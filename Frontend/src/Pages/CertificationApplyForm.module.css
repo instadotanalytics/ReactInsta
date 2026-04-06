@@ -1,0 +1,449 @@
+.section {
+  padding: 0px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: stretch;
+  gap: 2.5rem;
+}
+
+/* LEFT SIDE */
+.left {
+  flex: 1;
+  background: #ffffff;
+  padding: 3rem;
+  border-radius: 24px;
+
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.left h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  border-left: 4px solid #0078d4;
+  padding-left: 1.5rem;
+}
+
+.benefitsWrapper {
+  margin-bottom: 2rem;
+}
+
+.benefitsWrapper h4 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.benefitsList li {
+  color: #374151;
+  font-size: 1rem;
+  display: flex;
+  align-items: left;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+}
+
+.highlightBox {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-left: 4px solid #0078d4;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.highlightBox h4 {
+  font-size: 1.1rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.highlightBox p {
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.trustBadges {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.trustBadges span {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  color: #374151;
+  display: inline-flex;
+  align-items: left;
+  gap: 0.25rem;
+  border: 1px solid #e5e7eb;
+}
+
+/* RIGHT SIDE */
+.right {
+  flex: 0.9;
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 120, 212, 0.03) 50%);
+  border-radius: 0 24px 0 0;
+}
+
+.right h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.formSubtitle {
+  text-align: left;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.inputGroup {
+  margin-bottom: 1.25rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.inputGroup input,
+.inputGroup select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background: #f9fafb;
+}
+
+.inputGroup input:hover,
+.inputGroup select:hover {
+  border-color: #9ca3af;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus {
+  outline: none;
+  border-color: #0078d4;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1rem;
+  background: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 6px -2px rgba(0, 120, 212, 0.3);
+}
+
+.submitBtn:hover {
+  background: #005fa3;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 120, 212, 0.4);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+.terms {
+  text-align: left;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-top: 1.5rem;
+  line-height: 1.5;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .left, .right {
+    width: 100%;
+  }
+  
+  .left h2 {
+    font-size: 2rem;
+  }
+  
+  .benefitsList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .left {
+    padding: 2rem;
+  }
+  
+  .right {
+    padding: 2rem;
+  }
+  
+  .left h2 {
+    font-size: 1.8rem;
+  }
+  
+  .trustBadges {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .trustBadges span {
+    width: 100%;
+    justify-content: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .left {
+    padding: 1.5rem;
+  }
+  
+  .right {
+    padding: 1.5rem;
+  }
+  
+  .left h2 {
+    font-size: 1.5rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+  
+  .benefitsList li {
+    font-size: 0.9rem;
+  }
+  
+  .right h3 {
+    font-size: 1.5rem;
+  }
+  
+  .inputGroup input,
+  .inputGroup select,
+  .submitBtn {
+    padding: 0.75rem;
+  }
+}
+
+/* Animation for left side content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.left {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom scrollbar for select dropdown */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem left;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+/* Add these new styles to your existing CSS file */
+
+/* Left side default state */
+.leftDefault {
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%) !important;
+  color: rgb(59, 59, 59);
+}
+
+.defaultContent {
+  text-align: left;
+  padding: 1rem 0 2rem;
+}
+
+.defaultIcon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.defaultContent h2 {
+  color: rgb(82, 82, 82) !important;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.defaultDescription {
+  color: rgba(0, 68, 255, 0.9);
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.featureItem {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 1rem;
+  border-radius: 16px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.featureItem h4 {
+  color: rgb(109, 109, 109);
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.featureItem p {
+  color: rgba(106, 106, 106, 0.8);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.featureEmoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Form field hint */
+.fieldHint {
+  font-size: 0.85rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+/* Select placeholder style */
+.selectPlaceholder {
+  color: #9ca3af;
+}
+
+/* Disabled button state */
+.submitBtn:disabled {
+  background: #9ca3af !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Responsive adjustments for default state */
+@media (max-width: 768px) {
+  .featureGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .defaultContent h2 {
+    font-size: 1.8rem;
+  }
+  
+  .defaultIcon {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .defaultContent h2 {
+    font-size: 1.5rem;
+  }
+  
+  .defaultDescription {
+    font-size: 1rem;
+  }
+}

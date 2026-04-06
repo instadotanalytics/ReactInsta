@@ -1,0 +1,428 @@
+/* AWS.module.css */
+
+.heroSection {
+  padding: 1rem 0;
+  background: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* LEFT CONTENT - IMAGE */
+.leftContent {
+  flex: 1.1;
+}
+
+.imageWrapper {
+  position: relative;
+  padding: 20px 20px;
+  
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+
+}
+
+
+
+/* Floating Badges - Fixed */
+.floatingBadge {
+  position: absolute;
+  background: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 153, 0, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.topBadge {
+  top: 1.5rem;
+  left: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.bottomBadge {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: #232F3E;
+  color: white;
+}
+
+.awsIcon {
+  font-size: 1.8rem;
+  color: #FF9900;
+}
+
+.badgeContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.badgeNumber {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #FF9900;
+}
+
+.badgeLabel {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* Stats Mini Card */
+.statsMiniCard {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 1.2rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+}
+
+.miniStat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.miniStatIcon {
+  color: #FF9900;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.miniStatValue {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #232F3E;
+  line-height: 1.2;
+}
+
+.miniStatLabel {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+/* RIGHT CONTENT */
+.rightContent {
+  flex: 1;
+  animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FFF4E5;
+  color: #FF9900;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 153, 0, 0.2);
+}
+
+.badgeIcon {
+  font-size: 1rem;
+}
+
+/* Title */
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  color: #232F3E;
+}
+
+.highlight {
+  color: #FF9900;
+  position: relative;
+  display: inline-block;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 153, 0, 0.15);
+  z-index: -1;
+}
+
+/* Description */
+.description {
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  border-left: 3px solid #FF9900;
+  padding-left: 1.2rem;
+}
+
+/* Service Tags */
+.serviceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #F8FAFC;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  color: #334155;
+  border: 1px solid #E2E8F0;
+  transition: all 0.2s;
+  cursor: default;
+}
+
+.tag:hover {
+  background: #FF9900;
+  color: white;
+  border-color: #FF9900;
+  transform: translateY(-2px);
+}
+
+.tagIcon {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Benefits Grid */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.benefitIcon {
+  color: #FF9900;
+  font-size: 1.1rem;
+  min-width: 1.1rem;
+}
+
+/* CTA Buttons */
+.ctaGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  background: #FF9900;
+  color: #232F3E;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.3s;
+  border: 1px solid #FF9900;
+}
+
+.primaryBtn:hover {
+  background: #e68a00;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px -8px rgba(255, 153, 0, 0.4);
+}
+
+.primaryBtn svg {
+  transition: transform 0.2s;
+}
+
+.primaryBtn:hover svg {
+  transform: translateX(5px);
+}
+
+.secondaryBtn {
+  background: #232F3E;
+  color: white;
+  border: 1px solid #232F3E;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.3s;
+}
+
+.secondaryBtn:hover {
+  background: #1a2532;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(35, 47, 62, 0.3);
+}
+
+.secondaryBtn svg {
+  color: #FF9900;
+}
+
+/* Trust Indicators */
+.trustIndicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #E2E8F0;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.trustDot {
+  width: 6px;
+  height: 6px;
+  background: #FF9900;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 2.3rem;
+  }
+  
+  .statsMiniCard {
+    display: none;
+  }
+}
+
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .leftContent, .rightContent {
+    width: 100%;
+  }
+  
+  .bottomBadge {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 2rem 0;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ctaGroup {
+    flex-direction: column;
+  }
+  
+  .primaryBtn, .secondaryBtn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .trustIndicators {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .topBadge {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .serviceTags {
+    gap: 0.5rem;
+  }
+  
+  .tag {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

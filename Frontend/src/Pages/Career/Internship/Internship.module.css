@@ -1,0 +1,221 @@
+/* Internship.module.css */
+
+.internshipPage {
+  background-color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Banner Section */
+.bannerSection {
+  padding: 0px 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.bannerContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.bannerTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(67, 97, 238, 0.1);
+  padding: 8px 16px;
+  border-radius: 40px;
+  color: #4361ee;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.tagIcon {
+  font-size: 16px;
+}
+
+.bannerTitle {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+}
+
+.gradientText {
+  background: linear-gradient(135deg, #4361ee 0%, #f72585 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bannerDesc {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 32px;
+}
+
+.bannerStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.statBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f4ff;
+  border-radius: 10px;
+  color: #4361ee;
+  font-size: 20px;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #6b6b6b;
+}
+
+
+.bannerCompanies {
+  margin-top: 24px;
+}
+
+.companiesText {
+  font-size: 14px;
+  color: #6b6b6b;
+  margin-bottom: 12px;
+}
+
+.companyLogos {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.companyLogos span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.companyLogos span:hover {
+  opacity: 1;
+}
+
+.bannerImageWrapper {
+  position: relative;
+}
+
+.bannerImageContainer {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.bannerImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.floatingCard {
+  position: absolute;
+  background: white;
+  padding: 16px 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.floatingCard .cardIcon {
+  font-size: 24px;
+  color: #4361ee;
+}
+
+.floatingCard div {
+  display: flex;
+  flex-direction: column;
+}
+
+.floatingCard strong {
+  font-size: 18px;
+  color: #1a1a1a;
+}
+
+.floatingCard span {
+  font-size: 12px;
+  color: #6b6b6b;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .bannerContainer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .bannerTitle {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bannerTitle {
+    font-size: 32px;
+  }
+
+  .bannerStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bannerButtons {
+    flex-direction: column;
+  }
+
+  .companyLogos {
+    flex-wrap: wrap;
+  }
+}

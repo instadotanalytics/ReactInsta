@@ -1,0 +1,534 @@
+.aboutSection {
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  padding: 60px 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.heroSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.heroContent {
+  max-width: 550px;
+}
+
+.badge {
+  display: inline-block;
+  background: #eef2ff;
+  color: #2563eb;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border: 1px solid #dbeafe;
+}
+
+.heroTitle {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #2563eb;
+  position: relative;
+  display: inline-block;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: rgba(37, 99, 235, 0.2);
+  z-index: -1;
+}
+
+.heroDescription {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #475569;
+  margin-bottom: 30px;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.statCard {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.1);
+  border-color: #2563eb;
+}
+
+.statIcon {
+  font-size: 32px;
+  background: #eef2ff;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statValue {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2563eb;
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Hero Image */
+.heroImage {
+  position: relative;
+  height: 550px;
+  border-radius: 30px;
+  overflow: hidden;
+  
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+
+
+.imageBadge {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  animation: float 3s ease-in-out infinite;
+}
+
+.imageBadge span {
+  font-size: 32px;
+}
+
+.imageBadge strong {
+  display: block;
+  font-size: 16px;
+  color: #2563eb;
+}
+
+.imageBadge span:last-child {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Features Section */
+.featuresSection {
+  margin-bottom: 80px;
+  background: white;
+  padding: 0px;
+  border-radius: 30px;
+
+  
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 30px;
+}
+
+.titleIcon {
+  font-size: 32px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.featureCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  background: #eef2ff;
+  border-color: #2563eb;
+  transform: translateX(5px);
+}
+
+.featureCheck {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.featureCard span:last-child {
+  font-size: 15px;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* Journey Section */
+.journeySection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+
+.journeyContent {
+  background: white;
+  padding: 40px;
+  border-radius: 30px;
+  
+}
+
+.journeyText {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+.journeyText:last-of-type {
+  margin-bottom: 30px;
+}
+
+.companyBadge {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #eef2ff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #dbeafe;
+}
+
+.badgeIcon {
+  font-size: 40px;
+  background: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.companyBadge div {
+  display: flex;
+  flex-direction: column;
+}
+
+.companyBadge strong {
+  font-size: 18px;
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.companyBadge span {
+  font-size: 14px;
+  color: #2563eb;
+}
+
+/* Journey Image */
+.journeyImage {
+  position: relative;
+  height: 600px;
+  border-radius: 30px;
+  overflow: hidden;
+ 
+}
+
+.journeyImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.experienceBadge {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.expNumber {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+  color: #2563eb;
+  line-height: 1.2;
+}
+
+.experienceBadge span:last-child {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Success Stories Section */
+.successStories {
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 80px;
+  
+}
+
+.successHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.successHeader h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.successHeader p {
+  font-size: 18px;
+  color: #475569;
+}
+
+.successGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.successCard {
+  background: white;
+  padding: 30px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.successCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+  border-color: #2563eb;
+}
+
+.successIcon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.successCard h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 5px;
+}
+
+.successCard p {
+  font-size: 16px;
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.successCard small {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: 36px;
+  }
+  
+  .journeySection {
+    grid-template-columns: 1fr;
+  }
+  
+  .successGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 968px) {
+  .heroSection {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .heroContent {
+    max-width: 100%;
+  }
+  
+  .statsGrid {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .heroImage {
+    height: 400px;
+  }
+  
+  .journeyImage {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 40px 15px;
+  }
+  
+  .heroTitle {
+    font-size: 32px;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sectionTitle {
+    font-size: 28px;
+  }
+  
+  .successGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .successHeader h2 {
+    font-size: 28px;
+  }
+  
+  .heroImage {
+    height: 350px;
+  }
+  
+  .journeyImage {
+    height: 350px;
+  }
+  
+  .imageBadge {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+  
+  .experienceBadge {
+    top: 15px;
+    right: 15px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 28px;
+  }
+  
+  .heroImage {
+    height: 300px;
+  }
+  
+  .journeyImage {
+    height: 300px;
+  }
+  
+  .journeyContent {
+    padding: 25px;
+  }
+  
+  .featuresSection {
+    padding: 25px;
+  }
+  
+  .successStories {
+    padding: 30px 20px;
+  }
+  
+  .companyBadge {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .badgeIcon {
+    margin-bottom: 10px;
+  }
+}

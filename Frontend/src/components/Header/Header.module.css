@@ -1,0 +1,694 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.header {
+  background: linear-gradient(135deg, #0055ff, #0088ff, #00e5ff);
+  padding: 0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header.scrolled {
+  background: linear-gradient(135deg, #0052cc, #4ec9e1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 80px;
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  flex-shrink: 0;
+  margin-right: 30px;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.scrolled .logo img {
+  height: 40px;
+}
+
+/* Desktop Navigation */
+.navDesktop {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navItem a, .dropdownLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+}
+
+.navItem a:hover, .dropdownLink:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.navIcon {
+  font-size: 16px;
+}
+
+/* Dropdown Styles */
+.dropdownContainer {
+  position: relative;
+}
+
+.dropdownLink {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dropdownArrow {
+  font-size: 20px;
+  margin-left: 2px;
+  margin-top: 5px;
+  transition: transform 0.3s ease;
+}
+
+.dropdownContainer:hover .dropdownArrow {
+  transform: rotate(180deg);
+}
+
+.careerDropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 750px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  overflow: hidden;
+  border: 1px solid rgba(0, 102, 255, 0.1);
+}
+
+.careerDropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(20px);
+}
+
+.dropdownContent {
+  display: flex;
+  padding: 25px;
+  gap: 25px;
+  background-color: white ;
+}
+
+.dropdownCategories {
+  flex: 1;
+  border-right: 2px solid rgba(0, 102, 255, 0.1);
+  padding-right: 25px;
+}
+
+.dropdownTitle {
+  color: #0061ff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0, 102, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.titleIcon {
+  font-size: 18px;
+}
+
+.dropdownCategoryItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  text-decoration: none;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  background: transparent;
+}
+
+.dropdownCategoryItem:hover,
+.dropdownCategoryItem.active {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.categoryIcon {
+  font-size: 24px;
+  color: #0061ff;
+  background: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 14px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoryText {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryTitle {
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.categoryDesc {
+  color: #666;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.dropdownPreview {
+  flex: 1.2;
+  min-width: 280px;
+}
+
+.previewContent {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.previewImageContainer {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+}
+
+.previewDetails {
+  padding: 10px 0;
+}
+
+.previewTitle {
+  color: #0061ff;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.previewDesc {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.featureList {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #444;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.featureIcon {
+  color: #00c853;
+  font-size: 12px;
+}
+
+.previewBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #0061ff, #00b8ff);
+  color: white;
+  text-decoration: none;
+  border-radius: 40px;
+  font-weight: 500;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.previewBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 97, 255, 0.3);
+}
+
+.previewBtn span {
+  transition: transform 0.3s ease;
+}
+
+.previewBtn:hover span {
+  transform: translateX(3px);
+}
+
+.dropdownFooter {
+  background: linear-gradient(135deg, #f0f7ff, #e6f0ff);
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 102, 255, 0.1);
+}
+
+.dropdownFooter p {
+  color: #0061ff;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footerBtn {
+  background: #0061ff;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footerBtn:hover {
+  background: #0052cc;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 97, 255, 0.3);
+}
+
+/* Auth Buttons */
+.authButtons {
+  display: flex;
+  gap: 12px;
+  margin-left: 30px;
+  flex-shrink: 0;
+}
+
+.whatsappBtn,
+.signupBtn {
+  padding: 10px 22px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.whatsappBtn {
+  background: #25D366;
+  color: white;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsappBtn:hover {
+  background: #20bd5a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.signupBtn {
+  background: white;
+  color: #0061ff;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.signupBtn:hover {
+  background: #f0f7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Hamburger Icon */
+.menuIcon {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuIcon:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.menuIcon.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Menu */
+.mobileMenu {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  visibility: hidden;
+}
+
+.mobileMenu.open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.mobileNav {
+  padding: 30px 20px;
+}
+
+.mobileNavList {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.mobileNavItem {
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.mobileNavItem:last-child {
+  border-bottom: none;
+}
+
+.mobileNavItem a,
+.mobileLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #0061ff;
+}
+
+/* Mobile Auth Buttons */
+.mobileAuthButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #eef2f6;
+}
+
+.mobileWhatsappBtn,
+.mobileSignupBtn {
+  padding: 16px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-decoration: none;
+}
+
+.mobileWhatsappBtn {
+  background: #25D366;
+  color: white;
+}
+
+.mobileWhatsappBtn:hover {
+  background: #20bd5a;
+}
+
+.mobileSignupBtn {
+  background: #0061ff;
+  color: white;
+}
+
+.mobileSignupBtn:hover {
+  background: #0052cc;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 992px) {
+  .navDesktop,
+  .authButtons {
+    display: none;
+  }
+
+  .menuIcon {
+    display: flex;
+  }
+
+  .container {
+    padding: 0 20px;
+    height: 70px;
+  }
+
+  .logo img {
+    height: 38px;
+  }
+
+  .careerDropdown {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .mobileMenu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .logo img {
+    height: 32px;
+  }
+
+  .menuIcon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Add these styles to your existing Header.module.css */
+
+/* Certification Dropdown - Uses same styles as career dropdown */
+/* No additional CSS needed as we're reusing the .careerDropdown class */
+
+/* Icon colors for different certifications */
+.categoryIcon svg {
+  transition: all 0.3s ease;
+}
+
+/* Microsoft icon color */
+.categoryIcon svg[data-icon="microsoft"] {
+  color: #00a4ef;
+}
+
+/* IBM icon color */
+.categoryIcon svg[data-icon="ibm"] {
+  color: #052fad;
+}
+
+/* AWS icon color */
+.categoryIcon svg[data-icon="aws"] {
+  color: #ff9900;
+}
+
+/* RedHat icon color */
+.categoryIcon svg[data-icon="redhat"] {
+  color: #ee0000;
+}
+
+/* Custom icon color */
+.categoryIcon svg[data-icon="customizer"] {
+  color: #6c5ce7;
+}
+
+/* Ensure dropdowns don't overlap */
+.dropdownContainer {
+  position: relative;
+}
+
+.careerDropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 750px;
+  background: rgb(255, 255, 255);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  overflow: hidden;
+  border: 1px solid rgba(0, 102, 255, 0.1);
+}
+
+.careerDropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(20px);
+}
+
+/* For dropdowns that appear side by side, adjust positioning */
+.navItem:nth-child(3) .careerDropdown {
+  left: 40%;
+}
+
+.navItem:nth-child(4) .careerDropdown {
+  left: 50%;
+}
+
+/* Mobile menu certification items */
+.mobileNavItem a svg {
+  font-size: 18px;
+}
+
+/* Specific styles for certification icons in mobile menu */
+.mobileNavItem a svg[data-icon="microsoft"] {
+  color: #00a4ef;
+}
+
+.mobileNavItem a svg[data-icon="ibm"] {
+  color: #052fad;
+}
+
+.mobileNavItem a svg[data-icon="aws"] {
+  color: #ff9900;
+}
+
+.mobileNavItem a svg[data-icon="redhat"] {
+  color: #ee0000;
+}
+
+.mobileNavItem a svg[data-icon="customizer"] {
+  color: #6c5ce7;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 992px) {
+  .careerDropdown {
+    display: none;
+  }
+}

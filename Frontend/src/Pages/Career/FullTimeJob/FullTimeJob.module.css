@@ -1,0 +1,130 @@
+.banner {
+  background: #ffffff;
+  padding: 10px 8%;
+}
+
+.bannerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* LEFT SECTION */
+
+.left {
+  flex: 1;
+}
+
+.badge {
+  background: #e6f2ff;
+  color: #0056b3;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.left h1 {
+  font-size: 48px;
+  margin: 20px 0;
+  color: #0a1f44; /* Dark Blue */
+}
+
+.left h1 span {
+  color: #007bff; /* Blue */
+}
+
+.left p {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* FEATURES */
+
+.features {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.features div {
+  background: #f0f8ff; /* Sky Blue Light */
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #003366;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* BUTTONS */
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.primaryBtn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.primaryBtn:hover {
+  background: #0056b3;
+}
+
+.secondaryBtn {
+  background: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.secondaryBtn:hover {
+  background: #007bff;
+  color: white;
+}
+
+/* RIGHT SECTION */
+
+.right {
+  flex: 1;
+  text-align: center;
+}
+
+.right img {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .bannerContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+
+  .features {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,239 @@
+/* HomeLanding.module.css */
+
+.homeLanding {
+  background-color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Hero Banner Section */
+.heroSection {
+  padding: 0px 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.heroTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(67, 97, 238, 0.1);
+  padding: 8px 16px;
+  border-radius: 40px;
+  color: #4361ee;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.tagIcon {
+  font-size: 16px;
+}
+
+.heroTitle {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+}
+
+.gradientText {
+  background: linear-gradient(135deg, #4361ee 0%, #f72585 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroDesc {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 32px;
+}
+
+.successStats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.successStat {
+  display: flex;
+  flex-direction: column;
+}
+
+.successStat .statValue {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.successStat .statLabel {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.primaryBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+}
+
+.primaryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(67, 97, 238, 0.4);
+}
+
+.secondaryBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  background: white;
+  color: #4361ee;
+  border: 2px solid #4361ee;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondaryBtn:hover {
+  background: #4361ee;
+  color: white;
+}
+
+.btnIcon {
+  font-size: 16px;
+}
+
+.trustBadges {
+  display: flex;
+  gap: 24px;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+.trustBadge svg {
+  color: #06d6a0;
+}
+
+.heroImageWrapper {
+  position: relative;
+}
+
+.heroImageContainer {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+
+
+.floatingCard {
+  position: absolute;
+  background: white;
+  padding: 16px 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.floatingCard .cardIcon {
+  font-size: 24px;
+}
+
+.floatingCard div {
+  display: flex;
+  flex-direction: column;
+}
+
+.floatingCard strong {
+  font-size: 18px;
+  color: #1a1a1a;
+}
+
+.floatingCard span {
+  font-size: 12px;
+  color: #6b6b6b;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .heroContainer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .heroTitle {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 32px;
+  }
+
+  .successStats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+  }
+
+  .trustBadges {
+    flex-wrap: wrap;
+  }
+}

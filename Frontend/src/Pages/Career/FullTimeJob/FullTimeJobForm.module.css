@@ -1,0 +1,376 @@
+/* Base Styles */
+.bannerSection {
+  min-height: 70vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+  max-width: 1290px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  border-radius: 20px;
+  padding: 2rem;
+  
+}
+
+/* Left Content Styles */
+.leftContent {
+  color: #1a2639;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  background-color: #dee2e6;
+}
+
+.contentWrapper {
+  max-width: 500px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: #0a1929;
+}
+
+.rocket {
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #2d3a4f;
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+}
+
+.benefitItem {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  color: #1a2639;
+}
+
+.checkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #0a1929;
+  border-radius: 50%;
+  margin-right: 12px;
+  font-size: 14px;
+  color: white;
+}
+
+/* Form Card Styles */
+.formCard {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+ 
+}
+
+.formTitle {
+  color: #0a1929;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Step Indicator */
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.stepWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stepCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #495057;
+  transition: all 0.3s ease;
+}
+
+.stepCircle.active {
+  background: #0a1929;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(10, 25, 41, 0.2);
+}
+
+.stepCircle.completed {
+  background: #1e3a5f;
+  color: white;
+}
+
+.stepLabel {
+  font-size: 0.8rem;
+  color: #0a1929;
+  font-weight: 500;
+}
+
+.line {
+  width: 60px;
+  height: 2px;
+  background: #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.line.active {
+  background: #1e3a5f;
+}
+
+/* Form Styles */
+.form {
+  width: 100%;
+}
+
+.formStep {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  color: #212529;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #0a1929;
+  box-shadow: 0 0 0 3px rgba(10, 25, 41, 0.1);
+}
+
+.input.error,
+.select.error,
+.textarea.error {
+  border-color: #dc3545;
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Button Styles */
+.nextButton,
+.submitButton,
+.backButton {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nextButton {
+  background: #0a1929;
+  color: white;
+  margin-top: 1rem;
+}
+
+.nextButton:hover {
+  background: #1e3a5f;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(10, 25, 41, 0.3);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.backButton {
+  background: #e9ecef;
+  color: #0a1929;
+  flex: 1;
+}
+
+.backButton:hover {
+  background: #dee2e6;
+}
+
+.submitButton {
+  background: #1e3a5f;
+  color: white;
+  flex: 2;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #0a1929;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(10, 25, 41, 0.3);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .leftContent {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .benefitItem {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .bannerSection {
+    padding: 1rem;
+  }
+  
+  .wrapper {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .stepIndicator {
+    gap: 0.5rem;
+  }
+  
+  .stepCircle {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .line {
+    width: 40px;
+  }
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.formStep {
+  animation: slideIn 0.3s ease;
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.submitButton:disabled::after {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  border: 2px solid white;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Placeholder Styles */
+::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #adb5bd;
+}
+
+::-ms-input-placeholder {
+  color: #adb5bd;
+}
+
+/* Select Styles */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a1929' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+select option {
+  color: #212529;
+}
