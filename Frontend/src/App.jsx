@@ -20,7 +20,7 @@ import MicrosoftHeroSection from "./Pages/Certification/Microsoft/MicrosoftHeroS
 import IBM from "./Pages/Certification/IBM/IBM";
 import AWS from "./Pages/Certification/Aws/AWS";
 import Redhat from "./Pages/Certification/RedHat/Redhat";
-import Custom from "./Pages/Certification/Custom/custom";
+import Custom from "./Pages/Certification/Custom/Custom";
 import ForgotPassword from "./Hr&Counsler/ForgotPassword";
 import HrCounslerLogin from "./Hr&Counsler/HrCounslerLogin";
 import HrCounslerSignup from "./Hr&Counsler/HrCounslerSignup";
