@@ -21,6 +21,16 @@ import applicationRoutes from "./routes/applicationRoutes.js";
 import hrCounslerRoutes from "./routes/hrCounslerRoutes.js"
 
 
+// 4️⃣ React static build
+app.use(express.static(path.join(__dirname, "client/build")));
+
+// 5️⃣ React fallback (LAST 🔥)
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
+
+
 dotenv.config();
 
 const app = express();
@@ -30,11 +40,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
 
 // Create uploads directory
 const uploadsDir = path.join(__dirname, 'uploads');
