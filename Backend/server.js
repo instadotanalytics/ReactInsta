@@ -36,6 +36,14 @@ if (!fs.existsSync(uploadsDir)) {
   console.log('✓ Uploads directory created');
 }
 
+
+app.get('/api/test', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Backend working perfectly 🚀"
+  })
+})
+
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
