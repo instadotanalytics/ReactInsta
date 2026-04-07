@@ -50,7 +50,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Middleware
 app.use(cors({ 
-  origin: 'http://localhost:5173',
+  origin: 'https://instadotanalytics-58sj.onrender.com',
   credentials: true 
 }));
 
@@ -103,6 +103,6 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n✓ Server running on http://localhost:${PORT}`);
+  console.log(`\n✓ Server running on https://instadotanalytics-58sj.onrender.com:${PORT}`);
   console.log(`✓ Cloudinary: ${cloudinary.config().cloud_name ? 'Connected' : 'Not Connected'}\n`);
 });
