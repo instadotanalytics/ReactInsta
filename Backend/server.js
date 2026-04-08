@@ -215,13 +215,7 @@ app.get('/api/test', (req, res) => {
   res.json({ success: true });
 });
 
-// React static (VITE FIX)
-app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
-// fallback
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "../Frontend/dist", "index.html"));
-});
 
 
 // ✅ error handler
