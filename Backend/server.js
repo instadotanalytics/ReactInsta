@@ -153,66 +153,52 @@ import hrCounslerRoutes from "./routes/hrCounslerRoutes.js";
 
 dotenv.config();
 
-// ✅ IMPORTANT: __dirname setup (ESM)
+// ✅ __dirname fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ INIT APP (FIRST 🔥)
+// ✅ INIT
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Create uploads directory
+// ✅ uploads folder
 const uploadsDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
-  console.log('✓ Uploads directory created');
 }
 
-// ✅ Cloudinary config
+// ✅ cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// ✅ MongoDB connection
+// ✅ MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✓ MongoDB Connected"))
-  .catch(err => console.log("✗ MongoDB Connection Error:", err));
+  .catch(err => console.log("✗ MongoDB Error:", err));
 
-// ✅ Middleware
+// ✅ middleware
 app.use(cors({ 
-  origin: 'https://instadotanalytics-58sj.onrender.com',
+  origin: '*',
   credentials: true 
 }));
 
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" }
-}));
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-
-// ✅ Static uploads
 app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
 
-// ✅ Rate limiting
+// ✅ rate limit
 const loginLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 5,
-  message: { success: false, message: "Too many login attempts. Try again later." }
+  max: 5
 });
 app.use('/api/admin/login', loginLimiter);
 
-// ✅ API test route
-app.get('/api/test', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Backend working perfectly 🚀"
-  });
-});
-
-// ✅ API routes (VERY IMPORTANT - ABOVE)
+// ✅ routes
 app.use('/api/admin', adminRoutes);
 app.use("/api/banners", bannerRoutes);
 app.use('/api/courses', courseRoutes);
@@ -224,19 +210,22 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/hr", hrCounslerRoutes);
 
-// ✅ React static build (CHECK folder name ⚠️)
-app.use(express.static(path.join(__dirname, "client/build")));
-
-// ✅ React fallback (LAST 🔥🔥🔥)
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+// ✅ test
+app.get('/api/test', (req, res) => {
+  res.json({ success: true });
 });
 
-// ✅ Error handler
+// ✅ 🔥 VERY IMPORTANT (correct path)
+app.use(express.static(path.join(__dirname, "../Frontend/build")));
+
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/build", "index.html"));
+});
+
+// ✅ error handler
 app.use(errorHandler);
 
-// ✅ Server start
+// ✅ start
 app.listen(PORT, () => {
-  console.log(`\n✓ Server running on https://instadotanalytics-58sj.onrender.com:${PORT}`);
-  console.log(`✓ Cloudinary: ${cloudinary.config().cloud_name ? 'Connected' : 'Not Connected'}\n`);
+  console.log(`Server running on port ${PORT}`);
 });
