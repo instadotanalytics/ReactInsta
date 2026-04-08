@@ -215,12 +215,14 @@ app.get('/api/test', (req, res) => {
   res.json({ success: true });
 });
 
-// ✅ 🔥 VERY IMPORTANT (correct path)
-app.use(express.static(path.join(__dirname, "../Frontend/build")));
+// React static (VITE FIX)
+app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
+// fallback
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "../Frontend/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../Frontend/dist", "index.html"));
 });
+
 
 // ✅ error handler
 app.use(errorHandler);
