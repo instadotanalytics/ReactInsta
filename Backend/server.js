@@ -215,10 +215,8 @@ app.get('/api/test', (req, res) => {
   res.json({ success: true });
 });
 
-// ✅ React static files (VITE dist)
 app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
-// ✅ React fallback (IMPORTANT - NO app.get)
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
 });
