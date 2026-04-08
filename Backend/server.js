@@ -219,7 +219,7 @@ app.get('/api/test', (req, res) => {
 app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
 // 👇 ye fallback add karo (VERY IMPORTANT)
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
 });
 
