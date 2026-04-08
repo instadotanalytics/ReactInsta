@@ -215,7 +215,13 @@ app.get('/api/test', (req, res) => {
   res.json({ success: true });
 });
 
+// 👇 ye line add karo
+app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
+// 👇 ye fallback add karo (VERY IMPORTANT)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
+});
 
 
 // ✅ error handler
