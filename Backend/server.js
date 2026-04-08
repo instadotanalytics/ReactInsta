@@ -215,14 +215,13 @@ app.get('/api/test', (req, res) => {
   res.json({ success: true });
 });
 
-// 👇 ye line add karo
+// ✅ React static files (VITE dist)
 app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
-// 👇 ye fallback add karo (VERY IMPORTANT)
-app.get("/*", (req, res) => {
+// ✅ React fallback (IMPORTANT - NO app.get)
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/dist/index.html"));
 });
-
 
 // ✅ error handler
 app.use(errorHandler);
