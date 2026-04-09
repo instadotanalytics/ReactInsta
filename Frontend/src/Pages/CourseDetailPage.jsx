@@ -1,33 +1,15 @@
-// CourseDetailPage.jsx
+// CourseDetailPage.jsx — Luxury Editorial Redesign
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { 
-  FiClock, 
-  FiBookOpen, 
-  FiGlobe, 
-  FiGrid, 
-  FiAward, 
-  FiBriefcase, 
-  FiBarChart2,
-  FiDownload,
-  FiMonitor,
-  FiSmartphone,
-  FiCheckCircle,
-  FiChevronRight,
-  FiChevronDown,
-  FiPlayCircle,
-  FiStar,
-  FiUsers,
-  FiCalendar,
-  FiZap
+import {
+  FiClock, FiBookOpen, FiGlobe, FiGrid, FiAward, FiBriefcase,
+  FiBarChart2, FiDownload, FiMonitor, FiSmartphone, FiCheckCircle,
+  FiChevronRight, FiChevronDown, FiPlayCircle, FiStar, FiUsers,
+  FiCalendar, FiShield
 } from 'react-icons/fi';
-import { 
-  FaGraduationCap, 
-  FaChalkboardTeacher,
-  FaRegClock,
-  FaRocket,
-  FaShieldAlt,
-  FaHeadset
+import {
+  FaGraduationCap, FaChalkboardTeacher, FaRegClock, FaRocket,
+  FaShieldAlt, FaHeadset
 } from 'react-icons/fa';
 import { BsFillBriefcaseFill, BsTrophy } from 'react-icons/bs';
 import Header from '../components/Header/Header';
@@ -43,6 +25,16 @@ import CareerSection from './CareerSection';
 import FAQSection from './FAQSection';
 import OurPremiumServices from './OurPremiumServices';
 
+// Inject Google Fonts once
+if (typeof document !== 'undefined' && !document.getElementById('cdp-fonts')) {
+  const link = document.createElement('link');
+  link.id = 'cdp-fonts';
+  link.rel = 'stylesheet';
+  link.href =
+    'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap';
+  document.head.appendChild(link);
+}
+
 const CourseDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -57,142 +49,98 @@ const CourseDetailPage = () => {
     const fetchCourseDetails = async () => {
       try {
         setLoading(true);
-        console.log('Fetching course with ID:', id);
         const response = await fetch(`${API_BASE_URL}/courses/${id}`);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const result = await response.json();
-        console.log('Fetched course details:', result);
-        
-        if (result.success && result.data) {
-          setCourse(result.data);
-        } else if (result.data) {
-          setCourse(result.data);
-        } else {
-          throw new Error('Course not found');
-        }
-        
+        if (result.success && result.data) setCourse(result.data);
+        else if (result.data) setCourse(result.data);
+        else throw new Error('Course not found');
         setError(null);
       } catch (err) {
-        console.error('Error fetching course details:', err);
         setError('Failed to load course details. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
-
-    if (id) {
-      fetchCourseDetails();
-    } else {
-      console.error('No ID provided in URL');
-      setError('No course ID provided');
-      setLoading(false);
-    }
+    if (id) fetchCourseDetails();
+    else { setError('No course ID provided'); setLoading(false); }
   }, [id]);
 
   useEffect(() => {
-    if (showRegistrationPopup) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
+    document.body.style.overflow = showRegistrationPopup ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
   }, [showRegistrationPopup]);
 
   const getImageUrl = (imagePath) => {
     if (!imagePath) return '/default-course-image.jpg';
-    if (imagePath.startsWith('http')) {
-      return imagePath;
-    }
+    if (imagePath.startsWith('http')) return imagePath;
     return `${SERVER_BASE_URL}/${imagePath}`;
   };
 
-  const handleEnrollNow = () => {
-    setShowRegistrationPopup(true);
-  };
+  const handleEnrollNow = () => setShowRegistrationPopup(true);
+  const handleClosePopup = () => setShowRegistrationPopup(false);
+  const handleRegistrationSuccess = (data) => console.log('Registration successful:', data);
+  const handleRegistrationError = (error) => console.error('Registration error:', error);
 
-  const handleClosePopup = () => {
-    setShowRegistrationPopup(false);
-  };
-
-  const handleRegistrationSuccess = (data) => {
-    console.log('Registration successful:', data);
-  };
-
-  const handleRegistrationError = (error) => {
-    console.error('Registration error:', error);
-  };
-
-  if (loading) {
-    return (
-      <>
-        <Header />
-        <div className={styles.loadingContainer}>
-          <div className={styles.loaderWrapper}>
-            <div className={styles.loader}></div>
-            <div className={styles.loaderGlow}></div>
-          </div>
-          <p>Loading your dream course...</p>
+  /* ── Loading ── */
+  if (loading) return (
+    <>
+      <Header />
+      <div className={styles.loadingContainer}>
+        <div className={styles.loaderWrapper}>
+          <div className={styles.loader} />
+          <div className={styles.loaderGlow} />
         </div>
-        <Footer />
-      </>
-    );
-  }
+        <p>Loading course details…</p>
+      </div>
+      <Footer />
+    </>
+  );
 
-  if (error || !course) {
-    return (
-      <>
-        <Header />
-        <div className={styles.errorContainer}>
-          <div className={styles.errorContent}>
-            <div className={styles.errorIcon}>😕</div>
-            <h2>Oops! Course Not Found</h2>
-            <p>{error || 'The course you\'re looking for doesn\'t exist or has been removed.'}</p>
-            <button 
-              onClick={() => navigate('/courses')} 
-              className={styles.backButton}
-            >
-              <FiBookOpen className={styles.buttonIcon} />
-              Browse Other Courses
-            </button>
-          </div>
+  /* ── Error ── */
+  if (error || !course) return (
+    <>
+      <Header />
+      <div className={styles.errorContainer}>
+        <div className={styles.errorContent}>
+          <span className={styles.errorIcon}>😕</span>
+          <h2>Course Not Found</h2>
+          <p>{error || "The course you're looking for doesn't exist or has been removed."}</p>
+          <button onClick={() => navigate('/courses')} className={styles.backButton}>
+            <FiBookOpen className={styles.buttonIcon} />
+            Browse Courses
+          </button>
         </div>
-        <Footer />
-      </>
-    );
-  }
+      </div>
+      <Footer />
+    </>
+  );
 
+  /* ── Main ── */
   return (
     <div className={styles.courseDetailPage}>
       <Header />
-      
-      {/* Registration Popup */}
+
       {showRegistrationPopup && (
-        <RegistrationPopUp 
+        <RegistrationPopUp
           onClose={handleClosePopup}
           onSuccess={handleRegistrationSuccess}
           onError={handleRegistrationError}
         />
       )}
-      
-      {/* Hero Section */}
+
+      {/* ── Hero ── */}
       <section className={styles.heroSection}>
         <div className={styles.heroBackground}>
-          <div className={styles.heroOverlay}></div>
-          <div className={styles.heroPattern}></div>
-          <img 
-            src={getImageUrl(course.thumbnail)} 
+          <div className={styles.heroOverlay} />
+          <div className={styles.heroPattern} />
+          <img
+            src={getImageUrl(course.thumbnail)}
             alt={course.title}
             className={styles.heroImage}
           />
         </div>
-        
+
         <div className={styles.heroContent}>
           <div className={styles.container}>
             <nav className={styles.breadcrumb}>
@@ -202,7 +150,7 @@ const CourseDetailPage = () => {
               <FiChevronRight className={styles.breadcrumbIcon} />
               <span className={styles.current}>{course.title}</span>
             </nav>
-            
+
             <div className={styles.courseInfo}>
               <div className={styles.badges}>
                 <span className={styles.categoryBadge}>
@@ -228,13 +176,13 @@ const CourseDetailPage = () => {
                   </span>
                 )}
               </div>
-              
+
               <h1 className={styles.courseTitle}>{course.title}</h1>
-              
+
               {course.shortDescription && (
                 <p className={styles.courseDescription}>{course.shortDescription}</p>
               )}
-              
+
               <div className={styles.courseMeta}>
                 {course.duration && (
                   <div className={styles.metaItem}>
@@ -261,7 +209,7 @@ const CourseDetailPage = () => {
                   </div>
                 )}
               </div>
-              
+
               <div className={styles.priceSection}>
                 <div className={styles.priceWrapper}>
                   {course.discountedPrice ? (
@@ -284,86 +232,69 @@ const CourseDetailPage = () => {
                     </span>
                   )}
                 </div>
-                
+
                 <div className={styles.actionButtons}>
-                  <button 
-                    className={styles.enrollButton}
-                    onClick={handleEnrollNow}
-                  >
+                  <button className={styles.enrollButton} onClick={handleEnrollNow}>
                     Enroll Now
                     <FiChevronRight className={styles.buttonIcon} />
                   </button>
-                  
                 </div>
               </div>
-
-              
             </div>
           </div>
         </div>
 
         <div className={styles.heroWave}>
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+          <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path
+              d="M0 90L60 78C120 66 240 42 360 33C480 24 600 30 720 36C840 42 960 48 1080 45C1200 42 1320 30 1380 24L1440 18V90H0Z"
+              fill="white"
+            />
           </svg>
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* ── Main Content ── */}
       <div className={styles.container}>
         <div className={styles.mainContent}>
-          {/* Left Column - Course Details */}
+
+          {/* Left Column */}
           <div className={styles.leftColumn}>
-            {/* Tabs Navigation */}
+            {/* Tabs */}
             <div className={styles.tabs}>
-              <button 
-                className={`${styles.tabButton} ${activeTab === 'overview' ? styles.active : ''}`}
-                onClick={() => setActiveTab('overview')}
-              >
-                Overview
-              </button>
-              <button 
-                className={`${styles.tabButton} ${activeTab === 'curriculum' ? styles.active : ''}`}
-                onClick={() => setActiveTab('curriculum')}
-              >
-                Curriculum
-              </button>
-              <button 
-                className={`${styles.tabButton} ${activeTab === 'instructor' ? styles.active : ''}`}
-                onClick={() => setActiveTab('instructor')}
-              >
-                Instructor
-              </button>
-              <button 
-                className={`${styles.tabButton} ${activeTab === 'faq' ? styles.active : ''}`}
-                onClick={() => setActiveTab('faq')}
-              >
-                FAQ
-              </button>
+              {['overview', 'curriculum', 'instructor', 'faq'].map((tab) => (
+                <button
+                  key={tab}
+                  className={`${styles.tabButton} ${activeTab === tab ? styles.active : ''}`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
+              ))}
             </div>
 
-            {/* Tab Content */}
             <div className={styles.tabContent}>
-              {/* Overview Tab */}
+
+              {/* Overview */}
               {activeTab === 'overview' && (
                 <div className={styles.overviewTab}>
                   {course.fullDescription && (
                     <div className={styles.section}>
                       <h2 className={styles.sectionTitle}>About This Course</h2>
                       <div className={styles.fullDescription}>
-                        {course.fullDescription.split('\n').map((paragraph, index) => (
-                          <p key={index}>{paragraph}</p>
+                        {course.fullDescription.split('\n').map((para, i) => (
+                          <p key={i}>{para}</p>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {course.whatYouWillLearn && course.whatYouWillLearn.length > 0 && (
+                  {course.whatYouWillLearn?.length > 0 && (
                     <div className={styles.section}>
                       <h2 className={styles.sectionTitle}>What You'll Learn</h2>
                       <div className={styles.learnGrid}>
-                        {course.whatYouWillLearn.map((item, index) => (
-                          <div key={index} className={styles.learnItem}>
+                        {course.whatYouWillLearn.map((item, i) => (
+                          <div key={i} className={styles.learnItem}>
                             <div className={styles.learnItemIcon}>
                               <FiCheckCircle />
                             </div>
@@ -383,7 +314,7 @@ const CourseDetailPage = () => {
                             <FaGraduationCap className={styles.featureIcon} />
                           </div>
                           <h3>Certificate</h3>
-                          <p>Get certified upon completion</p>
+                          <p>Verified on completion</p>
                         </div>
                       )}
                       {course.placementAssistance && (
@@ -391,8 +322,8 @@ const CourseDetailPage = () => {
                           <div className={styles.featureIconWrapper}>
                             <BsFillBriefcaseFill className={styles.featureIcon} />
                           </div>
-                          <h3>Placement Assistance</h3>
-                          <p>Get help with job placement</p>
+                          <h3>Placement Help</h3>
+                          <p>Resume & interview support</p>
                         </div>
                       )}
                       {course.internshipIncluded && (
@@ -401,7 +332,7 @@ const CourseDetailPage = () => {
                             <FaRocket className={styles.featureIcon} />
                           </div>
                           <h3>Internship</h3>
-                          <p>Practical industry experience</p>
+                          <p>Real industry experience</p>
                         </div>
                       )}
                       {course.downloadableResources && (
@@ -410,7 +341,7 @@ const CourseDetailPage = () => {
                             <FiDownload className={styles.featureIcon} />
                           </div>
                           <h3>Resources</h3>
-                          <p>Downloadable study materials</p>
+                          <p>Downloadable materials</p>
                         </div>
                       )}
                       <div className={styles.featureCard}>
@@ -418,7 +349,7 @@ const CourseDetailPage = () => {
                           <FaRegClock className={styles.featureIcon} />
                         </div>
                         <h3>Duration</h3>
-                        <p>{course.duration || 'Flexible'}</p>
+                        <p>{course.duration || 'Flexible pace'}</p>
                       </div>
                       <div className={styles.featureCard}>
                         <div className={styles.featureIconWrapper}>
@@ -431,49 +362,47 @@ const CourseDetailPage = () => {
                   </div>
                 </div>
               )}
-
-              {/* Curriculum Tab */}
+              {/* Curriculum */}
               {activeTab === 'curriculum' && (
                 <div className={styles.curriculumTab}>
                   <h2 className={styles.sectionTitle}>Course Curriculum</h2>
                   <div className={styles.curriculumContent}>
-                    <div className={styles.curriculumModule}>
-                      <h3>Module 1: Introduction</h3>
-                      <ul>
-                        <li>Welcome to the Course</li>
-                        <li>What You'll Learn</li>
-                        <li>Prerequisites</li>
-                      </ul>
-                    </div>
-                    <div className={styles.curriculumModule}>
-                      <h3>Module 2: Core Concepts</h3>
-                      <ul>
-                        <li>Fundamentals</li>
-                        <li>Advanced Topics</li>
-                        <li>Practical Examples</li>
-                      </ul>
-                    </div>
-                    <div className={styles.curriculumModule}>
-                      <h3>Module 3: Projects</h3>
-                      <ul>
-                        <li>Hands-on Projects</li>
-                        <li>Real-world Applications</li>
-                        <li>Final Assessment</li>
-                      </ul>
-                    </div>
+                    {[
+                      {
+                        title: 'Module 1: Introduction',
+                        items: ['Welcome to the Course', "What You'll Learn", 'Prerequisites'],
+                      },
+                      {
+                        title: 'Module 2: Core Concepts',
+                        items: ['Fundamentals', 'Advanced Topics', 'Practical Examples'],
+                      },
+                      {
+                        title: 'Module 3: Projects',
+                        items: ['Hands-on Projects', 'Real-world Applications', 'Final Assessment'],
+                      },
+                    ].map((mod, i) => (
+                      <div key={i} className={styles.curriculumModule}>
+                        <h3>{mod.title}</h3>
+                        <ul>
+                          {mod.items.map((item, j) => (
+                            <li key={j}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* Instructor Tab */}
+              {/* Instructor */}
               {activeTab === 'instructor' && course.instructor && (
                 <div className={styles.instructorTab}>
                   <h2 className={styles.sectionTitle}>Meet Your Instructor</h2>
                   <div className={styles.instructorCard}>
                     <div className={styles.instructorImageWrapper}>
                       {course.instructor.image ? (
-                        <img 
-                          src={getImageUrl(course.instructor.image)} 
+                        <img
+                          src={getImageUrl(course.instructor.image)}
                           alt={course.instructor.name}
                           className={styles.instructorImage}
                         />
@@ -494,22 +423,17 @@ const CourseDetailPage = () => {
                         </p>
                       )}
                       {course.instructor.bio && (
-                        <p className={styles.instructorBio}>
-                          {course.instructor.bio}
-                        </p>
+                        <p className={styles.instructorBio}>{course.instructor.bio}</p>
                       )}
                       <div className={styles.instructorStats}>
                         <div className={styles.instructorStat}>
-                          <FiStar />
-                          <span>4.8 Rating</span>
+                          <FiStar /><span>4.8 Rating</span>
                         </div>
                         <div className={styles.instructorStat}>
-                          <FiUsers />
-                          <span>10,000+ Students</span>
+                          <FiUsers /><span>10,000+ Students</span>
                         </div>
                         <div className={styles.instructorStat}>
-                          <FiPlayCircle />
-                          <span>15 Courses</span>
+                          <FiPlayCircle /><span>15 Courses</span>
                         </div>
                       </div>
                     </div>
@@ -517,90 +441,65 @@ const CourseDetailPage = () => {
                 </div>
               )}
 
-              {/* FAQ Tab */}
+              {/* FAQ */}
               {activeTab === 'faq' && (
                 <div className={styles.faqTab}>
                   <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-                  
                   <div className={styles.faqList}>
-                    <div className={styles.faqItem}>
-                      <button 
-                        className={styles.faqQuestion}
-                        onClick={() => setExpandedFaq(expandedFaq === 1 ? null : 1)}
-                      >
-                        <span>What is the duration of this course?</span>
-                        {expandedFaq === 1 ? <FiChevronDown /> : <FiChevronRight />}
-                      </button>
-                      {expandedFaq === 1 && (
-                        <div className={styles.faqAnswer}>
-                          <p>{course.duration || 'The course duration varies based on your learning pace and schedule.'}</p>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className={styles.faqItem}>
-                      <button 
-                        className={styles.faqQuestion}
-                        onClick={() => setExpandedFaq(expandedFaq === 2 ? null : 2)}
-                      >
-                        <span>Is there any certification provided?</span>
-                        {expandedFaq === 2 ? <FiChevronDown /> : <FiChevronRight />}
-                      </button>
-                      {expandedFaq === 2 && (
-                        <div className={styles.faqAnswer}>
-                          <p>{course.certificateAvailable ? 
-                            'Yes, you will receive a verified certificate upon successful completion of the course.' : 
-                            'Currently, this course does not include a certificate. However, you will gain valuable skills.'}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className={styles.faqItem}>
-                      <button 
-                        className={styles.faqQuestion}
-                        onClick={() => setExpandedFaq(expandedFaq === 3 ? null : 3)}
-                      >
-                        <span>Do you provide placement assistance?</span>
-                        {expandedFaq === 3 ? <FiChevronDown /> : <FiChevronRight />}
-                      </button>
-                      {expandedFaq === 3 && (
-                        <div className={styles.faqAnswer}>
-                          <p>{course.placementAssistance ?
-                            'Yes, we provide comprehensive placement assistance including resume building, interview preparation, and job referrals to our partner companies.' :
-                            'Placement assistance is not included in this course, but we provide career guidance and support.'}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className={styles.faqItem}>
-                      <button 
-                        className={styles.faqQuestion}
-                        onClick={() => setExpandedFaq(expandedFaq === 4 ? null : 4)}
-                      >
-                        <span>What is the refund policy?</span>
-                        {expandedFaq === 4 ? <FiChevronDown /> : <FiChevronRight />}
-                      </button>
-                      {expandedFaq === 4 && (
-                        <div className={styles.faqAnswer}>
-                          <p>We offer a 30-day money-back guarantee. If you're not satisfied with the course, you can request a full refund within 30 days of purchase.</p>
-                        </div>
-                      )}
-                    </div>
+                    {[
+                      {
+                        id: 1,
+                        q: 'What is the duration of this course?',
+                        a: course.duration || 'The course duration varies based on your learning pace and schedule.',
+                      },
+                      {
+                        id: 2,
+                        q: 'Is there any certification provided?',
+                        a: course.certificateAvailable
+                          ? 'Yes, you will receive a verified certificate upon successful completion of the course.'
+                          : 'This course does not include a certificate, but you will gain valuable hands-on skills.',
+                      },
+                      {
+                        id: 3,
+                        q: 'Do you provide placement assistance?',
+                        a: course.placementAssistance
+                          ? 'Yes, we provide comprehensive placement assistance including resume building, interview preparation, and job referrals.'
+                          : 'Placement assistance is not included, but we provide career guidance and support throughout.',
+                      },
+                      {
+                        id: 4,
+                        q: 'What is the refund policy?',
+                        a: 'We offer a 30-day money-back guarantee. If you are not satisfied, request a full refund within 30 days of purchase.',
+                      },
+                    ].map(({ id, q, a }) => (
+                      <div key={id} className={styles.faqItem}>
+                        <button
+                          className={styles.faqQuestion}
+                          onClick={() => setExpandedFaq(expandedFaq === id ? null : id)}
+                        >
+                          <span>{q}</span>
+                          {expandedFaq === id
+                            ? <FiChevronDown />
+                            : <FiChevronRight />}
+                        </button>
+                        {expandedFaq === id && (
+                          <div className={styles.faqAnswer}><p>{a}</p></div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Right Column - Course Summary Card */}
+          {/* Right Column */}
           <div className={styles.rightColumn}>
             <div className={styles.summaryCard}>
               <div className={styles.summaryCardHeader}>
-                <h3>This Course Includes:</h3>
+                <h3>This Course Includes</h3>
               </div>
-              
+
               <ul className={styles.summaryList}>
                 {course.duration && (
                   <li className={styles.summaryItem}>
@@ -642,7 +541,7 @@ const CourseDetailPage = () => {
                 </li>
                 <li className={styles.summaryItem}>
                   <FiSmartphone className={styles.summaryIcon} />
-                  <span>Access on Mobile & TV</span>
+                  <span>Mobile & TV Access</span>
                 </li>
                 <li className={styles.summaryItem}>
                   <FiUsers className={styles.summaryIcon} />
@@ -655,7 +554,7 @@ const CourseDetailPage = () => {
                   {course.discountedPrice ? (
                     <>
                       <span className={styles.finalPrice}>
-                        ₹{course.discountedPrice.toLocaleString()}
+                        ₹{course.discountedPrice?.toLocaleString()}
                       </span>
                       <span className={styles.originalPrice}>
                         ₹{course.originalPrice?.toLocaleString()}
@@ -667,53 +566,54 @@ const CourseDetailPage = () => {
                     </span>
                   )}
                 </div>
-                
-                <button 
-                  className={styles.enrollNowBtn}
-                  onClick={handleEnrollNow}
-                >
+
+                <button className={styles.enrollNowBtn} onClick={handleEnrollNow}>
                   Enroll Now
                   <FiChevronRight className={styles.btnIcon} />
                 </button>
 
-              
+                <div className={styles.moneyBackGuarantee}>
+                  <FiShield />
+                  <span>30-day money-back guarantee</span>
+                </div>
               </div>
             </div>
 
-            {/* Related Stats */}
+            {/* Stats */}
             <div className={styles.statsCard}>
               <div className={styles.statItem}>
                 <BsTrophy className={styles.statIcon} />
                 <div>
                   <h4>4.8</h4>
-                  <p>Course Rating</p>
+                  <p>Rating</p>
                 </div>
               </div>
               <div className={styles.statItem}>
                 <FiUsers className={styles.statIcon} />
                 <div>
                   <h4>10k+</h4>
-                  <p>Students Enrolled</p>
+                  <p>Enrolled</p>
                 </div>
               </div>
               <div className={styles.statItem}>
                 <FiCalendar className={styles.statIcon} />
                 <div>
                   <h4>2024</h4>
-                  <p>Last Updated</p>
+                  <p>Updated</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-     <PlacementList/>
-     <Companypartners/>
-     <WhyJoinUS/>
-     <OurPremiumServices/>
-     <CareerSection/>
-     <ReviewSection/>
-     <FAQSection/>
+
+      <PlacementList />
+      <Companypartners />
+      <WhyJoinUS />
+      <OurPremiumServices />
+      <CareerSection />
+      <ReviewSection />
+      <FAQSection />
       <Footer />
     </div>
   );

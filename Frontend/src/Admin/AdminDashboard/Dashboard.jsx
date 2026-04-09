@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Dashboard.module.css';
-import BannerManagement from "./BannerManagement";
-import { 
-  BiLogOutCircle, BiUser, BiBell, BiSearch, 
-  BiDollar, BiCalendar, BiMessage, 
+
+import {
+  BiLogOutCircle, BiUser, BiBell, BiSearch,
+  BiDollar, BiCalendar, BiMessage,
   BiBriefcase, BiCodeAlt, BiCertification,
   BiGroup, BiTime, BiBarChartAlt, BiMenu,
   BiX, BiChevronRight, BiBuildings, BiTrendingUp,
   BiBookOpen, BiCalendarCheck, BiAward
 } from "react-icons/bi";
-import { 
-  FiUsers, FiBookOpen, FiClock, FiBarChart2, 
+import {
+  FiUsers, FiBookOpen, FiClock, FiBarChart2,
   FiHome, FiSettings, FiCalendar, FiUserCheck,
   FiAward, FiTrendingUp, FiTarget, FiChevronDown,
   FiGrid, FiLayers, FiBriefcase
 } from "react-icons/fi";
-import { 
-  MdOutlineWorkspacePremium, 
-  MdOutlineComputer, 
+import {
+  MdOutlineWorkspacePremium,
+  MdOutlineComputer,
   MdOutlineEmojiEvents,
   MdOutlinePeopleAlt,
   MdOutlineAnalytics,
@@ -37,38 +37,38 @@ import AdminCertificationFormData from './AdminCertificationFormData';
 // Dashboard Home Component
 const DashboardHome = ({ username }) => {
   const instituteStats = [
-    { 
-      title: 'Active Students', 
-      value: '458', 
-      change: '+12%', 
-      icon: <FiUsers />, 
+    {
+      title: 'Active Students',
+      value: '458',
+      change: '+12%',
+      icon: <FiUsers />,
       detail: 'vs last month',
       trend: 'up',
       color: '#4361ee'
     },
-    { 
-      title: 'Placement Rate', 
-      value: '78%', 
-      change: '+5%', 
-      icon: <BiBriefcase />, 
+    {
+      title: 'Placement Rate',
+      value: '78%',
+      change: '+5%',
+      icon: <BiBriefcase />,
       detail: 'this quarter',
       trend: 'up',
       color: '#f72585'
     },
-    { 
-      title: 'Avg Package', 
-      value: '₹6.8L', 
-      change: '+8%', 
-      icon: <FiTrendingUp />, 
+    {
+      title: 'Avg Package',
+      value: '₹6.8L',
+      change: '+8%',
+      icon: <FiTrendingUp />,
       detail: 'per annum',
       trend: 'up',
       color: '#4cc9f0'
     },
-    { 
-      title: 'Live Batches', 
-      value: '12', 
-      change: '+3', 
-      icon: <BiGroup />, 
+    {
+      title: 'Live Batches',
+      value: '12',
+      change: '+3',
+      icon: <BiGroup />,
       detail: 'this month',
       trend: 'up',
       color: '#f8961e'
@@ -76,73 +76,73 @@ const DashboardHome = ({ username }) => {
   ];
 
   const recentActivities = [
-    { 
-      id: 1, 
-      action: 'New Placement', 
-      student: 'Rahul Sharma', 
-      company: 'Google', 
+    {
+      id: 1,
+      action: 'New Placement',
+      student: 'Rahul Sharma',
+      company: 'Google',
       package: '₹12 LPA',
-      time: '2 hours ago', 
-      type: 'placement' 
+      time: '2 hours ago',
+      type: 'placement'
     },
-    { 
-      id: 2, 
-      action: 'Training Completed', 
-      batch: 'Full Stack Batch 5', 
+    {
+      id: 2,
+      action: 'Training Completed',
+      batch: 'Full Stack Batch 5',
       students: '24 students',
-      time: '5 hours ago', 
-      type: 'training' 
+      time: '5 hours ago',
+      type: 'training'
     },
-    { 
-      id: 3, 
-      action: 'Interview Scheduled', 
-      student: 'Priya Patel', 
+    {
+      id: 3,
+      action: 'Interview Scheduled',
+      student: 'Priya Patel',
       company: 'Microsoft',
-      time: 'Tomorrow', 
-      type: 'interview' 
+      time: 'Tomorrow',
+      type: 'interview'
     },
-    { 
-      id: 4, 
-      action: 'Certification Issued', 
+    {
+      id: 4,
+      action: 'Certification Issued',
       batch: 'Data Science',
       count: '18 certifications',
-      time: 'Yesterday', 
-      type: 'certification' 
+      time: 'Yesterday',
+      type: 'certification'
     }
   ];
 
   const upcomingEvents = [
-    { 
-      id: 1, 
-      event: 'Tech Interview Workshop', 
-      date: '25 Feb 2026', 
-      time: '10:00 AM', 
+    {
+      id: 1,
+      event: 'Tech Interview Workshop',
+      date: '25 Feb 2026',
+      time: '10:00 AM',
       batch: 'All Batches',
       type: 'Workshop'
     },
-    { 
-      id: 2, 
-      event: 'Mock Interviews - Day 1', 
-      date: '28 Feb 2026', 
-      time: '9:00 AM', 
+    {
+      id: 2,
+      event: 'Mock Interviews - Day 1',
+      date: '28 Feb 2026',
+      time: '9:00 AM',
       batch: 'Final Year',
       type: 'Placement'
     }
   ];
 
   const batchPerformance = [
-    { 
-      name: 'Full Stack Web Dev', 
+    {
+      name: 'Full Stack Web Dev',
       code: 'FSD-101',
-      performance: 92, 
+      performance: 92,
       students: 28,
       placement: 85,
       avgPackage: '₹7.2L'
     },
-    { 
-      name: 'Data Science & AI', 
+    {
+      name: 'Data Science & AI',
       code: 'DSAI-202',
-      performance: 88, 
+      performance: 88,
       students: 24,
       placement: 82,
       avgPackage: '₹8.5L'
@@ -365,70 +365,64 @@ const Dashboard = ({ username, onLogout }) => {
 
   const sections = [
     { id: 'dashboard', name: 'Dashboard', icon: <FiHome />, component: <DashboardHome username={username} /> },
+
     {
-      id: 'banners',
-      name: 'Banners',
-      icon: <FiGrid />,
-      badge: 'Manage',
-      component: <BannerManagement />
+      id: 'Registration',
+      name: 'Registration',
+      icon: <FiUsers />,
+      badge: '6 Active',
+      component: <AdminRegistrationList />
     },
-    { 
-      id: 'Registration', 
-      name: 'Registration', 
-      icon: <FiUsers />, 
-      badge: '6 Active', 
-      component: <AdminRegistrationList/>
+    {
+      id: 'Internship',
+      name: 'Internship',
+      icon: <MdOutlinePeopleAlt />,
+      badge: '128',
+      component: <InternshipDetails />
     },
-    { 
-      id: 'Internship', 
-      name: 'Internship', 
-      icon: <MdOutlinePeopleAlt />, 
-      badge: '128', 
-      component: <InternshipDetails/>
+    {
+      id: 'Full Time Jobs',
+      name: 'Full Time Jobs',
+      icon: <FiUserCheck />,
+      badge: '12',
+      component: <FullTimeJobList />
     },
-    { 
-      id: 'Full Time Jobs', 
-      name: 'Full Time Jobs', 
-      icon: <FiUserCheck />, 
-      badge: '12', 
-      component: <FullTimeJobList/>
+    {
+      id: 'courses',
+      name: 'Courses',
+      icon: <FiBookOpen />,
+      badge: '8',
+      component: <Courses />
     },
-    { 
-      id: 'courses', 
-      name: 'Courses', 
-      icon: <FiBookOpen />, 
-      badge: '8', 
-      component: <Courses/>
+    {
+      id: 'placements',
+      name: 'Placements',
+      icon: <BiBriefcase />,
+      badge: '45 Jobs',
+      component: <PlacementForm />,
     },
-    { 
-      id: 'placements', 
-      name: 'Placements', 
-      icon: <BiBriefcase />, 
-      badge: '45 Jobs', 
-      component:<PlacementForm/> ,
+    {
+      id: 'certifications',
+      name: 'Certifications',
+      icon: <BiCertification />,
+      component: <AdminCertificationFormData />
     },
-    { 
-      id: 'certifications', 
-      name: 'Certifications', 
-      icon: <BiCertification />, 
-      component: <AdminCertificationFormData/>
-    },
-    { 
-      id: 'analytics', 
-      name: 'Analytics', 
-      icon: <FiBarChart2 />, 
+    {
+      id: 'analytics',
+      name: 'Analytics',
+      icon: <FiBarChart2 />,
       component: <CommonSection title="Analytics" icon={<FiBarChart2 />} description="View insights and reports" />
     },
-    { 
-      id: 'Contact Info', 
-      name: 'Contact', 
-      icon: <FiCalendar />, 
-      component: <ContactFormDetails/>
+    {
+      id: 'Contact Info',
+      name: 'Contact',
+      icon: <FiCalendar />,
+      component: <ContactFormDetails />
     },
-    { 
-      id: 'settings', 
-      name: 'Settings', 
-      icon: <FiSettings />, 
+    {
+      id: 'settings',
+      name: 'Settings',
+      icon: <FiSettings />,
       component: <CommonSection title="Settings" icon={<FiSettings />} description="Configure your preferences" />
     }
   ];
@@ -455,7 +449,7 @@ const Dashboard = ({ username, onLogout }) => {
       )}
 
       {/* Mobile Menu Toggle Button */}
-      <button 
+      <button
         className={styles.mobileMenuToggle}
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
@@ -474,7 +468,7 @@ const Dashboard = ({ username, onLogout }) => {
             <p className={styles.instituteName}>Training & Placement</p>
           </div>
         </div>
-        
+
         <div className={styles.userProfile}>
           <div className={styles.avatar}>
             {getInitials(username)}
@@ -530,34 +524,34 @@ const Dashboard = ({ username, onLogout }) => {
               Welcome back, {username}!
             </h1>
             <p className={styles.dateText}>
-              {new Date().toLocaleDateString('en-IN', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+              {new Date().toLocaleDateString('en-IN', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
               })}
             </p>
           </div>
-          
+
           <div className={styles.headerActions}>
             <div className={styles.searchSection}>
               <BiSearch className={styles.searchIcon} />
-              <input 
-                type="text" 
-                placeholder="Search students, batches, placements..." 
+              <input
+                type="text"
+                placeholder="Search students, batches, placements..."
                 className={styles.searchInput}
               />
             </div>
-            
+
             <button className={styles.notificationBtn}>
               <BiBell />
               {notifications > 0 && (
                 <span className={styles.notificationBadge}>{notifications}</span>
               )}
             </button>
-            
+
             <div className={styles.profileDropdown}>
-              <button 
+              <button
                 className={styles.profileBtn}
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
               >
@@ -567,25 +561,25 @@ const Dashboard = ({ username, onLogout }) => {
                 <span className={styles.profileName}>{username}</span>
                 <FiChevronDown className={styles.profileArrow} />
               </button>
-              
+
               {showProfileMenu && (
                 <div className={styles.dropdownMenu}>
                   <div className={styles.dropdownHeader}>
                     <h4>{username}</h4>
                     <p>Training Head · InstaDotAnalytics</p>
                   </div>
-                  
+
                   <hr className={styles.dropdownDivider} />
-                  
+
                   <button className={styles.dropdownItem}>
                     <BiUser /> My Profile
                   </button>
                   <button className={styles.dropdownItem}>
                     <FiSettings /> Settings
                   </button>
-                  
+
                   <hr className={styles.dropdownDivider} />
-                  
+
                   <button onClick={onLogout} className={styles.dropdownItem}>
                     <BiLogOutCircle /> Logout
                   </button>

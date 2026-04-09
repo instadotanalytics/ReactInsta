@@ -41,35 +41,7 @@ const PlacementList = () => {
   const firstRow = placements.slice(0, half);
   const secondRow = placements.slice(half);
 
-  return (
-    <div className={styles.mainContainer}>
-      <div className={styles.contentWrapper}>
-        <h2 className={styles.heading}>Our Successful Placements</h2>
-        <p className={styles.subText}>
-          We are proud to showcase our students placed in top companies
-          with impressive salary packages.
-        </p>
 
-        <div className={styles.marqueeWrapper}>
-
-          {/* First Row (Left → Right) */}
-          <div className={styles.marqueeLeft}>
-            {[...firstRow, ...firstRow].map((item, index) => (
-              <Card key={`row1-${index}`} item={item} />
-            ))}
-          </div>
-
-          {/* Second Row (Right → Left) */}
-          <div className={styles.marqueeRight}>
-            {[...secondRow, ...secondRow].map((item, index) => (
-              <Card key={`row2-${index}`} item={item} />
-            ))}
-          </div>
-
-        </div>
-      </div>
-    </div>
-  );
 };
 
 const Card = ({ item }) => (
