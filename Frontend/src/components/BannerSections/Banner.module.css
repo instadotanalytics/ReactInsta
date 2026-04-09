@@ -10,7 +10,6 @@
   font-family: 'DM Sans', sans-serif;
 }
 
-/* ── Slides ── */
 .slide {
   position: absolute;
   inset: 0;
@@ -38,7 +37,6 @@
   transform: scale(1);
 }
 
-/* ── Overlay gradient ── */
 .overlay {
   position: absolute;
   inset: 0;
@@ -50,102 +48,6 @@
   );
 }
 
-/* ── Content ── */
-.content {
-  position: absolute;
-  bottom: 14%;
-  left: 7%;
-  max-width: 560px;
-  transform: translateY(28px);
-  opacity: 0;
-  transition:
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.4s,
-    opacity 0.9s ease 0.4s;
-}
-
-.slide.active .content {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.slideNumber {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #e8c97e;
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.slideNumber::after {
-  content: '';
-  display: inline-block;
-  width: 40px;
-  height: 1px;
-  background: #e8c97e;
-}
-
-.title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  font-weight: 700;
-  color: #f5f0e8;
-  line-height: 1.12;
-  margin: 0 0 18px;
-  letter-spacing: -0.5px;
-}
-
-.titleItalic {
-  font-style: italic;
-  color: #e8c97e;
-}
-
-.description {
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  font-weight: 300;
-  color: rgba(245, 240, 232, 0.72);
-  line-height: 1.7;
-  margin: 0 0 32px;
-  max-width: 440px;
-}
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 30px;
-  border: 1px solid #e8c97e;
-  color: #e8c97e;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  background: transparent;
-  transition: background 0.3s, color 0.3s;
-}
-
-.cta:hover {
-  background: #e8c97e;
-  color: #080808;
-}
-
-.ctaArrow {
-  font-size: 16px;
-  transition: transform 0.3s;
-}
-
-.cta:hover .ctaArrow {
-  transform: translateX(5px);
-}
-
-/* ── Navigation arrows ── */
 .navBtn {
   position: absolute;
   top: 50%;
@@ -173,7 +75,6 @@
 .prevBtn { left: 28px; }
 .nextBtn { right: 28px; }
 
-/* ── Dots ── */
 .dots {
   position: absolute;
   bottom: 36px;
@@ -200,7 +101,6 @@
   transform: scale(1.5);
 }
 
-/* ── Progress bar ── */
 .progressBar {
   position: absolute;
   bottom: 0;
@@ -208,7 +108,7 @@
   height: 2px;
   background: #e8c97e;
   z-index: 10;
-  animation: progress 5s linear infinite;
+  animation: progress 5s linear forwards;
 }
 
 @keyframes progress {
@@ -216,7 +116,6 @@
   to   { width: 100%; }
 }
 
-/* ── Slide counter (top right) ── */
 .counter {
   position: absolute;
   top: 36px;
