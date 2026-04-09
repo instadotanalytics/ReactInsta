@@ -4,56 +4,55 @@ import styles from './Banner.module.css'
 const slides = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80',
-    tag: 'Adventure',
-    title: ['Discover the', 'Hidden Peaks'],
+    image: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Coding / Developer Image
+    tag: 'Web Development',
+    title: ['Master', 'Frontend Skills'],
     titleItalicIndex: 1,
     description:
-      'Journey beyond the known horizon. Every mountain holds a secret waiting to be uncovered by those bold enough to climb.',
-    cta: 'Explore Now',
+      'Learn HTML, CSS, and JavaScript to build stunning websites. Start your journey as a modern web developer today.',
+    cta: 'Enroll Now',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=1600&q=80',
-    tag: 'Wildlife',
-    title: ['Into the', 'Wild Unknown'],
+    image: 'https://i.pinimg.com/736x/7b/fd/87/7bfd875e85fbbed980e9df59bcde8579.jpg', // Backend / Server Image
+    tag: 'Backend',
+    title: ['Dive into', 'Server-Side Development'],
     titleItalicIndex: 1,
     description:
-      'Witness nature in its rawest form. The untamed world breathes with a rhythm older than time itself.',
+      'Understand databases, APIs, and server-side programming. Build robust backends with Node.js, Python, or Java.',
     cta: 'Learn More',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&q=80',
-    tag: 'Urban',
-    title: ['Cities that', 'Never Sleep'],
-    titleItalicIndex: 0,
+    image: 'https://i.pinimg.com/736x/3f/a8/80/3fa8800db6f8af0c736b78e9d85e6fba.jpg', // Cloud / DevOps Image
+    tag: 'Cloud & DevOps',
+    title: ['Explore', 'Cloud Technologies'],
+    titleItalicIndex: 1,
     description:
-      'Skylines that pulse with ambition. Every light in every window is a story still being written.',
-    cta: 'Discover More',
+      'Get hands-on experience with AWS, Azure, and CI/CD pipelines. Learn to deploy and manage scalable applications.',
+    cta: 'Start Learning',
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1600&q=80',
-    tag: 'Ocean',
-    title: ['Beneath the', 'Azure Depths'],
+    image: 'https://i.pinimg.com/736x/51/f2/33/51f233f4e9ceab328fda4882eb6457ad.jpg', // Data Science / AI Image
+    tag: 'Data Science',
+    title: ['Analyze', 'Data with Python'],
     titleItalicIndex: 1,
     description:
-      'The ocean holds more mysteries than the sky. Dive into a world of silence, colour and wonder.',
-    cta: 'Go Deeper',
+      'Learn Python, SQL, and machine learning algorithms to extract insights from data and build AI models.',
+    cta: 'Explore Courses',
   },
   {
     id: 5,
-    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&q=80',
-    tag: 'Forest',
-    title: ['Lost in the', 'Ancient Grove'],
-    titleItalicIndex: 0,
+    image: 'https://i.pinimg.com/1200x/52/4e/b7/524eb7e05b71dede4ea88230c7da51ed.jpg', // Cybersecurity Image
+    tag: 'Cybersecurity',
+    title: ['Secure', 'Digital Systems'],
+    titleItalicIndex: 1,
     description:
-      'Forests remember what cities have forgotten. Step inside and let the ancient canopy reclaim you.',
-    cta: 'Wander In',
+      'Understand network security, ethical hacking, and risk management. Protect systems and data from cyber threats.',
+    cta: 'Join Now',
   },
-]
-
+];
 const AUTOPLAY_INTERVAL = 5000
 
 const Banner = () => {

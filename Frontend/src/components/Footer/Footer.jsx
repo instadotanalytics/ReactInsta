@@ -35,10 +35,9 @@ const Footer = () => {
   ];
 
   const socials = [
-    { icon: <FaInstagram />, href: "https://instagram.com", label: "Instagram" },
-    { icon: <FaLinkedinIn />, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: <FaPodcast />, href: "https://podcast.com", label: "Podcast" },
-    { icon: <FaLink />, href: "https://linktr.ee", label: "Linktree" },
+    { icon: <FaInstagram />, href: "https://www.instagram.com/instadotanalytics/", label: "Instagram" },
+    { icon: <FaLinkedinIn />, href: "https://in.linkedin.com/company/instadotanalytics", label: "LinkedIn" },
+   
   ];
 
   return (
@@ -65,7 +64,8 @@ const Footer = () => {
           <ul className={styles.contactList}>
             <li>
               <FaMapMarkerAlt className={styles.contactIcon} />
-              <span>Bhopal, Madhya Pradesh, India</span>
+              <span>P13-14, Metro Tower, Vijay Nagar, Indore[M.P.]
+              </span>
             </li>
             <li>
               <FaEnvelope className={styles.contactIcon} />
@@ -73,7 +73,7 @@ const Footer = () => {
             </li>
             <li>
               <FaPhoneAlt className={styles.contactIcon} />
-              <a href="tel:+911234567890">+91 12345 67890</a>
+              <a href="tel:+911234567890">+916232685820</a>
             </li>
           </ul>
         </div>
