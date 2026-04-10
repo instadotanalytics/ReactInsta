@@ -56,15 +56,14 @@ const Footer = () => {
             />
           </div>
           <p className={styles.brandDesc}>
-            Empowering your digital journey with cutting-edge analytics and
-            innovative solutions. We turn data into actionable insights.
+            Insta Dot Analytics is a leading IT training institute in Indore offering a wide range of job-oriented IT courses. We provide practical training, real-world projects, and expert guidance to help students build successful careers in the IT industry.
           </p>
 
           {/* Contact Info */}
           <ul className={styles.contactList}>
             <li>
               <FaMapMarkerAlt className={styles.contactIcon} />
-              <span>P13-14, Metro Tower, Vijay Nagar, Indore[M.P.]
+              <span>P13-14, Metro Tower, Ground Floor, Vijay Nagar, Indore[M.P.]
               </span>
             </li>
             <li>

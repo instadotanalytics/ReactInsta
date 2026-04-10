@@ -219,7 +219,7 @@ const CoursePage = () => {
                   className={styles.viewMoreBtn}
                   onClick={() => handleViewMore(course._id || course.id)}
                 >
-                  View Details <span className={styles.arrow}>→</span>
+                  View Details 
                 </button>
               </div>
             ))}
