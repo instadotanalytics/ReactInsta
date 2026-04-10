@@ -8,9 +8,9 @@ import CareerSection from './CareerSection'
 import ReviewSection from './ReviewSection'
 import FAQSection from './FAQSection'
 import Footer from '../components/Footer/Footer'
-import PlacementList from './PlacementList'
 import OurPremiumServices from './OurPremiumServices'
 import HomeLanding from './HomeLanding'
+import PlacementList from './PlacementList'
 
 
 const Home = () => {
@@ -19,16 +19,16 @@ const Home = () => {
         <Header/>
         <HomeLanding/>
         <Banner/>
-        <OurImpact/>
         <PlacementList/>
+        <OurImpact/>
         <OurPremiumServices/>
         <CareerSection/>
         <WhyJoinUS/>
         <Companypartners/>
-        
         <ReviewSection/>
         <FAQSection/>
         <Footer/>
+
        
     </div>
   )
