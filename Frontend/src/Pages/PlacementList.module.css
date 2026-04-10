@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arya:wght@400;700&family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Indie+Flower&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@800&family=Parisienne&family=Playwrite+IN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prata&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* ── CONTAINER ── */
 .mainContainer {
-  background: #0f1f4a;
+  background: #ffffff;
   padding: 70px 0 80px;
   overflow: hidden;
   width: 100%;
@@ -26,7 +27,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #c9a84c;
+  color: #c0900e;
   background: rgba(201, 168, 76, 0.1);
   border: 1px solid rgba(201, 168, 76, 0.35);
   padding: 5px 20px;
@@ -39,7 +40,7 @@
   text-align: center;
   font-size: 36px;
   font-weight: 700;
-  color: #f0d080;
+  color: #cf9501;
   margin-bottom: 12px;
   letter-spacing: -0.01em;
 }
@@ -47,8 +48,8 @@
 .subText {
   font-family: 'Inter', sans-serif;
   text-align: center;
-  font-size: 14px;
-  color: #8899cc;
+  font-size: 16px;
+  color: #2a2d36;
   max-width: 500px;
   margin: 0 auto 52px;
   line-height: 1.75;
@@ -76,11 +77,11 @@
 }
 .marqueeWrapper::before {
   left: 0;
-  background: linear-gradient(to right, #0f1f4a 0%, transparent 100%);
+  background: linear-gradient(to right, #ffffff 0%, transparent 100%);
 }
 .marqueeWrapper::after {
   right: 0;
-  background: linear-gradient(to left, #0f1f4a 0%, transparent 100%);
+  background: linear-gradient(to left, #ffffff 0%, transparent 100%);
 }
 
 /* ── TRACKS ── */
@@ -101,13 +102,13 @@
 
 /* ── CARD ── */
 .card {
-  width: 270px;
+  width: 320px;
   flex-shrink: 0;
-  background: linear-gradient(170deg, #162454 0%, #0d1a40 60%, #0a1535 100%);
+  background: linear-gradient(170deg, #ffffff 0%, #ffffff 60%, #ffffff 100%);
   border: 1px solid rgba(201, 168, 76, 0.25);
   border-radius: 20px;
   overflow: hidden;
-  margin: 6px 0;
+  margin: 0px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,7 +119,7 @@
   padding-bottom: 0;
 }
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: 0 18px 52px rgba(201, 168, 76, 0.2);
 }
 
@@ -131,13 +132,12 @@
 
 /* ── CONGRATS LABEL ── */
 .congratsLabel {
-  font-size: 10px;
+  font-size: 30px;
   font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #c9a84c;
-  margin: 14px 0 12px;
-  font-family: 'Playfair Display', serif;
+  color: #dfa60b;
+  margin: 4px 0 5px;
+  font-family: "Parisienne", cursive;;
+  
 }
 
 /* ── AVATAR ── */
@@ -145,12 +145,12 @@
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  border: 3px solid #c9a84c;
-  box-shadow: 0 0 0 5px rgba(201, 168, 76, 0.18), 0 8px 24px rgba(0,0,0,0.5);
+  border: 2px solid #ffbb00;
+ 
   overflow: hidden;
   flex-shrink: 0;
   background: #1a2a5a;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 .avatarWrap img {
   width: 100%;
@@ -163,41 +163,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4px 0 14px;
+  margin: 4px 0 4px;
   width: 100%;
 }
 .ribbonLeft {
   height: 22px;
   width: 64px;
-  background: linear-gradient(90deg, #8b6914, #c9a84c);
+  background: linear-gradient(90deg, #dba61f, #ecbf44);
   clip-path: polygon(0 50%, 8px 0, 100% 0, 100% 100%, 8px 100%);
 }
 .ribbonRight {
   height: 22px;
   width: 64px;
-  background: linear-gradient(90deg, #c9a84c, #8b6914);
+  background: linear-gradient(90deg,  #dba61f, #ecbf44);
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%);
 }
 .star {
   font-size: 28px;
   margin: 0 -3px;
   z-index: 1;
-  filter: drop-shadow(0 2px 8px rgba(201,168,76,0.7));
+  filter: drop-shadow(0 2px 8px rgba(193, 146, 19, 0.785));
 }
 
 /* ── NAME & DESIGNATION ── */
 .name {
   font-family: 'Playfair Display', serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
-  color: #f0d080;
+  color: #9f7200;
   text-align: center;
   padding: 0 16px;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 .designation {
   font-size: 12px;
-  color: #8899cc;
+  color: #012fb9d6;
   font-weight: 600;
   text-align: center;
   padding: 0 16px;
@@ -208,18 +208,17 @@
 .dividerGold {
   width: 80%;
   height: 1px;
-  background: linear-gradient(to right, transparent, #c9a84c88, transparent);
+  background: linear-gradient(to right, transparent, #c9a84c, transparent);
   margin-bottom: 12px;
 }
 
 /* ── DESCRIPTION ── */
 .description {
   font-size: 11px;
-  color: #7788bb;
-  line-height: 1.6;
+  color: #1c4fb5;
   text-align: center;
   padding: 0 18px;
-  margin-bottom: 13px;
+  margin-bottom: 3px;
   font-style: italic;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -239,10 +238,10 @@
 .pkgTag {
   font-size: 11px;
   font-weight: 700;
-  background: rgba(201, 168, 76, 0.14);
+ 
   color: #c9a84c;
-  border: 1px solid rgba(201, 168, 76, 0.35);
-  padding: 4px 11px;
+ 
+  padding: 2px 11px;
   border-radius: 999px;
 }
 .locTag {
@@ -261,9 +260,9 @@
 .batchTag {
   font-size: 10.5px;
   font-weight: 600;
-  background: rgba(100, 130, 255, 0.1);
+ 
   color: #7799ee;
-  border: 1px solid rgba(100, 130, 255, 0.2);
+  
   padding: 3px 10px;
   border-radius: 999px;
 }
@@ -271,10 +270,8 @@
 /* ── COMPANY LOGO BOX ── */
 .logoBox {
   width: calc(100% - 28px);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201, 168, 76, 0.22);
   border-radius: 12px;
-  padding: 10px 16px 12px;
+  padding: 5px 6px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -286,11 +283,11 @@
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: rgba(201, 168, 76, 0.55);
+  color: rgb(179, 132, 1);
 }
 .logoImg {
-  max-width: 130px;
-  max-height: 40px;
+  max-width: 150px;
+  max-height: auto;
   object-fit: contain;
   filter: brightness(1.3) saturate(0.7);
 }
@@ -313,7 +310,7 @@
   color: #556080;
   font-weight: 500;
 }
-.metaLabel { color: rgba(201,168,76,0.55); }
+.metaLabel { color: rgb(165, 121, 0); }
 
 /* ── BOTTOM RIBBON ── */
 .ribbonBottom {
