@@ -99,7 +99,7 @@ const CoursesHome = () => {
           <div className={styles.heroImageWrapper}>
             <div className={styles.heroImageContainer}>
               <img 
-                src="https://i.pinimg.com/736x/0d/08/d8/0d08d85c0baa936ee69e66ef43df4784.jpg" 
+                src="https://i.pinimg.com/1200x/cc/57/0b/cc570b0b64ad6ed4e605725470d76f32.jpg" 
                 alt="Online Learning"
                 className={styles.heroImage}
               />

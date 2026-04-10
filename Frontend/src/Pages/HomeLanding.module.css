@@ -44,12 +44,12 @@
   font-size: 52px;
   font-weight: 800;
   line-height: 1.2;
-  color: #1a1a1a;
+  color: #0077ff;
   margin-bottom: 24px;
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #4361ee 0%, #f72585 100%);
+  background: linear-gradient(135deg, #1c68ff 0%, #2a3bff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -58,7 +58,7 @@
 .heroDesc {
   font-size: 18px;
   line-height: 1.6;
-  color: #4a4a4a;
+  color: #4e4e4f;
   margin-bottom: 32px;
 }
 

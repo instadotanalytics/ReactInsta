@@ -35,7 +35,6 @@ const About = () => {
           {/* Hero Section with Image */}
           <div className={styles.heroSection}>
             <div className={styles.heroContent}>
-              <span className={styles.badge}>About Us</span>
               <h1 className={styles.heroTitle}>
                 Taking your imagination as{" "}
                 <span className={styles.highlight}>
@@ -82,22 +81,6 @@ const About = () => {
             </div>
           </div>
           <Companypartners />
-
-          {/* Features Section */}
-          <div className={styles.featuresSection}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.titleIcon}>📚</span>
-              Courses we Offer
-            </h2>
-            <div className={styles.featuresGrid}>
-              {features.map((feature, index) => (
-                <div key={index} className={styles.featureCard}>
-                  <span className={styles.featureCheck}>✓</span>
-                  <span>{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
           <OurImpact />
 
           {/* Journey Section with Image */}

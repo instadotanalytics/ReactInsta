@@ -42,12 +42,11 @@ const OurImpact = () => (
 
         {/* ── LEFT ── */}
         <div className={styles.left}>
-          <span className={styles.badge}>Our Impact</span>
-
+         
           <h2 className={styles.title}>
             Transforming Careers Through
             <br />
-            <span className={styles.highlight}> Quality Education</span>
+            
           </h2>
 
           <p className={styles.desc}>
@@ -99,7 +98,7 @@ const OurImpact = () => (
             </div>
 
             <img
-              src="https://i.pinimg.com/736x/40/c3/64/40c3647635f831066267fc7c39917030.jpg"
+              src="https://i.pinimg.com/1200x/83/8c/cc/838ccc2629857f40606a3d6927de1e72.jpg"
               alt="Training session with students and mentor"
               className={styles.image}
               loading="lazy"

@@ -70,7 +70,7 @@ const HomeLanding = () => {
           <div className={styles.heroImageWrapper}>
             <div className={styles.heroImageContainer}>
               <img 
-                src="https://i.pinimg.com/736x/1a/2f/fa/1a2ffa9d918a1a13d7810f5a9de19906.jpg" 
+                src="https://i.pinimg.com/1200x/06/f6/23/06f6235b88be4decbae8cae39ef01343.jpg" 
                 alt="Students Learning"
                 className={styles.heroImage}
               />

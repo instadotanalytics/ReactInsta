@@ -4,7 +4,7 @@ import styles from "./Header.module.css";
 import { IoBookSharp } from "react-icons/io5";
 import { GiStairsGoal } from "react-icons/gi";
 import { IoIosArrowDown } from "react-icons/io";
-import { 
+import {
   FaHome,
   FaBars,
   FaTimes,
@@ -133,7 +133,7 @@ const Header = () => {
       desc: "Start your professional journey",
       icon: <FaUserTie />,
       path: "/career/fulltime",
-      image:"https://i.pinimg.com/736x/45/a5/c6/45a5c66ba7c17cd03c0e7f833f547878.jpg",
+      image: "https://i.pinimg.com/736x/45/a5/c6/45a5c66ba7c17cd03c0e7f833f547878.jpg",
       features: ["Dream company", "Growth opportunities", "Global exposure"],
     },
   ];
@@ -212,7 +212,7 @@ const Header = () => {
               </li>
 
               {/* Certification Dropdown */}
-              <li 
+              <li
                 className={`${styles.navItem} ${styles.dropdownContainer}`}
                 onMouseEnter={handleCertificationMouseEnter}
                 onMouseLeave={handleCertificationMouseLeave}
@@ -221,7 +221,7 @@ const Header = () => {
                 <button className={styles.dropdownLink}>
                   <FaGraduationCap className={styles.navIcon} /> Certification <span className={styles.dropdownArrow}><IoIosArrowDown /></span>
                 </button>
-                
+
                 {/* Certification Dropdown - Enhanced */}
                 <div className={`${styles.careerDropdown} ${certificationDropdownOpen ? styles.show : ''}`}>
                   <div className={styles.dropdownContent}>
@@ -230,15 +230,14 @@ const Header = () => {
                       <h3 className={styles.dropdownTitle}>
                         <FaGraduationCap className={styles.titleIcon} /> Certifications
                       </h3>
-                      
+
                       {certificationItems.map((item) => (
                         <Link
                           key={item.id}
                           to={item.path}
                           onClick={handleLinkClick}
-                          className={`${styles.dropdownCategoryItem} ${
-                            activeCertificationItem === item.id ? styles.active : ""
-                          }`}
+                          className={`${styles.dropdownCategoryItem} ${activeCertificationItem === item.id ? styles.active : ""
+                            }`}
                           onMouseEnter={() => setActiveCertificationItem(item.id)}
                         >
                           <span className={styles.categoryIcon}>{item.icon}</span>
@@ -249,7 +248,7 @@ const Header = () => {
                         </Link>
                       ))}
                     </div>
-                    
+
                     {/* Right Side - Dynamic Content Based on Hover */}
                     <div className={styles.dropdownPreview}>
                       {certificationItems.map(
@@ -257,8 +256,8 @@ const Header = () => {
                           activeCertificationItem === item.id && (
                             <div key={item.id} className={styles.previewContent}>
                               <div className={styles.previewImageContainer}>
-                                <img 
-                                  src={item.image} 
+                                <img
+                                  src={item.image}
                                   alt={item.title}
                                   className={styles.previewImage}
                                 />
@@ -275,9 +274,7 @@ const Header = () => {
                                     </li>
                                   ))}
                                 </ul>
-                                <Link to={item.path} className={styles.previewBtn}>
-                                  Explore {item.title} <span>→</span>
-                                </Link>
+                              
                               </div>
                             </div>
                           )
@@ -286,8 +283,8 @@ const Header = () => {
                   </div>
                 </div>
               </li>
-              
-              <li 
+
+              <li
                 className={`${styles.navItem} ${styles.dropdownContainer}`}
                 onMouseEnter={handleCareerMouseEnter}
                 onMouseLeave={handleCareerMouseLeave}
@@ -296,7 +293,7 @@ const Header = () => {
                 <button className={styles.dropdownLink}>
                   <GiStairsGoal className={styles.navIcon} /> Career <span className={styles.dropdownArrow}><IoIosArrowDown /></span>
                 </button>
-                
+
                 {/* Career Dropdown - Enhanced */}
                 <div className={`${styles.careerDropdown} ${careerDropdownOpen ? styles.show : ''}`}>
                   <div className={styles.dropdownContent}>
@@ -305,15 +302,14 @@ const Header = () => {
                       <h3 className={styles.dropdownTitle}>
                         <FaGraduationCap className={styles.titleIcon} /> Career
                       </h3>
-                      
+
                       {careerItems.map((item) => (
                         <Link
                           key={item.id}
                           to={item.path}
                           onClick={handleLinkClick}
-                          className={`${styles.dropdownCategoryItem} ${
-                            activeCareerItem === item.id ? styles.active : ""
-                          }`}
+                          className={`${styles.dropdownCategoryItem} ${activeCareerItem === item.id ? styles.active : ""
+                            }`}
                           onMouseEnter={() => setActiveCareerItem(item.id)}
                         >
                           <span className={styles.categoryIcon}>{item.icon}</span>
@@ -324,7 +320,7 @@ const Header = () => {
                         </Link>
                       ))}
                     </div>
-                    
+
                     {/* Right Side - Dynamic Content Based on Hover */}
                     <div className={styles.dropdownPreview}>
                       {careerItems.map(
@@ -332,8 +328,8 @@ const Header = () => {
                           activeCareerItem === item.id && (
                             <div key={item.id} className={styles.previewContent}>
                               <div className={styles.previewImageContainer}>
-                                <img 
-                                  src={item.image} 
+                                <img
+                                  src={item.image}
                                   alt={item.title}
                                   className={styles.previewImage}
                                 />
@@ -367,7 +363,7 @@ const Header = () => {
                   <BsInfoCircle className={styles.navIcon} /> About Us
                 </Link>
               </li>
-              
+
               <li className={styles.navItem}>
                 <Link to="/contact" onClick={handleLinkClick}>
                   <FaPhoneAlt className={styles.navIcon} /> Contact
@@ -377,15 +373,15 @@ const Header = () => {
           </nav>
 
           <div className={styles.authButtons}>
-            <a 
-              href="https://wa.link/dakfe1" 
-              target="_blank" 
+            <a
+              href="https://wa.link/dakfe1"
+              target="_blank"
               rel="noopener noreferrer"
               className={styles.whatsappBtn}
             >
               <FaWhatsapp /> <span>WhatsApp</span>
             </a>
-            <button 
+            <button
               className={styles.signupBtn}
               onClick={handleRegisterClick}
             >
@@ -393,8 +389,8 @@ const Header = () => {
             </button>
           </div>
 
-          <button 
-            className={`${styles.menuIcon} ${mobileMenuOpen ? styles.active : ""}`} 
+          <button
+            className={`${styles.menuIcon} ${mobileMenuOpen ? styles.active : ""}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -416,50 +412,50 @@ const Header = () => {
                     <IoBookSharp /> Courses
                   </Link>
                 </li>
-                
+
                 {/* Mobile Certification Links */}
                 <li className={styles.mobileNavItem}>
                   <Link to="/certification/microsoft" onClick={handleLinkClick} className={styles.mobileLink}>
                     <FaMicrosoft /> Microsoft Certification
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/certification/ibm" onClick={handleLinkClick} className={styles.mobileLink}>
                     <SiBmcsoftware /> IBM Certification
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/certification/aws" onClick={handleLinkClick} className={styles.mobileLink}>
                     <FaAws /> AWS Certification
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/certification/redhat" onClick={handleLinkClick} className={styles.mobileLink}>
                     <FaRedhat /> RedHat Certification
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/certification/custom" onClick={handleLinkClick} className={styles.mobileLink}>
                     <SiCoursera /> Custom Certification
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/career/internship" onClick={handleLinkClick} className={styles.mobileLink}>
                     <FaLaptopCode /> Internship
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/career/placement" onClick={handleLinkClick} className={styles.mobileLink}>
                     <FaBriefcase /> Placement
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/career/fulltime" onClick={handleLinkClick} className={styles.mobileLink}>
                     <FaUserTie /> Full Time Job
@@ -471,7 +467,7 @@ const Header = () => {
                     <BsInfoCircle /> About Us
                   </Link>
                 </li>
-                
+
                 <li className={styles.mobileNavItem}>
                   <Link to="/contact" onClick={handleLinkClick} className={styles.mobileLink}>
                     <FaPhoneAlt /> Contact
