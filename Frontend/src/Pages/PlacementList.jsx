@@ -7,7 +7,9 @@ const PlacementList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(() => { fetchPlacements(); }, []);
+  useEffect(() => {
+    fetchPlacements();
+  }, []);
 
   const fetchPlacements = async () => {
     try {
@@ -15,24 +17,29 @@ const PlacementList = () => {
       const data = await res.json();
       if (data.success) setPlacements(data.data);
       else setError(true);
-    } catch { setError(true); }
-    finally { setLoading(false); }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  if (loading) return (
-    <div className={styles.mainContainer}>
-      <div className={styles.center}>
-        <div className={styles.spinner} />
-        <p>Loading placements...</p>
+  if (loading)
+    return (
+      <div className={styles.mainContainer}>
+        <div className={styles.center}>
+          <div className={styles.spinner} />
+          <p>Loading placements...</p>
+        </div>
       </div>
-    </div>
-  );
+    );
 
-  if (error) return (
-    <div className={styles.mainContainer}>
-      <div className={styles.center}>Failed to load placements.</div>
-    </div>
-  );
+  if (error)
+    return (
+      <div className={styles.mainContainer}>
+        <div className={styles.center}>Failed to load placements.</div>
+      </div>
+    );
 
   const half = Math.ceil(placements.length / 2);
 
@@ -72,55 +79,63 @@ const PlacementList = () => {
 const Card = ({ item }) => {
   const date = item.placementDate
     ? new Date(item.placementDate).toLocaleDateString("en-IN", {
-        month: "short", year: "numeric",
+        month: "short",
+        year: "numeric",
       })
     : null;
 
   return (
     <div className={styles.card}>
-      {/* Top Gold Ribbon */}
+
+      {/* ── Top Gold Ribbon ── */}
       <div className={styles.ribbonTop} />
 
-      {/* Congratulations Label */}
+      {/* ── Congratulations Label ── */}
       <div className={styles.congratsLabel}>★ Congratulations ★</div>
 
-      {/* Avatar */}
+      {/* ── Avatar ── */}
       <div className={styles.avatarWrap}>
         <img src={item.profileImage} alt={item.fullName} loading="lazy" />
       </div>
 
-      {/* Star + Ribbon Row */}
+      {/* ── Star + Ribbon Row ── */}
       <div className={styles.starRow}>
         <div className={styles.ribbonLeft} />
         <span className={styles.star}>⭐</span>
         <div className={styles.ribbonRight} />
       </div>
 
-      {/* Name & Designation */}
+      {/* ── Name & Designation ── */}
       <h3 className={styles.name}>{item.fullName}</h3>
       <p className={styles.designation}>{item.designation}</p>
 
-      {/* Gold Divider */}
+      {/* ── Gold Divider ── */}
       <div className={styles.dividerGold} />
 
-      {/* Description */}
+      {/* ── Description ── */}
       {item.description && (
         <p className={styles.description}>{item.description}</p>
       )}
 
-      {/* Tags */}
+      {/* ── Tags ── */}
       <div className={styles.tagsRow}>
-        <span className={styles.pkgTag}>◆ {item.package} LPA</span>
-        {item.location && <span className={styles.locTag}>◎ {item.location}</span>}
-        {item.batch && <span className={styles.batchTag}>Batch {item.batch}</span>}
+        {item.package && (
+          <span className={styles.pkgTag}>◆ {item.package} LPA</span>
+        )}
+        {item.location && (
+          <span className={styles.locTag}>◎ {item.location}</span>
+        )}
+        {item.batch && (
+          <span className={styles.batchTag}>Batch {item.batch}</span>
+        )}
       </div>
 
-      {/* Company Logo Box */}
+      {/* ── Company Logo Box ── */}
       <div className={styles.logoBox}>
-        <span className={styles.logoLabel}>Placed At</span>
+       
         <img
           src={item.companyLogo}
-          alt="company logo"
+          alt={item.companyName || "company logo"}
           loading="lazy"
           className={styles.logoImg}
           onError={(e) => {
@@ -128,20 +143,27 @@ const Card = ({ item }) => {
             e.target.nextSibling.style.display = "block";
           }}
         />
-        <span className={styles.logoFallback}>{item.designation || "Company"}</span>
+        <span className={styles.logoFallback}>
+          {item.companyName || item.designation || "Company"}
+        </span>
       </div>
 
-      {/* Placed Date */}
+      {/* ── Placed Date ── */}
       {date && (
         <div className={styles.metaRow}>
           <span className={styles.metaItem}>
-            <span className={styles.metaLabel}>Placed: </span>{date}
+            <span className={styles.metaLabel}>Placed: </span>
+            {date}
           </span>
         </div>
       )}
 
-      {/* Bottom Ribbon */}
+      {/* ── Spacer pushes ribbon to bottom ── */}
+      <div className={styles.spacer} />
+
+      {/* ── Bottom Gold Ribbon ── */}
       <div className={styles.ribbonBottom} />
+
     </div>
   );
 };

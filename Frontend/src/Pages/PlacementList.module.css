@@ -102,13 +102,15 @@
 
 /* ── CARD ── */
 .card {
-  width: 320px;
+  width: 300px;
   flex-shrink: 0;
-  background: linear-gradient(170deg, #ffffff 0%, #ffffff 60%, #ffffff 100%);
-  border: 1px solid rgba(201, 168, 76, 0.25);
-  border-radius: 20px;
+  height: auto;
+  min-height: 480px;
+  background: #ffffff;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 18px;
   overflow: hidden;
-  margin: 0px 0;
+  margin: 4px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,41 +118,45 @@
   position: relative;
   transition: transform 0.28s ease, box-shadow 0.28s ease;
   cursor: default;
-  padding-bottom: 0;
 }
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 52px rgba(201, 168, 76, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 56px rgba(201, 168, 76, 0.25);
 }
 
 /* ── TOP RIBBON ── */
 .ribbonTop {
   width: 100%;
-  height: 7px;
-  background: linear-gradient(90deg, #8b6914, #f0d080, #c9a84c, #f0d080, #8b6914);
+  height: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #7a5c0f, #f0d878, #c9a84c, #f0d878, #7a5c0f);
 }
 
 /* ── CONGRATS LABEL ── */
 .congratsLabel {
-  font-size: 30px;
-  font-weight: 800;
-  color: #dfa60b;
-  margin: 4px 0 5px;
-  font-family: "Parisienne", cursive;;
-  
+  font-size: 26px;
+  font-weight: 400;
+  color: #c9880a;
+  margin: 10px 0 8px;
+  font-family: "Parisienne", cursive;
+  line-height: 1;
+  text-align: center;
 }
 
 /* ── AVATAR ── */
 .avatarWrap {
-  width: 96px;
-  height: 96px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
-  border: 2px solid #ffbb00;
- 
+  border: 3px solid #e8c84a;
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15);
   overflow: hidden;
   flex-shrink: 0;
-  background: #1a2a5a;
-  margin-bottom: 0px;
+  background: linear-gradient(135deg, #1a2a5a, #2a4a9a);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .avatarWrap img {
   width: 100%;
@@ -163,53 +169,56 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4px 0 4px;
+  margin: 7px 0 5px;
   width: 100%;
 }
 .ribbonLeft {
-  height: 22px;
-  width: 64px;
-  background: linear-gradient(90deg, #dba61f, #ecbf44);
+  height: 20px;
+  width: 56px;
+  background: linear-gradient(90deg, #b8860b, #e8c84a);
   clip-path: polygon(0 50%, 8px 0, 100% 0, 100% 100%, 8px 100%);
 }
 .ribbonRight {
-  height: 22px;
-  width: 64px;
-  background: linear-gradient(90deg,  #dba61f, #ecbf44);
+  height: 20px;
+  width: 56px;
+  background: linear-gradient(90deg, #e8c84a, #b8860b);
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%);
 }
 .star {
-  font-size: 28px;
-  margin: 0 -3px;
+  font-size: 22px;
+  margin: 0 3px;
   z-index: 1;
-  filter: drop-shadow(0 2px 8px rgba(193, 146, 19, 0.785));
+  filter: drop-shadow(0 1px 6px rgba(193, 146, 19, 0.6));
 }
 
 /* ── NAME & DESIGNATION ── */
 .name {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
   color: #9f7200;
   text-align: center;
   padding: 0 16px;
-  margin-bottom: 2px;
+  margin: 8px 0 3px;
+  line-height: 1.3;
 }
 .designation {
-  font-size: 12px;
-  color: #012fb9d6;
+  font-size: 11.5px;
+  color: #1a3faa;
   font-weight: 600;
   text-align: center;
   padding: 0 16px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
 }
 
 /* ── GOLD DIVIDER ── */
 .dividerGold {
-  width: 80%;
+  width: 75%;
   height: 1px;
   background: linear-gradient(to right, transparent, #c9a84c, transparent);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
 /* ── DESCRIPTION ── */
@@ -218,8 +227,9 @@
   color: #1c4fb5;
   text-align: center;
   padding: 0 18px;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
   font-style: italic;
+  line-height: 1.55;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -238,58 +248,59 @@
 .pkgTag {
   font-size: 11px;
   font-weight: 700;
- 
-  color: #c9a84c;
- 
-  padding: 2px 11px;
+  color: #b8860b;
+  padding: 2px 10px;
   border-radius: 999px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.25);
 }
 .locTag {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  background: rgba(255,255,255,0.05);
-  color: #8899cc;
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 4px 11px;
+  color: #5577bb;
+  border: 1px solid #dde4f5;
+  padding: 2px 10px;
   border-radius: 999px;
   max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  background: #f5f7fd;
 }
 .batchTag {
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 600;
- 
-  color: #7799ee;
-  
-  padding: 3px 10px;
+  color: #6688dd;
+  padding: 2px 10px;
   border-radius: 999px;
+  background: #eef1fb;
+  border: 1px solid #d5dbf5;
 }
 
 /* ── COMPANY LOGO BOX ── */
 .logoBox {
   width: calc(100% - 28px);
   border-radius: 12px;
-  padding: 5px 6px 12px;
+  padding: 8px 10px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 7px;
   margin: 0 14px;
+  flex-shrink: 0;
 }
 .logoLabel {
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgb(179, 132, 1);
+  color: #b38401;
 }
 .logoImg {
   max-width: 150px;
-  max-height: auto;
+  max-height: 64px;
   object-fit: contain;
-  filter: brightness(1.3) saturate(0.7);
+  filter: brightness(1.1) saturate(0.8);
 }
 .logoFallback {
   display: none;
@@ -302,22 +313,31 @@
 .metaRow {
   display: flex;
   justify-content: center;
-  margin-top: 11px;
-  margin-bottom: 2px;
+  margin: 10px 0 0;
 }
 .metaItem {
-  font-size: 10.5px;
-  color: #556080;
+  font-size: 10px;
+  color: #6677aa;
   font-weight: 500;
 }
-.metaLabel { color: rgb(165, 121, 0); }
+.metaLabel {
+  color: #a57900;
+  font-weight: 700;
+}
 
 /* ── BOTTOM RIBBON ── */
 .ribbonBottom {
   width: 100%;
-  height: 6px;
-  background: linear-gradient(90deg, #8b6914, #f0d080, #c9a84c, #f0d080, #8b6914);
-  margin-top: 14px;
+  height: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #7a5c0f, #f0d878, #c9a84c, #f0d878, #7a5c0f);
+  margin-top: auto;
+}
+
+/* ── SPACER (keeps ribbon at bottom when content is short) ── */
+.spacer {
+  flex: 1;
+  min-height: 12px;
 }
 
 /* ── LOADING / ERROR ── */
@@ -335,7 +355,7 @@
 .spinner {
   width: 38px;
   height: 38px;
-  border: 2px solid #1e3060;
+  border: 2px solid #e0d8c8;
   border-top-color: #c9a84c;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -346,7 +366,7 @@
 @media (max-width: 768px) {
   .heading { font-size: 26px; }
   .subText { font-size: 13px; margin-bottom: 36px; }
-  .card { width: 240px; }
+  .card { width: 245px; }
   .marqueeWrapper::before,
   .marqueeWrapper::after { width: 80px; }
 }
