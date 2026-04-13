@@ -461,11 +461,11 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
-  transform: translateX(-120%);
+ 
   transition: transform 0.5s;
 }
 
-.enrollButton:hover::after { transform: translateX(120%); }
+
 
 .enrollButton:hover {
   transform: translateY(-2px);
@@ -1061,11 +1061,11 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
-  transform: translateX(-120%);
+ 
   transition: transform 0.5s;
 }
 
-.enrollNowBtn:hover::after { transform: translateX(120%); }
+
 
 .enrollNowBtn:hover {
   transform: translateY(-2px);

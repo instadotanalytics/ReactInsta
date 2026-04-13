@@ -45,6 +45,11 @@ const CourseDetailPage = () => {
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showRegistrationPopup, setShowRegistrationPopup] = useState(false);
 
+  // ✅ FIX: Har baar course page khulne par page top pe le jao
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [id]);
+
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
@@ -362,6 +367,7 @@ const CourseDetailPage = () => {
                   </div>
                 </div>
               )}
+
               {/* Curriculum */}
               {activeTab === 'curriculum' && (
                 <div className={styles.curriculumTab}>
