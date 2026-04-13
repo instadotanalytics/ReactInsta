@@ -15,13 +15,15 @@
 }
 
 .heroContainer {
-  max-width: 1280px;
+  max-width: 1300px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
+  height: 100vh;
 }
+
 
 .heroTag {
   display: inline-flex;

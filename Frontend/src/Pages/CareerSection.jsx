@@ -122,8 +122,8 @@ const CareerSection = () => {
                   <h3 className={styles.cardTitle}>{item.title}</h3>
                   <p className={styles.cardDesc}>{item.desc}</p>
                   <button className={styles.learnLink}>
-                    <span>Learn More</span>
-                    {icons.arrowRight}
+                    
+                   
                   </button>
                 </div>
               );

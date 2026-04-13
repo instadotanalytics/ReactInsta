@@ -34,14 +34,19 @@ const HomeLanding = () => {
             <div className={styles.heroTag}>
               <FaRocket className={styles.tagIcon} />
               <span>India's #1 Training Institute </span>
+               
             </div>
             <h1 className={styles.heroTitle}>
               <span className={styles.gradientText}>100% Job Guarantee</span>
               <br />Training Programs
+             
             </h1>
             <p className={styles.heroDesc}>
-              Transform your career with industry-relevant training. Get placed in top MNCs 
-              with 6-25 LPA packages. 5000+ successful placements and counting!
+               <span>Insta Dot Analytics  </span><br />Best IT Tranning  Institude in Indore
+            
+
+
+Transform your career with industry-focused, job-oriented training programs. Learn in-demand skills guided by expert mentors and work on real-world projects. Join 5000+ successful students and get placed in top MNCs with packages ranging from 6–25 LPA. Your journey to a successful IT career starts here!
             </p>
 
             <div className={styles.successStats}>
@@ -74,20 +79,8 @@ const HomeLanding = () => {
                 alt="Students Learning"
                 className={styles.heroImage}
               />
-              <div className={styles.floatingCard} style={{ top: '15%', right: '10%' }}>
-                <FaTrophy className={styles.cardIcon} style={{ color: '#ffb703' }} />
-                <div>
-                  <strong>100%</strong>
-                  <span>Job Guarantee</span>
-                </div>
-              </div>
-              <div className={styles.floatingCard} style={{ bottom: '20%', left: '10%' }}>
-                <FaUsers className={styles.cardIcon} style={{ color: '#4361ee' }} />
-                <div>
-                  <strong>5000+</strong>
-                  <span>Students Placed</span>
-                </div>
-              </div>
+              
+             
             </div>
           </div>
         </div>

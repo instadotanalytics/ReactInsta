@@ -4,7 +4,7 @@
 /* ── CONTAINER ── */
 .mainContainer {
   background: #ffffff;
-  padding: 70px 0 80px;
+  padding: 50px 0 60px;
   overflow: hidden;
   width: 100%;
   display: flex;
@@ -59,7 +59,7 @@
 .marqueeWrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   overflow: hidden;
   position: relative;
   padding: 6px 0;
@@ -88,7 +88,7 @@
 .trackLeft,
 .trackRight {
   display: flex;
-  gap: 22px;
+  gap: 18px;
   width: max-content;
   will-change: transform;
 }
@@ -297,8 +297,8 @@
   color: #b38401;
 }
 .logoImg {
-  max-width: 150px;
-  max-height: 64px;
+  max-width: 110px;
+  max-height: 44px;
   object-fit: contain;
   filter: brightness(1.1) saturate(0.8);
 }
@@ -334,7 +334,7 @@
   margin-top: auto;
 }
 
-/* ── SPACER (keeps ribbon at bottom when content is short) ── */
+/* ── SPACER ── */
 .spacer {
   flex: 1;
   min-height: 12px;
@@ -362,18 +362,109 @@
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .heading { font-size: 26px; }
-  .subText { font-size: 13px; margin-bottom: 36px; }
-  .card { width: 245px; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE — MOBILE FIRST BREAKPOINTS
+════════════════════════════════════════ */
+
+/* ── Tablet (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .heading { font-size: 30px; }
+  .subText { font-size: 15px; margin-bottom: 40px; }
+  .card { width: 265px; min-height: 450px; }
   .marqueeWrapper::before,
-  .marqueeWrapper::after { width: 80px; }
+  .marqueeWrapper::after { width: 120px; }
 }
-@media (max-width: 480px) {
-  .heading { font-size: 22px; }
-  .card { width: 215px; }
-  .avatarWrap { width: 80px; height: 80px; }
+
+/* ── Small Tablet / Large Mobile (≤ 768px) ── */
+@media (max-width: 768px) {
+  .mainContainer { padding: 36px 0 44px; }
+  .heading { font-size: 24px; }
+  .subText { font-size: 13px; margin-bottom: 28px; padding: 0 16px; }
+  .badge { font-size: 10px; padding: 4px 14px; }
+
+  .marqueeWrapper { gap: 14px; }
+  .trackLeft, .trackRight { gap: 14px; }
   .marqueeWrapper::before,
-  .marqueeWrapper::after { width: 50px; }
+  .marqueeWrapper::after { width: 72px; }
+
+  .card {
+    width: 200px;
+    min-height: 380px;
+    border-radius: 14px;
+  }
+  .ribbonTop, .ribbonBottom { height: 8px; }
+  .congratsLabel { font-size: 19px; margin: 8px 0 6px; }
+  .avatarWrap { width: 72px; height: 72px; border-width: 2px; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+  .ribbonLeft, .ribbonRight { width: 40px; height: 16px; }
+  .star { font-size: 18px; }
+  .starRow { margin: 5px 0 4px; }
+  .name { font-size: 15px; padding: 0 12px; margin: 6px 0 2px; }
+  .designation { font-size: 10px; padding: 0 10px; margin-bottom: 8px; }
+  .dividerGold { margin-bottom: 8px; }
+  .description { font-size: 10px; padding: 0 12px; margin-bottom: 6px; }
+  .tagsRow { gap: 4px; padding: 0 10px; margin-bottom: 10px; }
+  .pkgTag { font-size: 9.5px; padding: 2px 8px; }
+  .locTag { font-size: 9px; padding: 2px 8px; max-width: 90px; }
+  .batchTag { font-size: 9px; padding: 2px 8px; }
+  .logoBox { width: calc(100% - 20px); margin: 0 10px; padding: 6px 8px 10px; gap: 5px; border-radius: 10px; }
+  .logoLabel { font-size: 8px; letter-spacing: 0.12em; }
+  .logoImg { max-width: 80px; max-height: 34px; }
+  .logoFallback { font-size: 11px; }
+  .metaRow { margin: 8px 0 0; }
+  .metaItem { font-size: 9px; }
+  .spacer { min-height: 8px; }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .mainContainer { padding: 28px 0 36px; }
+  .heading { font-size: 20px; }
+  .subText { font-size: 12px; margin-bottom: 22px; }
+
+  .marqueeWrapper { gap: 12px; }
+  .trackLeft, .trackRight { gap: 12px; }
+  .marqueeWrapper::before,
+  .marqueeWrapper::after { width: 44px; }
+
+  .card {
+    width: 172px;
+    min-height: 340px;
+    border-radius: 12px;
+    margin: 3px 0;
+  }
+  .ribbonTop, .ribbonBottom { height: 7px; }
+  .congratsLabel { font-size: 17px; margin: 7px 0 5px; }
+  .avatarWrap { width: 62px; height: 62px; border-width: 2px; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+  .ribbonLeft, .ribbonRight { width: 34px; height: 14px; }
+  .star { font-size: 16px; margin: 0 2px; }
+  .starRow { margin: 4px 0 3px; }
+  .name { font-size: 13.5px; padding: 0 10px; margin: 5px 0 2px; }
+  .designation { font-size: 9.5px; padding: 0 8px; margin-bottom: 7px; }
+  .dividerGold { width: 70%; margin-bottom: 7px; }
+  .description { font-size: 9.5px; padding: 0 10px; margin-bottom: 5px; }
+  .tagsRow { gap: 3px; padding: 0 8px; margin-bottom: 8px; }
+  .pkgTag { font-size: 9px; padding: 1px 7px; }
+  .locTag { font-size: 8.5px; padding: 1px 7px; max-width: 80px; }
+  .batchTag { font-size: 8.5px; padding: 1px 7px; }
+  .logoBox { width: calc(100% - 16px); margin: 0 8px; padding: 5px 7px 9px; gap: 4px; border-radius: 8px; }
+  .logoLabel { font-size: 7.5px; }
+  .logoImg { max-width: 70px; max-height: 28px; }
+  .logoFallback { font-size: 10px; }
+  .metaRow { margin: 6px 0 0; }
+  .metaItem { font-size: 8.5px; }
+  .spacer { min-height: 6px; }
+}
+
+/* ── Very small phones (≤ 360px) ── */
+@media (max-width: 360px) {
+  .card { width: 150px; min-height: 310px; }
+  .congratsLabel { font-size: 15px; }
+  .avatarWrap { width: 54px; height: 54px; }
+  .name { font-size: 12.5px; }
+  .designation { font-size: 9px; }
+  .ribbonLeft, .ribbonRight { width: 28px; }
+  .star { font-size: 14px; }
+  .logoImg { max-width: 60px; max-height: 24px; }
+  .pkgTag, .locTag, .batchTag { font-size: 8px; padding: 1px 6px; }
 }
