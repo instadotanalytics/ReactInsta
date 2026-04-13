@@ -48,13 +48,7 @@ const FullTimeJob = () => {
               </div>
             </div>
 
-            <div className={styles.buttons}>
-              <button className={styles.primaryBtn}>
-                <FiTrendingUp /> Search Jobs
-              </button>
-
-              <button className={styles.secondaryBtn}>Post a Job</button>
-            </div>
+            
           </div>
 
           {/* Right Image */}

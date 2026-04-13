@@ -31,9 +31,7 @@ const AboutMicrosoft = () => {
             <li>✔ Career Growth Opportunities</li>
           </ul>
 
-          <button className={styles.btn}>
-            Explore Certifications
-          </button>
+         
         </div>
 
       </div>

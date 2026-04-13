@@ -92,10 +92,6 @@ const CustomAbout = () => {
             ))}
           </div>
 
-          <button className={styles.learnMoreBtn}>
-            Learn More About Us
-            <span className={styles.arrow}>→</span>
-          </button>
 
         </div>
       </div>

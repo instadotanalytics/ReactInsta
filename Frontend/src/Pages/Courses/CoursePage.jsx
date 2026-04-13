@@ -187,7 +187,7 @@ const CoursePage = () => {
         {filteredCourses.length > 0 && (
           <div className={styles.coursesGrid}>
             {filteredCourses.map((course) => (
-              <div key={course._id || course.id} className={styles.courseCard}>
+              <div key={course._id || course.id} className={styles.courseCard}onClick={() => handleViewMore(course._id || course.id)}>
                 <div className={styles.cardImageWrapper}>
                   <div className={styles.cardImage}>
                     <img
@@ -201,7 +201,9 @@ const CoursePage = () => {
                   )}
                 </div>
 
-                <div className={styles.cardContent}>
+                <div className={styles.cardContent}
+                onClick={() => handleViewMore(course._id || course.id)}
+                >
                   <h3 className={styles.courseTitle}>{course.title || 'Untitled Course'}</h3>
                   {course.category && (
                     <div className={styles.categoryText}>{course.category}</div>

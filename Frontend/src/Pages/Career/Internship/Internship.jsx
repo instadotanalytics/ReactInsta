@@ -32,8 +32,10 @@ const Internship = () => {
   ];
 
   return (
+    <>
+    <Header/>
     <div className={styles.internshipPage}>
-      <Header />
+      
       
       {/* Modern Banner Section */}
       <section className={styles.bannerSection}>
@@ -106,6 +108,7 @@ const Internship = () => {
       <FAQSection/>
       <Footer />
     </div>
+    </>
   );
 };
 
