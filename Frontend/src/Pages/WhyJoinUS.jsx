@@ -5,7 +5,7 @@ const WhyJoinUS = () => {
   const benefits = [
     {
       title: "Industry-Aligned Curriculum",
-      desc: "Courses designed with input from top companies"
+      desc: "Built with Industry Input"
     },
     {
       title: "Global Recognition",
