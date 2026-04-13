@@ -9,18 +9,18 @@
 
 /* ─── Tokens ─────────────────────────────────────── */
 :root {
-  --h-blue-1: #0ea5e9;
-  --h-blue-2: #2563eb;
-  --h-blue-dark: #1e40af;
-  --h-accent: #38bdf8;
-  --h-white: #ffffff;
-  --h-ink: #0f172a;
-  --h-ink-soft: #1e293b;
-  --h-muted: #64748b;
-  --h-surface: #f0f9ff;
-  --h-border: rgba(14, 165, 233, 0.18);
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --h-blue-1:     #0ea5e9;
+  --h-blue-2:     #2563eb;
+  --h-blue-dark:  #1e40af;
+  --h-accent:     #38bdf8;
+  --h-white:      #ffffff;
+  --h-ink:        #0f172a;
+  --h-ink-soft:   #1e293b;
+  --h-muted:      #64748b;
+  --h-surface:    #f0f9ff;
+  --h-border:     rgba(14, 165, 233, 0.18);
+  --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ─── Header ─────────────────────────────────────── */
@@ -30,6 +30,7 @@
   width: 100%;
   position: sticky;
   top: 0;
+  /* KEY FIX: z-index must be high so dropdown appears above page content */
   z-index: 1000;
   transition: all 0.3s var(--ease);
   box-shadow: 0 2px 24px rgba(37, 99, 235, 0.18);
@@ -54,6 +55,7 @@
   box-shadow: 0 4px 32px rgba(37, 99, 235, 0.28);
 }
 
+/* ─── Container ──────────────────────────────────── */
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -62,6 +64,7 @@
   justify-content: space-between;
   padding: 0 32px;
   height: 76px;
+  /* KEY FIX: position relative so child dropdowns anchor to this */
   position: relative;
 }
 
@@ -107,12 +110,15 @@
   align-items: center;
 }
 
+/* ─── Nav Item ───────────────────────────────────── */
 .navItem {
+  /* KEY FIX: position relative on navItem so megaDropdown
+     uses THIS as its positioning parent, not the viewport */
   position: relative;
 }
 
 .navItem a,
-.dropdownLink {
+.dropdownTrigger {
   display: flex;
   align-items: center;
   gap: 7px;
@@ -128,10 +134,11 @@
   background: transparent;
   border: none;
   font-family: inherit;
+  white-space: nowrap;
 }
 
 .navItem a:hover,
-.dropdownLink:hover {
+.dropdownTrigger:hover {
   background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
   transform: translateY(-1px);
@@ -139,69 +146,98 @@
 
 .navIcon {
   font-size: 15px;
+  flex-shrink: 0;
 }
 
 /* ─── Dropdown Container ─────────────────────────── */
 .dropdownContainer {
-  position: relative;
+  /* Inherits position: relative from .navItem above */
 }
 
+/* Arrow that rotates on open */
 .dropdownArrow {
   font-size: 18px;
   margin-left: 1px;
-  margin-top: 4px;
+  margin-top: 2px;
+  display: inline-flex;
   transition: transform 0.3s var(--ease);
 }
 
-.dropdownContainer:hover .dropdownArrow {
+.arrowOpen {
   transform: rotate(180deg);
 }
 
-/* ─── Dropdown Panel ─────────────────────────────── */
-.careerDropdown {
+/* ─── Mega Dropdown Panel ────────────────────────── */
+/*
+  KEY FIXES applied here:
+  1. position: absolute  — anchors to .navItem (position: relative)
+  2. top: 100%           — opens directly below the nav button
+  3. left: 50%           — starts at center of the nav button
+  4. transform: translateX(-50%)  — shifts left to horizontally center the panel under the button
+  5. NO top:50%, NO left:50% relative to viewport
+  6. NO position: fixed
+*/
+.megaDropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);  /* 8px gap below the nav button */
   left: 50%;
-  transform: translateX(-50%) translateY(12px);
-  width: 760px;
+  transform: translateX(-50%) translateY(-6px);
+  width: 720px;
   background: #ffffff;
-  border-radius: 24px;
+  border-radius: 20px;
   box-shadow:
-    0 0 0 1px rgba(14, 165, 233, 0.12),
-    0 32px 80px rgba(37, 99, 235, 0.16),
-    0 8px 24px rgba(0, 0, 0, 0.06);
+    0 0 0 1px rgba(14, 165, 233, 0.14),
+    0 24px 60px rgba(37, 99, 235, 0.16),
+    0 8px 20px rgba(0, 0, 0, 0.07);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s var(--ease);
+  pointer-events: none;
+  transition:
+    opacity 0.25s var(--ease),
+    transform 0.25s var(--ease),
+    visibility 0.25s;
   z-index: 1001;
   overflow: hidden;
 }
 
-.careerDropdown.show {
+/* Open state */
+.megaDropdownOpen {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(22px);
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 
+/* Prevent the dropdown from going off-screen on the left edge */
+.dropdownContainer:first-of-type .megaDropdown {
+  left: 0;
+  transform: translateX(0) translateY(-6px);
+}
+.dropdownContainer:first-of-type .megaDropdownOpen {
+  transform: translateX(0) translateY(0);
+}
+
+/* ─── Dropdown Inner Layout ──────────────────────── */
 .dropdownContent {
   display: flex;
   padding: 24px;
-  gap: 24px;
+  gap: 20px;
   background: #ffffff;
 }
 
+/* Left panel */
 .dropdownCategories {
-  flex: 1;
+  flex: 0 0 220px;
   border-right: 1.5px solid rgba(14, 165, 233, 0.12);
-  padding-right: 24px;
+  padding-right: 20px;
 }
 
 .dropdownTitle {
   color: var(--h-blue-2);
   font-size: 11px;
   font-weight: 800;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
   border-bottom: 1.5px solid rgba(37, 99, 235, 0.1);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -211,70 +247,72 @@
 }
 
 .titleIcon {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .dropdownCategoryItem {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 13px 14px;
+  gap: 12px;
+  padding: 11px 12px;
   text-decoration: none;
-  border-radius: 14px;
-  transition: all 0.25s var(--ease);
-  margin-bottom: 6px;
+  border-radius: 12px;
+  transition: all 0.22s var(--ease);
+  margin-bottom: 4px;
   background: transparent;
 }
 
 .dropdownCategoryItem:hover,
-.dropdownCategoryItem.active {
+.activeItem {
   background: #f0f9ff;
   transform: translateX(4px);
 }
 
 .categoryIcon {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--h-blue-2);
   background: linear-gradient(135deg, #e0f2fe, #dbeafe);
-  padding: 10px;
-  border-radius: 12px;
-  min-width: 42px;
+  padding: 9px;
+  border-radius: 10px;
+  min-width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .categoryText {
   display: flex;
   flex-direction: column;
+  gap: 1px;
 }
 
 .categoryTitle {
   color: var(--h-ink);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13.5px;
 }
 
 .categoryDesc {
   color: var(--h-muted);
-  font-size: 12px;
-  margin-top: 2px;
+  font-size: 11.5px;
 }
 
-/* ─── Preview Panel ──────────────────────────────── */
+/* Right panel */
 .dropdownPreview {
-  flex: 1.2;
-  min-width: 280px;
+  flex: 1;
+  min-width: 0;
 }
 
 .previewContent {
-  animation: fadeIn 0.3s var(--ease);
+  animation: previewFadeIn 0.25s var(--ease);
 }
 
-@keyframes fadeIn {
+@keyframes previewFadeIn {
   from {
     opacity: 0;
-    transform: translateX(10px);
+    transform: translateX(8px);
   }
   to {
     opacity: 1;
@@ -285,8 +323,8 @@
 .previewImageContainer {
   position: relative;
   width: 100%;
-  height: 180px;
-  border-radius: 16px;
+  height: 170px;
+  border-radius: 14px;
   overflow: hidden;
   margin-bottom: 14px;
 }
@@ -307,18 +345,18 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(14, 165, 233, 0.15),
-    rgba(37, 99, 235, 0.08)
+    rgba(14, 165, 233, 0.14),
+    rgba(37, 99, 235, 0.07)
   );
 }
 
 .previewDetails {
-  padding: 4px 0;
+  padding: 0 2px;
 }
 
 .previewTitle {
   color: var(--h-blue-2);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   margin-bottom: 4px;
   letter-spacing: -0.02em;
@@ -326,7 +364,7 @@
 
 .previewDesc {
   color: var(--h-muted);
-  font-size: 13px;
+  font-size: 12.5px;
   margin-bottom: 10px;
 }
 
@@ -340,22 +378,22 @@
   align-items: center;
   gap: 8px;
   color: var(--h-ink-soft);
-  font-size: 13px;
-  margin-bottom: 7px;
+  font-size: 12.5px;
+  margin-bottom: 6px;
   font-weight: 500;
 }
 
 .featureIcon {
   color: #22c55e;
-  font-size: 11px;
+  font-size: 10px;
+  flex-shrink: 0;
 }
 
 .previewBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 22px;
-  /* background: linear-gradient(120deg, var(--h-blue-1), var(--h-blue-2)); */
+  padding: 9px 20px;
   background-color: #1d4ed8;
   color: #ffffff;
   text-decoration: none;
@@ -376,6 +414,7 @@
 .previewBtn span {
   transition: transform 0.3s var(--ease);
 }
+
 .previewBtn:hover span {
   transform: translateX(3px);
 }
@@ -448,6 +487,7 @@
 .menuIcon:hover {
   background: rgba(255, 255, 255, 0.22);
 }
+
 .menuIcon.active {
   background: rgba(255, 255, 255, 0.28);
 }
@@ -502,9 +542,7 @@
   font-weight: 600;
   text-decoration: none;
   color: var(--h-blue-2);
-  transition:
-    color 0.2s,
-    padding-left 0.2s;
+  transition: color 0.2s, padding-left 0.2s;
 }
 
 .mobileNavItem a:hover,
@@ -513,24 +551,29 @@
   padding-left: 8px;
 }
 
-/* Responsive */
+/* ─── Responsive ─────────────────────────────────── */
 @media screen and (max-width: 992px) {
   .navDesktop,
   .authButtons {
     display: none;
   }
+
   .menuIcon {
     display: flex;
   }
+
   .container {
     padding: 0 20px;
     height: 68px;
   }
+
   .logo img {
     height: 38px;
   }
-  .careerDropdown {
-    display: none;
+
+  /* Mobile menu top should match header height */
+  .mobileMenu {
+    top: 68px;
   }
 }
 
@@ -544,31 +587,12 @@
   .container {
     padding: 0 16px;
   }
+
   .logo img {
     height: 32px;
   }
-}
 
-/* ─── Certification icon accent colors ───────────── */
-.dropdownContainer {
-  position: relative;
-}
-
-.careerDropdown {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-}
-
-.navItem:nth-child(3) .careerDropdown {
-  left: 40%;
-}
-.navItem:nth-child(4) .careerDropdown {
-  left: 50%;
-}
-
-@media screen and (max-width: 992px) {
-  .careerDropdown {
-    display: none;
+  .mobileMenu {
+    top: 68px;
   }
 }
