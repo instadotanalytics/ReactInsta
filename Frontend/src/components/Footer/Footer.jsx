@@ -155,13 +155,7 @@ const Footer = () => {
         <p className={styles.copyright}>
           © {currentYear} Insta Dot Analytics. All rights reserved.
         </p>
-        <div className={styles.legalLinks}>
-          <a href="/privacy">Privacy Policy</a>
-          <span className={styles.dot}>·</span>
-          <a href="/terms">Terms of Service</a>
-          <span className={styles.dot}>·</span>
-          <a href="/faqs">FAQs</a>
-        </div>
+       
       </div>
     </footer>
   );
