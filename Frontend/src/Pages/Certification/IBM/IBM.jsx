@@ -7,159 +7,199 @@ import Companypartners from "../../Courses/Companypartners";
 import AboutIBM from "./AboutIBM";
 import ReviewSection from "../../ReviewSection";
 
+import { FiArrowRight, FiClock, FiCheckCircle } from "react-icons/fi";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
+import {
+  MdOutlineCloud,
+  MdOutlinePsychology,
+  MdOutlineBarChart,
+  MdOutlineShield,
+} from "react-icons/md";
+import {
+  RiTrophyLine,
+  RiRefreshLine,
+  RiBriefcaseLine,
+  RiGlobalLine,
+} from "react-icons/ri";
+import { TbCertificate } from "react-icons/tb";
+
 const IBM = () => {
   const certifications = [
-    {
-      icon: "☁️",
-      title: "Cloud Computing",
-      description: "AWS, Azure, hybrid cloud architecture"
-    },
-    {
-      icon: "🤖",
-      title: "Artificial Intelligence",
-      description: "Watson, NLP, machine learning"
-    },
-    {
-      icon: "📊",
-      title: "Data Science",
-      description: "Analysis, visualization, Python"
-    },
-    {
-      icon: "🔒",
-      title: "Cybersecurity",
-      description: "Threat management, compliance"
-    }
+    { icon: <MdOutlineCloud size={22} />, title: "Cloud Computing", description: "AWS, Azure, hybrid cloud architecture" },
+    { icon: <MdOutlinePsychology size={22} />, title: "Artificial Intelligence", description: "Watson, NLP, machine learning" },
+    { icon: <MdOutlineBarChart size={22} />, title: "Data Science", description: "Analysis, visualization, Python" },
+    { icon: <MdOutlineShield size={22} />, title: "Cybersecurity", description: "Threat management, compliance" },
   ];
 
-  const benefits = [
-    "Industry-recognized credentials",
-    "Hands-on practical projects",
-    "Flexible self-paced learning",
-    "Career support & networking"
+ 
+  const features = [
+    { icon: <RiTrophyLine size={28} />, title: "Industry Trust", desc: "Recognized by 90% of Fortune 500 companies" },
+    { icon: <RiRefreshLine size={28} />, title: "Always Updated", desc: "Curriculum aligned with latest tech trends" },
+    { icon: <RiBriefcaseLine size={28} />, title: "Career Boost", desc: "Average 35% salary increase after certification" },
+    { icon: <RiGlobalLine size={28} />, title: "Global Community", desc: "Connect with IBM professionals worldwide" },
+  ];
+
+  const certTracks = [
+    {
+      icon: <MdOutlineCloud size={30} />,
+      title: "Cloud Computing",
+      desc: "Master AWS, Azure & hybrid cloud architecture for modern enterprises.",
+      modules: "12 Modules",
+      bg: "#EFF6FF",
+      color: "#2563EB",
+    },
+    {
+      icon: <MdOutlinePsychology size={30} />,
+      title: "Artificial Intelligence",
+      desc: "Watson AI, NLP systems, and machine learning model deployment.",
+      modules: "16 Modules",
+      bg: "#F5F3FF",
+      color: "#7C3AED",
+    },
+    {
+      icon: <MdOutlineBarChart size={30} />,
+      title: "Data Science",
+      desc: "Data analysis, visualization, Python, and statistical modeling.",
+      modules: "14 Modules",
+      bg: "#ECFDF5",
+      color: "#059669",
+    },
+    {
+      icon: <MdOutlineShield size={30} />,
+      title: "Cybersecurity",
+      desc: "Threat management, compliance frameworks, and risk assessment.",
+      modules: "10 Modules",
+      bg: "#FFF7ED",
+      color: "#EA580C",
+    },
   ];
 
   return (
     <>
       <Header />
-      
-      {/* Hero Section */}
+
+      {/* ── HERO ── */}
       <section className={styles.heroSection}>
-        <div className={styles.container}>
-          {/* LEFT CONTENT */}
+        <div className={styles.heroInner}>
+
+          {/* LEFT */}
           <div className={styles.leftContent}>
+            <div className={styles.eyebrow}>
+              <TbCertificate size={14} />
+              Globally Recognized Credentials
+            </div>
+
             <h1 className={styles.title}>
-              Advance Your Career with <span className={styles.highlightText}>IBM Certifications</span>
+              Advance Your Career with{" "}
+              <span className={styles.highlight}>IBM Certifications</span>
             </h1>
-            
+
             <p className={styles.description}>
-              Gain industry-recognized credentials in Cloud Computing, 
-              Artificial Intelligence, Data Science, and Cybersecurity 
-              with professional IBM certification programs.
+              Gain industry-recognized credentials in Cloud Computing,
+              Artificial Intelligence, Data Science, and Cybersecurity with
+              professional IBM certification programs.
             </p>
 
-            <div className={styles.badge}>
-              <i className="fas fa-check-circle"></i>
-              Globally trusted • Industry aligned • Career focused
-            </div>
+            
 
-            {/* Certification Grid */}
-            <div className={styles.certGrid}>
-              {certifications.map((cert, index) => (
-                <div key={index} className={styles.certCard}>
-                  <span className={styles.certIcon}>{cert.icon}</span>
-                  <div>
-                    <h3 className={styles.certTitle}>{cert.title}</h3>
-                    <p className={styles.certDesc}>{cert.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Buttons */}
-          
-            {/* Stats Section */}
-            <div className={styles.statsContainer}>
+            <div className={styles.statsRow}>
               <div className={styles.statItem}>
-                <span className={styles.statNumber}>500K+</span>
-                <span className={styles.statLabel}>Certified Professionals</span>
+                <span className={styles.statNum}>500K+</span>
+                <span className={styles.statLabel}>Certified Pros</span>
               </div>
-              <div className={styles.statDivider}></div>
+              <div className={styles.statDiv} />
               <div className={styles.statItem}>
-                <span className={styles.statNumber}>87%</span>
+                <span className={styles.statNum}>87%</span>
                 <span className={styles.statLabel}>Career Growth</span>
               </div>
-              <div className={styles.statDivider}></div>
+              <div className={styles.statDiv} />
               <div className={styles.statItem}>
-                <span className={styles.statNumber}>150+</span>
+                <span className={styles.statNum}>150+</span>
                 <span className={styles.statLabel}>Countries</span>
               </div>
             </div>
           </div>
 
-          {/* RIGHT IMAGE */}
+          {/* RIGHT */}
           <div className={styles.rightContent}>
-            <div className={styles.imageWrapper}>
-              <img 
-                src="https://i.pinimg.com/1200x/d2/71/7c/d2717c8f0072c85b264b762ab436a513.jpg" 
+            <div className={styles.imgWrapper}>
+              <img
+                src="https://i.pinimg.com/1200x/d2/71/7c/d2717c8f0072c85b264b762ab436a513.jpg"
                 alt="IBM Professional Certification"
-                className={styles.heroImage}
+                className={styles.heroImg}
               />
-              <div className={styles.imageBadge}>
-                <i className="fas fa-certificate"></i>
-                <div>
+              <div className={styles.imgBadge}>
+                <div className={styles.badgeIconWrap}>
+                  <HiOutlineBadgeCheck size={18} color="#2563EB" />
+                </div>
+                <div className={styles.badgeText}>
                   <strong>IBM Certified</strong>
                   <span>Premium Partner</span>
                 </div>
               </div>
             </div>
 
-            {/* Benefits List */}
-            <div className={styles.benefitsCard}>
-              <h4>Why get certified?</h4>
-              <ul className={styles.benefitsList}>
-                {benefits.map((benefit, index) => (
-                  <li key={index}>
-                    <i className="fas fa-check-circle"></i>
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
+            <div className={styles.certGrid}>
+              {certifications.map((cert, i) => (
+                <div key={i} className={styles.certCard}>
+                  <span className={styles.certIconWrap}>{cert.icon}</span>
+                  <div>
+                    <div className={styles.certTitle}>{cert.title}</div>
+                    <div className={styles.certDesc}>{cert.description}</div>
+                  </div>
+                </div>
+              ))}
             </div>
+
+         
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className={styles.featuresSection}>
-        <div className={styles.container}>
-          <div className={styles.featuresGrid}>
-            <div className={styles.feature}>
-              <div className={styles.featureIcon}>🏆</div>
-              <h3>Industry Trust</h3>
-              <p>Recognized by 90% of Fortune 500 companies</p>
+      {/* ── FEATURES BAR ── */}
+      <div className={styles.featuresBar}>
+        <div className={styles.featuresInner}>
+          {features.map((f, i) => (
+            <div key={i} className={styles.feat}>
+              <div className={styles.featIconWrap}>{f.icon}</div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
             </div>
-            <div className={styles.feature}>
-              <div className={styles.featureIcon}>🔄</div>
-              <h3>Always Updated</h3>
-              <p>Curriculum aligned with latest tech trends</p>
+          ))}
+        </div>
+      </div>
+
+      {/* ── CERT TRACKS ── */}
+      <section className={styles.certsSection}>
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionTag}>Certification Tracks</div>
+          <h2 className={styles.sectionTitle}>Choose Your Specialization</h2>
+          <p className={styles.sectionSub}>
+            From cloud to AI — find the track that accelerates your career
+          </p>
+        </div>
+        <div className={styles.bigCertGrid}>
+          {certTracks.map((track, i) => (
+            <div key={i} className={styles.bigCertCard}>
+              <div
+                className={styles.bigCertIconWrap}
+                style={{ background: track.bg, color: track.color }}
+              >
+                {track.icon}
+              </div>
+              <h3>{track.title}</h3>
+              <p>{track.desc}</p>
+              <span className={styles.certTag}>{track.modules}</span>
             </div>
-            <div className={styles.feature}>
-              <div className={styles.featureIcon}>💼</div>
-              <h3>Career Boost</h3>
-              <p>Average 35% salary increase after certification</p>
-            </div>
-            <div className={styles.feature}>
-              <div className={styles.featureIcon}>🌐</div>
-              <h3>Global Community</h3>
-              <p>Connect with IBM professionals worldwide</p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
-      <CertificationApplyForm/>
-      <Companypartners/>
-      <AboutIBM/>
-      <ReviewSection/>
+
+      <CertificationApplyForm />
+      <Companypartners />
+      <AboutIBM />
+      <ReviewSection />
+
    
 
       <Footer />
