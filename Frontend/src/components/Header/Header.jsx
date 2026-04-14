@@ -293,13 +293,9 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* ── SEARCH BAR (desktop) ── */}
-          <div className={styles.searchDesktop}>
-            <SearchBar placeholder="Search Courses,Career,Certification" maxResults={9} />
-          </div>
-
-          {/* ── AUTH BUTTONS (desktop) ── */}
-          <div className={styles.authButtons}>
+          {/* ── DESKTOP RIGHT SIDE: Search icon → WhatsApp → Register ── */}
+          <div className={styles.desktopRight}>
+            <SearchBar maxResults={9} />
             <a
               href="https://wa.link/dakfe1"
               target="_blank"
@@ -313,80 +309,77 @@ const Header = () => {
             </button>
           </div>
 
-          {/* ── SEARCH BAR (mobile — bahar, hamburger ke saath) ── */}
-          <div className={styles.searchMobile}>
-            <SearchBar placeholder="Search, courses, certification, career" maxResults={8} />
-          </div>
-
-          {/* ── HAMBURGER ── */}
-          <button
-            className={`${styles.menuIcon} ${mobileMenuOpen ? styles.active : ""}`}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-
-          {/* ── MOBILE MENU (sirf nav links, search bahar hai) ── */}
-          <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.open : ""}`}>
-            <nav className={styles.mobileNav}>
-              <ul className={styles.mobileNavList}>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/" onClick={handleLinkClick} className={styles.mobileLink}><FaHome /> Home</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/courses" onClick={handleLinkClick} className={styles.mobileLink}><IoBookSharp /> Courses</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/certification/microsoft" onClick={handleLinkClick} className={styles.mobileLink}><FaMicrosoft /> Microsoft Certification</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/certification/ibm" onClick={handleLinkClick} className={styles.mobileLink}><SiBmcsoftware /> IBM Certification</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/certification/aws" onClick={handleLinkClick} className={styles.mobileLink}><FaAws /> AWS Certification</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/certification/redhat" onClick={handleLinkClick} className={styles.mobileLink}><FaRedhat /> RedHat Certification</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/certification/custom" onClick={handleLinkClick} className={styles.mobileLink}><SiCoursera /> Custom Certification</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/career/internship" onClick={handleLinkClick} className={styles.mobileLink}><FaLaptopCode /> Internship</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/career/placement" onClick={handleLinkClick} className={styles.mobileLink}><FaBriefcase /> Placement</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/career/fulltime" onClick={handleLinkClick} className={styles.mobileLink}><FaUserTie /> Full Time Job</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/about" onClick={handleLinkClick} className={styles.mobileLink}><BsInfoCircle /> About Us</Link>
-                </li>
-                <li className={styles.mobileNavItem}>
-                  <Link to="/contact" onClick={handleLinkClick} className={styles.mobileLink}><FaPhoneAlt /> Contact</Link>
-                </li>
-              </ul>
-
-              {/* Mobile Auth Buttons */}
-              <div className={styles.mobileAuthBtns}>
-                <a
-                  href="https://wa.link/dakfe1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.mobileWaBtn}
-                >
-                  <FaWhatsapp /> WhatsApp
-                </a>
-                <button className={styles.mobileRegBtn} onClick={handleRegisterClick}>
-                  <FaUserPlus /> Register
-                </button>
-              </div>
-            </nav>
+          {/* ── MOBILE RIGHT SIDE: Search icon → Hamburger ── */}
+          <div className={styles.mobileRight}>
+            <SearchBar maxResults={8} />
+            <button
+              className={`${styles.menuIcon} ${mobileMenuOpen ? styles.active : ""}`}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+            </button>
           </div>
 
         </div>
+
+        {/* ── MOBILE MENU ── */}
+        <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.open : ""}`}>
+          <nav className={styles.mobileNav}>
+            <ul className={styles.mobileNavList}>
+              <li className={styles.mobileNavItem}>
+                <Link to="/" onClick={handleLinkClick} className={styles.mobileLink}><FaHome /> Home</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/courses" onClick={handleLinkClick} className={styles.mobileLink}><IoBookSharp /> Courses</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/certification/microsoft" onClick={handleLinkClick} className={styles.mobileLink}><FaMicrosoft /> Microsoft Certification</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/certification/ibm" onClick={handleLinkClick} className={styles.mobileLink}><SiBmcsoftware /> IBM Certification</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/certification/aws" onClick={handleLinkClick} className={styles.mobileLink}><FaAws /> AWS Certification</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/certification/redhat" onClick={handleLinkClick} className={styles.mobileLink}><FaRedhat /> RedHat Certification</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/certification/custom" onClick={handleLinkClick} className={styles.mobileLink}><SiCoursera /> Custom Certification</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/career/internship" onClick={handleLinkClick} className={styles.mobileLink}><FaLaptopCode /> Internship</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/career/placement" onClick={handleLinkClick} className={styles.mobileLink}><FaBriefcase /> Placement</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/career/fulltime" onClick={handleLinkClick} className={styles.mobileLink}><FaUserTie /> Full Time Job</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/about" onClick={handleLinkClick} className={styles.mobileLink}><BsInfoCircle /> About Us</Link>
+              </li>
+              <li className={styles.mobileNavItem}>
+                <Link to="/contact" onClick={handleLinkClick} className={styles.mobileLink}><FaPhoneAlt /> Contact</Link>
+              </li>
+            </ul>
+            <div className={styles.mobileAuthBtns}>
+              <a
+                href="https://wa.link/dakfe1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mobileWaBtn}
+              >
+                <FaWhatsapp /> WhatsApp
+              </a>
+              <button className={styles.mobileRegBtn} onClick={handleRegisterClick}>
+                <FaUserPlus /> Register
+              </button>
+            </div>
+          </nav>
+        </div>
+
       </header>
 
       {showRegistration && <RegistrationPopUp onClose={handleCloseRegistration} />}

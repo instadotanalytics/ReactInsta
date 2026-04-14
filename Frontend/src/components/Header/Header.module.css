@@ -62,7 +62,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  height: 60px; /* ← 60px height */
+  height: 60px;
   position: relative;
   gap: 8px;
 }
@@ -370,16 +370,10 @@
   transform: translateX(3px);
 }
 
-/* ─── Desktop Search Bar ─────────────────────────── */
-.searchDesktop {
-  flex-shrink: 0;
-  width: 350px;
-  margin: 0 6px;
-}
-
-/* ─── Auth Buttons ───────────────────────────────── */
-.authButtons {
+/* ─── Desktop Right: Search + WhatsApp + Register ── */
+.desktopRight {
   display: flex;
+  align-items: center;
   gap: 8px;
   flex-shrink: 0;
 }
@@ -426,21 +420,16 @@
   box-shadow: 0 6px 18px rgba(255, 255, 255, 0.25);
 }
 
-/* ─── Mobile Search Bar (bahar, header ke andar) ─── */
-/*
-  Yeh search bar mobile pe header container ke andar
-  hamburger ke baad nahi, balki hamburger se PEHLE
-  dikhta hai — logo → search → hamburger
-*/
-.searchMobile {
+/* ─── Mobile Right: Search icon + Hamburger ─────── */
+.mobileRight {
   display: none;
-  flex: 1;
-  max-width: 220px;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 /* ─── Hamburger ──────────────────────────────────── */
 .menuIcon {
-  display: none;
   background: rgba(255, 255, 255, 0.14);
   border: 1.5px solid rgba(255, 255, 255, 0.24);
   color: #ffffff;
@@ -450,6 +439,7 @@
   height: 40px;
   border-radius: 10px;
   transition: all 0.3s var(--ease);
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
@@ -458,10 +448,10 @@
 .menuIcon:hover  { background: rgba(255, 255, 255, 0.22); }
 .menuIcon.active { background: rgba(255, 255, 255, 0.28); }
 
-/* ─── Mobile Menu (sirf nav links) ──────────────── */
+/* ─── Mobile Menu ────────────────────────────────── */
 .mobileMenu {
   position: fixed;
-  top: 60px; /* matches header height */
+  top: 60px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -566,35 +556,34 @@
 
 /* ─── Responsive ─────────────────────────────────── */
 @media screen and (max-width: 1200px) {
-  .searchDesktop {
-    width: 190px;
-  }
-}
-
-@media screen and (max-width: 1050px) {
-  .searchDesktop {
-    width: 160px;
-  }
   .navItem a,
   .dropdownLink {
     padding: 7px 10px;
-    font-size: 13px;
+    font-size: 12px;
+  }
+  .whatsappBtn span,
+  .signupBtn span {
+    display: none;
+  }
+  .whatsappBtn,
+  .signupBtn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
   }
 }
 
 @media screen and (max-width: 992px) {
-  /* Desktop nav + auth + desktop search — hide */
+  /* Hide desktop nav and desktop right side */
   .navDesktop,
-  .authButtons,
-  .searchDesktop {
+  .desktopRight {
     display: none;
   }
 
-  /* Show mobile search + hamburger */
-  .searchMobile {
-    display: flex;
-  }
-  .menuIcon {
+  /* Show mobile right: search icon + hamburger */
+  .mobileRight {
     display: flex;
   }
 
@@ -608,15 +597,9 @@
     height: 32px;
   }
 
-  /* Dropdown panel hidden on mobile (use mobile menu instead) */
   .careerDropdown {
     display: none !important;
   }
-}
-
-@media screen and (min-width: 993px) {
-  .mobileMenu  { display: none !important; }
-  .searchMobile { display: none !important; }
 }
 
 @media screen and (max-width: 480px) {
@@ -630,7 +613,8 @@
   .logo {
     padding: 4px 10px;
   }
-  .searchMobile {
-    max-width: 175px;
+  .menuIcon {
+    width: 38px;
+    height: 38px;
   }
 }

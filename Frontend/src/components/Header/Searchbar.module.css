@@ -1,54 +1,84 @@
-/* ═══════════════════════════════════════════════════
-   SearchBar.module.css
-   White-theme, production-ready search bar styles
-═══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   SearchBar — icon button + full overlay
+══════════════════════════════════════════════════ */
 
-/* ── Wrapper ─────────────────────────────────────── */
-.wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-  z-index: 1100;
-}
-
-/* ── Input container ─────────────────────────────── */
-.inputWrap {
+/* ── Search icon button (sits in header) ────────── */
+.searchIconBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 8px;
-  height: 42px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 100px;
-  padding: 0 14px;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
   transition: all 0.2s ease;
-  backdrop-filter: blur(6px);
 }
 
-.inputWrap:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.38);
+.searchIconBtn:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: scale(1.04);
 }
 
-.inputWrapOpen {
-  background: #ffffff !important;
-  border-color: #2563EB !important;
-  border-radius: 14px 14px 0 0 !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+/* ── Overlay backdrop ───────────────────────────── */
+.overlayBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px; /* aligns just below header */
+  animation: fadeBackdrop 0.18s ease;
 }
 
-/* ── Search icon ─────────────────────────────────── */
-.searchIcon {
-  color: rgba(255, 255, 255, 0.8);
+@keyframes fadeBackdrop {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Overlay panel ──────────────────────────────── */
+.overlayPanel {
+  width: 100%;
+  max-width: 660px;
+  background: #ffffff;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 28px 70px rgba(37, 99, 235, 0.2), 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: slidePanel 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slidePanel {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Overlay input row ──────────────────────────── */
+.overlayInputRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  height: 60px;
+  border-bottom: 1.5px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.overlaySearchIcon {
+  color: #2563eb;
   flex-shrink: 0;
   transition: color 0.2s;
 }
 
-.inputWrapOpen .searchIcon {
-  color: #2563EB;
-}
-
-/* Spinning state during load */
 .searchIconSpin {
   animation: spin 0.8s linear infinite;
 }
@@ -57,40 +87,29 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Text input ──────────────────────────────────── */
-.input {
+.overlayInput {
   flex: 1;
   background: transparent;
   border: none;
   outline: none;
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 500;
-  color: #ffffff;
+  color: #0f172a;
   font-family: inherit;
   min-width: 0;
-  letter-spacing: 0.1px;
 }
 
-.input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+.overlayInput::placeholder {
+  color: #94a3b8;
   font-weight: 400;
 }
 
-/* When open — input turns dark text on white bg */
-.inputWrapOpen .input {
-  color: #0F172A;
-}
-
-.inputWrapOpen .input::placeholder {
-  color: #94A3B8;
-}
-
-/* ── Loading dot ─────────────────────────────────── */
+/* ── Loading dot ────────────────────────────────── */
 .loadingDot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #2563EB;
+  background: #2563eb;
   flex-shrink: 0;
   animation: pulse 0.9s ease-in-out infinite;
 }
@@ -100,7 +119,7 @@
   50%       { opacity: 0.4; transform: scale(0.75); }
 }
 
-/* ── Clear button ────────────────────────────────── */
+/* ── Clear button ───────────────────────────────── */
 .clearBtn {
   background: rgba(100, 116, 139, 0.12);
   border: none;
@@ -108,10 +127,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  color: #64748B;
+  color: #64748b;
   flex-shrink: 0;
   transition: all 0.15s;
   padding: 0;
@@ -119,94 +138,84 @@
 
 .clearBtn:hover {
   background: rgba(239, 68, 68, 0.1);
-  color: #EF4444;
+  color: #ef4444;
 }
 
-/* ═══════════════════════════════════════════════════
-   DROPDOWN
-═══════════════════════════════════════════════════ */
-.dropdown {
-  position: absolute;
-  top: calc(100% - 1px);
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  border: 1.5px solid #2563EB;
-  border-top: none;
-  border-radius: 0 0 16px 16px;
-  box-shadow:
-    0 16px 40px rgba(37, 99, 235, 0.14),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  animation: slideDown 0.18s ease;
-  max-height: 520px;
+/* ── Close button (X) ───────────────────────────── */
+.closeOverlayBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #f1f5f9;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.closeOverlayBtn:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* ── Results container ──────────────────────────── */
+.overlayResults {
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #E2E8F0 transparent;
+  scrollbar-color: #e2e8f0 transparent;
+  flex: 1;
 }
 
-.dropdown::-webkit-scrollbar       { width: 4px; }
-.dropdown::-webkit-scrollbar-track { background: transparent; }
-.dropdown::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+.overlayResults::-webkit-scrollbar       { width: 4px; }
+.overlayResults::-webkit-scrollbar-track { background: transparent; }
+.overlayResults::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ═══════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════
    SECTION
-═══════════════════════════════════════════════════ */
-.section {
-  padding: 0;
-}
+══════════════════════════════════════════════════ */
+.section { padding: 0; }
+.section + .section { border-top: 1px solid #f1f5f9; }
 
-.section + .section {
-  border-top: 1px solid #F1F5F9;
-}
-
-/* ── Section label row ───────────────────────────── */
 .sectionLabel {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 14px 6px;
+  padding: 10px 20px 6px;
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #94A3B8;
-  background: #FAFBFC;
-  border-bottom: 1px solid #F1F5F9;
+  color: #94a3b8;
+  background: #fafbfc;
+  border-bottom: 1px solid #f1f5f9;
   position: sticky;
   top: 0;
   z-index: 2;
 }
 
-.sectionIcon {
-  display: flex;
-  align-items: center;
-}
+.sectionIcon { display: flex; align-items: center; }
 
 .sectionCount {
   margin-left: auto;
-  background: #F1F5F9;
-  color: #64748B;
+  background: #f1f5f9;
+  color: #64748b;
   font-size: 10px;
   font-weight: 700;
   padding: 1px 6px;
   border-radius: 100px;
 }
 
-/* ═══════════════════════════════════════════════════
-   RESULT ITEM
-═══════════════════════════════════════════════════ */
+/* ── Result item ────────────────────────────────── */
 .resultItem {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 10px 14px;
+  padding: 11px 20px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -215,19 +224,14 @@
   transition: background 0.12s ease;
 }
 
-.resultItem:last-child {
-  padding-bottom: 12px;
-}
+.resultItem:last-child { padding-bottom: 13px; }
 
-.resultItemActive {
-  background: #F0F7FF;
-}
+.resultItemActive { background: #f0f7ff; }
 
-/* ── Item icon bubble ────────────────────────────── */
 .itemIcon {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -235,41 +239,35 @@
   transition: transform 0.15s;
 }
 
-.resultItemActive .itemIcon {
-  transform: scale(1.08);
-}
+.resultItemActive .itemIcon { transform: scale(1.08); }
 
-/* ── Item title ──────────────────────────────────── */
 .itemTitle {
   flex: 1;
   font-size: 13.5px;
   font-weight: 600;
-  color: #0F172A;
+  color: #0f172a;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
 }
 
-/* ── Highlight mark ──────────────────────────────── */
 .mark {
-  background: #FEF08A;
-  color: #78350F;
+  background: #fef08a;
+  color: #78350f;
   border-radius: 2px;
   padding: 0 1px;
   font-style: normal;
 }
 
-/* ── Course level meta ───────────────────────────── */
 .itemMeta {
   font-size: 11px;
-  color: #94A3B8;
+  color: #94a3b8;
   font-weight: 500;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* ── Type badge ──────────────────────────────────── */
 .itemBadge {
   font-size: 10px;
   font-weight: 700;
@@ -280,10 +278,9 @@
   letter-spacing: 0.04em;
 }
 
-/* ── Arrow indicator ─────────────────────────────── */
 .itemArrow {
   font-size: 13px;
-  color: #CBD5E1;
+  color: #cbd5e1;
   flex-shrink: 0;
   transition: all 0.15s;
   opacity: 0;
@@ -293,41 +290,39 @@
 .itemArrowActive {
   opacity: 1;
   transform: translateX(0);
-  color: #2563EB;
+  color: #2563eb;
 }
 
-/* ═══════════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════════ */
+/* ── Footer ─────────────────────────────────────── */
 .dropdownFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 14px;
-  border-top: 1px solid #F1F5F9;
-  background: #FAFBFC;
+  padding: 10px 20px;
+  border-top: 1px solid #f1f5f9;
+  background: #fafbfc;
 }
 
 .footerCount {
   font-size: 11px;
   font-weight: 600;
-  color: #64748B;
+  color: #64748b;
 }
 
 .footerHint {
   font-size: 10.5px;
-  color: #94A3B8;
+  color: #94a3b8;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
 }
 
 .footerHint kbd {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #F1F5F9;
-  border: 1px solid #E2E8F0;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   border-radius: 4px;
   padding: 1px 5px;
   font-size: 10px;
@@ -336,9 +331,7 @@
   color: #475569;
 }
 
-/* ═══════════════════════════════════════════════════
-   EMPTY STATE
-═══════════════════════════════════════════════════ */
+/* ── Empty state ────────────────────────────────── */
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -352,12 +345,12 @@
 .emptyIcon {
   width: 44px;
   height: 44px;
-  background: #F1F5F9;
+  background: #f1f5f9;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94A3B8;
+  color: #94a3b8;
   margin-bottom: 6px;
 }
 
@@ -368,84 +361,36 @@
   margin: 0;
 }
 
-.emptyTitle strong {
-  color: #0F172A;
-}
+.emptyTitle strong { color: #0f172a; }
 
 .emptySubtitle {
   font-size: 12px;
-  color: #94A3B8;
+  color: #94a3b8;
   margin: 0;
 }
 
-/* ═══════════════════════════════════════════════════
-   ERROR BANNER
-═══════════════════════════════════════════════════ */
+/* ── Error banner ───────────────────────────────── */
 .errorBanner {
-  padding: 8px 14px;
+  padding: 8px 20px;
   font-size: 11.5px;
-  color: #92400E;
-  background: #FFFBEB;
-  border-top: 1px solid #FDE68A;
+  color: #92400e;
+  background: #fffbeb;
+  border-top: 1px solid #fde68a;
   text-align: center;
 }
 
-/* ═══════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════
    RESPONSIVE
-═══════════════════════════════════════════════════ */
-@media (max-width: 1200px) {
-  .wrapper {
-    max-width: 340px;
-  }
-}
-
-@media (max-width: 992px) {
-  /* In mobile layout, SearchBar spans full width inside mobileNav */
-  .wrapper {
+══════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+  .overlayPanel {
     max-width: 100%;
-    width: 100%;
+    border-radius: 0 0 16px 16px;
   }
-
-  .inputWrap {
-    background: #F8FAFC;
-    border-color: #E2E8F0;
-    border-radius: 12px;
+  .overlayBackdrop {
+    padding-top: 60px;
   }
-
-  .inputWrap:hover {
-    border-color: #93C5FD;
-    background: #F0F7FF;
-  }
-
-  .inputWrapOpen {
-    border-radius: 12px 12px 0 0 !important;
-  }
-
-  .searchIcon {
-    color: #64748B;
-  }
-
-  .input {
-    color: #0F172A;
-  }
-
-  .input::placeholder {
-    color: #94A3B8;
-  }
-
-  .footerHint {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .dropdown {
-    border-radius: 0 0 12px 12px;
-    max-height: 380px;
-  }
-
   .itemBadge,
-  .itemMeta {
-    display: none;
-  }
+  .itemMeta { display: none; }
+  .footerHint { display: none; }
 }
