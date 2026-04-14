@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config/api.js";
-import styles from "./SearchBar.module.css";
+import styles from "./Searchbar.module.css";
 import { FiSearch, FiX } from "react-icons/fi";
 import { FiBook, FiAward, FiBriefcase } from "react-icons/fi";
 import { MdOutlineTrendingUp } from "react-icons/md";
