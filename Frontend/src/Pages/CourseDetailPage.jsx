@@ -1,4 +1,4 @@
-// CourseDetailPage.jsx — Luxury Editorial Redesign
+// CourseDetailPage.jsx — Full Fixed Version with Slug Support + Console Logs
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
@@ -9,7 +9,6 @@ import {
 } from 'react-icons/fi';
 import {
   FaGraduationCap, FaChalkboardTeacher, FaRegClock, FaRocket,
-  FaShieldAlt, FaHeadset
 } from 'react-icons/fa';
 import { BsFillBriefcaseFill, BsTrophy } from 'react-icons/bs';
 import Header from '../components/Header/Header';
@@ -25,7 +24,6 @@ import CareerSection from './CareerSection';
 import FAQSection from './FAQSection';
 import OurPremiumServices from './OurPremiumServices';
 
-// Inject Google Fonts once
 if (typeof document !== 'undefined' && !document.getElementById('cdp-fonts')) {
   const link = document.createElement('link');
   link.id = 'cdp-fonts';
@@ -36,7 +34,7 @@ if (typeof document !== 'undefined' && !document.getElementById('cdp-fonts')) {
 }
 
 const CourseDetailPage = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,31 +43,134 @@ const CourseDetailPage = () => {
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [showRegistrationPopup, setShowRegistrationPopup] = useState(false);
 
-  // ✅ FIX: Har baar course page khulne par page top pe le jao
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [id]);
+  }, [slug]);
 
+  // ─── Fetch Course ────────────────────────────────────────────────
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${API_BASE_URL}/courses/${id}`);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        const result = await response.json();
-        if (result.success && result.data) setCourse(result.data);
-        else if (result.data) setCourse(result.data);
-        else throw new Error('Course not found');
         setError(null);
+
+        console.log('🚀 Course fetch start');
+        console.log('📌 slug:', slug);
+        console.log('🌐 API_BASE_URL:', API_BASE_URL);
+
+        // ── Step 1: Saare courses fetch karo, slug se match karo ──
+        // Yeh most reliable approach hai — slug/ID endpoint issue bypass hoga
+        console.log('📡 Step 1: Fetching all courses...');
+        const allRes = await fetch(`${API_BASE_URL}/courses`);
+        console.log('📥 All courses status:', allRes.status);
+
+        const allContentType = allRes.headers.get('content-type');
+        console.log('📄 Content-Type:', allContentType);
+
+        if (!allContentType || !allContentType.includes('application/json')) {
+          const htmlSnippet = await allRes.text();
+          console.error('❌ HTML mila JSON nahi:', htmlSnippet.substring(0, 200));
+          throw new Error(
+            `Backend se HTML aa raha hai JSON nahi.\n` +
+            `API_BASE_URL: ${API_BASE_URL}\n` +
+            `Backend chal raha hai? Check: ${API_BASE_URL}/courses`
+          );
+        }
+
+        const allData = await allRes.json();
+        console.log('✅ All courses response:', allData);
+        console.log('📊 Total courses:', allData?.data?.length);
+
+        if (allData.success && Array.isArray(allData.data)) {
+          // Slug se match karo
+          let found = allData.data.find(c => c.slug === slug);
+          console.log('🔍 Slug match:', found ? `✅ ${found.title}` : '❌ Not found');
+
+          // ObjectId se match karo (purane URLs ke liye)
+          if (!found && /^[0-9a-fA-F]{24}$/.test(slug)) {
+            found = allData.data.find(c => c._id === slug);
+            console.log('🔍 ID match:', found ? `✅ ${found.title}` : '❌ Not found');
+          }
+
+          if (found) {
+            console.log('🎉 Course found:', found.title, '| slug:', found.slug);
+            setCourse(found);
+            return;
+          }
+        }
+
+        // ── Step 2: Direct slug endpoint try karo ──
+        console.log('📡 Step 2: Trying slug endpoint...');
+        const slugUrl = `${API_BASE_URL}/courses/slug/${slug}`;
+        console.log('🔗 Slug URL:', slugUrl);
+
+        const slugRes = await fetch(slugUrl);
+        console.log('📥 Slug endpoint status:', slugRes.status);
+
+        const slugContentType = slugRes.headers.get('content-type');
+        console.log('📄 Slug Content-Type:', slugContentType);
+
+        if (slugContentType && slugContentType.includes('application/json')) {
+          const slugData = await slugRes.json();
+          console.log('✅ Slug endpoint data:', slugData);
+
+          if (slugRes.ok && slugData.success && slugData.data) {
+            console.log('🎉 Course found via slug endpoint:', slugData.data.title);
+            setCourse(slugData.data);
+            return;
+          }
+        } else {
+          console.warn('⚠️ Slug endpoint HTML return kar raha hai — route missing hoga');
+        }
+
+        // ── Step 3: Direct ID endpoint ──
+        if (/^[0-9a-fA-F]{24}$/.test(slug)) {
+          console.log('📡 Step 3: Trying ID endpoint...');
+          const idUrl = `${API_BASE_URL}/courses/${slug}`;
+          console.log('🔗 ID URL:', idUrl);
+
+          const idRes = await fetch(idUrl);
+          console.log('📥 ID endpoint status:', idRes.status);
+
+          const idContentType = idRes.headers.get('content-type');
+          if (idContentType && idContentType.includes('application/json')) {
+            const idData = await idRes.json();
+            console.log('✅ ID endpoint data:', idData);
+
+            if (idRes.ok && idData.success && idData.data) {
+              console.log('🎉 Course found via ID:', idData.data.title);
+              setCourse(idData.data);
+              return;
+            }
+          } else {
+            console.error('❌ ID endpoint bhi HTML return kar raha hai');
+          }
+        }
+
+        console.error('❌ Course not found after all attempts');
+        console.error('💡 Debug info:');
+        console.error('   - slug:', slug);
+        console.error('   - API_BASE_URL:', API_BASE_URL);
+        console.error('   - Backend pe yeh URL check karo:', `${API_BASE_URL}/courses`);
+        throw new Error('Course not found');
+
       } catch (err) {
-        setError('Failed to load course details. Please try again later.');
+        console.error('❌ fetchCourseDetails final error:', err.message);
+        setError(err.message);
       } finally {
         setLoading(false);
+        console.log('🏁 Fetch complete');
       }
     };
-    if (id) fetchCourseDetails();
-    else { setError('No course ID provided'); setLoading(false); }
-  }, [id]);
+
+    if (slug) {
+      fetchCourseDetails();
+    } else {
+      console.error('❌ slug is undefined/null');
+      setError('No course slug provided');
+      setLoading(false);
+    }
+  }, [slug]);
 
   useEffect(() => {
     document.body.style.overflow = showRegistrationPopup ? 'hidden' : 'auto';
@@ -87,7 +188,7 @@ const CourseDetailPage = () => {
   const handleRegistrationSuccess = (data) => console.log('Registration successful:', data);
   const handleRegistrationError = (error) => console.error('Registration error:', error);
 
-  /* ── Loading ── */
+  // ─── Loading ─────────────────────────────────────────────────────
   if (loading) return (
     <>
       <Header />
@@ -102,26 +203,32 @@ const CourseDetailPage = () => {
     </>
   );
 
-  /* ── Error ── */
-  if (error || !course) return (
-    <>
-      <Header />
-      <div className={styles.errorContainer}>
-        <div className={styles.errorContent}>
-          <span className={styles.errorIcon}>😕</span>
-          <h2>Course Not Found</h2>
-          <p>{error || "The course you're looking for doesn't exist or has been removed."}</p>
-          <button onClick={() => navigate('/courses')} className={styles.backButton}>
-            <FiBookOpen className={styles.buttonIcon} />
-            Browse Courses
-          </button>
+  // ─── Error ───────────────────────────────────────────────────────
+  if (error || !course) {
+    return (
+      <>
+        <Header />
+        <div className={styles.errorContainer}>
+          <div className={styles.errorContent}>
+            <span className={styles.errorIcon}>😕</span>
+            <h2>Course Not Found</h2>
+            <p>
+              {error?.includes('HTML aa raha')
+                ? '⚠️ Backend server se connection nahi ho raha. Please check your server.'
+                : error || "The course you're looking for doesn't exist or has been removed."}
+            </p>
+            <button onClick={() => navigate('/courses')} className={styles.backButton}>
+              <FiBookOpen className={styles.buttonIcon} />
+              Browse Courses
+            </button>
+          </div>
         </div>
-      </div>
-      <Footer />
-    </>
-  );
+        <Footer />
+      </>
+    );
+  }
 
-  /* ── Main ── */
+  // ─── Main Render ─────────────────────────────────────────────────
   return (
     <div className={styles.courseDetailPage}>
       <Header />
@@ -134,7 +241,7 @@ const CourseDetailPage = () => {
         />
       )}
 
-      {/* ── Hero ── */}
+      {/* ── Hero Section ── */}
       <section className={styles.heroSection}>
         <div className={styles.heroBackground}>
           <div className={styles.heroOverlay} />
@@ -207,7 +314,7 @@ const CourseDetailPage = () => {
                     <span>{course.language}</span>
                   </div>
                 )}
-                {course.studentsEnrolled && (
+                {course.studentsEnrolled > 0 && (
                   <div className={styles.metaItem}>
                     <FiUsers className={styles.metaIcon} />
                     <span>{course.studentsEnrolled}+ Students</span>
@@ -237,7 +344,6 @@ const CourseDetailPage = () => {
                     </span>
                   )}
                 </div>
-
                 <div className={styles.actionButtons}>
                   <button className={styles.enrollButton} onClick={handleEnrollNow}>
                     Enroll Now
@@ -265,7 +371,6 @@ const CourseDetailPage = () => {
 
           {/* Left Column */}
           <div className={styles.leftColumn}>
-            {/* Tabs */}
             <div className={styles.tabs}>
               {['overview', 'curriculum', 'instructor', 'faq'].map((tab) => (
                 <button
@@ -374,18 +479,9 @@ const CourseDetailPage = () => {
                   <h2 className={styles.sectionTitle}>Course Curriculum</h2>
                   <div className={styles.curriculumContent}>
                     {[
-                      {
-                        title: 'Module 1: Introduction',
-                        items: ['Welcome to the Course', "What You'll Learn", 'Prerequisites'],
-                      },
-                      {
-                        title: 'Module 2: Core Concepts',
-                        items: ['Fundamentals', 'Advanced Topics', 'Practical Examples'],
-                      },
-                      {
-                        title: 'Module 3: Projects',
-                        items: ['Hands-on Projects', 'Real-world Applications', 'Final Assessment'],
-                      },
+                      { title: 'Module 1: Introduction', items: ['Welcome to the Course', "What You'll Learn", 'Prerequisites'] },
+                      { title: 'Module 2: Core Concepts', items: ['Fundamentals', 'Advanced Topics', 'Practical Examples'] },
+                      { title: 'Module 3: Projects', items: ['Hands-on Projects', 'Real-world Applications', 'Final Assessment'] },
                     ].map((mod, i) => (
                       <div key={i} className={styles.curriculumModule}>
                         <h3>{mod.title}</h3>
@@ -456,13 +552,13 @@ const CourseDetailPage = () => {
                       {
                         id: 1,
                         q: 'What is the duration of this course?',
-                        a: course.duration || 'The course duration varies based on your learning pace and schedule.',
+                        a: course.duration ? `This course runs for ${course.duration}.` : 'The course duration varies based on your learning pace.',
                       },
                       {
                         id: 2,
                         q: 'Is there any certification provided?',
                         a: course.certificateAvailable
-                          ? 'Yes, you will receive a verified certificate upon successful completion of the course.'
+                          ? 'Yes, you will receive a verified certificate upon successful completion.'
                           : 'This course does not include a certificate, but you will gain valuable hands-on skills.',
                       },
                       {
@@ -477,6 +573,20 @@ const CourseDetailPage = () => {
                         q: 'What is the refund policy?',
                         a: 'We offer a 30-day money-back guarantee. If you are not satisfied, request a full refund within 30 days of purchase.',
                       },
+                      {
+                        id: 5,
+                        q: 'Is internship included in this course?',
+                        a: course.internshipIncluded
+                          ? 'Yes! This course includes a real industry internship opportunity.'
+                          : 'Internship is not part of this course, but you can apply separately.',
+                      },
+                      {
+                        id: 6,
+                        q: 'Are study materials downloadable?',
+                        a: course.downloadableResources
+                          ? 'Yes, all study materials and resources are downloadable for offline access.'
+                          : 'Study materials are available online within the course portal.',
+                      },
                     ].map(({ id, q, a }) => (
                       <div key={id} className={styles.faqItem}>
                         <button
@@ -484,9 +594,7 @@ const CourseDetailPage = () => {
                           onClick={() => setExpandedFaq(expandedFaq === id ? null : id)}
                         >
                           <span>{q}</span>
-                          {expandedFaq === id
-                            ? <FiChevronDown />
-                            : <FiChevronRight />}
+                          {expandedFaq === id ? <FiChevronDown /> : <FiChevronRight />}
                         </button>
                         {expandedFaq === id && (
                           <div className={styles.faqAnswer}><p>{a}</p></div>
@@ -496,6 +604,7 @@ const CourseDetailPage = () => {
                   </div>
                 </div>
               )}
+
             </div>
           </div>
 
@@ -505,7 +614,6 @@ const CourseDetailPage = () => {
               <div className={styles.summaryCardHeader}>
                 <h3>This Course Includes</h3>
               </div>
-
               <ul className={styles.summaryList}>
                 {course.duration && (
                   <li className={styles.summaryItem}>
@@ -537,14 +645,18 @@ const CourseDetailPage = () => {
                     <span>{course.level} Level</span>
                   </li>
                 )}
-                <li className={styles.summaryItem}>
-                  <FiAward className={styles.summaryIcon} />
-                  <span>Certificate of Completion</span>
-                </li>
-                <li className={styles.summaryItem}>
-                  <FiDownload className={styles.summaryIcon} />
-                  <span>Downloadable Resources</span>
-                </li>
+                {course.certificateAvailable && (
+                  <li className={styles.summaryItem}>
+                    <FiAward className={styles.summaryIcon} />
+                    <span>Certificate of Completion</span>
+                  </li>
+                )}
+                {course.downloadableResources && (
+                  <li className={styles.summaryItem}>
+                    <FiDownload className={styles.summaryIcon} />
+                    <span>Downloadable Resources</span>
+                  </li>
+                )}
                 <li className={styles.summaryItem}>
                   <FiSmartphone className={styles.summaryIcon} />
                   <span>Mobile & TV Access</span>
@@ -565,6 +677,11 @@ const CourseDetailPage = () => {
                       <span className={styles.originalPrice}>
                         ₹{course.originalPrice?.toLocaleString()}
                       </span>
+                      {course.offerPercentage && (
+                        <span className={styles.offerBadge}>
+                          {course.offerPercentage}% OFF
+                        </span>
+                      )}
                     </>
                   ) : (
                     <span className={styles.finalPrice}>
@@ -572,12 +689,10 @@ const CourseDetailPage = () => {
                     </span>
                   )}
                 </div>
-
                 <button className={styles.enrollNowBtn} onClick={handleEnrollNow}>
                   Enroll Now
                   <FiChevronRight className={styles.btnIcon} />
                 </button>
-
                 <div className={styles.moneyBackGuarantee}>
                   <FiShield />
                   <span>30-day money-back guarantee</span>
@@ -585,7 +700,6 @@ const CourseDetailPage = () => {
               </div>
             </div>
 
-            {/* Stats */}
             <div className={styles.statsCard}>
               <div className={styles.statItem}>
                 <BsTrophy className={styles.statIcon} />
@@ -597,19 +711,20 @@ const CourseDetailPage = () => {
               <div className={styles.statItem}>
                 <FiUsers className={styles.statIcon} />
                 <div>
-                  <h4>10k+</h4>
+                  <h4>{course.studentsEnrolled > 0 ? `${course.studentsEnrolled}+` : '10k+'}</h4>
                   <p>Enrolled</p>
                 </div>
               </div>
               <div className={styles.statItem}>
                 <FiCalendar className={styles.statIcon} />
                 <div>
-                  <h4>2024</h4>
+                  <h4>{new Date(course.updatedAt || course.createdAt).getFullYear()}</h4>
                   <p>Updated</p>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
 

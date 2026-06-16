@@ -28,14 +28,11 @@ import HrCounslerSignup from "./Hr&Counsler/HrCounslerSignup";
 import HrDashboard from "./Hr&Counsler/hr-dashboard/HrDashboard";
 import CounselorDashboard from "./Hr&Counsler/counselor-dashboard/CounselorDashboard";
 
-
-// 🔥 Scroll To Top Component
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // instant scroll
-    // window.scrollTo({ top: 0, behavior: "smooth" }); // optional smooth
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
@@ -44,13 +41,14 @@ const ScrollToTop = () => {
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop /> {/* 🔥 IMPORTANT LINE */}
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/courses" element={<CoursePage />} />
-        <Route path="/course/:id" element={<CourseDetailPage />} />
+        {/* ✅ Slug or ID dono support karega */}
+        <Route path="/course/:slug" element={<CourseDetailPage />} />
         <Route path="/career/internship" element={<Internship />} />
         <Route path="/career/fulltime" element={<FullTimeJob />} />
         <Route path="/career/placement" element={<PlacementRoute />} />
@@ -67,7 +65,6 @@ function App() {
         <Route path="/counselor-dashboard" element={<CounselorDashboard />} />
         <Route path="/hr-dashboard" element={<HrDashboard />} />
 
-        {/* Protected Route */}
         <Route
           path="/admin-dashboard"
           element={
@@ -81,4 +78,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

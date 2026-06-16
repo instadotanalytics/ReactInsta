@@ -101,7 +101,11 @@ const CoursePage = () => {
     return `${SERVER_BASE_URL}/${imagePath}`
   }
 
-  const handleViewMore = (courseId) => navigate(`/course/${courseId}`)
+  // ✅ FIXED — slug use karo, _id fallback ke liye
+  const handleViewMore = (course) => {
+    const identifier = course.slug || course._id || course.id
+    navigate(`/course/${identifier}`)
+  }
 
   return (
     <div className={styles.coursePage}>
@@ -183,11 +187,15 @@ const CoursePage = () => {
           </div>
         )}
 
-        {/* Grid */}
+        {/* ✅ FIXED Grid — poora course object pass karo */}
         {filteredCourses.length > 0 && (
           <div className={styles.coursesGrid}>
             {filteredCourses.map((course) => (
-              <div key={course._id || course.id} className={styles.courseCard}onClick={() => handleViewMore(course._id || course.id)}>
+              <div
+                key={course._id || course.id}
+                className={styles.courseCard}
+                onClick={() => handleViewMore(course)}
+              >
                 <div className={styles.cardImageWrapper}>
                   <div className={styles.cardImage}>
                     <img
@@ -201,9 +209,7 @@ const CoursePage = () => {
                   )}
                 </div>
 
-                <div className={styles.cardContent}
-                onClick={() => handleViewMore(course._id || course.id)}
-                >
+                <div className={styles.cardContent}>
                   <h3 className={styles.courseTitle}>{course.title || 'Untitled Course'}</h3>
                   {course.category && (
                     <div className={styles.categoryText}>{course.category}</div>
@@ -219,9 +225,12 @@ const CoursePage = () => {
 
                 <button
                   className={styles.viewMoreBtn}
-                  onClick={() => handleViewMore(course._id || course.id)}
+                  onClick={(e) => {
+                    e.stopPropagation() // ✅ double navigate rokta hai
+                    handleViewMore(course)
+                  }}
                 >
-                  View Details 
+                  View Details
                 </button>
               </div>
             ))}
