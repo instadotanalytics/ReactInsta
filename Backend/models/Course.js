@@ -32,7 +32,7 @@ const CourseSchema = new mongoose.Schema(
     popular: { type: Boolean, default: false },
     studentsEnrolled: { type: Number, default: 0 },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // ─── Slug Generator Helper ────────────────────────────────────────
@@ -40,10 +40,10 @@ const generateSlug = (title) => {
   return title
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
 };
 
 // ─── Unique Slug Finder ───────────────────────────────────────────
@@ -68,30 +68,30 @@ const findUniqueSlug = async (Model, baseSlug, excludeId = null) => {
 };
 
 // ─── PRE-SAVE HOOK ────────────────────────────────────────────────
-CourseSchema.pre('save', async function (next) {
+CourseSchema.pre("save", async function (next) {
   try {
     // Sirf tab chalo jab title ho aur slug nahi ya title change hua
-    if (this.title && (!this.slug || this.isModified('title'))) {
-      const baseSlug = generateSlug(this.title) || 'course';
+    if (this.title && (!this.slug || this.isModified("title"))) {
+      const baseSlug = generateSlug(this.title) || "course";
       this.slug = await findUniqueSlug(this.constructor, baseSlug, this._id);
       console.log(`🔗 Slug set: "${this.title}" → "${this.slug}"`);
     }
     next();
   } catch (err) {
-    console.error('❌ Slug generation error:', err);
+    console.error("❌ Slug generation error:", err);
     next(err);
   }
 });
 
 // ─── PRE-FINDONEANDUPDATE HOOK ────────────────────────────────────
 // Jab admin course title update kare tab bhi slug update ho
-CourseSchema.pre('findOneAndUpdate', async function (next) {
+CourseSchema.pre("findOneAndUpdate", async function (next) {
   try {
     const update = this.getUpdate();
     const newTitle = update?.title || update?.$set?.title;
 
     if (newTitle) {
-      const baseSlug = generateSlug(newTitle) || 'course';
+      const baseSlug = generateSlug(newTitle) || "course";
       const doc = await this.model.findOne(this.getQuery());
       const uniqueSlug = await findUniqueSlug(this.model, baseSlug, doc?._id);
 
@@ -105,7 +105,7 @@ CourseSchema.pre('findOneAndUpdate', async function (next) {
     }
     next();
   } catch (err) {
-    console.error('❌ Slug update error:', err);
+    console.error("❌ Slug update error:", err);
     next(err);
   }
 });
