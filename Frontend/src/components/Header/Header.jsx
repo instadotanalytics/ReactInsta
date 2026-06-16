@@ -15,6 +15,11 @@ import { BsInfoCircle } from "react-icons/bs";
 import RegistrationPopUp from "./RegistrationPopUp";
 import SearchBar from "./Searchbar";
 
+// ✅ LOGO IMPORT - Aapke project ke hisaab se path set karein
+import logo from "../../../public/instadotlogoforweb.png";  // Agar assets folder me hai
+// Ya agar public folder me hai to:
+// const logo = "/logo.png";
+
 const Header = () => {
   const [mobileMenuOpen,            setMobileMenuOpen]            = useState(false);
   const [scrolled,                  setScrolled]                  = useState(false);
@@ -133,8 +138,9 @@ const Header = () => {
           {/* ── LOGO ── */}
           <div className={styles.logo} onClick={() => handleNavigation("/")}>
             <img
-              src="https://mllffozprx61.i.optimole.com/w:393/h:128/q:mauto/ig:avif/https://instadotanalytics.com/wp-content/uploads/2023/05/WhatsApp_Image_2024-07-11_at_15.57.22_70256fed-removebg-preview.png"
+              src={logo}  // ✅ Ab logo import ho gaya
               alt="InstaDot Analytics"
+              className={styles.logoImage}
             />
           </div>
 
@@ -293,7 +299,7 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* ── DESKTOP RIGHT SIDE: Search icon → WhatsApp → Register ── */}
+          {/* ── DESKTOP RIGHT SIDE ── */}
           <div className={styles.desktopRight}>
             <SearchBar maxResults={9} />
             <a
@@ -309,7 +315,7 @@ const Header = () => {
             </button>
           </div>
 
-          {/* ── MOBILE RIGHT SIDE: Search icon → Hamburger ── */}
+          {/* ── MOBILE RIGHT SIDE ── */}
           <div className={styles.mobileRight}>
             <SearchBar maxResults={8} />
             <button
