@@ -98,14 +98,22 @@ const Contact = () => {
 
         <div className={styles.container}>
           {/* Hero Header */}
+
           <div className={styles.heroHeader}>
-            <span className={styles.badge}>Get In Touch</span>
+            <span className={styles.badge}>
+              Launch Your IT Career
+            </span>
+
             <h1 className={styles.title}>
-              Let's <em>Talk</em> About<br />Your Future
+              Build Your <span>Future</span><br />
+              With Industry-Ready Skills
             </h1>
+
             <p className={styles.subtitle}>
-              Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              Master Java Full Stack Development, React, Spring Boot, and more through
+              hands-on training designed to help you land your dream IT job.
             </p>
+
           </div>
 
           {/* Main Grid */}
@@ -148,111 +156,64 @@ const Contact = () => {
 
             {/* Right — Form */}
             <div className={styles.formCol}>
-              <form onSubmit={handleSubmit} className={styles.form}>
+              <form className={styles.form}>
                 <div className={styles.formRow}>
-                  <div className={`${styles.field} ${focused === "name" ? styles.fieldActive : ""}`}>
-                    <label className={styles.fieldLabel}>Full Name</label>
+
+                  <div className={styles.field}>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      onFocus={() => setFocused("name")}
-                      onBlur={() => setFocused(null)}
                       className={styles.fieldInput}
+                      placeholder=" "
                       required
-                      placeholder="Rahul Sharma"
                     />
-                    <span className={styles.fieldLine} />
+                    <label className={styles.fieldLabel}>Full Name</label>
                   </div>
 
-                  <div className={`${styles.field} ${focused === "email" ? styles.fieldActive : ""}`}>
-                    <label className={styles.fieldLabel}>Email Address</label>
+                  <div className={styles.field}>
                     <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleChange}
-                      onFocus={() => setFocused("email")}
-                      onBlur={() => setFocused(null)}
                       className={styles.fieldInput}
+                      placeholder=" "
                       required
-                      placeholder="rahul@example.com"
                     />
-                    <span className={styles.fieldLine} />
+                    <label className={styles.fieldLabel}>Phone Number</label>
                   </div>
+
                 </div>
 
-                <div className={`${styles.field} ${focused === "phone" ? styles.fieldActive : ""}`}>
-                  <label className={styles.fieldLabel}>Phone Number</label>
+                <div className={styles.field}>
                   <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
-                    onFocus={() => setFocused("phone")}
-                    onBlur={() => setFocused(null)}
                     className={styles.fieldInput}
+                    placeholder=" "
                     required
-                    placeholder="+91 98765 43210"
                   />
-                  <span className={styles.fieldLine} />
+                  <label className={styles.fieldLabel}>Email Address</label>
                 </div>
 
-                <div className={`${styles.field} ${focused === "message" ? styles.fieldActive : ""}`}>
-                  <label className={styles.fieldLabel}>Your Message</label>
+                <div className={styles.field}>
                   <textarea
                     name="message"
-                    rows="5"
                     value={formData.message}
                     onChange={handleChange}
-                    onFocus={() => setFocused("message")}
-                    onBlur={() => setFocused(null)}
                     className={`${styles.fieldInput} ${styles.fieldTextarea}`}
+                    placeholder=" "
                     required
-                    placeholder="Tell us about your query or what you'd like to learn..."
                   />
-                  <span className={styles.fieldLine} />
+                  <label className={styles.fieldLabel}>Your Message</label>
                 </div>
 
-                {/* Success Message */}
-                {submitted && (
-                  <div className={styles.successBox}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    Message sent successfully! We'll get back to you soon.
-                  </div>
-                )}
-
-                {/* Error Message */}
-                {error && (
-                  <div className={styles.errorBox}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="8" x2="12" y2="12" />
-                      <line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                    {error}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={styles.submitBtn}
-                >
-                  {loading ? (
-                    <span className={styles.spinner} />
-                  ) : (
-                    <>
-                      Send Message
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </>
-                  )}
+                <button type="submit" className={styles.submitBtn}>
+                  Send Message
                 </button>
               </form>
             </div>
