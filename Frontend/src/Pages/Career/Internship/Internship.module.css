@@ -329,17 +329,46 @@
   .heroInner {
     padding: 0 20px 44px;
   }
+  /* 2×2 grid for stats */
   .statsStrip {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
   }
   .statPill {
     width: 100%;
     justify-content: flex-start;
+    padding: 8px 12px;
   }
+  .statPillValue {
+    font-size: 17px;
+  }
+  .statPillLabel {
+    font-size: 11px;
+  }
+ 
+  /* companies: single line, horizontal scroll, no wrap */
   .heroCompanies {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+  }
+  .companiesList {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 18px;
+    width: 100%;
+    padding-bottom: 4px;
+    /* hide scrollbar visually but keep it functional */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .companiesList::-webkit-scrollbar {
+    display: none;
+  }
+  .companyName {
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }

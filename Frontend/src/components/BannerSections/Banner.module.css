@@ -51,7 +51,7 @@
     z-index 0s;
   pointer-events: none;
   will-change: transform, opacity;
-  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.55);
+  /* box-shadow: 0 10px 45px rgba(0, 0, 0, 0.55); */
 }
 
 /* Active (center) card */
@@ -60,7 +60,7 @@
   opacity: 1;
   z-index: 5;
   pointer-events: all;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7); */
   filter: brightness(1);
 }
 

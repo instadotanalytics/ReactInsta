@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./InternshipForm.module.css";
-import { API_BASE_URL } from "../../../config/api.js"; // apna path adjust karo
+import { API_BASE_URL } from "../../../config/api.js";
 
 const InternshipForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -54,7 +54,6 @@ const InternshipForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await fetch(`${API_BASE_URL}/internships`, {
         method: "POST",
@@ -89,289 +88,150 @@ const InternshipForm = () => {
     }
   };
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>Personal Information</h3>
-            <div className={styles.formGrid}>
-              <input
-                className={styles.input}
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="Full Name"
-                required
-              />
-              <input
-                className={styles.input}
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email Address"
-                required
-              />
-              <input
-                className={styles.input}
-                name="mobile"
-                value={formData.mobile}
-                onChange={handleChange}
-                placeholder="Mobile Number"
-                required
-              />
-              <input
-                className={styles.input}
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                placeholder="City"
-                required
-              />
+  return (
+    <div className={styles.pageContainer}>
+      <div className={styles.mainCard}>
+        
+        {/* Left Side: Editorial Content Area */}
+        <div className={styles.leftPanel}>
+          <div className={styles.promoBadge}>
+            <span className={styles.badgePulse}></span>
+            Kickstart Your Career with the Perfect Internship →
+          </div>
+          <h1 className={styles.mainTitle}>
+            Join thousands of students who have found their dream internships <span>through our platform.</span>
+          </h1>
+          <p className={styles.mainSubtitle}>
+            Get hands-on experience and launch your career.
+          </p>
+
+          {/* Quick Option Grid matching the layout buttons of your image */}
+          <div className={styles.optionGrid}>
+            <div className={`${styles.optionItem} ${currentStep === 1 ? styles.optionActive : ""}`}>
+              <div className={styles.checkboxIndicator}></div>
+              <span> Personal</span>
+            </div>
+            <div className={`${styles.optionItem} ${currentStep === 2 ? styles.optionActive : ""}`}>
+              <div className={styles.checkboxIndicator}></div>
+              <span> Education </span>
+            </div>
+            <div className={`${styles.optionItem} ${currentStep === 3 ? styles.optionActive : ""}`}>
+              <div className={styles.checkboxIndicator}></div>
+              <span>Preferences</span>
             </div>
           </div>
-        );
+        </div>
 
-      case 2:
-        return (
-          <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>Educational Details</h3>
-            <div className={styles.formGrid}>
-              <input
-                className={styles.input}
-                name="college"
-                value={formData.college}
-                onChange={handleChange}
-                placeholder="College Name"
-                required
-              />
-              <input
-                className={styles.input}
-                name="course"
-                value={formData.course}
-                onChange={handleChange}
-                placeholder="Course (e.g., B.Tech, BCA)"
-                required
-              />
-              <input
-                className={styles.input}
-                name="branch"
-                value={formData.branch}
-                onChange={handleChange}
-                placeholder="Branch/Specialization"
-                required
-              />
-              <input
-                className={styles.input}
-                name="currentYear"
-                value={formData.currentYear}
-                onChange={handleChange}
-                placeholder="Current Year"
-                required
-              />
-              <input
-                className={styles.input}
-                name="skills"
-                value={formData.skills}
-                onChange={handleChange}
-                placeholder="Skills (comma separated)"
-                required
-                style={{ gridColumn: "span 2" }}
-              />
+        {/* Right Side: Floating Interactive Card Form Area */}
+        <div className={styles.rightPanel}>
+          <div className={styles.glassCard}>
+
+            {/* Stepper Headers */}
+            <div className={styles.formHeader}>
+              <div className={styles.stepCounter}>STEP 0{currentStep} / 03</div>
+              <h2 className={styles.stepHeadline}>
+                {currentStep === 1 && "Personal Registry"}
+                {currentStep === 2 && "Academic Portfolio"}
+                {currentStep === 3 && "Final Placement Terms"}
+              </h2>
             </div>
-          </div>
-        );
 
-      case 3:
-        return (
-          <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>Internship Preferences</h3>
-            <div className={styles.formGrid}>
-              <select
-                className={styles.select}
-                name="duration"
-                value={formData.duration}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Duration</option>
-                <option value="1 Month">1 Month</option>
-                <option value="3 Months">3 Months</option>
-                <option value="6 Months">6 Months</option>
-              </select>
-
-              <select
-                className={styles.select}
-                name="mode"
-                value={formData.mode}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Mode</option>
-                <option value="Remote">Remote</option>
-                <option value="Onsite">Onsite</option>
-                <option value="Hybrid">Hybrid</option>
-              </select>
-
-              <select
-                className={styles.select}
-                name="internshipType"
-                value={formData.internshipType}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Internship Type</option>
-                <option value="paid">Paid</option>
-                <option value="unpaid">Unpaid</option>
-                <option value="stipend">Stipend Based</option>
-              </select>
-
-              {formData.internshipType !== "unpaid" && formData.internshipType !== "" && (
-                <div className={styles.stipendInput}>
-                  <input
-                    className={styles.input}
-                    type="number"
-                    name="expectedStipend"
-                    value={formData.expectedStipend}
-                    onChange={handleChange}
-                    placeholder="Expected Stipend (₹)"
-                  />
+            {/* Step Content Renderers */}
+            <form onSubmit={handleSubmit} className={styles.formElement}>
+              {currentStep === 1 && (
+                <div className={styles.stepWrapper}>
+                  <div className={styles.inputGroup}>
+                    <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full Name" required className={styles.premiumInput} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required className={styles.premiumInput} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} placeholder="Mobile Number" required className={styles.premiumInput} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="Current City" required className={styles.premiumInput} />
+                  </div>
                 </div>
               )}
-            </div>
 
-            {/* Review Section */}
-            <div className={styles.reviewSection}>
-              <h4 style={{ marginBottom: "15px", color: "#333" }}>Review Your Application</h4>
-              <div className={styles.reviewItem}>
-                <span className={styles.reviewLabel}>Name:</span>
-                <span className={styles.reviewValue}>{formData.fullName || "Not provided"}</span>
+              {currentStep === 2 && (
+                <div className={styles.stepWrapper}>
+                  <div className={styles.inputGroup}>
+                    <input type="text" name="college" value={formData.college} onChange={handleChange} placeholder="College / University Name" required className={styles.premiumInput} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input type="text" name="course" value={formData.course} onChange={handleChange} placeholder="Course Track (e.g. B.Tech, BCA)" required className={styles.premiumInput} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input type="text" name="branch" value={formData.branch} onChange={handleChange} placeholder="Specialization Branch" required className={styles.premiumInput} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <input type="text" name="currentYear" value={formData.currentYear} onChange={handleChange} placeholder="Current Academic Year" required className={styles.premiumInput} />
+                  </div>
+                  <div className={`${styles.inputGroup} ${styles.spanAll}`}>
+                    <input type="text" name="skills" value={formData.skills} onChange={handleChange} placeholder="Skills / Core Technical Proficiencies" required className={styles.premiumInput} />
+                  </div>
+                </div>
+              )}
+
+              {currentStep === 3 && (
+                <div className={styles.stepWrapper}>
+                  <div className={styles.inputGroup}>
+                    <select name="duration" value={formData.duration} onChange={handleChange} required className={styles.premiumSelect}>
+                      <option value="">Select Target Duration</option>
+                      <option value="1 Month">1 Month Fast-track</option>
+                      <option value="3 Months">3 Months Full Quarter</option>
+                      <option value="6 Months">6 Months Extended Internship</option>
+                    </select>
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <select name="mode" value={formData.mode} onChange={handleChange} required className={styles.premiumSelect}>
+                      <option value="">Select Workflow Mode</option>
+                      <option value="Remote">Remote Operations</option>
+                      <option value="Onsite">Onsite Placement</option>
+                      <option value="Hybrid">Hybrid Schedule</option>
+                    </select>
+                  </div>
+                  <div className={`${styles.inputGroup} ${formData.internshipType === "unpaid" ? "" : styles.spanAll}`}>
+                    <select name="internshipType" value={formData.internshipType} onChange={handleChange} required className={styles.premiumSelect}>
+                      <option value="">Compensation Type</option>
+                      <option value="paid">Paid Contract</option>
+                      <option value="unpaid">Unpaid Internship</option>
+                      <option value="stipend">Performance Stipend Based</option>
+                    </select>
+                  </div>
+
+                  {formData.internshipType !== "unpaid" && formData.internshipType !== "" && (
+                    <div className={`${styles.inputGroup} ${styles.spanAll} ${styles.stipendAnimate}`}>
+                      <input type="number" name="expectedStipend" value={formData.expectedStipend} onChange={handleChange} placeholder="Expected Monthly Stipend (₹)" className={styles.premiumInput} />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Action Buttons Container */}
+              <div className={styles.footerNavigation}>
+                {currentStep > 1 && (
+                  <button type="button" onClick={handleBack} className={styles.buttonSecondary}>
+                    Go Back
+                  </button>
+                )}
+                {currentStep < 3 ? (
+                  <button type="button" onClick={handleNext} className={styles.buttonPrimary}>
+                    Continue Forward
+                  </button>
+                ) : (
+                  <button type="submit" className={styles.buttonSubmit}>
+                    Finalize Application
+                  </button>
+                )}
               </div>
-              <div className={styles.reviewItem}>
-                <span className={styles.reviewLabel}>Email:</span>
-                <span className={styles.reviewValue}>{formData.email || "Not provided"}</span>
-              </div>
-              <div className={styles.reviewItem}>
-                <span className={styles.reviewLabel}>College:</span>
-                <span className={styles.reviewValue}>{formData.college || "Not provided"}</span>
-              </div>
-              <div className={styles.reviewItem}>
-                <span className={styles.reviewLabel}>Course:</span>
-                <span className={styles.reviewValue}>{formData.course || "Not provided"}</span>
-              </div>
-              <div className={styles.reviewItem}>
-                <span className={styles.reviewLabel}>Duration:</span>
-                <span className={styles.reviewValue}>{formData.duration || "Not selected"}</span>
-              </div>
-            </div>
-          </div>
-        );
+            </form>
 
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <div className={styles.container}>
-      {/* Left Content Section */}
-      <div className={styles.leftContent}>
-        <h1 className={styles.title}>
-          Kickstart Your Career with the Perfect Internship
-        </h1>
-        <p className={styles.subtitle}>
-          Join thousands of students who have found their dream internships
-          through our platform. Get hands-on experience and launch your career.
-        </p>
-
-        <ul className={styles.features}>
-          <li className={styles.featureItem}>
-            <span className={styles.featureIcon}>🎯</span>
-            <span className={styles.featureText}>
-              <strong>Personalized Matches</strong>
-              Get internships tailored to your skills
-            </span>
-          </li>
-          <li className={styles.featureItem}>
-            <span className={styles.featureIcon}>🏢</span>
-            <span className={styles.featureText}>
-              <strong>Top Companies</strong>
-              Work with leading companies worldwide
-            </span>
-          </li>
-          <li className={styles.featureItem}>
-            <span className={styles.featureIcon}>💼</span>
-            <span className={styles.featureText}>
-              <strong>Paid Opportunities</strong>
-              Earn while you learn
-            </span>
-          </li>
-        </ul>
-      </div>
-
-      {/* Right Form Section */}
-      <div className={styles.rightForm}>
-        <div className={styles.formHeader}>
-          <h2 className={styles.formTitle}>Apply for Internship</h2>
-          <p className={styles.formSubtitle}>
-            Step {currentStep} of 3 - {currentStep === 1 ? "Personal Info" : currentStep === 2 ? "Education" : "Preferences"}
-          </p>
-        </div>
-
-        {/* Progress Bar */}
-        <div className={styles.progressContainer}>
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{ width: `${(currentStep / 3) * 100}%` }}
-            />
-          </div>
-          <div className={styles.progressSteps}>
-            <span className={currentStep >= 1 ? styles.stepActive : ""}>
-              <span className={styles.stepDot} /> Personal
-            </span>
-            <span className={currentStep >= 2 ? styles.stepActive : ""}>
-              <span className={styles.stepDot} /> Education
-            </span>
-            <span className={currentStep >= 3 ? styles.stepActive : ""}>
-              <span className={styles.stepDot} /> Preferences
-            </span>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {renderStep()}
-
-          <div className={styles.buttonGroup}>
-            {currentStep > 1 && (
-              <button
-                type="button"
-                onClick={handleBack}
-                className={styles.backButton}
-              >
-                Back
-              </button>
-            )}
-
-            {currentStep < 3 ? (
-              <button
-                type="button"
-                onClick={handleNext}
-                className={styles.nextButton}
-              >
-                Next Step
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className={styles.submitButton}
-              >
-                Submit Application
-              </button>
-            )}
-          </div>
-        </form>
       </div>
     </div>
   );
