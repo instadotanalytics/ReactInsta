@@ -15,55 +15,100 @@ import { BsInfoCircle } from "react-icons/bs";
 import RegistrationPopUp from "./RegistrationPopUp";
 import SearchBar from "./Searchbar";
 
-import logo from "../../../public/instadotlogoforweb.png"; 
-
+import logo from "../../../public/instadotlogoforweb.png";
 
 const Header = () => {
-  const [mobileMenuOpen,            setMobileMenuOpen]            = useState(false);
-  const [scrolled,                  setScrolled]                  = useState(false);
-  const [showRegistration,          setShowRegistration]          = useState(false);
-  const [careerDropdownOpen,        setCareerDropdownOpen]        = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
+  const [careerDropdownOpen, setCareerDropdownOpen] = useState(false);
   const [certificationDropdownOpen, setCertificationDropdownOpen] = useState(false);
-  const [activeCareerItem,          setActiveCareerItem]          = useState("internship");
-  const [activeCertificationItem,   setActiveCertificationItem]   = useState("microsoft");
+  const [activeCareerItem, setActiveCareerItem] = useState("internship");
+  const [activeCertificationItem, setActiveCertificationItem] = useState("microsoft");
 
-  const navigate                 = useNavigate();
-  const menuRef                  = useRef();
-  const careerDropdownRef        = useRef();
+  const navigate = useNavigate();
+  const headerRef = useRef();
+  const menuRef = useRef();
+  const careerDropdownRef = useRef();
   const certificationDropdownRef = useRef();
 
+  // Scroll effect with passive listener for better performance
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Handle resize
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth > 992) setMobileMenuOpen(false);
+      if (window.innerWidth > 992) {
+        setMobileMenuOpen(false);
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.top = "";
+      }
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+      }
+    }
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Close dropdowns on outside click
   useEffect(() => {
     const handler = (e) => {
-      if (careerDropdownRef.current && !careerDropdownRef.current.contains(e.target))
+      if (careerDropdownRef.current && !careerDropdownRef.current.contains(e.target)) {
         setCareerDropdownOpen(false);
-      if (certificationDropdownRef.current && !certificationDropdownRef.current.contains(e.target))
+      }
+      if (certificationDropdownRef.current && !certificationDropdownRef.current.contains(e.target)) {
         setCertificationDropdownOpen(false);
+      }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const handleRegisterClick     = () => { setShowRegistration(true); setMobileMenuOpen(false); };
+  const handleRegisterClick = () => {
+    setShowRegistration(true);
+    setMobileMenuOpen(false);
+  };
+
   const handleCloseRegistration = () => setShowRegistration(false);
-  const handleLinkClick         = () => {
+
+  const handleLinkClick = () => {
     setMobileMenuOpen(false);
     setCareerDropdownOpen(false);
     setCertificationDropdownOpen(false);
   };
+
   const handleNavigation = (path) => {
     navigate(path);
     setMobileMenuOpen(false);
@@ -73,21 +118,27 @@ const Header = () => {
 
   const careerItems = [
     {
-      id: "internship", title: "Internship",    desc: "Gain practical experience",
+      id: "internship",
+      title: "Internship",
+      desc: "Gain practical experience",
       icon: <FaLaptopCode />,
       image: "https://i.pinimg.com/736x/f3/84/a6/f384a6683b3c91e409ca0b7b4df43173.jpg",
       features: ["Hands-on training", "Industry projects", "Mentorship"],
       path: "/career/internship",
     },
     {
-      id: "placement",  title: "Placement",     desc: "Get placed in top companies",
+      id: "placement",
+      title: "Placement",
+      desc: "Get placed in top companies",
       icon: <FaBuilding />,
       image: "https://i.pinimg.com/1200x/ab/44/70/ab44700476c8bf1332ec326d290e8ec7.jpg",
       features: ["100% placement support", "Top MNCs", "Interview prep"],
       path: "/career/placement",
     },
     {
-      id: "fulltime",   title: "Full Time Job", desc: "Start your professional journey",
+      id: "fulltime",
+      title: "Full Time Job",
+      desc: "Start your professional journey",
       icon: <FaUserTie />,
       image: "https://i.pinimg.com/736x/45/a5/c6/45a5c66ba7c17cd03c0e7f833f547878.jpg",
       features: ["Dream company", "Growth opportunities", "Global exposure"],
@@ -97,32 +148,47 @@ const Header = () => {
 
   const certificationItems = [
     {
-      id: "microsoft", title: "Microsoft", desc: "Microsoft Certified Professional",
-      icon: <FaMicrosoft />, path: "/certification/microsoft",
+      id: "microsoft",
+      title: "Microsoft",
+      desc: "Microsoft Certified Professional",
+      icon: <FaMicrosoft />,
+      path: "/certification/microsoft",
       image: "https://i.pinimg.com/1200x/81/23/cd/8123cdbabacaa7cd0748f2a45cd69c66.jpg",
       features: ["Azure certifications", "Microsoft 365", "Dynamics 365"],
     },
     {
-      id: "ibm",       title: "IBM",       desc: "IBM Professional Certification",
-      icon: <SiBmcsoftware />, path: "/certification/ibm",
+      id: "ibm",
+      title: "IBM",
+      desc: "IBM Professional Certification",
+      icon: <SiBmcsoftware />,
+      path: "/certification/ibm",
       image: "https://i.pinimg.com/1200x/d5/2d/3c/d52d3cb8b9490cc38295052352da7cbd.jpg",
       features: ["Data Science", "Cloud Computing", "AI & ML"],
     },
     {
-      id: "aws",       title: "AWS",       desc: "Amazon Web Services Certification",
-      icon: <FaAws />, path: "/certification/aws",
+      id: "aws",
+      title: "AWS",
+      desc: "Amazon Web Services Certification",
+      icon: <FaAws />,
+      path: "/certification/aws",
       image: "https://i.pinimg.com/1200x/e8/96/25/e89625b8b225969fab294a3dda380399.jpg",
       features: ["Solutions Architect", "Developer", "DevOps Engineer"],
     },
     {
-      id: "redhat",    title: "RedHat",    desc: "RedHat Certified Engineer",
-      icon: <FaRedhat />, path: "/certification/redhat",
+      id: "redhat",
+      title: "RedHat",
+      desc: "RedHat Certified Engineer",
+      icon: <FaRedhat />,
+      path: "/certification/redhat",
       image: "https://i.pinimg.com/736x/6e/18/05/6e18057e5050f4254b1e34e16f1ac4ac.jpg",
       features: ["RHCSA", "RHCE", "OpenShift"],
     },
     {
-      id: "custom",    title: "Custom",    desc: "Custom Certification Programs",
-      icon: <SiCoursera />, path: "/certification/custom",
+      id: "custom",
+      title: "Custom",
+      desc: "Custom Certification Programs",
+      icon: <SiCoursera />,
+      path: "/certification/custom",
       image: "https://i.pinimg.com/736x/4c/a4/73/4ca4732a3a3ba06a36bc8fea1aefad50.jpg",
       features: ["Tailored programs", "Industry specific", "Flexible learning"],
     },
@@ -130,44 +196,49 @@ const Header = () => {
 
   return (
     <>
-      <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+      <header ref={headerRef} className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.container} ref={menuRef}>
-
           {/* ── LOGO ── */}
           <div className={styles.logo} onClick={() => handleNavigation("/")}>
-            <img
-              src={logo}  
-              alt="InstaDot Analytics"
-              className={styles.logoImage}
-            />
+            <img src={logo} alt="InstaDot Analytics" className={styles.logoImage} />
           </div>
 
           {/* ── DESKTOP NAV ── */}
           <nav className={styles.navDesktop}>
             <ul className={styles.navList}>
-
               <li className={styles.navItem}>
                 <Link to="/" onClick={handleLinkClick}>
-                  <FaHome className={styles.navIcon} /> Home
+                  <span className={styles.linkContent}>
+                    <FaHome className={styles.navIcon} /> Home
+                  </span>
                 </Link>
               </li>
 
               <li className={styles.navItem}>
                 <Link to="/courses" onClick={handleLinkClick}>
-                  <IoBookSharp className={styles.navIcon} /> Courses
+                  <span className={styles.linkContent}>
+                    <IoBookSharp className={styles.navIcon} /> Courses
+                  </span>
                 </Link>
               </li>
 
               {/* Certification dropdown */}
               <li
                 className={`${styles.navItem} ${styles.dropdownContainer}`}
-                onMouseEnter={() => { setCertificationDropdownOpen(true); setCareerDropdownOpen(false); }}
+                onMouseEnter={() => {
+                  setCertificationDropdownOpen(true);
+                  setCareerDropdownOpen(false);
+                }}
                 onMouseLeave={() => setCertificationDropdownOpen(false)}
                 ref={certificationDropdownRef}
               >
                 <button className={styles.dropdownLink}>
-                  <FaGraduationCap className={styles.navIcon} /> Certification
-                  <span className={styles.dropdownArrow}><IoIosArrowDown /></span>
+                  <span className={styles.linkContent}>
+                    <FaGraduationCap className={styles.navIcon} /> Certification
+                    <span className={styles.dropdownArrow}>
+                      <IoIosArrowDown />
+                    </span>
+                  </span>
                 </button>
 
                 <div className={`${styles.careerDropdown} ${certificationDropdownOpen ? styles.show : ""}`}>
@@ -176,12 +247,15 @@ const Header = () => {
                       <h3 className={styles.dropdownTitle}>
                         <FaGraduationCap className={styles.titleIcon} /> Certifications
                       </h3>
-                      {certificationItems.map((item) => (
+                      {certificationItems.map((item, idx) => (
                         <Link
                           key={item.id}
                           to={item.path}
                           onClick={handleLinkClick}
-                          className={`${styles.dropdownCategoryItem} ${activeCertificationItem === item.id ? styles.active : ""}`}
+                          style={{ "--stagger-index": idx }}
+                          className={`${styles.dropdownCategoryItem} ${
+                            activeCertificationItem === item.id ? styles.active : ""
+                          }`}
                           onMouseEnter={() => setActiveCertificationItem(item.id)}
                         >
                           <span className={styles.categoryIcon}>{item.icon}</span>
@@ -193,26 +267,27 @@ const Header = () => {
                       ))}
                     </div>
                     <div className={styles.dropdownPreview}>
-                      {certificationItems.map((item) =>
-                        activeCertificationItem === item.id && (
-                          <div key={item.id} className={styles.previewContent}>
-                            <div className={styles.previewImageContainer}>
-                              <img src={item.image} alt={item.title} className={styles.previewImage} />
-                              <div className={styles.imageOverlay}></div>
+                      {certificationItems.map(
+                        (item) =>
+                          activeCertificationItem === item.id && (
+                            <div key={item.id} className={styles.previewContent}>
+                              <div className={styles.previewImageContainer}>
+                                <img src={item.image} alt={item.title} className={styles.previewImage} />
+                                <div className={styles.imageOverlay}></div>
+                              </div>
+                              <div className={styles.previewDetails}>
+                                <h4 className={styles.previewTitle}>{item.title} Certification</h4>
+                                <p className={styles.previewDesc}>{item.desc}</p>
+                                <ul className={styles.featureList}>
+                                  {item.features.map((f, i) => (
+                                    <li key={i} className={styles.featureItem}>
+                                      <FaRocket className={styles.featureIcon} /> {f}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
                             </div>
-                            <div className={styles.previewDetails}>
-                              <h4 className={styles.previewTitle}>{item.title} Certification</h4>
-                              <p className={styles.previewDesc}>{item.desc}</p>
-                              <ul className={styles.featureList}>
-                                {item.features.map((f, i) => (
-                                  <li key={i} className={styles.featureItem}>
-                                    <FaRocket className={styles.featureIcon} /> {f}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                        )
+                          )
                       )}
                     </div>
                   </div>
@@ -222,13 +297,20 @@ const Header = () => {
               {/* Career dropdown */}
               <li
                 className={`${styles.navItem} ${styles.dropdownContainer}`}
-                onMouseEnter={() => { setCareerDropdownOpen(true); setCertificationDropdownOpen(false); }}
+                onMouseEnter={() => {
+                  setCareerDropdownOpen(true);
+                  setCertificationDropdownOpen(false);
+                }}
                 onMouseLeave={() => setCareerDropdownOpen(false)}
                 ref={careerDropdownRef}
               >
                 <button className={styles.dropdownLink}>
-                  <GiStairsGoal className={styles.navIcon} /> Career
-                  <span className={styles.dropdownArrow}><IoIosArrowDown /></span>
+                  <span className={styles.linkContent}>
+                    <GiStairsGoal className={styles.navIcon} /> Career
+                    <span className={styles.dropdownArrow}>
+                      <IoIosArrowDown />
+                    </span>
+                  </span>
                 </button>
 
                 <div className={`${styles.careerDropdown} ${careerDropdownOpen ? styles.show : ""}`}>
@@ -237,12 +319,15 @@ const Header = () => {
                       <h3 className={styles.dropdownTitle}>
                         <FaGraduationCap className={styles.titleIcon} /> Career
                       </h3>
-                      {careerItems.map((item) => (
+                      {careerItems.map((item, idx) => (
                         <Link
                           key={item.id}
                           to={item.path}
                           onClick={handleLinkClick}
-                          className={`${styles.dropdownCategoryItem} ${activeCareerItem === item.id ? styles.active : ""}`}
+                          style={{ "--stagger-index": idx }}
+                          className={`${styles.dropdownCategoryItem} ${
+                            activeCareerItem === item.id ? styles.active : ""
+                          }`}
                           onMouseEnter={() => setActiveCareerItem(item.id)}
                         >
                           <span className={styles.categoryIcon}>{item.icon}</span>
@@ -254,29 +339,30 @@ const Header = () => {
                       ))}
                     </div>
                     <div className={styles.dropdownPreview}>
-                      {careerItems.map((item) =>
-                        activeCareerItem === item.id && (
-                          <div key={item.id} className={styles.previewContent}>
-                            <div className={styles.previewImageContainer}>
-                              <img src={item.image} alt={item.title} className={styles.previewImage} />
-                              <div className={styles.imageOverlay}></div>
+                      {careerItems.map(
+                        (item) =>
+                          activeCareerItem === item.id && (
+                            <div key={item.id} className={styles.previewContent}>
+                              <div className={styles.previewImageContainer}>
+                                <img src={item.image} alt={item.title} className={styles.previewImage} />
+                                <div className={styles.imageOverlay}></div>
+                              </div>
+                              <div className={styles.previewDetails}>
+                                <h4 className={styles.previewTitle}>{item.title}</h4>
+                                <p className={styles.previewDesc}>{item.desc}</p>
+                                <ul className={styles.featureList}>
+                                  {item.features.map((f, i) => (
+                                    <li key={i} className={styles.featureItem}>
+                                      <FaRocket className={styles.featureIcon} /> {f}
+                                    </li>
+                                  ))}
+                                </ul>
+                                <Link to={item.path} className={styles.previewBtn} onClick={handleLinkClick}>
+                                  Explore {item.title} <span>→</span>
+                                </Link>
+                              </div>
                             </div>
-                            <div className={styles.previewDetails}>
-                              <h4 className={styles.previewTitle}>{item.title}</h4>
-                              <p className={styles.previewDesc}>{item.desc}</p>
-                              <ul className={styles.featureList}>
-                                {item.features.map((f, i) => (
-                                  <li key={i} className={styles.featureItem}>
-                                    <FaRocket className={styles.featureIcon} /> {f}
-                                  </li>
-                                ))}
-                              </ul>
-                              <Link to={item.path} className={styles.previewBtn} onClick={handleLinkClick}>
-                                Explore {item.title} <span>→</span>
-                              </Link>
-                            </div>
-                          </div>
-                        )
+                          )
                       )}
                     </div>
                   </div>
@@ -285,13 +371,17 @@ const Header = () => {
 
               <li className={styles.navItem}>
                 <Link to="/about" onClick={handleLinkClick}>
-                  <BsInfoCircle className={styles.navIcon} /> About
+                  <span className={styles.linkContent}>
+                    <BsInfoCircle className={styles.navIcon} /> About
+                  </span>
                 </Link>
               </li>
 
               <li className={styles.navItem}>
                 <Link to="/contact" onClick={handleLinkClick}>
-                  <FaPhoneAlt className={styles.navIcon} /> Contact
+                  <span className={styles.linkContent}>
+                    <FaPhoneAlt className={styles.navIcon} /> Contact
+                  </span>
                 </Link>
               </li>
             </ul>
@@ -324,7 +414,6 @@ const Header = () => {
               {mobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
-
         </div>
 
         {/* ── MOBILE MENU ── */}
@@ -332,40 +421,64 @@ const Header = () => {
           <nav className={styles.mobileNav}>
             <ul className={styles.mobileNavList}>
               <li className={styles.mobileNavItem}>
-                <Link to="/" onClick={handleLinkClick} className={styles.mobileLink}><FaHome /> Home</Link>
+                <Link to="/" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaHome /> Home
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/courses" onClick={handleLinkClick} className={styles.mobileLink}><IoBookSharp /> Courses</Link>
+                <Link to="/courses" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <IoBookSharp /> Courses
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/certification/microsoft" onClick={handleLinkClick} className={styles.mobileLink}><FaMicrosoft /> Microsoft Certification</Link>
+                <Link to="/certification/microsoft" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaMicrosoft /> Microsoft Certification
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/certification/ibm" onClick={handleLinkClick} className={styles.mobileLink}><SiBmcsoftware /> IBM Certification</Link>
+                <Link to="/certification/ibm" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <SiBmcsoftware /> IBM Certification
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/certification/aws" onClick={handleLinkClick} className={styles.mobileLink}><FaAws /> AWS Certification</Link>
+                <Link to="/certification/aws" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaAws /> AWS Certification
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/certification/redhat" onClick={handleLinkClick} className={styles.mobileLink}><FaRedhat /> RedHat Certification</Link>
+                <Link to="/certification/redhat" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaRedhat /> RedHat Certification
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/certification/custom" onClick={handleLinkClick} className={styles.mobileLink}><SiCoursera /> Custom Certification</Link>
+                <Link to="/certification/custom" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <SiCoursera /> Custom Certification
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/career/internship" onClick={handleLinkClick} className={styles.mobileLink}><FaLaptopCode /> Internship</Link>
+                <Link to="/career/internship" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaLaptopCode /> Internship
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/career/placement" onClick={handleLinkClick} className={styles.mobileLink}><FaBriefcase /> Placement</Link>
+                <Link to="/career/placement" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaBriefcase /> Placement
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/career/fulltime" onClick={handleLinkClick} className={styles.mobileLink}><FaUserTie /> Full Time Job</Link>
+                <Link to="/career/fulltime" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaUserTie /> Full Time Job
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/about" onClick={handleLinkClick} className={styles.mobileLink}><BsInfoCircle /> About Us</Link>
+                <Link to="/about" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <BsInfoCircle /> About Us
+                </Link>
               </li>
               <li className={styles.mobileNavItem}>
-                <Link to="/contact" onClick={handleLinkClick} className={styles.mobileLink}><FaPhoneAlt /> Contact</Link>
+                <Link to="/contact" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaPhoneAlt /> Contact
+                </Link>
               </li>
             </ul>
             <div className={styles.mobileAuthBtns}>
@@ -383,7 +496,6 @@ const Header = () => {
             </div>
           </nav>
         </div>
-
       </header>
 
       {showRegistration && <RegistrationPopUp onClose={handleCloseRegistration} />}

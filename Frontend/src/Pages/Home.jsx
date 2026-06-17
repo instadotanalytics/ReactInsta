@@ -17,8 +17,8 @@ const Home = () => {
   return (
     <div>
         <Header/>
-        <HomeLanding/>
         <Banner/>
+        <HomeLanding/>
         <PlacementList/>
         <OurImpact/>
         <OurPremiumServices/>

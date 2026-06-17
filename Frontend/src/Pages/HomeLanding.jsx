@@ -18,10 +18,7 @@ const badges = [
   'Govt. Approved',
 ];
 
-const courses = [
-  'Java', 'Python', 'MERN Stack', 'AI / ML',
-  'Data Science', 'Cyber Security', 'C / C++', 'Power BI', 'Tableau', 'C#',
-];
+
 
 /* Animated dot-network background — skipped on small screens & reduced-motion */
 function useNetworkCanvas(canvasRef) {
@@ -175,15 +172,6 @@ export default function HomeLanding() {
         </div>
       </section>
 
-      {/* ── Courses strip ── */}
-      <div className={styles.courseStrip}>
-        <p className={styles.stripLabel}>Popular Programs</p>
-        <div className={styles.pills}>
-          {courses.map((c) => (
-            <button type="button" key={c} className={styles.pill}>{c}</button>
-          ))}
-        </div>
-      </div>
 
     </div>
   );
