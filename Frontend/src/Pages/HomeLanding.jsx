@@ -18,108 +18,110 @@ const badges = [
   'Govt. Approved',
 ];
 
-
-
-/* Animated dot-network background — skipped on small screens & reduced-motion */
-function useNetworkCanvas(canvasRef) {
+/* ── Wave Canvas Animation (Right to Left) ── */
+function useWaveCanvas(canvasRef) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    if (window.innerWidth < 640) return; // skip on mobile for performance
-
+    
     const ctx = canvas.getContext('2d');
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let width, height, dpr, nodes = [], rafId;
-
-    const initNodes = () => {
-      const count = Math.min(55, Math.max(20, Math.floor((width * height) / 15000)));
-      nodes = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-      }));
-    };
+    let width, height, dpr, animationId;
+    let time = 0;
 
     const resize = () => {
-      const parent = canvas.parentElement;
-      width = parent.clientWidth;
-      height = parent.clientHeight;
+      // Get full viewport dimensions
+      width = window.innerWidth;
+      height = window.innerHeight;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      initNodes();
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+      
+      time += 0.008;
+      
+      // Wave settings - moving right to left
+      const waves = [
+        { amplitude: 25, frequency: 0.02, speed: 0.6, color: 'rgba(37, 186, 235, 0.08)' },
+        { amplitude: 35, frequency: 0.025, speed: 0.8, color: 'rgba(37, 205, 235, 0.06)' },
+        { amplitude: 45, frequency: 0.03, speed: 1.0, color: 'rgba(14, 165, 233, 0.05)' },
+        { amplitude: 20, frequency: 0.015, speed: 0.4, color: 'rgba(2, 52, 253, 0.07)' },
+      ];
 
-      if (!prefersReduced) {
-        nodes.forEach((n) => {
-          n.x += n.vx;
-          n.y += n.vy;
-          if (n.x < 0 || n.x > width) n.vx *= -1;
-          if (n.y < 0 || n.y > height) n.vy *= -1;
-        });
-      }
-
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            ctx.strokeStyle = `rgba(37, 99, 235, ${0.14 * (1 - dist / 130)})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
+      waves.forEach((wave) => {
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+        
+        // Moving from right to left
+        const offset = time * wave.speed * 100;
+        
+        for (let x = 0; x <= width; x += 1) {
+          const y = height / 2 + 
+            wave.amplitude * Math.sin((x + offset) * wave.frequency) +
+            wave.amplitude * 0.5 * Math.sin((x + offset * 0.7) * wave.frequency * 1.5 + 1);
+          
+          if (x === 0) {
+            ctx.lineTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
           }
         }
-      }
-
-      nodes.forEach((n) => {
-        ctx.fillStyle = 'rgba(29, 78, 216, 0.5)';
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+        
+        ctx.lineTo(width, height);
+        ctx.closePath();
+        ctx.fillStyle = wave.color;
         ctx.fill();
       });
 
-      if (!prefersReduced) rafId = requestAnimationFrame(draw);
+      // Add floating particles
+      for (let i = 0; i < 40; i++) {
+        const x = (i * 137 + time * 50 * (0.5 + i % 3 * 0.2)) % width;
+        const y = height * 0.3 + Math.sin(i * 2.3 + time * (0.5 + i % 2)) * 50 + 
+                  Math.sin(i * 1.7 + time * 0.8) * 30;
+        const size = 1 + (i % 3);
+        const opacity = 0.1 + (i % 5) * 0.03;
+        
+        ctx.fillStyle = `rgba(37, 99, 235, ${opacity})`;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animationId = requestAnimationFrame(draw);
     };
 
     resize();
     draw();
+
     window.addEventListener('resize', resize);
+    
     return () => {
       window.removeEventListener('resize', resize);
-      if (rafId) cancelAnimationFrame(rafId);
+      if (animationId) cancelAnimationFrame(animationId);
     };
   }, [canvasRef]);
 }
 
 export default function HomeLanding() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const networkCanvasRef = useRef(null);
+  const waveCanvasRef = useRef(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
-  useNetworkCanvas(networkCanvasRef);
+  useWaveCanvas(waveCanvasRef);
 
   return (
     <div className={styles.root}>
+      {/* ── Wave Canvas Background ── */}
+      <canvas ref={waveCanvasRef} className={styles.bgCanvas} aria-hidden="true" />
 
       {/* ── Hero ── */}
       <section className={styles.hero}>
-        <canvas ref={networkCanvasRef} className={styles.bgCanvas} aria-hidden="true" />
-
         {/* Left: content */}
         <div className={styles.heroLeft}>
-
           <h1 className={styles.title}>
             <span className={styles.titleGrad}>100% Job Guarantee</span>
             <br />Training Programs
@@ -160,7 +162,7 @@ export default function HomeLanding() {
           </div>
         </div>
 
-        {/* Right: image */}
+        {/* Right: image - Hidden on mobile */}
         <div className={styles.heroRight}>
           <div className={styles.imageFrame}>
             <img
@@ -171,8 +173,6 @@ export default function HomeLanding() {
           </div>
         </div>
       </section>
-
-
     </div>
   );
 }
