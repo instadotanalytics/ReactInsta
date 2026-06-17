@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 
 /* ── WRAPPER ── */
 .sliderWrapper {
@@ -51,7 +51,7 @@
     z-index 0s;
   pointer-events: none;
   will-change: transform, opacity;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.55);
 }
 
 /* Active (center) card */
@@ -60,7 +60,7 @@
   opacity: 1;
   z-index: 5;
   pointer-events: all;
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
   filter: brightness(1);
 }
 
@@ -129,8 +129,8 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 0%,
+    rgba(8, 10, 15, 0.62) 0%,
+    rgba(8, 10, 15, 0.18) 40%,
     transparent 70%
   );
   z-index: 2;
@@ -162,7 +162,7 @@
 }
 .navBtn:hover {
   background: rgba(232, 201, 126, 0.14);
-  border-color: rgba(232, 201, 126, 0.75);
+  border-color: rgba(241, 238, 230, 0.75);
   transform: translateY(-50%) scale(1.06);
 }
 .navBtn:active {
@@ -243,50 +243,64 @@
 }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .sliderWrapper {
-    height: 320px;
-  }
-  .counterCurrent {
-    font-size: 30px;
-  }
-  .counterTotal {
-    font-size: 12px;
-  }
-  .counter {
-    top: 18px;
-    right: 22px;
-  }
-  .counterLine {
-    display: none;
-  }
-  .navBtn {
-    width: 38px;
-    height: 38px;
-  }
-  .prevBtn {
-    left: 12px;
-  }
-  .nextBtn {
-    right: 12px;
-  }
-  .bottomBar {
-    bottom: 14px;
-  }
-}
 
+@media (max-width: 1024px) {
+  .sliderWrapper { height: 440px; }
+  .slide { width: 62%; }
+  .slide.prevSlide  { transform: translate(calc(-50% - 62%), -50%) scale(0.86); }
+  .slide.nextSlide  { transform: translate(calc(-50% + 62%), -50%) scale(0.86); }
+  .slide.prevSlide2 { transform: translate(calc(-50% - 90%), -50%) scale(0.74); }
+  .slide.nextSlide2 { transform: translate(calc(-50% + 90%), -50%) scale(0.74); }
+}
+ 
+@media (max-width: 768px) {
+  .sliderWrapper { height: 320px; }
+ 
+  /* active card: wider + less scale-up so it doesn't overflow */
+  .slide { width: 78%; height: 82%; }
+  .slide.active { transform: translate(-50%, -50%) scale(1.04); }
+ 
+  /* side cards: tighter offset, more hidden */
+  .slide.prevSlide  { transform: translate(calc(-50% - 72%), -50%) scale(0.78); opacity: 0.45; }
+  .slide.nextSlide  { transform: translate(calc(-50% + 72%), -50%) scale(0.78); opacity: 0.45; }
+  .slide.prevSlide2 { transform: translate(calc(-50% - 98%), -50%) scale(0.62); opacity: 0; pointer-events: none; }
+  .slide.nextSlide2 { transform: translate(calc(-50% + 98%), -50%) scale(0.62); opacity: 0; pointer-events: none; }
+ 
+  .counterCurrent { font-size: 26px; }
+  .counterTotal   { font-size: 11px; }
+  .counter        { top: 14px; right: 18px; left: auto; }
+  .counterLine    { display: none; }
+  .navBtn         { width: 34px; height: 34px; }
+  .prevBtn        { left: 8px; }
+  .nextBtn        { right: 8px; }
+  .bottomBar      { bottom: 10px; }
+}
+ 
 @media (max-width: 480px) {
-  .sliderWrapper {
-    height: 240px;
-  }
-  .navBtn {
-    display: none;
-  }
-  .dot {
-    width: 4px;
-    height: 4px;
-  }
-  .dot.activeDot {
-    width: 16px;
-  }
+  .sliderWrapper { height: 200px; }
+ 
+  .slide { width: 85%; height: 88%; }
+  .slide.active { transform: translate(-50%, -50%) scale(1.02); }
+ 
+  .slide.prevSlide  { transform: translate(calc(-50% - 80%), -50%) scale(0.72); opacity: 0.3; filter: brightness(0.25); }
+  .slide.nextSlide  { transform: translate(calc(-50% + 80%), -50%) scale(0.72); opacity: 0.3; filter: brightness(0.25); }
+  .slide.prevSlide2,
+  .slide.nextSlide2 { opacity: 0; pointer-events: none; }
+ 
+  /* smaller nav buttons, hug the edges */
+  .navBtn { width: 28px; height: 28px; }
+  .navBtn svg { width: 12px; height: 12px; }
+  .prevBtn { left: 15px; }
+  .nextBtn { right: 15px; }
+ 
+  .dot { width: 4px; height: 4px; }
+  .dot.activeDot { width: 14px; }
+  .cardLabel { bottom: 12px; left: 12px; }
+  .bottomBar { bottom: 8px; gap: 12px; }
+  .slideLabel { display: none; }
+}
+ 
+@media (max-width: 360px) {
+  .sliderWrapper { height: 200px; }
+  .slide { width: 95%; height: 82%; }
 }

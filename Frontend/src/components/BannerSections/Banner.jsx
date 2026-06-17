@@ -61,9 +61,6 @@ const Banner = () => {
         </div>
       ))}
 
-      {/* Vertical line decoration near counter */}
-      <div className={styles.counterLine} />
-
       {/* Prev / Next Buttons */}
       <button
         className={`${styles.navBtn} ${styles.prevBtn}`}
@@ -103,9 +100,6 @@ const Banner = () => {
           Slide {String(current + 1).padStart(2, '0')}
         </span>
       </div>
-
-      {/* Progress bar at very bottom */}
-      <div key={progressKey} className={styles.progressBar} />
 
     </div>
   )
