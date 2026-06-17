@@ -2,11 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styles from './Banner.module.css'
 
 const slides = [
-  { id: 1, image: '/Banner1.png' },
-  { id: 2, image: '/Banner2.png' },
-  { id: 3, image: '/Banner3.png' },
-  { id: 4, image: '/Banner4.png' },
-  { id: 5, image: '/Banner5.png' },
+  { id: 1, image: '/banner1.png' },
+  { id: 2, image: '/banner2.png' },
+  { id: 3, image: '/banner3.png' },
+  { id: 4, image: '/banner4.png' },
+  { id: 5, image: '/banner5.png' },
 ]
 
 const AUTOPLAY_INTERVAL = 5000
@@ -58,30 +58,8 @@ const Banner = () => {
             loading={i === 0 ? 'eager' : 'lazy'}
           />
           <div className={styles.overlay} />
- 
-          {/* Label shown on active card */}
-          <div className={styles.cardLabel}>
-            <span className={styles.cardLabelNew}>New Slide</span>
-            <button className={styles.cardLabelBtn}>
-              Learn more
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M2.5 6H9.5M6.5 3L9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
         </div>
       ))}
-
-      {/* Slide Number Counter — top right */}
-      <div className={styles.counter}>
-        <span className={styles.counterCurrent}>
-          {String(current + 1).padStart(2, '0')}
-        </span>
-        <span className={styles.counterSep}>/</span>
-        <span className={styles.counterTotal}>
-          {String(slides.length).padStart(2, '0')}
-        </span>
-      </div>
 
       {/* Vertical line decoration near counter */}
       <div className={styles.counterLine} />
