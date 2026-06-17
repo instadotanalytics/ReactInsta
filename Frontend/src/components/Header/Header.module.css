@@ -25,19 +25,18 @@
 
 /* ─── Header ─────────────────────────────────────── */
 .header {
-  margin-top: 15px;  /* ✅ 20px space from top */
+
   background: linear-gradient(120deg, #00aaff 0%, #0051ff 60%, #5a82ef 100%);
   padding: 10px;
   width: 100%;
-  max-width: 1200px;
+
   margin-left: auto;   /* ✅ Center the header */
   margin-right: auto;  /* ✅ Center the header */
   position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 24px rgba(37, 99, 235, 0.18);
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
+  
 }
 
 /* ─── Container ──────────────────────────────────── */
@@ -582,7 +581,7 @@
   }
 
   .logo img {
-    height: 32px;
+    height: 45px;
   }
 
   .careerDropdown {
@@ -596,7 +595,7 @@
     gap: 8px;
   }
   .logo img {
-    height: 28px;
+    height: 45px;
   }
   .logo {
     padding: 4px 10px;

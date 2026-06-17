@@ -1,221 +1,345 @@
-/* Internship.module.css */
-
+/* ── BASE ── */
 .internshipPage {
   background-color: #ffffff;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   overflow-x: hidden;
 }
 
-/* Banner Section */
-.bannerSection {
-  padding: 0px 24px;
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+/* ═══════════════════════════════════════════
+   HERO SECTION  — full-bleed image layout
+═══════════════════════════════════════════ */
+.heroSection {
   position: relative;
-  overflow: hidden;
-}
-
-.bannerContainer {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.bannerTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(67, 97, 238, 0.1);
-  padding: 8px 16px;
-  border-radius: 40px;
-  color: #4361ee;
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 24px;
-}
-
-.tagIcon {
-  font-size: 16px;
-}
-
-.bannerTitle {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #1a1a1a;
-  margin-bottom: 24px;
-}
-
-.gradientText {
-  background: linear-gradient(135deg, #4361ee 0%, #f72585 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.bannerDesc {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #4a4a4a;
-  margin-bottom: 32px;
-}
-
-.bannerStats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 32px;
-}
-
-.statBox {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: white;
-  padding: 12px 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.statIcon {
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f4ff;
-  border-radius: 10px;
-  color: #4361ee;
-  font-size: 20px;
-}
-
-.statInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.statValue {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-.statLabel {
-  font-size: 12px;
-  color: #6b6b6b;
-}
-
-
-.bannerCompanies {
-  margin-top: 24px;
-}
-
-.companiesText {
-  font-size: 14px;
-  color: #6b6b6b;
-  margin-bottom: 12px;
-}
-
-.companyLogos {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-
-.companyLogos span {
-  font-size: 16px;
-  font-weight: 500;
-  color: #1a1a1a;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-}
-
-.companyLogos span:hover {
-  opacity: 1;
-}
-
-.bannerImageWrapper {
-  position: relative;
-}
-
-.bannerImageContainer {
-  position: relative;
-  border-radius: 24px;
   overflow: hidden;
 }
 
-.bannerImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.5s ease;
+/* ── background image ── */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-.floatingCard {
+.heroBgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.04);
+  transition: transform 10s ease;
+}
+.heroSection:hover .heroBgImg {
+  transform: scale(1);
+}
+
+/* base dark veil */
+.heroOverlay {
   position: absolute;
-  background: white;
-  padding: 16px 24px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  inset: 0;
+  background: rgba(5, 10, 20, 0.54);
+}
+
+/* bottom-up gradient so text pops */
+.heroOverlayGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(5, 10, 20, 0.92) 0%,
+    rgba(5, 10, 20, 0.55) 45%,
+    rgba(5, 10, 20, 0.15) 100%
+  );
+}
+
+/* ── content block ── */
+.heroInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 64px 72px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* headline */
+.heroTitle {
+  font-size: clamp(35px, 4vw, 75px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0 0 24px;
+  letter-spacing: -1.5px;
+}
+
+.heroAccent {
+  color: transparent;
+  -webkit-text-stroke: 2px #ffffff;
+  /* hollow outline text — distinctive, not generic */
+}
+
+/* description */
+.heroDesc {
+  font-size: clamp(12px, 1.2vw, 15px);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 580px;
+  margin: 0 0 36px;
+  text-align: center;
+}
+
+/* CTA buttons */
+.heroActions {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4361ee;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+  letter-spacing: 0.05cm;
+}
+.ctaPrimary:hover {
+  background: #3451d1;
+  transform: translateY(-2px);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.ctaSecondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── stats strip ── */
+.statsStrip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  justify-content: center;
+}
+
+.statPill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 10px 18px;
+  transition: background 0.25s;
+}
+.statPill:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.statPillIcon {
+  color: #4361ee;
+  font-size: 18px;
+  display: flex;
+}
+
+.statPillValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.statPillLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.3;
+}
+
+/* ── companies row ── */
+.heroCompanies {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.companiesLabel {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+
+.companiesList {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.companyName {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+  cursor: default;
+}
+.companyName:hover {
+  color: #ffffff;
+}
+
+/* ── floating badges ── */
+.badge {
+  position: absolute;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   gap: 12px;
-  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  animation: floatBadge 3.5s ease-in-out infinite;
 }
 
-.floatingCard .cardIcon {
-  font-size: 24px;
+.badgeTop {
+  top: 22%;
+  right: 6%;
+  animation-delay: 0s;
+}
+.badgeBottom {
+  bottom: 22%;
+  right: 10%;
+  animation-delay: 1.2s;
+}
+
+.badgeIcon {
+  font-size: 22px;
   color: #4361ee;
 }
 
-.floatingCard div {
+.badge div {
   display: flex;
   flex-direction: column;
 }
-
-.floatingCard strong {
+.badge strong {
   font-size: 18px;
+  font-weight: 700;
   color: #1a1a1a;
+  line-height: 1.1;
 }
-
-.floatingCard span {
+.badge span {
   font-size: 12px;
   color: #6b6b6b;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
 }
 
-/* Responsive Design */
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .bannerContainer {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .heroInner {
+    padding: 0 48px 60px;
+    max-width: 100%;
   }
-
-  .bannerTitle {
-    font-size: 40px;
-  }
+  .badgeTop  { right: 3%; top: 18%; }
+  .badgeBottom { right: 3%; bottom: 18%; }
 }
 
 @media (max-width: 768px) {
-  .bannerTitle {
-    font-size: 32px;
+  .heroSection {
+    min-height: 100svh;
+    align-items: flex-end;
   }
-
-  .bannerStats {
-    grid-template-columns: repeat(2, 1fr);
+  .heroInner {
+    padding: 0 24px 52px;
   }
-
-  .bannerButtons {
+  .heroTitle {
+    letter-spacing: -0.5px;
+  }
+  .heroAccent {
+    -webkit-text-stroke: 1.5px #ffffff;
+  }
+  .statsStrip {
+    gap: 8px;
+  }
+  .statPill {
+    padding: 8px 14px;
+  }
+  .badge {
+    display: none; /* hide on small screens to reduce clutter */
+  }
+  .heroActions {
     flex-direction: column;
+    align-items: center;
   }
+  .ctaPrimary,
+  .ctaSecondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
 
-  .companyLogos {
-    flex-wrap: wrap;
+@media (max-width: 480px) {
+  .heroInner {
+    padding: 0 20px 44px;
+  }
+  .statsStrip {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .statPill {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .heroCompanies {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 }

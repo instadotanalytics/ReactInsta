@@ -15,10 +15,8 @@ import { BsInfoCircle } from "react-icons/bs";
 import RegistrationPopUp from "./RegistrationPopUp";
 import SearchBar from "./Searchbar";
 
-// ✅ LOGO IMPORT - Aapke project ke hisaab se path set karein
-import logo from "../../../public/instadotlogoforweb.png";  // Agar assets folder me hai
-// Ya agar public folder me hai to:
-// const logo = "/logo.png";
+import logo from "../../../public/instadotlogoforweb.png"; 
+
 
 const Header = () => {
   const [mobileMenuOpen,            setMobileMenuOpen]            = useState(false);
@@ -138,7 +136,7 @@ const Header = () => {
           {/* ── LOGO ── */}
           <div className={styles.logo} onClick={() => handleNavigation("/")}>
             <img
-              src={logo}  // ✅ Ab logo import ho gaya
+              src={logo}  
               alt="InstaDot Analytics"
               className={styles.logoImage}
             />

@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styles from './Internship.module.css';
 import { 
-  FaRocket,
-  FaArrowRight,
   FaStar,
-  FaUsers,
-  FaRegFileAlt,
   FaBuilding,
   FaUserGraduate,
   FaRegCalendarAlt
@@ -19,95 +15,107 @@ import FAQSection from '../../FAQSection';
 import WhyJoinUS from '../../WhyJoinUS';
 import OurImpact from '../../OurImpact';
 
-const Internship = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const HERO_IMAGE = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 
-  const stats = [
-    { icon: <FaBuilding />, value: "50+", label: "Partner Companies" },
-    { icon: <FaUserGraduate />, value: "500+", label: "Interns Placed" },
-    { icon: <FaRegCalendarAlt />, value: "6", label: "Programs" },
-    { icon: <FaStar />, value: "4.8", label: "Rating" }
-  ];
+const stats = [
+  { icon: <FaBuilding />, value: '50+',  label: 'Partner Companies' },
+  { icon: <FaUserGraduate />, value: '500+', label: 'Interns Placed' },
+  { icon: <FaRegCalendarAlt />, value: '6',    label: 'Programs' },
+  { icon: <FaStar />, value: '4.8', label: 'Rating' },
+];
+
+const scrollTo = (id) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+const Internship = () => {
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <>
-    <Header/>
-    <div className={styles.internshipPage}>
-      
-      
-      {/* Modern Banner Section */}
-      <section className={styles.bannerSection}>
-        <div className={styles.bannerContainer}>
-          <div className={styles.bannerContent}>
-          
-            <h1 className={styles.bannerTitle}>
-              Kickstart Your Professional Journey with{' '}
-              <span className={styles.gradientText}>Industry-Led Internships</span>
+      <Header />
+      <div className={styles.internshipPage}>
+
+        {/* ── HERO SECTION ── */}
+        <section className={styles.heroSection}>
+          {/* full-bleed background image */}
+          <div className={styles.heroBg}>
+            <img
+              src={HERO_IMAGE}
+              alt="Interns collaborating"
+              className={styles.heroBgImg}
+            />
+            {/* layered overlays */}
+            <div className={styles.heroOverlay} />
+            <div className={styles.heroOverlayGradient} />
+          </div>
+
+          {/* content */}
+          <div className={styles.heroInner}>
+
+            {/* headline */}
+            <h1 className={styles.heroTitle}>
+              Kickstart Your<br />
+              <span className={styles.heroAccent}>Professional Journey</span>
             </h1>
-            <p className={styles.bannerDesc}>
-              Join 500+ successful interns who transformed their careers through hands-on projects, 
-              expert mentorship, and real-world experience at India's top companies.
+
+            {/* sub-copy */}
+            <p className={styles.heroDesc}>
+              Join 500+ successful interns who transformed their careers through
+              hands-on projects, expert mentorship, and real-world experience at
+              India's top companies.
             </p>
-            
-            <div className={styles.bannerStats}>
-              {stats.map((stat, index) => (
-                <div key={index} className={styles.statBox}>
-                  <div className={styles.statIcon}>{stat.icon}</div>
-                  <div className={styles.statInfo}>
-                    <span className={styles.statValue}>{stat.value}</span>
-                    <span className={styles.statLabel}>{stat.label}</span>
-                  </div>
+
+            {/* CTA row */}
+            <div className={styles.heroActions}>
+              <button
+                className={styles.ctaPrimary}
+                onClick={() => scrollTo('internship-form')}
+              >
+                Start Your Career
+              </button>
+              
+            </div>
+
+            {/* stats strip */}
+            <div className={styles.statsStrip}>
+              {stats.map((s, i) => (
+                <div key={i} className={styles.statPill}>
+                  <span className={styles.statPillIcon}>{s.icon}</span>
+                  <span className={styles.statPillValue}>{s.value}</span>
+                  <span className={styles.statPillLabel}>{s.label}</span>
                 </div>
               ))}
             </div>
 
-            <div className={styles.bannerCompanies}>
-              <p className={styles.companiesText}>Our interns work at</p>
-              <div className={styles.companyLogos}>
-                <span>Microsoft</span>
-                <span>Google</span>
-                <span>Amazon</span>
-                <span>Meta</span>
-                <span>Apple</span>
+            {/* companies */}
+            <div className={styles.heroCompanies}>
+              <span className={styles.companiesLabel}>Our interns work at</span>
+              <div className={styles.companiesList}>
+                {['Microsoft', 'Google', 'Amazon', 'Meta', 'Apple'].map((c) => (
+                  <span key={c} className={styles.companyName}>{c}</span>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className={styles.bannerImageWrapper}>
-            <div className={styles.bannerImageContainer}>
-              <img 
-                src="https://i.pinimg.com/736x/47/38/6c/47386cc6981f75d199cf3ab716def9b7.jpg" 
-                alt="Internship Program"
-                className={styles.bannerImage}
-              />
-              <div className={styles.floatingCard} style={{ top: '20%', right: '10%' }}>
-                <FaStar className={styles.cardIcon} />
-                <div>
-                  <strong>95%</strong>
-                  <span>Placement Rate</span>
-                </div>
-              </div>
-              <div className={styles.floatingCard} style={{ bottom: '20%', left: '10%' }}>
-                <FaUsers className={styles.cardIcon} />
-                <div>
-                  <strong>50+</strong>
-                  <span>Mentors</span>
-                </div>
-              </div>
-            </div>
-          </div>
+
+        </section>
+
+        {/* ── REST OF PAGE (unchanged) ── */}
+        <div id="internship-form" style={{ scrollMarginTop: '80px' }}>
+          <InternshipForm />
         </div>
-      </section>
-      <InternshipForm/>
-      <Companypartners/>
-      <ReviewSection/>
-      <WhyJoinUS/>
-      <OurImpact/>
-      <FAQSection/>
-      <Footer />
-    </div>
+        <div id="explore-programs" style={{ scrollMarginTop: '80px' }}>
+          <Companypartners />
+        </div>
+        <ReviewSection />
+        <WhyJoinUS />
+        <OurImpact />
+        <FAQSection />
+        <Footer />
+      </div>
     </>
   );
 };

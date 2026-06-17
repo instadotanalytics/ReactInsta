@@ -2,14 +2,25 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styles from './Banner.module.css'
 
 const slides = [
-  { id: 1, image: '/banner1.jpeg' },
-  { id: 2, image: '/banner2.jpeg' },
-  { id: 3, image: '/banner3.jpeg' },
-  { id: 4, image: '/banner4.jpeg' },
-  { id: 5, image: '/banner5.jpeg' },
+  { id: 1, image: '/Banner1.png' },
+  { id: 2, image: '/Banner2.png' },
+  { id: 3, image: '/Banner3.png' },
+  { id: 4, image: '/Banner4.png' },
+  { id: 5, image: '/Banner5.png' },
 ]
 
 const AUTOPLAY_INTERVAL = 5000
+
+const getSlideClass = (slideIndex, currentIndex, total) => {
+  const diff = ((slideIndex - currentIndex) % total + total) % total
+ 
+  if (diff === 0)               return styles.active
+  if (diff === 1)               return styles.nextSlide
+  if (diff === 2)               return styles.nextSlide2
+  if (diff === total - 1)       return styles.prevSlide
+  if (diff === total - 2)       return styles.prevSlide2
+  return styles.hiddenSlide
+}
 
 const Banner = () => {
   const [current, setCurrent] = useState(0)
@@ -35,9 +46,10 @@ const Banner = () => {
 
       {/* Slides */}
       {slides.map((slide, i) => (
-        <div
+<div
           key={slide.id}
-          className={`${styles.slide} ${i === current ? styles.active : ''}`}
+          className={`${styles.slide} ${getSlideClass(i, current, slides.length)}`}
+          onClick={() => i !== current && goTo(i)}
         >
           <img
             className={styles.slideImage}
@@ -46,6 +58,17 @@ const Banner = () => {
             loading={i === 0 ? 'eager' : 'lazy'}
           />
           <div className={styles.overlay} />
+ 
+          {/* Label shown on active card */}
+          <div className={styles.cardLabel}>
+            <span className={styles.cardLabelNew}>New Slide</span>
+            <button className={styles.cardLabelBtn}>
+              Learn more
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 6H9.5M6.5 3L9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       ))}
 
