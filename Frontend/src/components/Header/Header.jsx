@@ -31,6 +31,7 @@ const Header = () => {
   const menuRef = useRef();
   const careerDropdownRef = useRef();
   const certificationDropdownRef = useRef();
+  const mobileMenuRef = useRef();
 
   // Scroll effect with passive listener for better performance
   useEffect(() => {
@@ -41,7 +42,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Handle resize
+  // Handle resize - close mobile menu on desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 992) {
@@ -54,6 +55,35 @@ const Header = () => {
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Set header height offset
+  useEffect(() => {
+    const headerEl = headerRef.current;
+    if (!headerEl) return;
+
+    const applyOffset = () => {
+      const height = headerEl.offsetHeight;
+      document.documentElement.style.setProperty("--header-height", `${height}px`);
+      // Only set padding-top if header is sticky/fixed
+      if (getComputedStyle(headerEl).position === 'sticky' || 
+          getComputedStyle(headerEl).position === 'fixed') {
+        document.body.style.paddingTop = `${height}px`;
+      }
+    };
+
+    applyOffset();
+
+    const resizeObserver = new ResizeObserver(applyOffset);
+    resizeObserver.observe(headerEl);
+
+    window.addEventListener("resize", applyOffset);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", applyOffset);
+      document.body.style.paddingTop = "";
+    };
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -198,12 +228,12 @@ const Header = () => {
     <>
       <header ref={headerRef} className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.container} ref={menuRef}>
-          {/* ── LOGO ── */}
+          {/* LOGO */}
           <div className={styles.logo} onClick={() => handleNavigation("/")}>
             <img src={logo} alt="InstaDot Analytics" className={styles.logoImage} />
           </div>
 
-          {/* ── DESKTOP NAV ── */}
+          {/* DESKTOP NAV */}
           <nav className={styles.navDesktop}>
             <ul className={styles.navList}>
               <li className={styles.navItem}>
@@ -387,7 +417,7 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* ── DESKTOP RIGHT SIDE ── */}
+          {/* DESKTOP RIGHT SIDE */}
           <div className={styles.desktopRight}>
             <SearchBar maxResults={9} />
             <a
@@ -403,7 +433,7 @@ const Header = () => {
             </button>
           </div>
 
-          {/* ── MOBILE RIGHT SIDE ── */}
+          {/* MOBILE RIGHT SIDE */}
           <div className={styles.mobileRight}>
             <SearchBar maxResults={8} />
             <button
@@ -416,8 +446,8 @@ const Header = () => {
           </div>
         </div>
 
-        {/* ── MOBILE MENU ── */}
-        <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.open : ""}`}>
+        {/* MOBILE MENU */}
+        <div ref={mobileMenuRef} className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.open : ""}`}>
           <nav className={styles.mobileNav}>
             <ul className={styles.mobileNavList}>
               <li className={styles.mobileNavItem}>
