@@ -1253,18 +1253,12 @@ body {
   }
 
   .header.scrolled {
-    background: rgba(15, 23, 42, 0.95);
+    
     backdrop-filter: blur(20px);
     border-bottom: 2px solid rgba(14, 165, 233, 0.3);
   }
 
-  .careerDropdown {
-    background: rgba(15, 23, 42, 0.98);
-  }
-
-  .mobileMenu {
-    background: rgba(15, 23, 42, 0.98);
-  }
+  
 
   .dropdownCategoryItem::before {
     background: linear-gradient(
