@@ -27,7 +27,7 @@
 .header {
 
   background: linear-gradient(120deg, #00aaff 0%, #0051ff 60%, #5a82ef 100%);
-  padding: 10px;
+  padding: 7px;
   width: 100%;
 
   margin-left: auto;   /* ✅ Center the header */
