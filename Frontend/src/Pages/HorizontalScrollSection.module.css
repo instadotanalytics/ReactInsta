@@ -104,12 +104,13 @@
 
 .heading {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(4rem, 3.5vw, 3rem);
+  font-size: clamp(3rem, 3.5vw, 3rem);
   font-weight: 800;
   color: #f1f5f9;
   line-height: 1.1;
   letter-spacing: -0.04em;
   margin: 0 0 10px 0;
+  
 }
 
 .accent {
@@ -125,6 +126,7 @@
   color: #64748b;
   margin: 0;
   font-weight: 400;
+  margin-bottom: 20px;
 }
 
 /* ══════════════════════════════════════
