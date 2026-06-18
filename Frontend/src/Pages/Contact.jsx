@@ -7,6 +7,18 @@ import ReviewSection from "./ReviewSection";
 import FAQSection from "./FAQSection";
 import { API_BASE_URL } from "../config/api.js";
 
+import {
+  FiMapPin,
+  FiPhone,
+  FiMail,
+  FiArrowRight,
+  FiChevronDown,
+  FiCheckCircle,
+} from "react-icons/fi";
+import { BsPatchCheck } from "react-icons/bs";
+import { HiOutlineLightningBolt } from "react-icons/hi";
+import { RiMedalLine } from "react-icons/ri";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,7 +30,6 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const [focused, setFocused] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,18 +41,13 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
       const response = await fetch(`${API_BASE_URL}/contact`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
       const data = await response.json();
-
       if (response.ok && data.success) {
         setSubmitted(true);
         setFormData({ name: "", email: "", phone: "", message: "" });
@@ -58,33 +64,38 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-          <circle cx="12" cy="10" r="3" />
-        </svg>
-      ),
+      icon: <FiMapPin size={20} />,
       label: "Our Location",
-      value: "P13-14, Ground Floor, Metro Tower, Vijay Nagar, Scheme No 54, Indore, Madhya Pradesh",
+      value:
+        "P13-14, Ground Floor, Metro Tower, Vijay Nagar, Scheme No 54, Indore, Madhya Pradesh",
     },
     {
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-        </svg>
-      ),
+      icon: <FiPhone size={20} />,
       label: "Phone",
-      value: "+91 6232685820\nMon–Sat: 10AM – 7PM",
+      value: "+91 6232685820  ·  Mon–Sat: 10AM – 7PM",
     },
     {
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-          <polyline points="22,6 12,13 2,6" />
-        </svg>
-      ),
+      icon: <FiMail size={20} />,
       label: "Email",
       value: "info@instadotanalytics.com",
+    },
+  ];
+
+  const features = [
+    {
+      icon: <HiOutlineLightningBolt size={22} />,
+      title: "Job-Focused Curriculum",
+      desc: "Courses built around what top IT companies actually hire for — updated every quarter.",
+    },
+    {
+      icon: <BsPatchCheck size={22} />,
+      title: "Hands-On Projects",
+      desc: "Build a portfolio of real-world capstone projects that genuinely impress recruiters.",
+    },
+    {
+      icon: <RiMedalLine size={22} />,
+      title: "Placement Support",
+      desc: "Resume prep, mock interviews, and direct referrals to 150+ hiring partner companies.",
     },
   ];
 
@@ -93,37 +104,82 @@ const Contact = () => {
       <Header />
 
       <div className={styles.page}>
-        <div className={styles.bgOrb1} />
-        <div className={styles.bgOrb2} />
+        {/* ── Hero ── */}
+        <div className={styles.heroHeader}>
+          <div className={styles.heroInner}>
 
-        <div className={styles.container}>
-          {/* Hero Header */}
+            {/* Badge */}
+            <div className={styles.badge}>
+              <span className={styles.badgeDot} />
+              Now Enrolling — Batch Starting Soon
+            </div>
 
-          <div className={styles.heroHeader}>
-            <span className={styles.badge}>
-              Launch Your IT Career
-            </span>
-
+            {/* Title */}
             <h1 className={styles.title}>
-              Build Your <span>Future</span><br />
+              Build Your <span className={styles.accent}>Future</span>
+              <br />
               With Industry-Ready Skills
             </h1>
 
+            {/* Subtitle */}
             <p className={styles.subtitle}>
-              Master Java Full Stack Development, React, Spring Boot, and more through
-              hands-on training designed to help you land your dream IT job.
+              Master Java Full Stack, React, Spring Boot, Node.js and more —
+              through hands-on training crafted by industry experts to get
+              you hired faster.
             </p>
+
+            {/* Description */}
+            <p className={styles.heroDesc}>
+              Join thousands of students who transformed their careers with
+              our structured programs, real-world capstone projects, and
+              dedicated placement support. Our curriculum is built around
+              what top companies actually look for — so you're job-ready
+              from day one.
+            </p>
+
+            {/* Buttons */}
+            <div className={styles.heroBtns}>
+              <a href="/courses" className={styles.btnPrimary}>
+                Explore Courses <FiArrowRight />
+              </a>
+            </div>
+
+            {/* Feature Cards */}
+            <div className={styles.featGrid}>
+              {features.map((f, i) => (
+                <div className={styles.featCard} key={i}>
+                  <div className={styles.featIconBox}>{f.icon}</div>
+                  <div className={styles.featTitle}>{f.title}</div>
+                  <div className={styles.featDesc}>{f.desc}</div>
+                </div>
+              ))}
+            </div>
 
           </div>
 
+          {/* Scroll hint */}
+          <div className={styles.scrollHint}>
+            <span>Scroll down</span>
+            <FiChevronDown className={styles.scrollArrow} size={18} />
+          </div>
+        </div>
+
+        {/* ── Below Hero ── */}
+        <div className={styles.container}>
+
           {/* Main Grid */}
           <div className={styles.mainGrid}>
+
             {/* Left — Info */}
             <div className={styles.infoCol}>
               <div className={styles.infoInner}>
+                {/* watermark text */}
+                <span className={styles.watermark}>CONTACT</span>
+
                 <h2 className={styles.infoHeading}>Contact Information</h2>
                 <p className={styles.infoDesc}>
-                  Fill up the form and our team will get back to you within 24 hours.
+                  Fill up the form and our team will get back to you within
+                  24 hours.
                 </p>
 
                 <div className={styles.infoList}>
@@ -138,14 +194,6 @@ const Contact = () => {
                   ))}
                 </div>
 
-                {/* Social Links */}
-                {/* <div className={styles.socials}>
-                  {["LinkedIn", "Twitter", "Instagram"].map((s) => (
-                    <a key={s} href="#" className={styles.socialBtn}>{s[0]}</a>
-                  ))}
-                </div> */}
-
-                {/* Decorative dots */}
                 <div className={styles.dotsGrid}>
                   {Array.from({ length: 20 }).map((_, i) => (
                     <span key={i} className={styles.dot} />
@@ -156,9 +204,17 @@ const Contact = () => {
 
             {/* Right — Form */}
             <div className={styles.formCol}>
-              <form className={styles.form}>
-                <div className={styles.formRow}>
+              <form className={styles.form} onSubmit={handleSubmit}>
 
+                {submitted && (
+                  <p className={styles.successMsg}>
+                    <FiCheckCircle size={16} /> Message sent successfully!
+                  </p>
+                )}
+
+                {error && <p className={styles.errorMsg}>{error}</p>}
+
+                <div className={styles.formRow}>
                   <div className={styles.field}>
                     <input
                       type="text"
@@ -184,7 +240,6 @@ const Contact = () => {
                     />
                     <label className={styles.fieldLabel}>Phone Number</label>
                   </div>
-
                 </div>
 
                 <div className={styles.field}>
@@ -212,24 +267,27 @@ const Contact = () => {
                   <label className={styles.fieldLabel}>Your Message</label>
                 </div>
 
-                <button type="submit" className={styles.submitBtn}>
-                  Send Message
+                <button
+                  type="submit"
+                  className={styles.submitBtn}
+                  disabled={loading}
+                >
+                  <span>{loading ? "Sending..." : "Send Message "}</span>
                 </button>
+
               </form>
             </div>
+
           </div>
 
           {/* Map */}
           <div className={styles.mapWrapper}>
-            <div className={styles.mapHeader}>
-              <h3 className={styles.mapTitle}>Find Us Here</h3>
-              <p className={styles.mapSubtitle}>Visit our office in Vijay Nagar, Indore</p>
-            </div>
+         
             <div className={styles.mapFrame}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d229.9578356683155!2d75.89718498963744!3d22.75330334092318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396302ab01f137ed%3A0xd9ae82fbc59ab08a!2sP-9%2C%20Vijay%20Nagar%2C%20Scheme%20No%2054%2C%20Indore%2C%20Madhya%20Pradesh%20452010!5e0!3m2!1sen!2sin!4v1773321741083!5m2!1sen!2sin"
                 width="100%"
-                height="420"
+                height="400"
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
@@ -238,6 +296,7 @@ const Contact = () => {
               />
             </div>
           </div>
+
         </div>
       </div>
 
