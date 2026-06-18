@@ -11,6 +11,7 @@ import Footer from '../components/Footer/Footer'
 import OurPremiumServices from './OurPremiumServices'
 import HomeLanding from './HomeLanding'
 import PlacementList from './PlacementList'
+import HorizontalScrollSection from './HorizontalScrollSection'
 
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
         <WhyJoinUS/>
         <Companypartners/>
         <ReviewSection/>
+        <HorizontalScrollSection/>
         <FAQSection/>
         <Footer/>
 

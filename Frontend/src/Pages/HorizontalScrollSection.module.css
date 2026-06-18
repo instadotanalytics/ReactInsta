@@ -1,0 +1,422 @@
+/* HorizontalScrollSection.module.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap");
+
+/* ══════════════════════════════════════
+   OUTER  — tall scroll container
+══════════════════════════════════════ */
+.outer {
+  position: relative;
+  width: 100%;
+}
+
+/* ══════════════════════════════════════
+   STICKY — 100vh pinned viewport
+══════════════════════════════════════ */
+.sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: #06090f;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ─── Background decorations ─── */
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 90% 90% at 50% 50%,
+    black 30%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.bgGlowLeft {
+  position: absolute;
+  top: -10%;
+  left: -8%;
+  width: 42vw;
+  height: 70vh;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.13) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.bgGlowRight {
+  position: absolute;
+  bottom: -10%;
+  right: -6%;
+  width: 38vw;
+  height: 60vh;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.1) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════
+   HEADER - Centered with auto height
+══════════════════════════════════════ */
+.header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 32px 20px 28px;
+  pointer-events: none;
+  flex-shrink: 0;
+  height: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #3b82f6;
+  margin-bottom: 12px;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #3b82f6;
+}
+
+.heading {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(4rem, 3.5vw, 3rem);
+  font-weight: 800;
+  color: #f1f5f9;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin: 0 0 10px 0;
+}
+
+.accent {
+  background: linear-gradient(120deg, #60a5fa 0%, #818cf8 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ══════════════════════════════════════
+   TRACK WRAP + TRACK
+══════════════════════════════════════ */
+.trackWrap {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  flex: 1;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 28px; /* must match CARD_GAP in JSX */
+  padding: 0 56px;
+  will-change: transform;
+  transition: transform 0.07s linear;
+}
+
+/* ══════════════════════════════════════
+   CARD - 80vw width, auto height
+   Layout: Text (Left) + Image (Right)
+══════════════════════════════════════ */
+.card {
+  min-width: 80vw;
+  width: 80vw;
+  height: auto;
+  min-height: 500px;
+  flex-shrink: 0;
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  cursor: default;
+}
+
+
+
+/* ─── Text Body (Left Side) ─── */
+.body {
+  flex: 1 1 50%;
+  padding: 40px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.tag {
+  display: inline-block;
+  width: fit-content;
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  padding: 5px 12px;
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  margin-bottom: 16px;
+  display: none;
+}
+
+.cardNum {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #334155;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  display: none;
+}
+
+.cardTitle {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(4rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.cardSub {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #3b82f6;
+  margin: 0 0 20px 0;
+}
+
+.cardDesc {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.8;
+  margin: 0 0 24px 0;
+  max-width: 480px;
+}
+
+.cardLine {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #818cf8);
+  border-radius: 2px;
+}
+
+/* ─── Image (Right Side) ─── */
+.imgWrap {
+  flex: 1 1 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card:hover .img {
+  transform: scale(1.06);
+}
+
+.imgGrad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(13, 17, 23, 0.4) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(13, 17, 23, 0.2) 100%
+  );
+}
+
+/* ══════════════════════════════════════
+   PROGRESS BAR
+══════════════════════════════════════ */
+.progressBar {
+  position: relative;
+  z-index: 10;
+  margin: 16px 56px 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #818cf8);
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+/* ══════════════════════════════════════
+   DOTS
+══════════════════════════════════════ */
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px 0 16px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+}
+
+.dotActive {
+  width: 22px;
+  border-radius: 3px;
+  background: #3b82f6;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .header {
+    padding: 28px 36px 24px;
+  }
+  .track {
+    padding: 0 36px;
+  }
+  .progressBar {
+    margin: 14px 36px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 24px 20px 20px;
+  }
+  .track {
+    padding: 0 20px;
+    gap: 16px;
+  }
+  .progressBar {
+    margin: 12px 20px 0;
+  }
+
+  /* Stack vertically on mobile */
+  .card {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    border-radius: 16px;
+  }
+
+  .body {
+    order: 2;
+    padding: 24px 20px 28px;
+  }
+
+  .imgWrap {
+    order: 1;
+    height: 220px;
+    flex: none;
+  }
+
+  .imgGrad {
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(13, 17, 23, 0.7) 80%,
+      #0d1117 100%
+    );
+  }
+
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+  .cardDesc {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 20px 16px 16px;
+  }
+  .track {
+    padding: 0 16px;
+    gap: 14px;
+  }
+  .progressBar {
+    margin: 10px 16px 0;
+  }
+
+  .heading {
+    font-size: 1.6rem;
+  }
+
+  .body {
+    padding: 20px 16px 24px;
+  }
+  .imgWrap {
+    height: 180px;
+  }
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+  .cardDesc {
+    font-size: 12px;
+  }
+}
