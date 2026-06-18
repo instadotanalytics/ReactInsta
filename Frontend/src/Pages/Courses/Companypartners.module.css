@@ -1,182 +1,332 @@
-.companyPartners {
-  width: 100%;
-  padding: 80px 10px;
-  background-color: hsl(0, 0%, 100%);
+/* Companypartners.module.css */
 
-  overflow: hidden;
+/* ================================
+   OUTER CONTAINER — Black rounded card
+================================ */
+.outerContainer {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #f0f0f0; /* page background — adjust to match your site */
 }
 
-.container {
+/* ================================
+   SECTION WRAPPER — Dark card
+================================ */
+.companyPartners {
   width: 100%;
-  margin: auto;
-  text-align: center;
+  min-height: 580px;
+  background-color: #0a0a0a;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ================================
+   LEFT TEXT BLOCK
+================================ */
+.textBlock {
+  /* Fixed width — stays on left, logos fill the rest */
+  flex: 0 0 480px;
+  max-width: 480px;
+  padding: 72px 0 72px 72px;
+  z-index: 10;
+  position: relative;
 }
 
 .title {
-  font-size: 38px;
-  font-weight: 700;
-  color: #000000;
-  margin-bottom: 15px;
+  font-size: 64px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.05;
+  margin: 0 0 28px 0;
+  letter-spacing: -0.04em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .subtitle {
-  font-size: 16px;
-  color: #474747;
-  max-width: 600px;
-  margin: 0 auto 50px auto;
-  line-height: 1.6;
+  font-size: 15px;
+  color: #888888;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 300px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Slider Wrapper */
-.sliderWrapper {
+/* ================================
+   DIAGONAL GRID WRAPPER
+   — Takes all remaining right space, content pushed to far right/corner
+================================ */
+.diagonalWrapper {
+  flex: 1 1 auto;
   position: relative;
-  width: 100%;
+  height: 580px;
   overflow: hidden;
+  /* Align content to the right edge */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-/* Smoke Fade Effect */
-.smoke {
+/* Rotated inner — diagonal effect, anchored to right */
+.diagonalInner {
   position: absolute;
-  top: 0;
-  height: 100%;
-  width: 120px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.smokeLeft {
+  /* Push to right corner: extend beyond right edge */
+  right: -120px;
+  top: -100px;
+  bottom: -100px;
   left: 0;
+  transform: rotate(-15deg);
+  transform-origin: right center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 60px 0;
+  /* Only show from center-right onwards via mask — not full width */
 }
 
-.smokeRight {
-  right: 0;
-}
-
-.smokeGradient {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgb(255, 255, 255),
-    rgba(15, 23, 42, 0)
-  );
-}
-
-.smokeRight .smokeGradient {
-  background: linear-gradient(
-    to left,
-    rgb(255, 255, 255),
-    rgba(15, 23, 42, 0)
-  );
-}
-
-/* Slider */
-.slider {
+/* ================================
+   SCROLL ROWS
+================================ */
+.scrollRow {
   width: 100%;
   overflow: hidden;
 }
 
-.slideTrack {
+.track {
   display: flex;
   width: fit-content;
-  animation: scroll 40s linear infinite;
+  gap: 18px;
 }
 
-.slider:hover .slideTrack {
+.trackLeft {
+  animation: scrollLeft 40s linear infinite;
+}
+
+.trackRight {
+  animation: scrollRight 48s linear infinite;
+}
+
+.scrollRow:hover .track {
   animation-play-state: paused;
 }
 
-/* Slide */
-.slide {
-  min-width: 180px;
-  height: 100px;
-  margin: 0 25px;
+/* ================================
+   LOGO CARD — Light cards on dark bg (like itgeeks)
+================================ */
+.card {
+  flex-shrink: 0;
+  width: 170px;
+  height: 84px;
+  background: #f5f5f5;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  transition: 0.3s ease;
+  padding: 16px 24px;
+  cursor: default;
+  transition: background 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.slide:hover {
-  transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.1);
-}
+/* .card:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+} */
 
-/* Logo */
-.partnerLogo {
-  max-width: 120px;
-  max-height: 50px;
+.logo {
+  max-width: 110px;
+  max-height: 44px;
+  width: 100%;
+  height: auto;
   object-fit: contain;
-  transition: 0.3s ease;
+  /* Grayscale by default — color on hover */
+  filter: grayscale(100%) contrast(0.75) brightness(0.85);
+  transition: filter 0.25s ease;
 }
 
-.slide:hover .partnerLogo {
-  filter: grayscale(0%) brightness(1);
+/* .card:hover .logo {
+  filter: grayscale(0%) contrast(1) brightness(1);
+} */
+
+.fallbackName {
+  display: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  text-align: center;
 }
 
-/* Animation */
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
+/* ================================
+   FADE MASKS
+   Left mask is strong — fades logos into the dark background seamlessly
+================================ */
+.mask {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.maskTop {
+  top: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, #0a0a0a 0%, rgba(10,10,10,0) 100%);
+}
+
+.maskBottom {
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0) 100%);
+}
+
+/* Strong left fade — blends logos into the text section boundary */
+.maskLeft {
+  top: 0; left: 0; bottom: 0;
+  width: 200px;
+  background: linear-gradient(to right, #0a0a0a 0%, rgba(10,10,10,0) 100%);
+}
+
+.maskRight {
+  top: 0; right: 0; bottom: 0;
+  width: 60px;
+  background: linear-gradient(to left, #0a0a0a 0%, rgba(10,10,10,0) 100%);
+}
+
+/* ================================
+   ANIMATIONS
+================================ */
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-16.666%); } /* 1/6 of 6x repeated content */
+}
+
+@keyframes scrollRight {
+  from { transform: translateX(-16.666%); }
+  to   { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none !important;
   }
 }
 
-/* ========================= */
-/* RESPONSIVE DESIGN */
-/* ========================= */
-
-@media (max-width: 1024px) {
-  .title {
-    font-size: 30px;
-  }
-
-  .slide {
-    min-width: 150px;
-    height: 90px;
-  }
-}
-
-@media (max-width: 768px) {
+/* ================================
+   RESPONSIVE — Tablet (≤1100px)
+================================ */
+@media (max-width: 1100px) {
   .companyPartners {
-    padding: 60px 0;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .textBlock {
+    flex: unset;
+    max-width: 100%;
+    text-align: center;
+    padding: 64px 32px 24px 32px;
+  }
+
+  .subtitle {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .diagonalWrapper {
+    width: 100%;
+    height: 400px;
+  }
+
+  .diagonalInner {
+    right: -60px;
+    top: -80px;
+    bottom: -80px;
+    left: 0;
+    transform: rotate(-12deg);
   }
 
   .title {
-    font-size: 26px;
+    font-size: 48px;
+  }
+}
+
+/* ================================
+   RESPONSIVE — Mobile (≤768px)
+================================ */
+@media (max-width: 768px) {
+  .outerContainer {
+    padding: 16px;
+  }
+
+  .companyPartners {
+    border-radius: 16px;
+  }
+
+  .textBlock {
+    padding: 48px 24px 20px 24px;
+  }
+
+  .title {
+    font-size: 38px;
   }
 
   .subtitle {
     font-size: 14px;
   }
 
-  .slide {
-    min-width: 130px;
-    height: 80px;
-    margin: 0 15px;
+  .diagonalWrapper {
+    height: 320px;
   }
 
-  .partnerLogo {
+  .diagonalInner {
+    transform: rotate(-10deg);
+    gap: 14px;
+  }
+
+  .card {
+    width: 140px;
+    height: 70px;
+    padding: 12px 18px;
+    border-radius: 12px;
+  }
+
+  .logo {
     max-width: 90px;
+    max-height: 36px;
   }
 }
 
+/* ================================
+   RESPONSIVE — Small Mobile (≤480px)
+================================ */
 @media (max-width: 480px) {
   .title {
-    font-size: 22px;
+    font-size: 30px;
   }
 
-  .slide {
-    min-width: 110px;
-    height: 70px;
+  .diagonalWrapper {
+    height: 260px;
   }
 
-  .partnerLogo {
-    max-width: 75px;
+  .diagonalInner {
+    transform: rotate(-8deg);
+    gap: 12px;
+  }
+
+  .card {
+    width: 118px;
+    height: 60px;
+    padding: 10px 14px;
+    border-radius: 10px;
+  }
+
+  .logo {
+    max-width: 76px;
+    max-height: 30px;
   }
 }

@@ -256,6 +256,12 @@
   border-radius: 28px;
   overflow: hidden;
   box-shadow: 0 32px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  min-height: 480px;
+}
+
+.singleColumn {
+  display: grid;
+  grid-template-columns: 1fr !important;
 }
 
 .cardTop {
@@ -300,6 +306,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  min-height: 280px;
 }
 
 .fieldsGrid {

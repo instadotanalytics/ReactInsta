@@ -10,7 +10,6 @@ import Header from '../../../components/Header/Header';
 import Footer from '../../../components/Footer/Footer';
 import Companypartners from '../../Courses/Companypartners';
 import InternshipForm from './InternshipForm';
-import MemoriesSection from './MemoriesSection';
 import ReviewSection from '../../ReviewSection';
 import FAQSection from '../../FAQSection';
 import WhyJoinUS from '../../WhyJoinUS';
@@ -114,7 +113,6 @@ const Internship = () => {
         <ReviewSection />
         <WhyJoinUS />
         <OurImpact />
-        <MemoriesSection />
         <FAQSection />
         <Footer />
       </div>

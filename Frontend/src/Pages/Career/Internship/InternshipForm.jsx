@@ -238,7 +238,7 @@ const InternshipForm = () => {
 
             <form onSubmit={handleSubmit} className={styles.formBody} noValidate>
               {currentStep === 1 && (
-                <div className={styles.fieldsGrid} key="step1">
+                <div className={`${styles.fieldsGrid} ${styles.singleColumn}`} key="step1">
                   <FloatingField name="fullName" label="Full Name" icon={FiUser} />
                   <FloatingField name="email" type="email" label="Email Address" icon={FiMail} />
                   <FloatingField name="mobile" type="tel" label="Mobile Number" icon={FiPhone} />
