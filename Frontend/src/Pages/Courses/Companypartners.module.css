@@ -5,9 +5,8 @@
 ================================ */
 .outerContainer {
   width: 100%;
-  padding: 24px;
   box-sizing: border-box;
-  background-color: #f0f0f0; /* page background — adjust to match your site */
+  background-color: #000000; /* page background — adjust to match your site */
 }
 
 /* ================================
@@ -38,7 +37,7 @@
 }
 
 .title {
-  font-size: 64px;
+  font-size: 44px;
   font-weight: 800;
   color: #ffffff;
   line-height: 1.05;

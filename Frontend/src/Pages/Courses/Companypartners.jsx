@@ -89,8 +89,8 @@ const Companypartners = ({ partners: customPartners }) => {
         <div className={styles.textBlock}>
           <h2 className={styles.title}>
             Trusted by<br />
-            Dreamers,<br />
-            Doers, and<br />
+            Dreamers,
+            Doers and<br />
             Leaders
           </h2>
           <p className={styles.subtitle}>
