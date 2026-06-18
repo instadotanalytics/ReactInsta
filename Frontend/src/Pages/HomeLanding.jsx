@@ -1,178 +1,163 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './HomeLanding.module.css';
-import {
-  FaRocket, FaCheckCircle,
-  FaArrowRight, FaPlayCircle, FaStar
-} from 'react-icons/fa';
+import { FaStar, FaArrowRight, FaThLarge, FaExternalLinkAlt } from 'react-icons/fa';
+import { HiSparkles } from 'react-icons/hi2';
 
-const stats = [
-  { value: '5000+',   label: 'Students Placed' },
-  { value: '500+',    label: 'Hiring Partners'  },
-  { value: '8.5 LPA', label: 'Avg. Package'    },
-  { value: '25 LPA',  label: 'Top Package'     },
-];
+const SPACING = 34;   // distance between grid dots
+const RADIUS = 170;   // cursor glow radius in px
 
-const badges = [
-  '100% Job Guarantee',
-  'ISO Certified',
-  'Govt. Approved',
-];
-
-/* ── Wave Canvas Animation (Right to Left) ── */
-function useWaveCanvas(canvasRef) {
+/* ── Interactive grid-dot canvas: dots glow + grow near the cursor ── */
+function useHeroFX(heroRef, canvasRef) {
   useEffect(() => {
+    const hero = heroRef.current;
     const canvas = canvasRef.current;
-    if (!canvas) return;
-    
+    if (!hero || !canvas) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
     const ctx = canvas.getContext('2d');
-    let width, height, dpr, animationId;
-    let time = 0;
+    let w, h, dpr, dots = [], animationId;
+    let mouseX = -9999, mouseY = -9999, active = false;
+
+    const buildDots = () => {
+      dots = [];
+      for (let y = SPACING / 2; y < h; y += SPACING) {
+        for (let x = SPACING / 2; x < w; x += SPACING) {
+          dots.push({
+            x: x + (Math.random() * 8 - 4),
+            y: y + (Math.random() * 8 - 4),
+            r: 1 + Math.random() * 0.8,
+            base: 0.1 + Math.random() * 0.14,
+            glow: 0,
+            pulse: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+    };
 
     const resize = () => {
-      // Get full viewport dimensions
-      width = window.innerWidth;
-      height = window.innerHeight;
+      w = hero.clientWidth;
+      h = hero.clientHeight;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildDots();
     };
 
     const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-      
-      time += 0.008;
-      
-      // Wave settings - moving right to left
-      const waves = [
-        { amplitude: 25, frequency: 0.02, speed: 0.6, color: 'rgba(37, 186, 235, 0.08)' },
-        { amplitude: 35, frequency: 0.025, speed: 0.8, color: 'rgba(37, 205, 235, 0.06)' },
-        { amplitude: 45, frequency: 0.03, speed: 1.0, color: 'rgba(14, 165, 233, 0.05)' },
-        { amplitude: 20, frequency: 0.015, speed: 0.4, color: 'rgba(2, 52, 253, 0.07)' },
-      ];
+      ctx.clearRect(0, 0, w, h);
 
-      waves.forEach((wave) => {
-        ctx.beginPath();
-        ctx.moveTo(0, height);
-        
-        // Moving from right to left
-        const offset = time * wave.speed * 100;
-        
-        for (let x = 0; x <= width; x += 1) {
-          const y = height / 2 + 
-            wave.amplitude * Math.sin((x + offset) * wave.frequency) +
-            wave.amplitude * 0.5 * Math.sin((x + offset * 0.7) * wave.frequency * 1.5 + 1);
-          
-          if (x === 0) {
-            ctx.lineTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
+      for (const dot of dots) {
+        dot.pulse += 0.012;
+        const breathe = 0.5 + Math.sin(dot.pulse) * 0.5;
+
+        let targetGlow = 0;
+        if (active) {
+          const dx = dot.x - mouseX;
+          const dy = dot.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < RADIUS) targetGlow = Math.pow(1 - dist / RADIUS, 2);
         }
-        
-        ctx.lineTo(width, height);
-        ctx.closePath();
-        ctx.fillStyle = wave.color;
-        ctx.fill();
-      });
+        dot.glow += (targetGlow - dot.glow) * 0.12;
 
-      // Add floating particles
-      for (let i = 0; i < 40; i++) {
-        const x = (i * 137 + time * 50 * (0.5 + i % 3 * 0.2)) % width;
-        const y = height * 0.3 + Math.sin(i * 2.3 + time * (0.5 + i % 2)) * 50 + 
-                  Math.sin(i * 1.7 + time * 0.8) * 30;
-        const size = 1 + (i % 3);
-        const opacity = 0.1 + (i % 5) * 0.03;
-        
-        ctx.fillStyle = `rgba(37, 99, 235, ${opacity})`;
+        const opacity = Math.min(dot.base + breathe * 0.06 + dot.glow * 0.85, 1);
+        const radius = dot.r + dot.glow * 3.2;
+
+        if (dot.glow > 0.04) {
+          const grad = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, radius * 5);
+          grad.addColorStop(0, `rgba(4,159,219,${0.55 * dot.glow})`);
+          grad.addColorStop(1, 'rgba(4,159,219,0)');
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, radius * 5, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+        }
+
         ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${dot.glow > 0.3 ? '120,210,250' : '4,159,219'},${opacity})`;
         ctx.fill();
       }
 
       animationId = requestAnimationFrame(draw);
     };
 
+    const handleMouseMove = (e) => {
+      const rect = hero.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+      active = true;
+      hero.style.setProperty('--mx', `${mouseX}px`);
+      hero.style.setProperty('--my', `${mouseY}px`);
+    };
+    const handleMouseLeave = () => { active = false; };
+
     resize();
     draw();
 
     window.addEventListener('resize', resize);
-    
+    hero.addEventListener('mousemove', handleMouseMove);
+    hero.addEventListener('mouseleave', handleMouseLeave);
+
     return () => {
       window.removeEventListener('resize', resize);
+      hero.removeEventListener('mousemove', handleMouseMove);
+      hero.removeEventListener('mouseleave', handleMouseLeave);
       if (animationId) cancelAnimationFrame(animationId);
     };
-  }, [canvasRef]);
+  }, [heroRef, canvasRef]);
 }
 
 export default function HomeLanding() {
-  const waveCanvasRef = useRef(null);
+  const heroRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
-  useWaveCanvas(waveCanvasRef);
+  useHeroFX(heroRef, canvasRef);
 
   return (
-    <div className={styles.root}>
-      {/* ── Wave Canvas Background ── */}
-      <canvas ref={waveCanvasRef} className={styles.bgCanvas} aria-hidden="true" />
+    <section ref={heroRef} className={styles.hero}>
+      <canvas ref={canvasRef} className={styles.bgCanvas} aria-hidden="true" />
+      <div className={styles.spotlight} aria-hidden="true" />
 
-      {/* ── Hero ── */}
-      <section className={styles.hero}>
-        {/* Left: content */}
-        <div className={styles.heroLeft}>
-          <h1 className={styles.title}>
-            <span className={styles.titleGrad}>100% Job Guarantee</span>
-            <br />Training Programs
-          </h1>
+      <div className={styles.content}>
+        <span className={styles.badge}>
+          <HiSparkles />
+          Venture-Grade Engineering Partner
+        </span>
 
-          <p className={styles.desc}>
-            <strong>Insta Dot Analytics</strong> — Best IT Training Institute in Indore.
-            Master in-demand skills with expert mentors, live projects, and dedicated
-            placement support. Join <strong>5,000+</strong> alumni placed in top MNCs
-            with packages from <strong>6–25 LPA</strong>.
-          </p>
+        <h1 className={styles.title}>
+          Built for <span className={styles.accent}>Scale</span> &amp; <span className={styles.accent}>Intelligence.</span>
+          <br />
+          Powered by <span className={styles.accent}>AI.</span>
+        </h1>
 
-          <div className={styles.stats}>
-            {stats.map(s => (
-              <div key={s.label} className={styles.statCard}>
-                <span className={styles.statVal}>{s.value}</span>
-                <span className={styles.statLbl}>{s.label}</span>
-              </div>
-            ))}
-          </div>
+        <p className={styles.desc}>
+          From London startups to Singapore enterprises — we build AI agents, ship full-stack
+          products, and scale cloud infrastructure. Fast. Reliable. Built to last.
+        </p>
 
-          <div className={styles.ratingRow}>
-            <span className={styles.starsWrap}>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <FaStar key={i} className={styles.ratingStar} />
-              ))}
-            </span>
-            <span className={styles.ratingText}>4.8 out of 5 &middot; 1,200+ student reviews</span>
-          </div>
-
-          <div className={styles.trustRow}>
-            {badges.map(b => (
-              <span key={b} className={styles.trustBadge}>
-                <FaCheckCircle className={styles.checkIcon} />
-                {b}
-              </span>
-            ))}
-          </div>
+        <div className={styles.ctaRow}>
+          <a href="/contact" className={styles.btnPrimary}>
+            Start Your Career
+            <FaArrowRight />
+          </a>
+          <a href="/courses" className={styles.btnSecondary}>
+            <FaThLarge />
+            See Our Courses
+            <FaExternalLinkAlt className={styles.arrowIcon} />
+          </a>
         </div>
 
-        {/* Right: image - Hidden on mobile */}
-        <div className={styles.heroRight}>
-          <div className={styles.imageFrame}>
-            <img
-              src="https://i.pinimg.com/1200x/06/f6/23/06f6235b88be4decbae8cae39ef01343.jpg"
-              alt="Students learning at Insta Dot Analytics"
-              className={styles.heroImg}
-            />
-          </div>
-        </div>
-      </section>
-    </div>
+        <span className={styles.trust}>
+          <FaStar />
+          Trusted by 14+ companies
+        </span>
+      </div>
+    </section>
   );
 }
