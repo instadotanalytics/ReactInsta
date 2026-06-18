@@ -1,5 +1,8 @@
 import React from "react";
 import styles from "./AboutMicrosoft.module.css";
+ import Microsoft from "../../../assets/Microsoftleft.png"
+
+ import { FaGlobe, FaChalkboardTeacher, FaLaptopCode, FaRocket } from "react-icons/fa";
 
 const AboutMicrosoft = () => {
   return (
@@ -9,7 +12,7 @@ const AboutMicrosoft = () => {
         {/* Left Side Image */}
         <div className={styles.imageWrapper}>
           <img 
-            src="https://i.pinimg.com/1200x/af/96/00/af9600692f8f0e901b466f5f4f8ac7c3.jpg" 
+            src={Microsoft} 
             alt="Microsoft Certification" 
             className={styles.image}
           />
@@ -24,12 +27,27 @@ const AboutMicrosoft = () => {
             certifications in Cloud, Security, AI, and Data technologies.
           </p>
 
-          <ul>
-            <li>✔ Globally Recognized Certifications</li>
-            <li>✔ Industry Expert Trainers</li>
-            <li>✔ Hands-on Practical Learning</li>
-            <li>✔ Career Growth Opportunities</li>
-          </ul>
+          <ul className={styles.benefits}>
+  <li>
+    <FaGlobe className={styles.icon} /> 
+    Globally Recognized Certifications
+  </li>
+
+  <li>
+    <FaChalkboardTeacher className={styles.icon} />
+    Industry Expert Trainers
+  </li>
+
+  <li>
+    <FaLaptopCode className={styles.icon} />
+    Hands-on Practical Learning
+  </li>
+
+  <li>
+    <FaRocket className={styles.icon} />
+    Career Growth Opportunities
+  </li>
+</ul>
 
          
         </div>

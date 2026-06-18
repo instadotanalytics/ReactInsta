@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./CallToAction.module.css";
+import Microsoftmiddle from "../../../assets/MicrosoftMiddle.png";
 
 const CallToAction = () => {
   return (
@@ -7,8 +8,13 @@ const CallToAction = () => {
       <div className={styles.container}>
 
         {/* LEFT SIDE CONTENT */}
-        <div className={styles.left}>
-          <h2>Take the Next Step in Your IT Career</h2>
+        
+<div className={styles.left}>
+        <h2>
+  Take the <span>Next Step</span> in
+  <br />
+  Your IT Career
+</h2>
 
           <p>
             Microsoft certifications validate your technical expertise and 
@@ -43,7 +49,7 @@ const CallToAction = () => {
         {/* RIGHT SIDE IMAGE */}
         <div className={styles.right}>
           <img
-            src="https://i.pinimg.com/736x/23/23/0e/23230e09da346c1e56fc4d522de9e2f7.jpg"
+            src={Microsoftmiddle}
             alt="Microsoft Career Growth"
           />
         </div>

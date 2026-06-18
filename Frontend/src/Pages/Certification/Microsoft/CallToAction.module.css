@@ -1,15 +1,37 @@
+
 .ctaSection {
-  padding: 30px 0;
-  background-color: #ffffff;
+  padding: 100px 0;
+  background:
+    radial-gradient(circle at top left, rgba(0,120,212,.08), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(59,130,246,.08), transparent 30%),
+    linear-gradient(180deg, #f8fbff 0%, #eef6ff 100%);
+  overflow: hidden;
+  position: relative;
 }
 
-.container {
-  width: 85%;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 60px;
+
+.ctaSection::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  top: -150px;
+  right: -100px;
+  background: rgba(255,255,255,.08);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.container{
+  width:90%;
+  max-width:1300px;
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:40px;
 }
 
 /* LEFT SIDE */
@@ -17,44 +39,94 @@
   flex: 1;
 }
 
+
+
 .left h2 {
-  font-size: 34px;
+  font-size: clamp(32px,4vw,56px);
+  line-height: 1.15;
+  font-weight: 800;
   margin-bottom: 20px;
-  color: #0078d4;
+  color: #111827;
+}
+
+.left h2 span {
+  background: linear-gradient(90deg, #0078d4, #00a4ef, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .left p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 30px;
-  line-height: 1.7;
+  font-size: 17px;
+  color:#4b5563;
+  max-width: 650px;
+  line-height: 1.9;
+  margin-bottom: 35px;
 }
 
-.stats {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 30px;
+.stats{
+  display:flex;
+  gap:16px;
+  flex-wrap:nowrap;
+  margin-bottom: 0;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.stats div {
+  background:transparent;
+
+  padding: 16px 14px;
+
+  border-radius: 18px;
+  flex: 1;
+  border: none;
+
+  
+
+  border:none;
+
+text-align: left;
+
+  transition: .3s ease;
+}
+
+.stats div:hover{
+  transform: translateY(-5px);
 }
 
 .stats div h3 {
-  font-size: 24px;
-  color: #0078d4;
-  margin-bottom: 5px;
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #0078d4, #00a4ef, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
 }
 
-.stats div p {
-  font-size: 14px;
-  color: #333;
+
+.stats div p{
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b7280;
+  margin: 0;
 }
 
 .noteBox {
-  background: #f4f9ff;
-  padding: 18px;
-  border-left: 4px solid #0078d4;
-  border-radius: 8px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #e5e7eb;   /* neutral, no blue */
+  padding: 20px 22px;
+  border-radius: 16px;
+  color: #374151;
   font-size: 15px;
-  color: #333;
+  line-height: 1.7;
+  margin-top: 0;                     /* no gap from stats */
+  box-shadow: none;
 }
+
+
 
 /* RIGHT SIDE */
 .right {
@@ -65,21 +137,107 @@
 .right img {
   width: 100%;
   max-width: 620px;
+
+  border-radius: 24px;
+
+  border: none;
+
+  box-shadow:none;
+
+  transition: .4s ease;
+  display: block;
+  margin: 0 auto;
 }
 
+
+.right img:hover {
+  transform: translateY(-8px) scale(1.01);
+}
+
+
 /* RESPONSIVE */
+
+
+
+
+@media (max-width: 1100px) {
+  .stats {
+    gap: 10px;
+  }
+
+  .stats div h3 {
+    font-size: 22px;
+  }
+}
+
 @media (max-width: 992px) {
+  .ctaSection {
+    padding: 70px 0;
+  }
+
   .container {
     flex-direction: column;
+    text-align: center;
+  }
+
+  .left h2 {
+    text-align: center;
+  }
+
+  .left p {
+    margin: 0 auto 30px;
     text-align: center;
   }
 
   .stats {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .stats div {
+    text-align: center;
+    flex: 0 1 calc(33% - 14px);
+    min-width: 110px;
+  }
+
+  .noteBox {
+    text-align: left;
   }
 
   .right {
-    margin-top: 40px;
+    width: 100%;
+    margin-top: 30px;
   }
 }
+
+@media (max-width: 600px) {
+  .ctaSection {
+    padding: 50px 0;
+  }
+
+  .left h2 {
+    font-size: 28px;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .stats div {
+    flex: 0 1 calc(50% - 10px);
+    text-align: center;
+  }
+
+  .stats div h3 {
+    font-size: 20px;
+  }
+
+  .noteBox {
+    font-size: 14px;
+    padding: 16px 18px;
+  }
+}
+
