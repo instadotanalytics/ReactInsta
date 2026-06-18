@@ -5,7 +5,7 @@
 /* ─── Page Wrapper ─────────────────────────────── */
 .page {
   position: relative;
-  background: #ffffff;
+  
   min-height: 100vh;
   overflow: hidden;
   font-family: "DM Sans", sans-serif;
@@ -45,6 +45,7 @@
 
 .container {
   max-width: 1160px;
+  
   margin: 0 auto;
   padding: 60px 24px 80px;
   position: relative;
@@ -58,6 +59,10 @@
   margin-bottom: 80px;
   animation: fadeUp 0.8s ease both;
   position: relative;
+  background-image: url('../../public/ChatGPT\ Image\ Jun\ 18\,\ 2026\,\ 11_30_02\ AM.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
 }
 
 .heroHeader::before {
@@ -167,10 +172,9 @@
 
 .mainGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 30px;
-  align-items: stretch;
-  /* background-color: black; */
+  /* align-items: stretch; */
+  grid-template-columns: 1fr 1fr;
 }
 
 .infoCol,
@@ -178,7 +182,7 @@
   display: flex;
   height: 100%;
   border: 1.3px solid rgb(0, 195, 255);
-  border-radius: 20px;
+  border-radius: 25px;
 }
 
 
@@ -259,7 +263,7 @@
 }
 
 .infoDesc {
-  color: #ffffff;
+  color: #fff;
   line-height: 1.7;
   margin-bottom: 32px;
   position: relative;
@@ -422,9 +426,9 @@
 .fieldInput {
   width: 100%;
   /* background: white; */
-  border: 1px solid #b3d0fd;
+  border: 1px solid rgb(123, 224, 255);
   border-radius: 14px;
-  color: white;
+  color: black;
   font-size: 15px;
   padding: 10px 10px 25px 10px;
   outline: none;
@@ -512,18 +516,14 @@
   transition: 0.8s ease;
 }
 .form .submitBtn {
-  background: linear-gradient(
-    135deg,
-    #38bdf8,
-    #0284c7
-  );
+  background: linear-gradient(90deg, var(--rv-blue-1), var(--rv-blue-2));
 }
 
 
 /* ─── Map Section ───────────────────────────────── */
 .mapWrapper {
   margin-top: 80px;
-  background: #111827;
+  background: #0369a1;
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 24px;
   overflow: hidden;
@@ -606,22 +606,12 @@
   z-index: 2;
 }
 
+.infoValue {
+  word-break: break-word;
+}
 
 /* ─── Responsive ────────────────────────────────── */
-@media (max-width: 900px) {
-  .mainGrid {
-    grid-template-columns: 1fr;
-  }
 
-  .infoCol {
-    padding: 40px 32px;
-  }
-
-  .dotsGrid {
-    display: none;
-  }
-
-}
 
 @media (max-width: 600px) {
   .container {
@@ -638,7 +628,7 @@
 
   .infoCol,
   .formCol {
-    padding: 32px 24px;
+    padding:  24px 16px;
   }
 
   .submitBtn {
@@ -656,90 +646,37 @@
 
 @media (max-width: 992px) {
   .mainGrid {
+    grid-template-columns: 1fr;
     gap: 24px;
   }
 
   .infoInner,
   .form {
-    padding: 24px;
-  }
-}
-
-/* Mobile */
-
-@media (max-width: 768px) {
-  .mainGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .infoInner,
-  .form {
-    height: auto;
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-  .infoInner,
-  .form {
-    padding: 20px;
-    border-radius: 18px;
+    width: 100%;
   }
 }
 
 /* Tablet */
+
 @media (max-width: 768px) {
   .formRow {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .form {
-    padding: 24px;
-  }
-}
-
-/* Mobile */
-
-@media (max-width: 480px) {
-  .form {
-    padding: 20px;
-    border-radius: 18px;
-  }
-
-  .fieldInput {
-    font-size: 14px;
-  }
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 992px) {
-  .mainGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-@media (max-width: 480px) {
   .infoInner,
   .form {
     padding: 20px;
-    border-radius: 18px;
   }
 
-  .infoItem {
-    padding: 14px;
+  .infoHeading {
+    font-size: 1.6rem;
   }
 
-  .infoIcon {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
+  .infoDesc {
+    font-size: 14px;
   }
-}
 
-/* Tablet */
-@media (max-width: 768px) {
   .mapWrapper {
     margin-top: 60px;
     border-radius: 18px;
@@ -756,7 +693,29 @@
   .mapFrame iframe {
     height: 320px;
   }
+ .dotsGrid {
+    display: none;
+  }
 }
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .form {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .fieldInput {
+    font-size: 14px;
+  }
+  .fieldLabel {
+    font-size: 13px;
+  }
+}
+
+
+
 
 /* Mobile */
 

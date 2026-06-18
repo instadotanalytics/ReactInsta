@@ -139,11 +139,11 @@ const Contact = () => {
                 </div>
 
                 {/* Social Links */}
-                <div className={styles.socials}>
+                {/* <div className={styles.socials}>
                   {["LinkedIn", "Twitter", "Instagram"].map((s) => (
                     <a key={s} href="#" className={styles.socialBtn}>{s[0]}</a>
                   ))}
-                </div>
+                </div> */}
 
                 {/* Decorative dots */}
                 <div className={styles.dotsGrid}>
