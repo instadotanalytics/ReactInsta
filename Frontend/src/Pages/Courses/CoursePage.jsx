@@ -10,6 +10,8 @@ import FAQSection from '../FAQSection'
 import Footer from '../../components/Footer/Footer'
 import OurPremiumServices from '../OurPremiumServices'
 import CoursesHome from './CoursesHome'
+import CourseHero from './CourseHero'
+import FontAnimation from './FontAnimation'
 
 // Lazy loaded skeleton card component
 const SkeletonCard = ({ delay = 0 }) => (
@@ -364,8 +366,8 @@ const CoursePage = () => {
         )}
       </div>
 
-   
-
+      <CourseHero />
+      <FontAnimation />
       <Companypartners />
       <WhyJoinUS />
       <OurPremiumServices />
