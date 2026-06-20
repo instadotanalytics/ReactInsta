@@ -134,12 +134,12 @@
   transition: opacity 0.3s var(--ease);
 }
 
-.card:hover {
+/* .card:hover {
   transform: translateY(-8px);
   box-shadow: 0 18px 48px rgba(37,99,235,0.13), 0 4px 14px rgba(0,0,0,0.06);
-}
+} */
 
-.card:hover::before { opacity: 1; }
+/* .card:hover::before { opacity: 1; } */
 
 /* ─── Avatar ─────────────────────────────────────── */
 .avatarSection {

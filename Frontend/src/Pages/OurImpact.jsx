@@ -76,9 +76,9 @@ const SkeletonOurImpact = () => (
 
 const OurImpact = () => {
   const sectionRef = useRef(null);
-  const trackRef = useRef(null); // the tall scroll track inside the pinned section
-  const textWrapRefs = useRef([]); // one wrapper per text panel (for fade/slide)
-  const imageTrackRef = useRef(null); // the tall column holding all stacked images
+  const trackRef = useRef(null);
+  const textWrapRefs = useRef([]);
+  const imageTrackRef = useRef(null);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -109,11 +109,8 @@ const OurImpact = () => {
 
     // Current step the UI is showing (0..TOTAL-1)
     let current = 0;
-    // True while a step transition tween is playing — input is ignored
-    // (queued, not dropped) until it finishes, so fast scrolling can
-    // never skip past an image; it just queues the next single step.
     let isAnimating = false;
-    let queuedDirection = 0; // -1, 0, or 1 — the next step to play once free
+    let queuedDirection = 0;
 
     const slideHeight = () => imageTrack.offsetHeight / TOTAL;
 
@@ -124,15 +121,13 @@ const OurImpact = () => {
       isAnimating = true;
       const goingForward = nextIndex > current;
 
-      // ── Image: move exactly one slide-height, nothing more ──
+      // ── Image: move exactly one slide-height ──
       gsap.to(imageTrack, {
         y: -nextIndex * slideHeight(),
         duration: 0.85,
         ease: 'power2.inOut',
         onComplete: () => {
           isAnimating = false;
-          // If more input queued up while we were animating, play the
-          // next single step now (still one at a time).
           if (queuedDirection !== 0) {
             const dir = queuedDirection;
             queuedDirection = 0;
@@ -189,17 +184,14 @@ const OurImpact = () => {
     };
 
     const ctx = gsap.context(() => {
-      // Text panels start hidden except the first.
+      // Text panels start hidden except the first
       textWrapRefs.current.forEach((el, i) => {
         if (!el) return;
         gsap.set(el, { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 40 });
       });
       gsap.set(imageTrack, { y: 0 });
 
-      // ── Pin the section. We give it a fixed, generous scroll
-      // distance, but we DON'T scrub the image to raw progress —
-      // instead we intercept the wheel/touch input ourselves while
-      // pinned, so every scroll "tick" advances exactly one step.
+      // ── Pin the section ──
       const pinST = ScrollTrigger.create({
         id: 'impactPin',
         trigger: section,
@@ -211,29 +203,25 @@ const OurImpact = () => {
         invalidateOnRefresh: true,
       });
 
-      // ── Wheel handler: only active while this section is pinned ──
+      // ── Wheel handler ──
       const onWheel = (e) => {
         if (!pinST.isActive) return;
 
         const dir = e.deltaY > 0 ? 1 : -1;
-
-        // Block the browser's native scroll while we're mid-story so
-        // the page can't "fall through" several vh in one tick.
         const atStart = current === 0 && dir < 0;
         const atEnd = current === TOTAL - 1 && dir > 0;
-        if (atStart || atEnd) return; // let native scroll pass through
+        if (atStart || atEnd) return;
 
         e.preventDefault();
 
         if (isAnimating) {
-          // Remember direction; current tween's onComplete will play it.
           queuedDirection = dir;
           return;
         }
         goToStep(current + dir);
       };
 
-      // ── Touch handler (mobile-ish trackpads / touch screens) ──
+      // ── Touch handler ──
       let touchStartY = 0;
       const onTouchStart = (e) => {
         touchStartY = e.touches[0].clientY;
@@ -241,7 +229,7 @@ const OurImpact = () => {
       const onTouchMove = (e) => {
         if (!pinST.isActive) return;
         const deltaY = touchStartY - e.touches[0].clientY;
-        if (Math.abs(deltaY) < 30) return; // ignore tiny jitters
+        if (Math.abs(deltaY) < 30) return;
 
         const dir = deltaY > 0 ? 1 : -1;
         const atStart = current === 0 && dir < 0;
@@ -262,7 +250,6 @@ const OurImpact = () => {
       window.addEventListener('touchstart', onTouchStart, { passive: true });
       window.addEventListener('touchmove', onTouchMove, { passive: false });
 
-      // Keep the image track's slide height correct on resize.
       const onResize = () => {
         gsap.set(imageTrack, { y: -current * slideHeight() });
       };
@@ -342,22 +329,7 @@ const OurImpact = () => {
                       <span className={styles.eyebrow}>{s.subtitle}</span>
                       <h2 className={styles.title}>{s.title}</h2>
                       <p className={styles.description}>{s.desc}</p>
-                      <button className={styles.ctaButton}>
-                        Learn More
-                        <svg
-                          className={styles.arrowIcon}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <path
-                            d="M5 12H19M19 12L12 5M19 12L12 19"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
+                   
                     </div>
                   </div>
                 ))}
@@ -367,9 +339,6 @@ const OurImpact = () => {
             {/* RIGHT — 60% */}
             <div className={styles.rightContent}>
               <div className={styles.imageContainer}>
-                {/* All images stacked in one tall column. GSAP slides this
-                    whole column up/down in direct sync with scroll
-                    position — see the scroll-driven effect above. */}
                 <div
                   className={styles.imageTrack}
                   ref={imageTrackRef}
@@ -404,7 +373,7 @@ const OurImpact = () => {
         </div>
       )}
 
-      {/* Mobile: stacked cards, pin disabled */}
+      {/* Mobile: stacked cards */}
       {isMobile && (
         <div className={styles.mobileCards}>
           {sections.map((s) => (
@@ -422,7 +391,7 @@ const OurImpact = () => {
                 <span className={styles.mobileEyebrow}>{s.subtitle}</span>
                 <h3 className={styles.mobileTitle}>{s.title}</h3>
                 <p className={styles.mobileDesc}>{s.desc}</p>
-                <button className={styles.mobileCta}>Learn More →</button>
+               
               </div>
             </div>
           ))}
