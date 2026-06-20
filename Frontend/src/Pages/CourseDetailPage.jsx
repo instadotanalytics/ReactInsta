@@ -1,5 +1,5 @@
-// CourseDetailPage.jsx — Full Fixed Version with Slug Support + Console Logs
-import React, { useState, useEffect } from 'react';
+// CourseDetailPage.jsx — Full Fixed Version with Skeleton Loading
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   FiClock, FiBookOpen, FiGlobe, FiGrid, FiAward, FiBriefcase,
@@ -24,15 +24,97 @@ import CareerSection from './CareerSection';
 import FAQSection from './FAQSection';
 import OurPremiumServices from './OurPremiumServices';
 
-if (typeof document !== 'undefined' && !document.getElementById('cdp-fonts')) {
-  const link = document.createElement('link');
-  link.id = 'cdp-fonts';
-  link.rel = 'stylesheet';
-  link.href =
-    'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap';
-  document.head.appendChild(link);
-}
+// ─── Skeleton Components ──────────────────────────────────────────
+const SkeletonHero = () => (
+  <div className={styles.skeletonHero}>
+    <div className={styles.skeletonHeroBackground}>
+      <div className={styles.skeletonHeroOverlay} />
+    </div>
+    <div className={styles.skeletonHeroContent}>
+      <div className={styles.skeletonBreadcrumb} />
+      <div className={styles.skeletonBadges}>
+        <div className={styles.skeletonBadge} />
+        <div className={styles.skeletonBadge} />
+        <div className={styles.skeletonBadge} />
+      </div>
+      <div className={styles.skeletonTitle} />
+      <div className={styles.skeletonDescription}>
+        <div className={styles.skeletonLine} />
+        <div className={styles.skeletonLine} />
+      </div>
+      <div className={styles.skeletonMeta}>
+        <div className={styles.skeletonMetaItem} />
+        <div className={styles.skeletonMetaItem} />
+        <div className={styles.skeletonMetaItem} />
+      </div>
+      <div className={styles.skeletonPrice}>
+        <div className={styles.skeletonPriceAmount} />
+        <div className={styles.skeletonButton} />
+      </div>
+    </div>
+  </div>
+);
 
+const SkeletonTabContent = () => (
+  <div className={styles.skeletonTabContent}>
+    <div className={styles.skeletonSection}>
+      <div className={styles.skeletonSectionTitle} />
+      <div className={styles.skeletonParagraph}>
+        <div className={styles.skeletonLine} />
+        <div className={styles.skeletonLine} />
+        <div className={styles.skeletonLine} />
+        <div className={styles.skeletonLine} />
+      </div>
+    </div>
+    <div className={styles.skeletonSection}>
+      <div className={styles.skeletonSectionTitle} />
+      <div className={styles.skeletonGrid}>
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className={styles.skeletonLearnItem}>
+            <div className={styles.skeletonLearnIcon} />
+            <div className={styles.skeletonLearnText} />
+          </div>
+        ))}
+      </div>
+    </div>
+    <div className={styles.skeletonSection}>
+      <div className={styles.skeletonSectionTitle} />
+      <div className={styles.skeletonFeatureGrid}>
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className={styles.skeletonFeatureCard}>
+            <div className={styles.skeletonFeatureIcon} />
+            <div className={styles.skeletonFeatureTitle} />
+            <div className={styles.skeletonFeatureDesc} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const SkeletonSidebar = () => (
+  <div className={styles.skeletonSidebar}>
+    <div className={styles.skeletonSummaryCard}>
+      <div className={styles.skeletonSummaryHeader} />
+      {[...Array(7)].map((_, i) => (
+        <div key={i} className={styles.skeletonSummaryItem} />
+      ))}
+      <div className={styles.skeletonSummaryDivider} />
+      <div className={styles.skeletonSummaryPrice} />
+      <div className={styles.skeletonSummaryButton} />
+    </div>
+    <div className={styles.skeletonStatsCard}>
+      {[...Array(3)].map((_, i) => (
+        <div key={i} className={styles.skeletonStatItem}>
+          <div className={styles.skeletonStatIcon} />
+          <div className={styles.skeletonStatText} />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// ─── Main Component ──────────────────────────────────────────────
 const CourseDetailPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -58,8 +140,7 @@ const CourseDetailPage = () => {
         console.log('📌 slug:', slug);
         console.log('🌐 API_BASE_URL:', API_BASE_URL);
 
-        // ── Step 1: Saare courses fetch karo, slug se match karo ──
-        // Yeh most reliable approach hai — slug/ID endpoint issue bypass hoga
+        // ── Step 1: Fetch all courses ──
         console.log('📡 Step 1: Fetching all courses...');
         const allRes = await fetch(`${API_BASE_URL}/courses`);
         console.log('📥 All courses status:', allRes.status);
@@ -99,7 +180,7 @@ const CourseDetailPage = () => {
           }
         }
 
-        // ── Step 2: Direct slug endpoint try karo ──
+        // ── Step 2: Direct slug endpoint ──
         console.log('📡 Step 2: Trying slug endpoint...');
         const slugUrl = `${API_BASE_URL}/courses/slug/${slug}`;
         console.log('🔗 Slug URL:', slugUrl);
@@ -177,31 +258,51 @@ const CourseDetailPage = () => {
     return () => { document.body.style.overflow = 'auto'; };
   }, [showRegistrationPopup]);
 
-  const getImageUrl = (imagePath) => {
+  const getImageUrl = useCallback((imagePath) => {
     if (!imagePath) return '/default-course-image.jpg';
     if (imagePath.startsWith('http')) return imagePath;
     return `${SERVER_BASE_URL}/${imagePath}`;
-  };
+  }, []);
 
-  const handleEnrollNow = () => setShowRegistrationPopup(true);
-  const handleClosePopup = () => setShowRegistrationPopup(false);
-  const handleRegistrationSuccess = (data) => console.log('Registration successful:', data);
-  const handleRegistrationError = (error) => console.error('Registration error:', error);
+  const handleEnrollNow = useCallback(() => setShowRegistrationPopup(true), []);
+  const handleClosePopup = useCallback(() => setShowRegistrationPopup(false), []);
+  const handleRegistrationSuccess = useCallback((data) => console.log('Registration successful:', data), []);
+  const handleRegistrationError = useCallback((error) => console.error('Registration error:', error), []);
 
-  // ─── Loading ─────────────────────────────────────────────────────
-  if (loading) return (
-    <>
-      <Header />
-      <div className={styles.loadingContainer}>
-        <div className={styles.loaderWrapper}>
-          <div className={styles.loader} />
-          <div className={styles.loaderGlow} />
+  // ─── Loading State ─────────────────────────────────────────────────────
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <div className={styles.courseDetailPage}>
+          <SkeletonHero />
+          <div className={styles.container}>
+            <div className={styles.mainContent}>
+              <div className={styles.leftColumn}>
+                <div className={styles.tabs}>
+                  {['overview', 'curriculum', 'instructor', 'faq'].map((tab) => (
+                    <div key={tab} className={styles.skeletonTab}>
+                      <div className={styles.skeletonTabText} />
+                    </div>
+                  ))}
+                </div>
+                <SkeletonTabContent />
+              </div>
+              <SkeletonSidebar />
+            </div>
+          </div>
+          <PlacementList />
+          <Companypartners />
+          <WhyJoinUS />
+          <OurPremiumServices />
+          <CareerSection />
+          <ReviewSection />
+          <FAQSection />
+          <Footer />
         </div>
-        <p>Loading course details…</p>
-      </div>
-      <Footer />
-    </>
-  );
+      </>
+    );
+  }
 
   // ─── Error ───────────────────────────────────────────────────────
   if (error || !course) {
@@ -250,6 +351,7 @@ const CourseDetailPage = () => {
             src={getImageUrl(course.thumbnail)}
             alt={course.title}
             className={styles.heroImage}
+            loading="lazy"
           />
         </div>
 
@@ -507,6 +609,7 @@ const CourseDetailPage = () => {
                           src={getImageUrl(course.instructor.image)}
                           alt={course.instructor.name}
                           className={styles.instructorImage}
+                          loading="lazy"
                         />
                       ) : (
                         <div className={styles.instructorImagePlaceholder}>
