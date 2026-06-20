@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import { API_BASE_URL, SERVER_BASE_URL } from '../../config/api'
@@ -11,17 +11,104 @@ import Footer from '../../components/Footer/Footer'
 import OurPremiumServices from '../OurPremiumServices'
 import CoursesHome from './CoursesHome'
 
+// Lazy loaded skeleton card component
+const SkeletonCard = ({ delay = 0 }) => (
+  <div 
+    className={styles.skeletonCard}
+    style={{ animationDelay: `${delay}ms` }}
+  >
+    <div className={styles.skeletonImage} />
+    <div className={styles.skeletonContent}>
+      <div className={styles.skeletonTitle} />
+      <div className={styles.skeletonCategory} />
+      <div className={styles.skeletonDescription} />
+      <div className={styles.skeletonButton} />
+    </div>
+  </div>
+);
+
+// Optimized Course Card with animation
+const CourseCard = React.memo(({ course, index, onViewMore }) => {
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '/default-course-image.jpg'
+    if (imagePath.startsWith('http')) return imagePath
+    return `${SERVER_BASE_URL}/${imagePath}`
+  }
+
+  const handleClick = useCallback(() => {
+    onViewMore(course)
+  }, [course, onViewMore])
+
+  return (
+    <div
+      className={`${styles.courseCard} ${styles.cardEntrance}`}
+      style={{ animationDelay: `${index * 80}ms` }}
+      onClick={handleClick}
+    >
+      <div className={styles.cardImageWrapper}>
+        <div className={styles.cardImage}>
+          <img
+            src={getImageUrl(course.thumbnail)}
+            alt={course.title || 'Course thumbnail'}
+            loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null
+              e.target.src = '/default-course-image.jpg'
+            }}
+          />
+        </div>
+        {course.category && (
+          <span className={styles.categoryBadge}>{course.category}</span>
+        )}
+      </div>
+
+      <div className={styles.cardContent}>
+        <h3 className={styles.courseTitle}>{course.title || 'Untitled Course'}</h3>
+        {course.category && (
+          <div className={styles.categoryText}>{course.category}</div>
+        )}
+        {course.shortDescription && (
+          <p className={styles.courseDescription}>
+            {course.shortDescription.length > 80
+              ? `${course.shortDescription.substring(0, 80)}…`
+              : course.shortDescription}
+          </p>
+        )}
+      </div>
+
+      <button
+        className={styles.viewMoreBtn}
+        onClick={(e) => {
+          e.stopPropagation()
+          onViewMore(course)
+        }}
+      >
+        View Details
+        <span className={styles.arrow}>→</span>
+      </button>
+    </div>
+  )
+}, (prevProps, nextProps) => {
+  return prevProps.course._id === nextProps.course._id
+})
+
 const CoursePage = () => {
   const navigate = useNavigate()
   const [courses, setCourses] = useState([])
   const [filteredCourses, setFilteredCourses] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [categories, setCategories] = useState([])
+  const [visibleCount, setVisibleCount] = useState(10)
+  const [isRendering, setIsRendering] = useState(false)
+  
+  const renderTimerRef = useRef(null)
+  const observerRef = useRef(null)
+  const isFirstRender = useRef(true)
 
-  const bannerImages = [
+  const bannerImages = useMemo(() => [
     'https://i.pinimg.com/1200x/73/5f/4b/735f4b0be1a783ac93ef3ec1a6fbaa0d.jpg',
     'https://i.pinimg.com/736x/6d/16/a3/6d16a301e656ab223942728e9e293e8b.jpg',
     'https://i.pinimg.com/1200x/c1/63/07/c16307103e86c604c6bc98c78aa84d4b.jpg',
@@ -32,10 +119,11 @@ const CoursePage = () => {
     'https://i.pinimg.com/736x/bf/00/7a/bf007a1fb2c3fbc87e5679c4631d8513.jpg',
     'https://i.pinimg.com/736x/4c/29/6a/4c296a3cf88c70d4b62759ecb6ae4bd2.jpg',
     'https://i.pinimg.com/1200x/1e/35/69/1e3569f36a9b5d2eada251ef4daec261.jpg',
-  ]
+  ], [])
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  // Banner auto-slide
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev === bannerImages.length - 1 ? 0 : prev + 1))
@@ -43,10 +131,40 @@ const CoursePage = () => {
     return () => clearInterval(interval)
   }, [bannerImages.length])
 
+  // Progressive rendering of remaining courses
+  const renderRemainingCourses = useCallback((filtered, startIndex) => {
+    const remaining = filtered.slice(startIndex)
+    let currentIndex = startIndex
+
+    const renderNext = () => {
+      if (currentIndex >= filtered.length) {
+        setIsRendering(false)
+        return
+      }
+
+      const batchSize = 2 // Render 2 cards at a time for better UX
+      const endIndex = Math.min(currentIndex + batchSize, filtered.length)
+      
+      setVisibleCount(endIndex)
+      currentIndex = endIndex
+
+      if (currentIndex < filtered.length) {
+        const delay = 80 + Math.random() * 70 // 80-150ms delay
+        renderTimerRef.current = setTimeout(renderNext, delay)
+      } else {
+        setIsRendering(false)
+      }
+    }
+
+    setIsRendering(true)
+    renderTimerRef.current = setTimeout(renderNext, 100)
+  }, [])
+
+  // Fetch courses
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        setLoading(true)
+        setIsLoading(true)
         const response = await fetch(`${API_BASE_URL}/courses`)
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`)
         const result = await response.json()
@@ -60,20 +178,37 @@ const CoursePage = () => {
 
         setCourses(coursesData)
         setFilteredCourses(coursesData)
+        
         const uniqueCategories = ['All', ...new Set(coursesData.map((c) => c.category).filter(Boolean))]
         setCategories(uniqueCategories)
         setError(null)
+        
+        // Initially show first 10 courses
+        setVisibleCount(Math.min(10, coursesData.length))
+        
+        // Start progressive rendering for remaining courses
+        if (coursesData.length > 10) {
+          renderRemainingCourses(coursesData, 10)
+        }
       } catch (err) {
         setError('Failed to load courses. Please try again later.')
         setCourses([])
         setFilteredCourses([])
       } finally {
-        setLoading(false)
+        setIsLoading(false)
       }
     }
-    fetchCourses()
-  }, [])
 
+    fetchCourses()
+
+    return () => {
+      if (renderTimerRef.current) {
+        clearTimeout(renderTimerRef.current)
+      }
+    }
+  }, [renderRemainingCourses])
+
+  // Handle filter changes with progressive rendering
   useEffect(() => {
     let filtered = courses
     if (searchTerm) {
@@ -87,32 +222,71 @@ const CoursePage = () => {
     if (selectedCategory !== 'All') {
       filtered = filtered.filter((c) => c.category === selectedCategory)
     }
+    
     setFilteredCourses(filtered)
-  }, [searchTerm, selectedCategory, courses])
+    
+    // Reset visible count and start progressive rendering for filtered results
+    if (filtered.length > 0) {
+      // Clear existing timer
+      if (renderTimerRef.current) {
+        clearTimeout(renderTimerRef.current)
+        renderTimerRef.current = null
+      }
+      
+      // Reset visible count to show first 10 immediately
+      const initialVisible = Math.min(10, filtered.length)
+      setVisibleCount(initialVisible)
+      
+      // Render remaining progressively
+      if (filtered.length > 10) {
+        renderRemainingCourses(filtered, 10)
+      } else {
+        setIsRendering(false)
+      }
+    } else {
+      setVisibleCount(0)
+      setIsRendering(false)
+    }
+  }, [searchTerm, selectedCategory, courses, renderRemainingCourses])
 
-  const nextSlide = () =>
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev === bannerImages.length - 1 ? 0 : prev + 1))
-  const prevSlide = () =>
-    setCurrentIndex((prev) => (prev === 0 ? bannerImages.length - 1 : prev - 1))
+  }, [bannerImages.length])
 
-  const getImageUrl = (imagePath) => {
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev === 0 ? bannerImages.length - 1 : prev - 1))
+  }, [bannerImages.length])
+
+  const getImageUrl = useCallback((imagePath) => {
     if (!imagePath) return '/default-course-image.jpg'
     if (imagePath.startsWith('http')) return imagePath
     return `${SERVER_BASE_URL}/${imagePath}`
-  }
+  }, [])
 
-  // ✅ FIXED — slug use karo, _id fallback ke liye
-  const handleViewMore = (course) => {
+  const handleViewMore = useCallback((course) => {
     const identifier = course.slug || course._id || course.id
     navigate(`/course/${identifier}`)
-  }
+  }, [navigate])
+
+  // Get visible courses
+  const visibleCourses = useMemo(() => {
+    return filteredCourses.slice(0, visibleCount)
+  }, [filteredCourses, visibleCount])
+
+  // Calculate skeleton count for loading state
+  const skeletonCount = useMemo(() => {
+    if (isLoading) return 10
+    if (filteredCourses.length > visibleCount) {
+      return Math.min(4, filteredCourses.length - visibleCount)
+    }
+    return 0
+  }, [isLoading, filteredCourses.length, visibleCount])
 
   return (
     <div className={styles.coursePage}>
       <Header />
       <CoursesHome />
 
-      {/* ── Courses Section ── */}
       <div className={styles.coursesSection}>
         <div className={styles.sectionHeader}>
           <p className={styles.sectionEyebrow}>What We Offer</p>
@@ -148,21 +322,14 @@ const CoursePage = () => {
         </div>
 
         {/* Results Count */}
-        {!loading && !error && (
+        {!isLoading && !error && (
           <div className={styles.resultsCount}>
-            Showing {filteredCourses.length} {filteredCourses.length === 1 ? 'course' : 'courses'}
+            Showing {visibleCount} of {filteredCourses.length} {filteredCourses.length === 1 ? 'course' : 'courses'}
+            {isRendering && <span className={styles.renderingIndicator}> • Loading more...</span>}
           </div>
         )}
 
-        {/* Loading */}
-        {loading && (
-          <div className={styles.loadingContainer}>
-            <div className={styles.loader} />
-            <p>Loading courses…</p>
-          </div>
-        )}
-
-        {/* Error */}
+        {/* Error State */}
         {error && (
           <div className={styles.errorContainer}>
             <p className={styles.errorMessage}>{error}</p>
@@ -172,8 +339,8 @@ const CoursePage = () => {
           </div>
         )}
 
-        {/* Empty */}
-        {!loading && !error && filteredCourses.length === 0 && (
+        {/* Empty State */}
+        {!isLoading && !error && filteredCourses.length === 0 && (
           <div className={styles.emptyContainer}>
             <p>No courses match your search criteria.</p>
             {(searchTerm || selectedCategory !== 'All') && (
@@ -187,58 +354,41 @@ const CoursePage = () => {
           </div>
         )}
 
-        {/* ✅ FIXED Grid — poora course object pass karo */}
-        {filteredCourses.length > 0 && (
+        {/* Course Grid */}
+        {(visibleCourses.length > 0 || isLoading) && (
           <div className={styles.coursesGrid}>
-            {filteredCourses.map((course) => (
-              <div
+            {/* Render actual courses */}
+            {visibleCourses.map((course, index) => (
+              <CourseCard
                 key={course._id || course.id}
-                className={styles.courseCard}
-                onClick={() => handleViewMore(course)}
-              >
-                <div className={styles.cardImageWrapper}>
-                  <div className={styles.cardImage}>
-                    <img
-                      src={getImageUrl(course.thumbnail)}
-                      alt={course.title || 'Course thumbnail'}
-                      onError={(e) => { e.target.onerror = null; e.target.src = '/default-course-image.jpg' }}
-                    />
-                  </div>
-                  {course.category && (
-                    <span className={styles.categoryBadge}>{course.category}</span>
-                  )}
-                </div>
-
-                <div className={styles.cardContent}>
-                  <h3 className={styles.courseTitle}>{course.title || 'Untitled Course'}</h3>
-                  {course.category && (
-                    <div className={styles.categoryText}>{course.category}</div>
-                  )}
-                  {course.shortDescription && (
-                    <p className={styles.courseDescription}>
-                      {course.shortDescription.length > 80
-                        ? `${course.shortDescription.substring(0, 80)}…`
-                        : course.shortDescription}
-                    </p>
-                  )}
-                </div>
-
-                <button
-                  className={styles.viewMoreBtn}
-                  onClick={(e) => {
-                    e.stopPropagation() // ✅ double navigate rokta hai
-                    handleViewMore(course)
-                  }}
-                >
-                  View Details
-                </button>
-              </div>
+                course={course}
+                index={index}
+                onViewMore={handleViewMore}
+              />
             ))}
+            
+            {/* Render skeleton cards for loading state */}
+            {isLoading && (
+              <>
+                {[...Array(skeletonCount)].map((_, i) => (
+                  <SkeletonCard key={`skeleton-${i}`} delay={i * 50} />
+                ))}
+              </>
+            )}
+
+            {/* Render skeleton cards for remaining courses being loaded */}
+            {!isLoading && isRendering && skeletonCount > 0 && (
+              <>
+                {[...Array(skeletonCount)].map((_, i) => (
+                  <SkeletonCard key={`loading-${i}`} delay={i * 50} />
+                ))}
+              </>
+            )}
           </div>
         )}
       </div>
 
-      {/* ── Banner ── */}
+      {/* Banner */}
       <div className={styles.banner}>
         <button className={`${styles.navButton} ${styles.prevButton}`} onClick={prevSlide}>❮</button>
         <div className={styles.imageContainer}>
@@ -247,7 +397,7 @@ const CoursePage = () => {
               key={index}
               className={`${styles.slide} ${index === currentIndex ? styles.active : ''}`}
             >
-              <img src={image} alt={`Slide ${index + 1}`} />
+              <img src={image} alt={`Slide ${index + 1}`} loading="lazy" />
             </div>
           ))}
         </div>

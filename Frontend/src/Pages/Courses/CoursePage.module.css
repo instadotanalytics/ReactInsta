@@ -633,3 +633,219 @@
 @media (prefers-reduced-motion: reduce) {
   .courseCard, .cardImage img, .viewMoreBtn { transition: none !important; animation: none !important; }
 }
+
+/* ─── Skeleton Loading Styles ────────────────────────────────────── */
+.skeletonCard {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #e8f0fe;
+  box-shadow: 0 2px 16px rgba(14,165,233,0.04);
+  position: relative;
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+.skeletonImage {
+  width: 100%;
+  padding-top: 68%;
+  background: linear-gradient(
+    90deg,
+    #f0f4ff 0%,
+    #e8edfa 20%,
+    #f0f4ff 40%,
+    #e8edfa 60%,
+    #f0f4ff 80%,
+    #e8edfa 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 20px 20px 0 0;
+}
+
+.skeletonContent {
+  padding: 16px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeletonTitle {
+  height: 18px;
+  width: 80%;
+  background: linear-gradient(
+    90deg,
+    #f0f4ff 0%,
+    #e8edfa 30%,
+    #f0f4ff 60%,
+    #e8edfa 90%,
+    #f0f4ff 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+.skeletonCategory {
+  height: 12px;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    #f0f4ff 0%,
+    #e8edfa 30%,
+    #f0f4ff 60%,
+    #e8edfa 90%,
+    #f0f4ff 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 4px;
+  animation-delay: 0.1s;
+}
+
+.skeletonDescription {
+  height: 12px;
+  width: 90%;
+  background: linear-gradient(
+    90deg,
+    #f0f4ff 0%,
+    #e8edfa 30%,
+    #f0f4ff 60%,
+    #e8edfa 90%,
+    #f0f4ff 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 4px;
+  animation-delay: 0.2s;
+}
+
+.skeletonDescription:last-of-type {
+  width: 70%;
+  animation-delay: 0.3s;
+}
+
+.skeletonButton {
+  margin-top: 4px;
+  height: 38px;
+  width: 60%;
+  background: linear-gradient(
+    90deg,
+    #f0f4ff 0%,
+    #e8edfa 30%,
+    #f0f4ff 60%,
+    #e8edfa 90%,
+    #f0f4ff 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 10px;
+  animation-delay: 0.4s;
+}
+
+/* ─── Skeleton Animation ────────────────────────────────────────── */
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes skeletonPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* ─── Card Entrance Animation ──────────────────────────────────── */
+.cardEntrance {
+  animation: cardEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Rendering Indicator ──────────────────────────────────────── */
+.renderingIndicator {
+  font-size: 0.8rem;
+  color: var(--cp-blue-1);
+  font-weight: 500;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ─── Skeleton Responsive ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .skeletonImage {
+    padding-top: 68%;
+  }
+}
+
+@media (max-width: 768px) {
+  .skeletonTitle {
+    height: 16px;
+  }
+  .skeletonCategory {
+    height: 11px;
+  }
+  .skeletonDescription {
+    height: 11px;
+  }
+  .skeletonButton {
+    height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeletonTitle {
+    height: 14px;
+  }
+  .skeletonCategory {
+    height: 10px;
+  }
+  .skeletonDescription {
+    height: 10px;
+  }
+  .skeletonButton {
+    height: 30px;
+    width: 50%;
+  }
+}
+
+/* ─── Reduce Motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .skeletonCard,
+  .skeletonImage,
+  .skeletonTitle,
+  .skeletonCategory,
+  .skeletonDescription,
+  .skeletonButton {
+    animation: none !important;
+  }
+  
+  .cardEntrance {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .renderingIndicator {
+    animation: none !important;
+  }
+}
