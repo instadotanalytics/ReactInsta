@@ -1,103 +1,434 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./OurImpact.module.css";
+// OurImpact.jsx - Premium ITGeeks-Style Sticky Storytelling
+import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from './OurImpact.module.css';
 
-
-
+gsap.registerPlugin(ScrollTrigger);
 
 const sections = [
   {
-    title: "Trusted By Learners Across India",
-    desc: "We provide industry-focused training programs that help learners gain real-world skills and grow their careers. Our comprehensive approach ensures every student achieves their professional goals.",
-    image: "/images/download (1).jfif",
+    id: 1,
+    title: 'Trusted By Learners Across India',
+    subtitle: 'Empowering Careers Nationwide',
+    desc: 'We provide industry-focused training programs that help learners gain real-world skills and grow their careers. Our comprehensive approach ensures every student achieves their professional goals.',
+    image: '/images/download (1).jfif',
+    tag: '01',
   },
   {
-    title: "Industry-Aligned Curriculum",
-    desc: "Courses designed with top industry experts. Stay ahead with industry-relevant skills, practical learning experiences, and up-to-date content tailored to employer expectations.",
-    image: "/images/Importancia de la protección de datos y privacidad.jfif",
+    id: 2,
+    title: 'Industry-Aligned Curriculum',
+    subtitle: 'Built with Industry Experts',
+    desc: 'Courses designed with top industry experts. Stay ahead with industry-relevant skills, practical learning experiences, and up-to-date content tailored to employer expectations.',
+    image: '/images/Importancia de la protección de datos y privacidad.jfif',
+    tag: '02',
   },
   {
-    title: "Hands-on Projects",
-    desc: "Build a real-world portfolio with live projects. Apply your knowledge to practical challenges, gain industry experience, and develop job-ready skills through hands-on learning.",
-    image: "/images/growth now.jfif",
+    id: 3,
+    title: 'Hands-on Projects',
+    subtitle: 'Real-World Experience',
+    desc: 'Build a real-world portfolio with live projects. Apply your knowledge to practical challenges, gain industry experience, and develop job-ready skills through hands-on learning.',
+    image: '/images/growth now.jfif',
+    tag: '03',
   },
   {
-    title: "Global Certification",
-    desc: "Internationally recognized certificates that showcase your expertise and boost your career prospects. Gain credentials valued by employers across industries and around the world.",
-    image: "/images/download (2).jfif",
+    id: 4,
+    title: 'Global Certification',
+    subtitle: 'Recognized Worldwide',
+    desc: 'Internationally recognized certificates that showcase your expertise and boost your career prospects. Gain credentials valued by employers across industries and around the world.',
+    image: '/images/download (2).jfif',
+    tag: '04',
   },
   {
-    title: "Expert Mentors",
-    desc: "Learn from experienced industry professionals who provide valuable guidance, practical insights, and mentorship to help you build confidence and succeed in your career.",
-    image: "/images/download (3).jfif",
+    id: 5,
+    title: 'Expert Mentors',
+    subtitle: 'Learn from the Best',
+    desc: 'Learn from experienced industry professionals who provide valuable guidance, practical insights, and mentorship to help you build confidence and succeed in your career.',
+    image: '/images/download (3).jfif',
+    tag: '05',
   },
 ];
 
+const TOTAL = sections.length;
+
+// ─── Skeleton ─────────────────────────────────────────────────────
+const SkeletonOurImpact = () => (
+  <div className={styles.skeletonWrapper}>
+    <div className={styles.skeletonContainer}>
+      <div className={styles.skeletonLeft}>
+        <div className={styles.skeletonEyebrow} />
+        <div className={styles.skeletonTitle} />
+        <div className={styles.skeletonSubtitle} />
+        <div className={styles.skeletonDesc}>
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+        </div>
+        <div className={styles.skeletonButton} />
+      </div>
+      <div className={styles.skeletonRight}>
+        <div className={styles.skeletonImage} />
+      </div>
+    </div>
+  </div>
+);
+
 const OurImpact = () => {
-  const sliderRef = useRef(null);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null); // the tall scroll track inside the pinned section
+  const textWrapRefs = useRef([]); // one wrapper per text panel (for fade/slide)
+  const imageTrackRef = useRef(null); // the tall column holding all stacked images
+
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 992 : false
+  );
 
-const handleScroll = () => {
-  const slider = sliderRef.current;
+  // ─── Resize watcher ───────────────────────────────────────────
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 992);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
-  let index = 0;
+  // ─── Simulated load ───────────────────────────────────────────
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(t);
+  }, []);
 
-  const isDesktop = window.innerWidth > 992;
+  // ─── Core scroll-driven storytelling (one step per scroll) ─────
+  useEffect(() => {
+    if (loading || isMobile) return;
 
-  if (isDesktop) {
-    // vertical scroll (desktop)
-    index = Math.round(slider.scrollTop / slider.clientHeight);
-  } else {
-    // horizontal scroll (mobile)
-    index = Math.round(slider.scrollLeft / slider.clientWidth);
+    const section = sectionRef.current;
+    const imageTrack = imageTrackRef.current;
+    if (!section || !imageTrack) return;
+
+    // Current step the UI is showing (0..TOTAL-1)
+    let current = 0;
+    // True while a step transition tween is playing — input is ignored
+    // (queued, not dropped) until it finishes, so fast scrolling can
+    // never skip past an image; it just queues the next single step.
+    let isAnimating = false;
+    let queuedDirection = 0; // -1, 0, or 1 — the next step to play once free
+
+    const slideHeight = () => imageTrack.offsetHeight / TOTAL;
+
+    const goToStep = (nextIndex) => {
+      if (nextIndex < 0 || nextIndex > TOTAL - 1) return;
+      if (nextIndex === current) return;
+
+      isAnimating = true;
+      const goingForward = nextIndex > current;
+
+      // ── Image: move exactly one slide-height, nothing more ──
+      gsap.to(imageTrack, {
+        y: -nextIndex * slideHeight(),
+        duration: 0.85,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          isAnimating = false;
+          // If more input queued up while we were animating, play the
+          // next single step now (still one at a time).
+          if (queuedDirection !== 0) {
+            const dir = queuedDirection;
+            queuedDirection = 0;
+            goToStep(current + dir);
+          }
+        },
+      });
+
+      // ── Text: fade/slide out old, fade/slide in new ──
+      const prevText = textWrapRefs.current[current];
+      const nextText = textWrapRefs.current[nextIndex];
+
+      if (prevText) {
+        gsap.to(prevText, {
+          opacity: 0,
+          y: goingForward ? -40 : 40,
+          duration: 0.4,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      }
+      if (nextText) {
+        gsap.fromTo(
+          nextText,
+          { opacity: 0, y: goingForward ? 40 : -40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          }
+        );
+        const kids = nextText.children;
+        if (kids?.length) {
+          gsap.fromTo(
+            kids,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              stagger: 0.07,
+              ease: 'power2.out',
+              delay: 0.05,
+              overwrite: 'auto',
+            }
+          );
+        }
+      }
+
+      current = nextIndex;
+      setActiveIndex(nextIndex);
+    };
+
+    const ctx = gsap.context(() => {
+      // Text panels start hidden except the first.
+      textWrapRefs.current.forEach((el, i) => {
+        if (!el) return;
+        gsap.set(el, { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 40 });
+      });
+      gsap.set(imageTrack, { y: 0 });
+
+      // ── Pin the section. We give it a fixed, generous scroll
+      // distance, but we DON'T scrub the image to raw progress —
+      // instead we intercept the wheel/touch input ourselves while
+      // pinned, so every scroll "tick" advances exactly one step.
+      const pinST = ScrollTrigger.create({
+        id: 'impactPin',
+        trigger: section,
+        start: 'top top',
+        end: '+=100vh',
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      });
+
+      // ── Wheel handler: only active while this section is pinned ──
+      const onWheel = (e) => {
+        if (!pinST.isActive) return;
+
+        const dir = e.deltaY > 0 ? 1 : -1;
+
+        // Block the browser's native scroll while we're mid-story so
+        // the page can't "fall through" several vh in one tick.
+        const atStart = current === 0 && dir < 0;
+        const atEnd = current === TOTAL - 1 && dir > 0;
+        if (atStart || atEnd) return; // let native scroll pass through
+
+        e.preventDefault();
+
+        if (isAnimating) {
+          // Remember direction; current tween's onComplete will play it.
+          queuedDirection = dir;
+          return;
+        }
+        goToStep(current + dir);
+      };
+
+      // ── Touch handler (mobile-ish trackpads / touch screens) ──
+      let touchStartY = 0;
+      const onTouchStart = (e) => {
+        touchStartY = e.touches[0].clientY;
+      };
+      const onTouchMove = (e) => {
+        if (!pinST.isActive) return;
+        const deltaY = touchStartY - e.touches[0].clientY;
+        if (Math.abs(deltaY) < 30) return; // ignore tiny jitters
+
+        const dir = deltaY > 0 ? 1 : -1;
+        const atStart = current === 0 && dir < 0;
+        const atEnd = current === TOTAL - 1 && dir > 0;
+        if (atStart || atEnd) return;
+
+        e.preventDefault();
+        touchStartY = e.touches[0].clientY;
+
+        if (isAnimating) {
+          queuedDirection = dir;
+          return;
+        }
+        goToStep(current + dir);
+      };
+
+      window.addEventListener('wheel', onWheel, { passive: false });
+      window.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: false });
+
+      // Keep the image track's slide height correct on resize.
+      const onResize = () => {
+        gsap.set(imageTrack, { y: -current * slideHeight() });
+      };
+      window.addEventListener('resize', onResize);
+
+      return () => {
+        window.removeEventListener('wheel', onWheel);
+        window.removeEventListener('touchstart', onTouchStart);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('resize', onResize);
+      };
+    }, section);
+
+    return () => ctx.revert();
+  }, [loading, isMobile]);
+
+  if (loading) {
+    return (
+      <section className={styles.impactSection}>
+        <SkeletonOurImpact />
+      </section>
+    );
   }
 
-  setActiveIndex(index);
-};
-
-
   return (
-    <div className={styles.wrapper}>
-
-      <div className={styles.left}>
-        <h2>{sections[activeIndex].title}</h2>
-        <p>{sections[activeIndex].desc}</p>
+    <section
+      className={`${styles.impactSection} ${isMobile ? styles.mobileView : ''}`}
+      ref={sectionRef}
+    >
+      <div className={styles.bgEffects}>
+        <div className={styles.bgGlow1} />
+        <div className={styles.bgGlow2} />
+        <div className={styles.bgGrid} />
       </div>
 
-      <div className={styles.right}>
-        <div
-          className={styles.imageSlider}
-          ref={sliderRef}
-            onScroll={handleScroll}
-        >
-          {sections.map((item, index) => (
-            <div
-              key={index}
-              className={styles.imageCard}
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-              />
+      {/* Desktop: pinned storytelling track */}
+      {!isMobile && (
+        <div className={styles.impactContainer} ref={trackRef}>
+          <div className={styles.contentWrapper}>
+            {/* LEFT — 40% */}
+            <div className={styles.leftContent}>
+              <div className={styles.progressWrapper}>
+                <div className={styles.progressLine}>
+                  <div
+                    className={styles.progressFill}
+                    style={{
+                      height: `${(activeIndex / (TOTAL - 1)) * 100}%`,
+                    }}
+                  />
+                </div>
+                <div className={styles.progressDots}>
+                  {sections.map((s, i) => (
+                    <div
+                      key={s.id}
+                      className={`${styles.progressDot} ${
+                        i <= activeIndex ? styles.active : ''
+                      } ${i === activeIndex ? styles.current : ''}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.panelsContainer}>
+                {sections.map((s, i) => (
+                  <div
+                    key={s.id}
+                    className={`${styles.panel} ${
+                      i === activeIndex ? styles.active : ''
+                    }`}
+                    style={{ zIndex: i === activeIndex ? 2 : 1 }}
+                  >
+                    <div
+                      className={styles.panelContent}
+                      ref={(el) => (textWrapRefs.current[i] = el)}
+                    >
+                      <span className={styles.tag}>{s.tag}</span>
+                      <span className={styles.eyebrow}>{s.subtitle}</span>
+                      <h2 className={styles.title}>{s.title}</h2>
+                      <p className={styles.description}>{s.desc}</p>
+                      <button className={styles.ctaButton}>
+                        Learn More
+                        <svg
+                          className={styles.arrowIcon}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M5 12H19M19 12L12 5M19 12L12 19"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — 60% */}
+            <div className={styles.rightContent}>
+              <div className={styles.imageContainer}>
+                {/* All images stacked in one tall column. GSAP slides this
+                    whole column up/down in direct sync with scroll
+                    position — see the scroll-driven effect above. */}
+                <div
+                  className={styles.imageTrack}
+                  ref={imageTrackRef}
+                  style={{ '--slide-count': TOTAL }}
+                >
+                  {sections.map((s, i) => (
+                    <div key={s.id} className={styles.imageSlide}>
+                      <img
+                        src={s.image}
+                        alt={s.title}
+                        className={styles.image}
+                        loading="lazy"
+                      />
+                      <div className={styles.imageOverlay}>
+                        <div
+                          className={`${styles.imageGlow} ${
+                            i === activeIndex ? styles.active : ''
+                          }`}
+                        />
+                        <div className={styles.imageBorder} />
+                        <span className={styles.imageCounter}>
+                          {String(i + 1).padStart(2, '0')} /{' '}
+                          {String(TOTAL).padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile: stacked cards, pin disabled */}
+      {isMobile && (
+        <div className={styles.mobileCards}>
+          {sections.map((s) => (
+            <div key={s.id} className={styles.mobileCard}>
+              <div className={styles.mobileImageWrapper}>
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  className={styles.mobileImage}
+                  loading="lazy"
+                />
+                <span className={styles.mobileTag}>{s.tag}</span>
+              </div>
+              <div className={styles.mobileContent}>
+                <span className={styles.mobileEyebrow}>{s.subtitle}</span>
+                <h3 className={styles.mobileTitle}>{s.title}</h3>
+                <p className={styles.mobileDesc}>{s.desc}</p>
+                <button className={styles.mobileCta}>Learn More →</button>
+              </div>
             </div>
           ))}
         </div>
-
-
-        <div className={styles.sliderIndicator}>
-          {activeIndex + 1} / {sections.length}
-        </div>
-
-        <p className={styles.swipeHint}>
-          Swipe left to view more →
-        </p>
-        {activeIndex === sections.length - 1 && (
-          <p className={styles.continueText}>
-            Scroll down to continue ↓
-          </p>
-        )}
-      </div>
-
-    </div>
+      )}
+    </section>
   );
 };
 

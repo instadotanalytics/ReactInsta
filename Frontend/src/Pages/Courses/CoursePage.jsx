@@ -108,28 +108,12 @@ const CoursePage = () => {
   const observerRef = useRef(null)
   const isFirstRender = useRef(true)
 
-  const bannerImages = useMemo(() => [
-    'https://i.pinimg.com/1200x/73/5f/4b/735f4b0be1a783ac93ef3ec1a6fbaa0d.jpg',
-    'https://i.pinimg.com/736x/6d/16/a3/6d16a301e656ab223942728e9e293e8b.jpg',
-    'https://i.pinimg.com/1200x/c1/63/07/c16307103e86c604c6bc98c78aa84d4b.jpg',
-    'https://i.pinimg.com/736x/7b/fd/87/7bfd875e85fbbed980e9df59bcde8579.jpg',
-    'https://i.pinimg.com/1200x/b0/bf/7b/b0bf7b591bb0295c182c7992c65617f0.jpg',
-    'https://i.pinimg.com/1200x/3f/bd/39/3fbd39179ec2be6cd25a41cfdfe94b9a.jpg',
-    'https://i.pinimg.com/1200x/74/a7/b2/74a7b2d8f733bcc8c984685bca93f387.jpg',
-    'https://i.pinimg.com/736x/bf/00/7a/bf007a1fb2c3fbc87e5679c4631d8513.jpg',
-    'https://i.pinimg.com/736x/4c/29/6a/4c296a3cf88c70d4b62759ecb6ae4bd2.jpg',
-    'https://i.pinimg.com/1200x/1e/35/69/1e3569f36a9b5d2eada251ef4daec261.jpg',
-  ], [])
+
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
   // Banner auto-slide
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev === bannerImages.length - 1 ? 0 : prev + 1))
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [bannerImages.length])
+
 
   // Progressive rendering of remaining courses
   const renderRemainingCourses = useCallback((filtered, startIndex) => {
@@ -248,14 +232,6 @@ const CoursePage = () => {
       setIsRendering(false)
     }
   }, [searchTerm, selectedCategory, courses, renderRemainingCourses])
-
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev === bannerImages.length - 1 ? 0 : prev + 1))
-  }, [bannerImages.length])
-
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev === 0 ? bannerImages.length - 1 : prev - 1))
-  }, [bannerImages.length])
 
   const getImageUrl = useCallback((imagePath) => {
     if (!imagePath) return '/default-course-image.jpg'
@@ -388,30 +364,7 @@ const CoursePage = () => {
         )}
       </div>
 
-      {/* Banner */}
-      <div className={styles.banner}>
-        <button className={`${styles.navButton} ${styles.prevButton}`} onClick={prevSlide}>❮</button>
-        <div className={styles.imageContainer}>
-          {bannerImages.map((image, index) => (
-            <div
-              key={index}
-              className={`${styles.slide} ${index === currentIndex ? styles.active : ''}`}
-            >
-              <img src={image} alt={`Slide ${index + 1}`} loading="lazy" />
-            </div>
-          ))}
-        </div>
-        <button className={`${styles.navButton} ${styles.nextButton}`} onClick={nextSlide}>❯</button>
-        <div className={styles.dots}>
-          {bannerImages.map((_, index) => (
-            <span
-              key={index}
-              className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ''}`}
-              onClick={() => setCurrentIndex(index)}
-            />
-          ))}
-        </div>
-      </div>
+   
 
       <Companypartners />
       <WhyJoinUS />
