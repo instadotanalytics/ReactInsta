@@ -1,222 +1,402 @@
-import React, { useEffect, useRef } from "react";
-import styles from "./OurImpact.module.css";
+// OurImpact.jsx - Premium ITGeeks-Style Sticky Storytelling
+import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from './OurImpact.module.css';
 
-// ─── Wave Canvas Animation ───
-const useWaveCanvas = (canvasRef) => {
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = canvas.getContext('2d');
-    let width, height, dpr;
-    let time = 0;
-    let rafId;
+const sections = [
+  {
+    id: 1,
+    title: 'Trusted By Learners Across India',
+    subtitle: 'Empowering Careers Nationwide',
+    desc: 'We provide industry-focused training programs that help learners gain real-world skills and grow their careers. Our comprehensive approach ensures every student achieves their professional goals.',
+    image: '/images/download (1).jfif',
+    tag: '01',
+  },
+  {
+    id: 2,
+    title: 'Industry-Aligned Curriculum',
+    subtitle: 'Built with Industry Experts',
+    desc: 'Courses designed with top industry experts. Stay ahead with industry-relevant skills, practical learning experiences, and up-to-date content tailored to employer expectations.',
+    image: '/images/Importancia de la protección de datos y privacidad.jfif',
+    tag: '02',
+  },
+  {
+    id: 3,
+    title: 'Hands-on Projects',
+    subtitle: 'Real-World Experience',
+    desc: 'Build a real-world portfolio with live projects. Apply your knowledge to practical challenges, gain industry experience, and develop job-ready skills through hands-on learning.',
+    image: '/images/growth now.jfif',
+    tag: '03',
+  },
+  {
+    id: 4,
+    title: 'Global Certification',
+    subtitle: 'Recognized Worldwide',
+    desc: 'Internationally recognized certificates that showcase your expertise and boost your career prospects. Gain credentials valued by employers across industries and around the world.',
+    image: '/images/download (2).jfif',
+    tag: '04',
+  },
+  {
+    id: 5,
+    title: 'Expert Mentors',
+    subtitle: 'Learn from the Best',
+    desc: 'Learn from experienced industry professionals who provide valuable guidance, practical insights, and mentorship to help you build confidence and succeed in your career.',
+    image: '/images/download (3).jfif',
+    tag: '05',
+  },
+];
 
-    const resize = () => {
-      const parent = canvas.parentElement;
-      width = parent.clientWidth;
-      height = parent.clientHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
+const TOTAL = sections.length;
 
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-      
-      const waveCount = 3;
-      const colors = [
-        'rgba(255, 215, 0, 0.08)',
-        'rgba(255, 180, 0, 0.06)',
-        'rgba(255, 160, 0, 0.04)'
-      ];
-
-      for (let w = 0; w < waveCount; w++) {
-        ctx.beginPath();
-        const offset = (w / waveCount) * Math.PI * 2;
-        const amplitude = 20 + w * 8;
-        const frequency = 0.015 + w * 0.003;
-        const yOffset = height * (0.3 + w * 0.15);
-
-        for (let x = 0; x <= width; x += 1) {
-          const y = yOffset + 
-            Math.sin(x * frequency + time + offset) * amplitude +
-            Math.sin(x * frequency * 0.5 + time * 0.7 + offset * 1.3) * amplitude * 0.5;
-          
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-
-        ctx.strokeStyle = colors[w];
-        ctx.lineWidth = 2 + w;
-        ctx.stroke();
-      }
-
-      // Second set of waves flowing opposite direction
-      for (let w = 0; w < 2; w++) {
-        ctx.beginPath();
-        const offset = w * Math.PI + 1.2;
-        const amplitude = 15 + w * 6;
-        const frequency = 0.02 + w * 0.005;
-        const yOffset = height * (0.7 + w * 0.12);
-
-        for (let x = 0; x <= width; x += 1) {
-          const y = yOffset + 
-            Math.sin((width - x) * frequency + time * 0.6 + offset) * amplitude +
-            Math.cos(x * frequency * 0.4 + time * 0.4) * amplitude * 0.3;
-          
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-
-        ctx.strokeStyle = `rgba(255, 215, 0, ${0.05 + w * 0.02})`;
-        ctx.lineWidth = 1.5 + w;
-        ctx.stroke();
-      }
-
-      // Glowing dots on wave intersections
-      for (let i = 0; i < 8; i++) {
-        const x = (i / 8) * width;
-        const y = height * 0.5 + 
-          Math.sin(x * 0.02 + time * 0.5) * 25 +
-          Math.sin(x * 0.01 + time * 0.3) * 15;
-        
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 8);
-        gradient.addColorStop(0, 'rgba(255, 215, 0, 0.2)');
-        gradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(x, y, 8, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      time += 0.02;
-      rafId = requestAnimationFrame(draw);
-    };
-
-    resize();
-    draw();
-    window.addEventListener('resize', resize);
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [canvasRef]);
-};
-
-// ─── Impact Icon ───
-const ImpactIcon = () => (
-  <div className={styles.iconWrapper}>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
+// ─── Skeleton ─────────────────────────────────────────────────────
+const SkeletonOurImpact = () => (
+  <div className={styles.skeletonWrapper}>
+    <div className={styles.skeletonContainer}>
+      <div className={styles.skeletonLeft}>
+        <div className={styles.skeletonEyebrow} />
+        <div className={styles.skeletonTitle} />
+        <div className={styles.skeletonSubtitle} />
+        <div className={styles.skeletonDesc}>
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+        </div>
+        <div className={styles.skeletonButton} />
+      </div>
+      <div className={styles.skeletonRight}>
+        <div className={styles.skeletonImage} />
+      </div>
+    </div>
   </div>
 );
 
-const features = [
-  {
-    title: "Industry-Aligned Curriculum",
-    desc: "Courses designed with top industry experts",
-  },
-  {
-    title: "Hands-on Projects",
-    desc: "Build real-world portfolio with live projects",
-  },
-  {
-    title: "Global Certification",
-    desc: "Internationally recognized certificates",
-  },
-  {
-    title: "Expert Mentors",
-    desc: "Learn from seasoned industry professionals",
-  },
-];
-
-const stats = [
-  { number: "10K+", label: "Students Trained" },
-  { number: "95%",  label: "Placement Rate"   },
-  { number: "50+",  label: "Expert Mentors"   },
-  { number: "100+", label: "Corporate Partners"},
-];
-
 const OurImpact = () => {
-  const canvasRef = useRef(null);
-  useWaveCanvas(canvasRef);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const textWrapRefs = useRef([]);
+  const imageTrackRef = useRef(null);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 992 : false
+  );
+
+  // ─── Resize watcher ───────────────────────────────────────────
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 992);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  // ─── Simulated load ───────────────────────────────────────────
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(t);
+  }, []);
+
+  // ─── Core scroll-driven storytelling (one step per scroll) ─────
+  useEffect(() => {
+    if (loading || isMobile) return;
+
+    const section = sectionRef.current;
+    const imageTrack = imageTrackRef.current;
+    if (!section || !imageTrack) return;
+
+    // Current step the UI is showing (0..TOTAL-1)
+    let current = 0;
+    let isAnimating = false;
+    let queuedDirection = 0;
+
+    const slideHeight = () => imageTrack.offsetHeight / TOTAL;
+
+    const goToStep = (nextIndex) => {
+      if (nextIndex < 0 || nextIndex > TOTAL - 1) return;
+      if (nextIndex === current) return;
+
+      isAnimating = true;
+      const goingForward = nextIndex > current;
+
+      // ── Image: move exactly one slide-height ──
+      gsap.to(imageTrack, {
+        y: -nextIndex * slideHeight(),
+        duration: 0.85,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          isAnimating = false;
+          if (queuedDirection !== 0) {
+            const dir = queuedDirection;
+            queuedDirection = 0;
+            goToStep(current + dir);
+          }
+        },
+      });
+
+      // ── Text: fade/slide out old, fade/slide in new ──
+      const prevText = textWrapRefs.current[current];
+      const nextText = textWrapRefs.current[nextIndex];
+
+      if (prevText) {
+        gsap.to(prevText, {
+          opacity: 0,
+          y: goingForward ? -40 : 40,
+          duration: 0.4,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      }
+      if (nextText) {
+        gsap.fromTo(
+          nextText,
+          { opacity: 0, y: goingForward ? 40 : -40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          }
+        );
+        const kids = nextText.children;
+        if (kids?.length) {
+          gsap.fromTo(
+            kids,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              stagger: 0.07,
+              ease: 'power2.out',
+              delay: 0.05,
+              overwrite: 'auto',
+            }
+          );
+        }
+      }
+
+      current = nextIndex;
+      setActiveIndex(nextIndex);
+    };
+
+    const ctx = gsap.context(() => {
+      // Text panels start hidden except the first
+      textWrapRefs.current.forEach((el, i) => {
+        if (!el) return;
+        gsap.set(el, { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 40 });
+      });
+      gsap.set(imageTrack, { y: 0 });
+
+      // ── Pin the section ──
+      const pinST = ScrollTrigger.create({
+        id: 'impactPin',
+        trigger: section,
+        start: 'top top',
+        end: '+=100vh',
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      });
+
+      // ── Wheel handler ──
+      const onWheel = (e) => {
+        if (!pinST.isActive) return;
+
+        const dir = e.deltaY > 0 ? 1 : -1;
+        const atStart = current === 0 && dir < 0;
+        const atEnd = current === TOTAL - 1 && dir > 0;
+        if (atStart || atEnd) return;
+
+        e.preventDefault();
+
+        if (isAnimating) {
+          queuedDirection = dir;
+          return;
+        }
+        goToStep(current + dir);
+      };
+
+      // ── Touch handler ──
+      let touchStartY = 0;
+      const onTouchStart = (e) => {
+        touchStartY = e.touches[0].clientY;
+      };
+      const onTouchMove = (e) => {
+        if (!pinST.isActive) return;
+        const deltaY = touchStartY - e.touches[0].clientY;
+        if (Math.abs(deltaY) < 30) return;
+
+        const dir = deltaY > 0 ? 1 : -1;
+        const atStart = current === 0 && dir < 0;
+        const atEnd = current === TOTAL - 1 && dir > 0;
+        if (atStart || atEnd) return;
+
+        e.preventDefault();
+        touchStartY = e.touches[0].clientY;
+
+        if (isAnimating) {
+          queuedDirection = dir;
+          return;
+        }
+        goToStep(current + dir);
+      };
+
+      window.addEventListener('wheel', onWheel, { passive: false });
+      window.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: false });
+
+      const onResize = () => {
+        gsap.set(imageTrack, { y: -current * slideHeight() });
+      };
+      window.addEventListener('resize', onResize);
+
+      return () => {
+        window.removeEventListener('wheel', onWheel);
+        window.removeEventListener('touchstart', onTouchStart);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('resize', onResize);
+      };
+    }, section);
+
+    return () => ctx.revert();
+  }, [loading, isMobile]);
+
+  if (loading) {
+    return (
+      <section className={styles.impactSection}>
+        <SkeletonOurImpact />
+      </section>
+    );
+  }
 
   return (
-    <section className={styles.section}>
-      <canvas ref={canvasRef} className={styles.waveCanvas} aria-hidden="true" />
-      
-      <div className={styles.container}>
-        <div className={styles.content}>
-
-          {/* ── LEFT ── */}
-          <div className={styles.left}>
-           
-
-            <h2 className={styles.title}>
-              <span className={styles.titleLine1}>Transforming Careers</span>
-              <br />
-              <span className={styles.titleLine2}>Through <span className={styles.highlight}>Excellence</span></span>
-            </h2>
-
-            <p className={styles.desc}>
-              We provide industry-focused training programs that help learners
-              gain real-world skills and grow their careers. Our comprehensive
-              approach ensures every student achieves their professional goals.
-            </p>
-
-            <div className={styles.features}>
-              {features.map((f, i) => (
-                <div className={styles.featureItem} key={i}>
-                  <div className={styles.featureIcon}>
-                    <ImpactIcon />
-                  </div>
-                  <div className={styles.featureContent}>
-                    <h4>{f.title}</h4>
-                    <p>{f.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.stats}>
-              {stats.map((s, i) => (
-                <div className={styles.stat} key={i}>
-                  <div className={styles.statNumber}>
-                    <span>{s.number}</span>
-                  </div>
-                  <div className={styles.statLabel}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── RIGHT ── */}
-          <div className={styles.right}>
-            <div className={styles.imageWrapper}>
-              {/* Top-right floating rating card */}
-           
-
-              <img
-                src="https://i.pinimg.com/1200x/83/8c/cc/838ccc2629857f40606a3d6927de1e72.jpg"
-                alt="Training session with students and mentor"
-                className={styles.image}
-                loading="lazy"
-              />
-
-             
-
-              <div className={styles.pattern} />
-            </div>
-          </div>
-
-        </div>
+    <section
+      className={`${styles.impactSection} ${isMobile ? styles.mobileView : ''}`}
+      ref={sectionRef}
+    >
+      <div className={styles.bgEffects}>
+        <div className={styles.bgGlow1} />
+        <div className={styles.bgGlow2} />
+        <div className={styles.bgGrid} />
       </div>
+
+      {/* Desktop: pinned storytelling track */}
+      {!isMobile && (
+        <div className={styles.impactContainer} ref={trackRef}>
+          <div className={styles.contentWrapper}>
+            {/* LEFT — 40% */}
+            <div className={styles.leftContent}>
+              <div className={styles.progressWrapper}>
+                <div className={styles.progressLine}>
+                  <div
+                    className={styles.progressFill}
+                    style={{
+                      height: `${(activeIndex / (TOTAL - 1)) * 100}%`,
+                    }}
+                  />
+                </div>
+                <div className={styles.progressDots}>
+                  {sections.map((s, i) => (
+                    <div
+                      key={s.id}
+                      className={`${styles.progressDot} ${
+                        i <= activeIndex ? styles.active : ''
+                      } ${i === activeIndex ? styles.current : ''}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.panelsContainer}>
+                {sections.map((s, i) => (
+                  <div
+                    key={s.id}
+                    className={`${styles.panel} ${
+                      i === activeIndex ? styles.active : ''
+                    }`}
+                    style={{ zIndex: i === activeIndex ? 2 : 1 }}
+                  >
+                    <div
+                      className={styles.panelContent}
+                      ref={(el) => (textWrapRefs.current[i] = el)}
+                    >
+                      <span className={styles.tag}>{s.tag}</span>
+                      <span className={styles.eyebrow}>{s.subtitle}</span>
+                      <h2 className={styles.title}>{s.title}</h2>
+                      <p className={styles.description}>{s.desc}</p>
+                   
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — 60% */}
+            <div className={styles.rightContent}>
+              <div className={styles.imageContainer}>
+                <div
+                  className={styles.imageTrack}
+                  ref={imageTrackRef}
+                  style={{ '--slide-count': TOTAL }}
+                >
+                  {sections.map((s, i) => (
+                    <div key={s.id} className={styles.imageSlide}>
+                      <img
+                        src={s.image}
+                        alt={s.title}
+                        className={styles.image}
+                        loading="lazy"
+                      />
+                      <div className={styles.imageOverlay}>
+                        <div
+                          className={`${styles.imageGlow} ${
+                            i === activeIndex ? styles.active : ''
+                          }`}
+                        />
+                        <div className={styles.imageBorder} />
+                        <span className={styles.imageCounter}>
+                          {String(i + 1).padStart(2, '0')} /{' '}
+                          {String(TOTAL).padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile: stacked cards */}
+      {isMobile && (
+        <div className={styles.mobileCards}>
+          {sections.map((s) => (
+            <div key={s.id} className={styles.mobileCard}>
+              <div className={styles.mobileImageWrapper}>
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  className={styles.mobileImage}
+                  loading="lazy"
+                />
+                <span className={styles.mobileTag}>{s.tag}</span>
+              </div>
+              <div className={styles.mobileContent}>
+                <span className={styles.mobileEyebrow}>{s.subtitle}</span>
+                <h3 className={styles.mobileTitle}>{s.title}</h3>
+                <p className={styles.mobileDesc}>{s.desc}</p>
+               
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

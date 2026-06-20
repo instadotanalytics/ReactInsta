@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import styles from './CoursesHome.module.css';
-import { 
+// CoursesHome.jsx
+import React, { useEffect, useRef } from "react";
+import styles from "./CoursesHome.module.css";
+import {
   FaRocket,
   FaArrowRight,
   FaStar,
@@ -14,122 +15,253 @@ import {
   FaLaptopCode,
   FaChartLine,
   FaGlobe,
-  FaBriefcase
-} from 'react-icons/fa';
-
+  FaBriefcase,
+  FaCode,
+  FaDatabase,
+  FaBullhorn,
+} from "react-icons/fa";
 
 const CoursesHome = () => {
+  const canvasRef = useRef(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Canvas Animation with Checkered Pattern
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let particles = [];
+    let checkeredSquares = [];
+
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement;
+      canvas.width = parent.offsetWidth;
+      canvas.height = parent.offsetHeight;
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Create checkered pattern squares
+    const createCheckeredPattern = () => {
+      const gridSize = 40;
+      const cols = Math.ceil(canvas.width / gridSize);
+      const rows = Math.ceil(canvas.height / gridSize);
+
+      checkeredSquares = [];
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          if ((i + j) % 2 === 0) {
+            checkeredSquares.push({
+              x: i * gridSize,
+              y: j * gridSize,
+              width: gridSize,
+              height: gridSize,
+              opacity: Math.random() * 0.18 + 0.08,
+              pulse: Math.random() * Math.PI * 2,
+              pulseSpeed: Math.random() * 0.01 + 0.005,
+            });
+          }
+        }
+      }
+    };
+
+    createCheckeredPattern();
+
+    // Particle class
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.3 + 0.1;
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.005;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.pulse += this.pulseSpeed;
+
+        // Wrap around edges
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+
+      draw() {
+        const pulseOpacity = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
+        ctx.fillStyle = `rgba(99, 102, 241, ${pulseOpacity * 0.8})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Create particles
+    const particleCount = 100;
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    // Draw connections
+    const drawConnections = () => {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
+            const opacity = 0.05 * (1 - distance / 150);
+            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.8})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw checkered pattern
+      checkeredSquares.forEach((square) => {
+        square.pulse += square.pulseSpeed;
+        const pulseOpacity =
+          square.opacity * (0.7 + 0.3 * Math.sin(square.pulse));
+        ctx.fillStyle = `rgba(99,102,241, ${pulseOpacity})`;
+        ctx.fillRect(square.x, square.y, square.width, square.height);
+
+        // Add border to checkered squares
+        ctx.strokeStyle = `rgba(99,102,241, ${pulseOpacity * 0.8})`;
+        ctx.lineWidth = 0.5;
+        ctx.strokeRect(square.x, square.y, square.width, square.height);
+      });
+
+      // Draw particles
+      particles.forEach((particle) => {
+        particle.update();
+        particle.draw();
+      });
+
+      drawConnections();
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Recreate checkered pattern on resize
+    const handleResize = () => {
+      resizeCanvas();
+      createCheckeredPattern();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const courseStats = [
-    { value: "25+", label: "Courses" },
-    { value: "5000+", label: "Students" },
-    { value: "150+", label: "Batches" },
-    { value: "4.9", label: "Rating" }
+    { value: "25+", label: "Courses", icon: <FaBook /> },
+    { value: "5000+", label: "Students", icon: <FaUsers /> },
+    { value: "150+", label: "Batches", icon: <FaClock /> },
+    { value: "4.9", label: "Rating", icon: <FaStar /> },
   ];
 
   const popularCourses = [
-    { name: "Full Stack Development", icon: <FaLaptopCode />, color: "#4361ee" },
-    { name: "Data Science", icon: <FaChartLine />, color: "#f72585" },
-    { name: "Digital Marketing", icon: <FaGlobe />, color: "#06d6a0" }
+    {
+      name: "Full Stack Development",
+      icon: <FaCode />,
+      description: "MERN, Python, Cloud",
+      color: "#4361ee",
+    },
+    {
+      name: "Data Science",
+      icon: <FaDatabase />,
+      description: "ML, AI, Analytics",
+      color: "#f72585",
+    },
+    {
+      name: "Digital Marketing",
+      icon: <FaBullhorn />,
+      description: "SEO, Social Media, Ads",
+      color: "#06d6a0",
+    },
+  ];
+
+  const features = [
+    "Live Classes",
+    "1:1 Mentorship",
+    "Placement Support",
+    "Certification",
   ];
 
   return (
     <div className={styles.coursesHome}>
-      
-
-      {/* Courses Hero Banner Section */}
       <section className={styles.heroSection}>
+        <canvas ref={canvasRef} className={styles.canvasBackground} />
+
         <div className={styles.heroContainer}>
-          <div className={styles.heroContent}>
-            <div className={styles.heroTag}>
-              <FaGraduationCap className={styles.tagIcon} />
-              <span>Learn from Industry Experts 🎓</span>
+          <div className={styles.centerHero}>
+            <div className={styles.topStats}>
+              <span>25+ Courses</span>
+              <span>5000+ Students</span>
+              <span>150+ Batches</span>
+              <span>4.9 Rating</span>
             </div>
+
             <h1 className={styles.heroTitle}>
-              <span className={styles.gradientText}>Upskill Yourself</span>
-              <br />with Industry-Ready Courses
+              Upskill Yourself
+              <br />
+              <span className={styles.gradientText}>
+                with Industry-Ready Courses
+              </span>
             </h1>
+
             <p className={styles.heroDesc}>
-              Choose from 25+ professional courses designed by industry experts. 
-              Get certified and boost your career with 100% placement assistance.
+              Learn in-demand skills with expert mentors, industry-recognized
+              certifications, and career-focused training programs.
             </p>
 
-            <div className={styles.courseStats}>
-              {courseStats.map((stat, index) => (
-                <div key={index} className={styles.statItem}>
-                  <span className={styles.statValue}>{stat.value}</span>
-                  <span className={styles.statLabel}>{stat.label}</span>
-                </div>
+            <div className={styles.courseFeatures}>
+              {features.map((feature, index) => (
+                <span key={index} className={styles.featureBadge}>
+                  <FaCheckCircle />
+                  {feature}
+                </span>
               ))}
             </div>
 
-          
-
-            <div className={styles.courseFeatures}>
-              <span className={styles.featureBadge}>
-                <FaCheckCircle /> Live Classes
-              </span>
-              <span className={styles.featureBadge}>
-                <FaCheckCircle /> 1:1 Mentorship
-              </span>
-              <span className={styles.featureBadge}>
-                <FaCheckCircle /> Placement Support
-              </span>
-              <span className={styles.featureBadge}>
-                <FaCheckCircle /> Certification
-              </span>
-            </div>
-
-            <div className={styles.popularCourses}>
-              <p className={styles.popularText}>Popular Courses:</p>
-              <div className={styles.courseTags}>
-                {popularCourses.map((course, index) => (
-                  <span key={index} className={styles.courseTag} style={{ borderColor: course.color }}>
-                    <span style={{ color: course.color }}>{course.icon}</span>
-                    {course.name}
+            <div className={styles.courseTags}>
+              {popularCourses.map((course, index) => (
+                <div key={index} className={styles.courseTag}>
+                  <span
+                    className={styles.courseIcon}
+                    style={{ color: course.color }}
+                  >
+                    {course.icon}
                   </span>
-                ))}
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.heroImageWrapper}>
-            <div className={styles.heroImageContainer}>
-              <img 
-                src="https://i.pinimg.com/1200x/cc/57/0b/cc570b0b64ad6ed4e605725470d76f32.jpg" 
-                alt="Online Learning"
-                className={styles.heroImage}
-              />
-              <div className={styles.floatingCard} style={{ top: '15%', right: '10%' }}>
-                <FaBook className={styles.cardIcon} style={{ color: '#4361ee' }} />
-                <div>
-                  <strong>25+</strong>
-                  <span>Courses</span>
+                  <span>{course.name}</span>
                 </div>
-              </div>
-              <div className={styles.floatingCard} style={{ bottom: '20%', left: '10%' }}>
-                <FaCertificate className={styles.cardIcon} style={{ color: '#f72585' }} />
-                <div>
-                  <strong>Certified</strong>
-                  <span>Courses</span>
-                </div>
-              </div>
-              <div className={styles.floatingCard} style={{ top: '50%', right: '5%' }}>
-                <FaClock className={styles.cardIcon} style={{ color: '#06d6a0' }} />
-                <div>
-                  <strong>Flexible</strong>
-                  <span>Timings</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
-
-      
     </div>
   );
 };

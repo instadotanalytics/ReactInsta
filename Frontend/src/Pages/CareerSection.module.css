@@ -1,18 +1,18 @@
-
-/* CareerSection.module.css */
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Outfit:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;600;700;800;900&display=swap");
 
 :root {
-  --cs-bg: #ffffff;
-  --cs-border: rgba(37, 99, 235, 0.08);
-  --cs-ink: #0a1628;
-  --cs-ink-muted: rgba(10, 22, 40, 0.5);
-  --cs-ink-faint: rgba(37, 99, 235, 0.12);
+  --cs-bg: #f8fafc;
+  --cs-card-bg: #ffffff;
+  --cs-ink: #0f172a;
+  --cs-ink-muted: #64748b;
   --cs-blue: #2563eb;
-  --cs-blue-light: #4b8cff;
-  --cs-blue-bg: rgba(37, 99, 235, 0.06);
-  --cs-blue-border: rgba(37, 99, 235, 0.2);
+  --cs-blue-dark: #1d4ed8;
+  --cs-blue-light: #3b82f6;
+  --cs-blue-bg: #eff6ff;
+  --cs-border: #e2e8f0;
+  --cs-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --cs-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --cs-shadow-lg: 0 10px 40px rgba(37, 99, 235, 0.15);
   --font-display: "Outfit", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
 }
@@ -21,205 +21,362 @@
   padding: 100px 0;
   background: var(--cs-bg);
   font-family: var(--font-body);
+  overflow: hidden;
 }
 
 .container {
   width: 100%;
-  max-width: 1500px;
-  margin: auto;
-  padding: 0 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
 }
 
-/* Header */
-.headerRow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Header Styles */
+.header {
   text-align: center;
-  margin-bottom: 50px;
-  width: 100%;
-}
-
-
-.headerLeft {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-bottom: 60px;
 }
 
 .title {
-  font-family: var(--font-display);
-  font-size: 60px;
-  font-weight: 800;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 600;
   color: var(--cs-ink);
-  line-height: 1.25;
-  text-align: center;
-  max-width: 850px;
-  margin: 0 auto;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 auto 20px;
+  max-width: 900px;
 }
 
 .titleAccent {
-  color: var(--cs-blue);
+  background: linear-gradient(135deg, #004ffa, #3d00a7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-
 
 .subtitle {
   font-size: 18px;
   color: var(--cs-ink-muted);
-  margin-top: 18px;
-  text-align: center;
-  max-width: 650px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 400;
 }
+
 /* Slider Wrapper */
 .sliderWrapper {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  margin: 0 -16px;
 }
 
-/* Arrows */
+/* Arrow Buttons */
 .arrowBtn {
-  width: 52px;
-  height: 52px;
-  border: none;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--cs-border);
   border-radius: 50%;
-  background: white;
+  background: var(--cs-card-bg);
   color: var(--cs-blue);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--cs-shadow-sm);
   cursor: pointer;
-  font-size: 10px;
-  z-index: 20;
-  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
 }
 
-.arrowBtn:hover {
+.arrowBtn:hover:not(:disabled) {
   background: var(--cs-blue);
   color: white;
-  transform: scale(1.08);
+  border-color: var(--cs-blue);
+  box-shadow: var(--cs-shadow-lg);
+  transform: translateY(-2px);
 }
 
-/* Left arrow */
+.arrowBtn:active:not(:disabled) {
+  transform: translateY(0) scale(0.95);
+}
+
+.arrowDisabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .leftArrow {
-  margin-right: 20px;
-  flex-shrink: 0;
+  margin-right: auto;
 }
 
-/* Right arrow */
 .rightArrow {
-  margin-left: 20px;
-  flex-shrink: 0;
+  margin-left: auto;
 }
 
-/* Slider */
+/* Slider Track */
 .sliderTrack {
   overflow: hidden;
   flex: 1;
+  padding: 8px 4px;
 }
 
 .slider {
   display: flex;
-  gap: 14px;
+  gap: 20px;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  padding: 8px 0;
 }
 
 .slider::-webkit-scrollbar {
   display: none;
 }
 
-/* Card */
+/* Card Styles */
 .card {
-  flex: 0 0 260px;
-  height: 300px;
-  background: white;
-  border:none;
-  border-radius: 24px;
-  padding: 24px;
+  flex: 0 0 300px;
+  background: var(--cs-card-bg);
+  border: 1px solid var(--cs-border);
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  scroll-snap-align: start;
+  box-shadow: var(--cs-shadow-sm);
 }
 
 
-/* Image */
+/* Image Container */
 .cardImageWrap {
-  max-width: 1100px;
-  height: 160px;
-  border-radius: 18px;
-  background: rgba(37, 99, 235, 0.04);
-  border: white;
+  width: 100%;
+  height: 255px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  overflow: hidden;
+  position: relative;
+}
+
+.cardImageWrap::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 .cardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 14px;
+  transition: transform 0.3s ease;
 }
-/* Text */
 
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+/* Card Content */
+.cardContent {
+  padding: 20px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
 .cardTitle {
-  font-size: 18px;
+  font-family: var(--font-display);
+  font-size: 20px;
   font-weight: 700;
   color: var(--cs-ink);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  line-height: 1.3;
 }
 
 .cardDesc {
-  font-size: 13px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--cs-ink-muted);
+  font-weight: 400;
+  flex: 1;
 }
 
-/* Dots */
+/* Dots Navigation */
 .dotsRow {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 35px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: none;
-  background: var(--cs-ink-faint);
+  border: 2px solid var(--cs-border);
+  background: transparent;
   cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.dot.active {
-  width: 28px;
-  border-radius: 4px;
+.dot:hover {
+  border-color: var(--cs-blue-light);
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.activeDot {
+  width: 32px;
+  border-radius: 12px;
   background: var(--cs-blue);
+  border-color: var(--cs-blue);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .sliderWrapper {
-    gap: 10px;
+.activeDot:hover {
+  background: var(--cs-blue-dark);
+  border-color: var(--cs-blue-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .careerSection {
+    padding: 80px 0;
+  }
+
+  .title {
+    font-size: clamp(28px, 4vw, 48px);
   }
 
   .card {
     flex: 0 0 280px;
-    height: auto;
+  }
+
+  .cardImageWrap {
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .careerSection {
+    padding: 60px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header {
+    margin-bottom: 40px;
   }
 
   .title {
-    font-size: 34px;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .sliderWrapper {
+    gap: 8px;
+    margin: 0 -8px;
   }
 
   .arrowBtn {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .card {
+    flex: 0 0 260px;
+  }
+
+  .cardImageWrap {
+    height: 140px;
+  }
+
+  .cardContent {
+    padding: 16px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+  }
+
+  .cardDesc {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .careerSection {
+    padding: 40px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .arrowBtn {
+    display: none; /* Hide arrows on mobile, rely on swipe */
+  }
+
+  .sliderTrack {
+    padding: 8px 0;
+  }
+
+  .card {
+    flex: 0 0 260px;
+  }
+
+  .dotsRow {
+    margin-top: 24px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cs-bg: #0f172a;
+    --cs-card-bg: #1e293b;
+    --cs-ink: #f1f5f9;
+    --cs-ink-muted: #94a3b8;
+    --cs-border: #334155;
+    --cs-blue-bg: #1e3a5f;
+    --cs-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --cs-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --cs-shadow-lg: 0 10px 40px rgba(37, 99, 235, 0.2);
+  }
+
+  .cardImageWrap {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
   }
 }

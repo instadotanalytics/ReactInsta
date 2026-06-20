@@ -1,8 +1,6 @@
-
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import styles from "./CareerSection.module.css";
-
 
 const images = {
   fullstack: "/FULL.png",
@@ -52,11 +50,31 @@ const trainings = [
   },
 ];
 
-const CARD_W = 260;
+const CARD_WIDTH = 300;
+const CARD_GAP = 20;
 
 const CareerSection = () => {
   const sliderRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+
+  const updateArrowStates = useCallback(() => {
+    if (!sliderRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+    setIsAtStart(scrollLeft <= 10);
+    setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 10);
+  }, []);
+
+  const scrollToIndex = useCallback((index) => {
+    if (!sliderRef.current) return;
+    const scrollPosition = index * (CARD_WIDTH + CARD_GAP);
+    sliderRef.current.scrollTo({
+      left: scrollPosition,
+      behavior: "smooth",
+    });
+    setActiveIdx(index);
+  }, []);
 
   const scroll = useCallback(
     (dir) => {
@@ -67,43 +85,60 @@ const CareerSection = () => {
           ? Math.max(0, activeIdx - 1)
           : Math.min(trainings.length - 1, activeIdx + 1);
 
-      sliderRef.current.scrollLeft = newIdx * CARD_W;
-      setActiveIdx(newIdx);
+      scrollToIndex(newIdx);
     },
-    [activeIdx]
+    [activeIdx, scrollToIndex]
   );
 
-  const scrollToIdx = (i) => {
+  const handleScroll = useCallback(() => {
     if (!sliderRef.current) return;
-    sliderRef.current.scrollLeft = i * CARD_W;
-    setActiveIdx(i);
-  };
+    const scrollLeft = sliderRef.current.scrollLeft;
+    const newIndex = Math.round(scrollLeft / (CARD_WIDTH + CARD_GAP));
+    if (newIndex !== activeIdx) {
+      setActiveIdx(Math.max(0, Math.min(newIndex, trainings.length - 1)));
+    }
+    updateArrowStates();
+  }, [activeIdx, updateArrowStates]);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (slider) {
+      slider.addEventListener("scroll", handleScroll, { passive: true });
+      updateArrowStates();
+      return () => slider.removeEventListener("scroll", handleScroll);
+    }
+  }, [handleScroll, updateArrowStates]);
 
   return (
     <section className={styles.careerSection}>
       <div className={styles.container}>
-        <div className={styles.headerRow}>
-          <div className={styles.headerLeft}>
-            <h2 className={styles.title}>
-              Upgrade Your Skills with{" "}
-              <span className={styles.titleAccent}>Industry-Focused</span>{" "}
-              Training
-            </h2>
-
-            <p className={styles.subtitle}>
-              Hands-on learning, real-world projects, and expert mentorship.
-            </p>
-          </div>
+        {/* Header */}
+        <div className={styles.header}>
+          <h2 className={styles.title}>
+            Upgrade Your Skills with{" "}
+            <span className={styles.titleAccent}>Industry-Focused</span>{" "}
+            Training
+          </h2>
+          <p className={styles.subtitle}>
+            Hands-on learning, real-world projects, and expert mentorship to accelerate your career growth.
+          </p>
         </div>
 
+        {/* Slider */}
         <div className={styles.sliderWrapper}>
+          {/* Left Arrow */}
           <button
-            className={`${styles.arrowBtn} ${styles.leftArrow}`}
+            className={`${styles.arrowBtn} ${styles.leftArrow} ${
+              isAtStart ? styles.arrowDisabled : ""
+            }`}
             onClick={() => scroll("left")}
+            disabled={isAtStart}
+            aria-label="Scroll left"
           >
             <FaArrowLeft />
           </button>
 
+          {/* Cards Track */}
           <div className={styles.sliderTrack}>
             <div className={styles.slider} ref={sliderRef}>
               {trainings.map((item, i) => (
@@ -113,34 +148,41 @@ const CareerSection = () => {
                       src={images[item.image]}
                       alt={item.title}
                       className={styles.cardImage}
+                      loading="lazy"
                     />
                   </div>
-
-                
-
-                  <h3 className={styles.cardTitle}>{item.title}</h3>
-                  <p className={styles.cardDesc}>{item.desc}</p>
+                  <div className={styles.cardContent}>
+                    <h3 className={styles.cardTitle}>{item.title}</h3>
+                    <p className={styles.cardDesc}>{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
+          {/* Right Arrow */}
           <button
-            className={`${styles.arrowBtn} ${styles.rightArrow}`}
+            className={`${styles.arrowBtn} ${styles.rightArrow} ${
+              isAtEnd ? styles.arrowDisabled : ""
+            }`}
             onClick={() => scroll("right")}
+            disabled={isAtEnd}
+            aria-label="Scroll right"
           >
             <FaArrowRight />
           </button>
         </div>
 
+        {/* Navigation Dots */}
         <div className={styles.dotsRow}>
           {trainings.map((_, i) => (
             <button
               key={i}
               className={`${styles.dot} ${
-                i === activeIdx ? styles.active : ""
+                i === activeIdx ? styles.activeDot : ""
               }`}
-              onClick={() => scrollToIdx(i)}
+              onClick={() => scrollToIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>

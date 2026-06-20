@@ -316,10 +316,7 @@ const MicrosoftHeroSection = () => {
                   Choose from 25+ professional courses designed by industry experts.
                   Get certified and boost your career with 100% placement assistance.
                 </p>
-                <div className={styles.ctaButtons}>
-                  <button className={styles.primaryBtn}>Explore Courses</button>
-                  <button className={styles.secondaryBtn}>View Brochure</button>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -397,10 +394,7 @@ const MicrosoftHeroSection = () => {
                   alt="Microsoft Certification Training"
                   className={styles.heroImage}
                 />
-                <div className={styles.imageBadge}>
-                  <FaCertificate className={styles.badgeIcon2} />
-                  <span>Certified Course</span>
-                </div>
+               
               </div>
             </div>
           </div>

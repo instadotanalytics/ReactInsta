@@ -2,9 +2,8 @@
 import React from "react";
 import styles from "./Companypartners.module.css";
 
-const Companypartners = () => {
-  // Partner logos (PNG images with colors)
-  const partners = [
+const Companypartners = ({ partners: customPartners }) => {
+  const defaultPartners = [
     {
       id: 1,
       name: "Microsoft",
@@ -55,59 +54,110 @@ const Companypartners = () => {
       name: "Salesforce",
       logo: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg",
     },
+    {
+      id: 11,
+      name: "Adobe",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Adobe_Corporate_Logo.png",
+    },
+    {
+      id: 12,
+      name: "NVIDIA",
+      logo: "https://upload.wikimedia.org/wikipedia/sco/2/21/Nvidia_logo.svg",
+    },
   ];
 
-  // Duplicate partners for seamless infinite scroll
-  const duplicatedPartners = [
-    ...partners,
-    ...partners,
-    ...partners,
-    ...partners,
-  ];
+  const partners = customPartners || defaultPartners;
+
+  const chunk = (arr, size) => {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunks.push(arr.slice(i, i + size));
+    }
+    return chunks;
+  };
+
+  const rows = chunk(partners, Math.ceil(partners.length / 3));
+  while (rows.length < 3) rows.push(rows[0] || []);
+
+  // 6x repeat for seamless infinite scroll
+  const makeRow = (row) => [...row, ...row, ...row, ...row, ...row, ...row];
 
   return (
-    <div className={styles.companyPartners}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Our Trusted Partners</h2>
-        <p className={styles.subtitle}>
-          We collaborate with industry-leading companies to provide the best
-          learning experience
-        </p>
-
-        <div className={styles.sliderWrapper}>
-          {/* Left smoke effect - more subtle */}
-          <div className={`${styles.smoke} ${styles.smokeLeft}`}>
-            <div className={styles.smokeGradient}></div>
-          </div>
-
-          {/* Right smoke effect - more subtle */}
-          <div className={`${styles.smoke} ${styles.smokeRight}`}>
-            <div className={styles.smokeGradient}></div>
-          </div>
-
-          {/* Scrolling logos container */}
-          <div className={styles.slider}>
-            <div className={styles.slideTrack}>
-              {duplicatedPartners.map((partner, index) => (
-                <div key={`${partner.id}-${index}`} className={styles.slide}>
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className={styles.partnerLogo}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src =
-                        "https://via.placeholder.com/120x50?text=Partner";
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+    <div className={styles.outerContainer}>
+      <section className={styles.companyPartners}>
+        {/* LEFT: Big heading */}
+        <div className={styles.textBlock}>
+          <h2 className={styles.title}>
+            Trusted by<br />
+            Dreamers,
+            Doers and<br />
+            Leaders
+          </h2>
+          <p className={styles.subtitle}>
+            We collaborate with industry-leading companies to provide
+            the best learning experience
+          </p>
         </div>
-      </div>
+
+        {/* RIGHT: Diagonal scrolling logos — pushed to corner */}
+        <div className={styles.diagonalWrapper}>
+          <div className={styles.diagonalInner}>
+
+            {/* Row 1 — scrolls left */}
+            <div className={styles.scrollRow}>
+              <div className={`${styles.track} ${styles.trackLeft}`}>
+                {makeRow(rows[0]).map((p, i) => (
+                  <LogoCard key={`r1-${p.id}-${i}`} partner={p} />
+                ))}
+              </div>
+            </div>
+
+            {/* Row 2 — scrolls right */}
+            <div className={styles.scrollRow}>
+              <div className={`${styles.track} ${styles.trackRight}`}>
+                {makeRow(rows[1]).map((p, i) => (
+                  <LogoCard key={`r2-${p.id}-${i}`} partner={p} />
+                ))}
+              </div>
+            </div>
+
+            {/* Row 3 — scrolls left */}
+            <div className={styles.scrollRow}>
+              <div className={`${styles.track} ${styles.trackLeft}`}>
+                {makeRow(rows[2]).map((p, i) => (
+                  <LogoCard key={`r3-${p.id}-${i}`} partner={p} />
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Fade masks — left fades into black, top & bottom clean */}
+          <div className={`${styles.mask} ${styles.maskTop}`} />
+          <div className={`${styles.mask} ${styles.maskBottom}`} />
+          <div className={`${styles.mask} ${styles.maskLeft}`} />
+          <div className={`${styles.mask} ${styles.maskRight}`} />
+        </div>
+      </section>
     </div>
   );
 };
+
+const LogoCard = ({ partner }) => (
+  <div className={styles.card}>
+    <img
+      src={partner.logo}
+      alt={partner.name}
+      className={styles.logo}
+      loading="lazy"
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.style.display = "none";
+        e.target.nextSibling.style.display = "block";
+      }}
+    />
+    <span className={styles.fallbackName}>{partner.name}</span>
+  </div>
+);
 
 export default Companypartners;

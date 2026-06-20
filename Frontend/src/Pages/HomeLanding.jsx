@@ -132,7 +132,7 @@ export default function HomeLanding() {
 
         <h1 className={styles.title}>
           Built for <span className={styles.accent}>Scale</span> &amp; <span className={styles.accent}>Intelligence.</span>
-          <br />
+          
           Powered by <span className={styles.accent}>AI.</span>
         </h1>
 
