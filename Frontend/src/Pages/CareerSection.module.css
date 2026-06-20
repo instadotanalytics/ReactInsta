@@ -1,443 +1,225 @@
-/* CareerSection.module.css — Modern Blue Theme */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Outfit:wght@300;400;600;700;800&display=swap');
+/* CareerSection.module.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Outfit:wght@300;400;600;700;800&display=swap");
 
 :root {
-  --cs-bg:           #ffffff;
-  --cs-surface:      #f8faff;
-  --cs-surface-2:    #eef4ff;
-  --cs-border:       rgba(37, 99, 235, 0.08);
-  --cs-border-h:     rgba(37, 99, 235, 0.18);
-  --cs-ink:          #0a1628;
-  --cs-ink-soft:     #1a2a4a;
-  --cs-ink-muted:    rgba(10, 22, 40, 0.5);
-  --cs-ink-faint:    rgba(37, 99, 235, 0.12);
-  --cs-blue:         #2563eb;
-  --cs-blue-dark:    #1a4fc3;
-  --cs-blue-light:   #4b8cff;
-  --cs-blue-bg:      rgba(37, 99, 235, 0.06);
-  --cs-blue-border:  rgba(37, 99, 235, 0.2);
-  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-smooth:     cubic-bezier(0.4, 0, 0.2, 1);
-  --font-display:    'Outfit', system-ui, sans-serif;
-  --font-body:       'Inter', system-ui, sans-serif;
+  --cs-bg: #ffffff;
+  --cs-border: rgba(37, 99, 235, 0.08);
+  --cs-ink: #0a1628;
+  --cs-ink-muted: rgba(10, 22, 40, 0.5);
+  --cs-ink-faint: rgba(37, 99, 235, 0.12);
+  --cs-blue: #2563eb;
+  --cs-blue-light: #4b8cff;
+  --cs-blue-bg: rgba(37, 99, 235, 0.06);
+  --cs-blue-border: rgba(37, 99, 235, 0.2);
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
 }
 
-/* ─── Section ────────────────────────────────────────────── */
 .careerSection {
-  padding: 100px 0 110px;
+  padding: 100px 0;
   background: var(--cs-bg);
-  position: relative;
-  overflow: hidden;
   font-family: var(--font-body);
-}
-
-.canvasBg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
 }
 
 .container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 40px;
-  position: relative;
-  z-index: 1;
+  width: 100%;
+  max-width: 1500px;
+  margin: auto;
+  padding: 0 20px;
 }
 
-/* ─── Header ─────────────────────────────────────────────── */
+/* Header */
 .headerRow {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-  margin-bottom: 56px;
-  flex-wrap: wrap;
-}
-
-.headerLeft { flex: 1; min-width: 280px; }
-
-.badge {
-  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  border-radius: 100px;
-  background: var(--cs-blue-bg);
-  border: 1px solid var(--cs-blue-border);
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cs-blue);
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 50px;
+  width: 100%;
 }
 
-.badge svg { 
-  width: 13px; 
-  height: 13px;
-  fill: none;
+
+.headerLeft {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-size: 60px;
   font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
   color: var(--cs-ink);
-  margin: 0 0 16px;
+  line-height: 1.25;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
 }
 
 .titleAccent {
   color: var(--cs-blue);
-  font-style: italic;
-  position: relative;
 }
 
-.titleAccent::after {
-  content: '';
-  position: absolute;
-  bottom: -2px; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--cs-blue), var(--cs-blue-light));
-  border-radius: 2px;
-  opacity: 0.3;
-}
 
 .subtitle {
-  font-size: 1.05rem;
-  font-weight: 400;
+  font-size: 18px;
   color: var(--cs-ink-muted);
-  line-height: 1.8;
-  max-width: 520px;
-  margin: 0;
+  margin-top: 18px;
+  text-align: center;
+  max-width: 650px;
 }
-
-/* ── Arrows ── */
-.arrowGroup {
+/* Slider Wrapper */
+.sliderWrapper {
+  position: relative;
   display: flex;
-  gap: 10px;
-  flex-shrink: 0;
-  padding-bottom: 4px;
+  align-items: center;
+  gap: 12px;
 }
 
+/* Arrows */
 .arrowBtn {
-  width: 48px; height: 48px;
+  width: 52px;
+  height: 52px;
+  border: none;
   border-radius: 50%;
-  border: 1.5px solid var(--cs-border-h);
-  background: var(--cs-surface);
-  color: var(--cs-ink-muted);
-  display: flex; align-items: center; justify-content: center;
+  background: white;
+  color: var(--cs-blue);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: all 0.3s var(--ease-smooth);
+  font-size: 10px;
+  z-index: 20;
+  transition: 0.3s ease;
   flex-shrink: 0;
 }
 
 .arrowBtn:hover {
   background: var(--cs-blue);
-  border-color: var(--cs-blue);
-  color: #ffffff;
+  color: white;
   transform: scale(1.08);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
 }
 
-.arrowBtn:active { transform: scale(0.94); }
-.arrowBtn svg { width: 18px; height: 18px; }
+/* Left arrow */
+.leftArrow {
+  margin-right: 20px;
+  flex-shrink: 0;
+}
 
-/* ─── Slider ─────────────────────────────────────────────── */
+/* Right arrow */
+.rightArrow {
+  margin-left: 20px;
+  flex-shrink: 0;
+}
+
+/* Slider */
 .sliderTrack {
   overflow: hidden;
-  position: relative;
-}
-
-.sliderTrack::before,
-.sliderTrack::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 80px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.sliderTrack::before {
-  left: 0;
-  background: linear-gradient(90deg, var(--cs-bg), transparent);
-}
-
-.sliderTrack::after {
-  right: 0;
-  background: linear-gradient(-90deg, var(--cs-bg), transparent);
+  flex: 1;
 }
 
 .slider {
   display: flex;
-  gap: 24px;
+  gap: 14px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 16px 4px 24px;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
 }
 
-.slider::-webkit-scrollbar { display: none; }
+.slider::-webkit-scrollbar {
+  display: none;
+}
 
-/* ─── Card ───────────────────────────────────────────────── */
+/* Card */
 .card {
-  flex: 0 0 290px;
-  background: #ffffff;
-  border: 1px solid var(--cs-border);
+  flex: 0 0 260px;
+  height: 300px;
+  background: white;
+  border:none;
   border-radius: 24px;
-  padding: 32px 26px 28px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.5s var(--ease-spring),
-    box-shadow 0.4s var(--ease-smooth),
-    border-color 0.4s;
-  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.card.active {
-  border-color: var(--cs-blue-border);
-  box-shadow: 0 0 0 1px var(--cs-blue-border);
+
+/* Image */
+.cardImageWrap {
+  max-width: 1100px;
+  height: 160px;
+  border-radius: 18px;
+  background: rgba(37, 99, 235, 0.04);
+  border: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 
-/* Glow effect */
-.cardGlow {
-  position: absolute;
-  top: -50%;
-  right: -50%;
+.cardImage {
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.04), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s;
-  pointer-events: none;
+  object-fit: cover;
+  border-radius: 14px;
 }
+/* Text */
 
-.card:hover .cardGlow,
-.card.active .cardGlow {
-  opacity: 1;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; left: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--cs-blue), var(--cs-blue-light));
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.4s var(--ease-spring);
-  border-radius: 0 2px 2px 0;
-}
-
-.card:hover::before,
-.card.active::before {
-  transform: scaleY(1);
-}
-
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--cs-blue), var(--cs-blue-light), transparent);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.card:hover::after,
-.card.active::after {
-  opacity: 0.5;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  border-color: var(--cs-blue-border);
-  box-shadow:
-    0 4px 8px rgba(37, 99, 235, 0.04),
-    0 12px 32px rgba(37, 99, 235, 0.08),
-    0 32px 64px rgba(37, 99, 235, 0.06);
-}
-
-/* ── Icon ── */
-.iconWrap {
-  width: 56px; height: 56px;
-  border-radius: 16px;
-  background: var(--cs-blue-bg);
-  border: 1px solid var(--cs-blue-border);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 22px;
-  transition: all 0.4s var(--ease-spring);
-  flex-shrink: 0;
-}
-
-.card:hover .iconWrap,
-.card.active .iconWrap {
-  transform: scale(1.08) rotate(4deg);
-  background: rgba(37, 99, 235, 0.12);
-  border-color: var(--cs-blue);
-}
-
-.iconWrap svg {
-  width: 24px; height: 24px;
-  color: var(--cs-blue);
-}
-
-/* ── Text ── */
-.cardNum {
-  font-family: var(--font-display);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--cs-ink-faint);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-}
 
 .cardTitle {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 18px;
   font-weight: 700;
   color: var(--cs-ink);
-  line-height: 1.25;
   margin-bottom: 12px;
-  letter-spacing: -0.01em;
 }
 
 .cardDesc {
-  font-size: 0.88rem;
-  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.8;
   color: var(--cs-ink-muted);
-  line-height: 1.7;
-  flex: 1;
-  margin-bottom: 0;
 }
 
-/* ─── Dots ───────────────────────────────────────────────── */
+/* Dots */
 .dotsRow {
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 36px;
+  margin-top: 35px;
 }
 
 .dot {
-  width: 8px; height: 8px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: var(--cs-ink-faint);
-  transition: all 0.4s var(--ease-smooth);
-  cursor: pointer;
   border: none;
-  padding: 0;
-}
-
-.dot:hover { 
-  background: var(--cs-ink-muted); 
-  transform: scale(1.2);
+  background: var(--cs-ink-faint);
+  cursor: pointer;
 }
 
 .dot.active {
-  background: var(--cs-blue);
   width: 28px;
   border-radius: 4px;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+  background: var(--cs-blue);
 }
 
-/* ─── Stats strip ────────────────────────────────────────── */
-.statsStrip {
-  display: flex;
-  align-items: stretch;
-  margin-top: 64px;
-  border: 1px solid var(--cs-border);
-  border-radius: 20px;
-  background: var(--cs-surface);
-  overflow: hidden;
-}
-
-.statItem {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 20px;
-  position: relative;
-  transition: background 0.3s;
-  text-align: center;
-}
-
-.statItem:hover { background: var(--cs-surface-2); }
-
-.statItem + .statItem::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 20%; bottom: 20%;
-  width: 1px;
-  background: var(--cs-border);
-}
-
-.statNum {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: var(--cs-ink);
-  letter-spacing: -0.03em;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.statNum span { 
-  color: var(--cs-blue);
-  font-weight: 700;
-}
-
-.statLabel {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--cs-ink-muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-family: var(--font-body);
-}
-
-/* ─── Responsive ─────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .card { flex: 0 0 260px; }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  .careerSection { padding: 72px 0 88px; }
-  .container { padding: 0 20px; }
-  .headerRow { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .arrowGroup { align-self: flex-end; }
-  .title { font-size: 2rem; }
-  .card { flex: 0 0 240px; padding: 26px 20px 22px; }
-  .statsStrip { flex-direction: column; }
-  .statItem + .statItem::before {
-    top: 0; bottom: auto;
-    left: 15%; right: 15%;
-    width: auto; height: 1px;
+  .sliderWrapper {
+    gap: 10px;
   }
-  .canvasBg { display: none; }
-}
 
-@media (max-width: 480px) {
-  .card { flex: 0 0 210px; }
-}
+  .card {
+    flex: 0 0 280px;
+    height: auto;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .card, .card::before, .iconWrap, .arrowBtn, .dot { transition: none !important; }
-  .slider { scroll-behavior: auto; }
+  .title {
+    font-size: 34px;
+  }
+
+  .arrowBtn {
+    width: 45px;
+    height: 45px;
+  }
 }
