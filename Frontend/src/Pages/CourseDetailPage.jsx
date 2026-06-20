@@ -69,11 +69,11 @@ const CourseDetailPage = () => {
 
         if (!allContentType || !allContentType.includes('application/json')) {
           const htmlSnippet = await allRes.text();
-          console.error('❌ HTML mila JSON nahi:', htmlSnippet.substring(0, 200));
+          console.error('❌ HTML Found:', htmlSnippet.substring(0, 200));
           throw new Error(
-            `Backend se HTML aa raha hai JSON nahi.\n` +
+            `The HTML is coming from Backend .\n` +
             `API_BASE_URL: ${API_BASE_URL}\n` +
-            `Backend chal raha hai? Check: ${API_BASE_URL}/courses`
+            `Is Backend running? Check: ${API_BASE_URL}/courses`
           );
         }
 
@@ -120,7 +120,7 @@ const CourseDetailPage = () => {
             return;
           }
         } else {
-          console.warn('⚠️ Slug endpoint HTML return kar raha hai — route missing hoga');
+          console.warn('⚠️ Slug returning the endpoint HTML  — maybe route is missing');
         }
 
         // ── Step 3: Direct ID endpoint ──
@@ -143,7 +143,7 @@ const CourseDetailPage = () => {
               return;
             }
           } else {
-            console.error('❌ ID endpoint bhi HTML return kar raha hai');
+            console.error('❌ even ID endpoint returning the HTML');
           }
         }
 
@@ -151,7 +151,7 @@ const CourseDetailPage = () => {
         console.error('💡 Debug info:');
         console.error('   - slug:', slug);
         console.error('   - API_BASE_URL:', API_BASE_URL);
-        console.error('   - Backend pe yeh URL check karo:', `${API_BASE_URL}/courses`);
+        console.error('   - Check this URL on Backend:', `${API_BASE_URL}/courses`);
         throw new Error('Course not found');
 
       } catch (err) {
@@ -213,8 +213,8 @@ const CourseDetailPage = () => {
             <span className={styles.errorIcon}>😕</span>
             <h2>Course Not Found</h2>
             <p>
-              {error?.includes('HTML aa raha')
-                ? '⚠️ Backend server se connection nahi ho raha. Please check your server.'
+              {error?.includes('HTML is coming')
+                ? '⚠️ Backend is connected, Please check your server.'
                 : error || "The course you're looking for doesn't exist or has been removed."}
             </p>
             <button onClick={() => navigate('/courses')} className={styles.backButton}>
