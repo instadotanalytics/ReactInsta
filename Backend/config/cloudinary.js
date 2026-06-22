@@ -1,3 +1,4 @@
+// config/cloudinary.js
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import multer from 'multer';
@@ -62,7 +63,7 @@ export const uploadInstructorImage = multer({
   fileFilter: imageFilter,
 });
 
-// ─── Course Files (Thumbnail + Instructor) — ✅ FIXED ─────────────
+// ─── Course Files (Thumbnail + Instructor) ────────────────────────
 const courseFilesStorage = new CloudinaryStorage({
   cloudinary,
   params: {
@@ -77,7 +78,7 @@ const courseFilesStorage = new CloudinaryStorage({
 });
 
 export const uploadCourseFiles = multer({
-  storage: courseFilesStorage, // ✅ ab Cloudinary pe jayega
+  storage: courseFilesStorage,
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: imageFilter,
 }).fields([

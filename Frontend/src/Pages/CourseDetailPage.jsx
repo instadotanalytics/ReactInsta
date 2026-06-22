@@ -1,4 +1,4 @@
-// CourseDetailPage.jsx — Full Fixed Version with Skeleton Loading
+// CourseDetailPage.jsx — Full Fixed Version with Skeleton Loading and Meta Tags
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
@@ -23,6 +23,7 @@ import ReviewSection from './ReviewSection';
 import CareerSection from './CareerSection';
 import FAQSection from './FAQSection';
 import OurPremiumServices from './OurPremiumServices';
+import CourseMetaTags from '../components/SEO/CourseMetaTags'; // ✅ Import Meta Tags
 
 // ─── Skeleton Components ──────────────────────────────────────────
 const SkeletonHero = () => (
@@ -332,6 +333,9 @@ const CourseDetailPage = () => {
   // ─── Main Render ─────────────────────────────────────────────────
   return (
     <div className={styles.courseDetailPage}>
+      {/* ✅ SEO Meta Tags - Render at the top for best SEO */}
+      <CourseMetaTags course={course} />
+
       <Header />
 
       {showRegistrationPopup && (
