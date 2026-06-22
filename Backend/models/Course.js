@@ -68,45 +68,38 @@ const findUniqueSlug = async (Model, baseSlug, excludeId = null) => {
 };
 
 // ─── PRE-SAVE HOOK ────────────────────────────────────────────────
-CourseSchema.pre("save", async function (next) {
-  try {
-    // Sirf tab chalo jab title ho aur slug nahi ya title change hua
-    if (this.title && (!this.slug || this.isModified("title"))) {
-      const baseSlug = generateSlug(this.title) || "course";
-      this.slug = await findUniqueSlug(this.constructor, baseSlug, this._id);
-      console.log(`🔗 Slug set: "${this.title}" → "${this.slug}"`);
-    }
-    next();
-  } catch (err) {
-    console.error("❌ Slug generation error:", err);
-    next(err);
+CourseSchema.pre("save", async function () {
+  if (this.title && (!this.slug || this.isModified("title"))) {
+    const baseSlug = generateSlug(this.title) || "course";
+    this.slug = await findUniqueSlug(this.constructor, baseSlug, this._id);
+
+    console.log(`🔗 Slug set: "${this.title}" → "${this.slug}"`);
   }
 });
 
 // ─── PRE-FINDONEANDUPDATE HOOK ────────────────────────────────────
 // Jab admin course title update kare tab bhi slug update ho
-CourseSchema.pre("findOneAndUpdate", async function (next) {
-  try {
-    const update = this.getUpdate();
-    const newTitle = update?.title || update?.$set?.title;
+CourseSchema.pre("findOneAndUpdate", async function () {
+  const update = this.getUpdate();
+  const newTitle = update?.title || update?.$set?.title;
 
-    if (newTitle) {
-      const baseSlug = generateSlug(newTitle) || "course";
-      const doc = await this.model.findOne(this.getQuery());
-      const uniqueSlug = await findUniqueSlug(this.model, baseSlug, doc?._id);
+  if (newTitle) {
+    const baseSlug = generateSlug(newTitle) || "course";
+    const doc = await this.model.findOne(this.getQuery());
 
-      if (update.$set) {
-        update.$set.slug = uniqueSlug;
-      } else {
-        update.slug = uniqueSlug;
-      }
+    const uniqueSlug = await findUniqueSlug(
+      this.model,
+      baseSlug,
+      doc?._id
+    );
 
-      console.log(`🔗 Slug updated: "${newTitle}" → "${uniqueSlug}"`);
+    if (update.$set) {
+      update.$set.slug = uniqueSlug;
+    } else {
+      update.slug = uniqueSlug;
     }
-    next();
-  } catch (err) {
-    console.error("❌ Slug update error:", err);
-    next(err);
+
+    console.log(`🔗 Slug updated: "${newTitle}" → "${uniqueSlug}"`);
   }
 });
 

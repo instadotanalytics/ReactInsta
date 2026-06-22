@@ -75,9 +75,15 @@ export const createCourse = async (req, res) => {
     res.status(201).json({ success: true, data: course, message: "Course created successfully" });
 
   } catch (err) {
-    console.error("✗ Error creating course:", err);
-    res.status(500).json({ success: false, message: err.message });
-  }
+  console.error("✗ FULL ERROR:", err);
+  console.error("✗ STACK:", err.stack);
+
+  res.status(500).json({
+    success: false,
+    message: err.message,
+    stack: err.stack
+  });
+}
 };
 
 // ─── GET ALL COURSES ──────────────────────────────────────────────
