@@ -584,3 +584,262 @@
   z-index: 100000 !important;
   pointer-events: auto !important;
 }
+
+
+/* Add to your Searchbar.module.css */
+
+/* Price display */
+.itemPrice {
+  font-size: 12px;
+  font-weight: 600;
+  color: #059669;
+  margin-right: 8px;
+  padding: 2px 8px;
+  background: #ecfdf5;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.resultItem:hover .itemPrice {
+  background: #d1fae5;
+}
+
+/* Search icon loading animation */
+.searchIconSpin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Loading dot */
+.loadingDot {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Better mobile responsiveness */
+@media (max-width: 640px) {
+  .overlayPanel {
+    margin: 10px;
+    border-radius: 12px;
+    max-height: 90vh;
+  }
+  
+  .overlayInput {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+  
+  .resultItem {
+    padding: 10px 12px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .itemTitle {
+    font-size: 13px;
+    flex: 1 1 100%;
+  }
+  
+  .itemMeta, .itemPrice {
+    font-size: 11px;
+  }
+  
+  .itemBadge {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+}
+
+/* Highlight match */
+.mark {
+  background-color: #fbbf24;
+  color: #1e293b;
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+/* Section styles */
+.section {
+  margin-bottom: 8px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  background: #f8fafc;
+  border-radius: 4px;
+}
+
+.sectionIcon {
+  display: flex;
+  align-items: center;
+}
+
+.sectionCount {
+  margin-left: auto;
+  background: #e2e8f0;
+  padding: 0 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  color: #475569;
+}
+
+/* Result item */
+.resultItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+  border-radius: 6px;
+}
+
+.resultItem:hover,
+.resultItemActive {
+  background: #f1f5f9;
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.itemTitle {
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemMeta {
+  font-size: 12px;
+  color: #64748b;
+  padding: 2px 8px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.itemBadge {
+  font-size: 10px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.itemArrow {
+  color: #94a3b8;
+  font-size: 14px;
+  transition: transform 0.2s ease, color 0.2s ease;
+  opacity: 0;
+}
+
+.itemArrowActive {
+  opacity: 1;
+  transform: translateX(2px);
+  color: #2563eb;
+}
+
+.resultItem:hover .itemArrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* Footer */
+.dropdownFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.footerHint kbd {
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: inherit;
+  border: 1px solid #e2e8f0;
+  margin: 0 2px;
+}
+
+/* Empty state */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.emptyTitle {
+  font-size: 16px;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.emptySubtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Error banner */
+.errorBanner {
+  padding: 12px 16px;
+  background: #fef2f2;
+  color: #991b1b;
+  border-radius: 6px;
+  font-size: 13px;
+  margin: 8px 12px;
+}

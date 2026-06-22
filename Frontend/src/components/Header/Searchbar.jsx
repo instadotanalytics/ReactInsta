@@ -19,6 +19,22 @@ const STATIC_CAREERS = [
   { id: "career-ft",  title: "Full Time Job", path: "/career/fulltime"   },
 ];
 
+// ─── Helper: Generate Slug from Meta Title or Title ──────────────
+const generateSlugFromMeta = (course) => {
+  // Priority: metaTitle > title
+  const sourceText = course.metaTitle || course.title;
+  
+  if (!sourceText) return 'course';
+  
+  return sourceText
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')  // Remove special characters
+    .replace(/\s+/g, '-')       // Replace spaces with hyphens
+    .replace(/-+/g, '-')        // Replace multiple hyphens with single
+    .replace(/^-+|-+$/g, '');   // Remove leading/trailing hyphens
+};
+
 const searchAdapter = async (query, signal) => {
   const q = query.toLowerCase().trim();
   const certifications = STATIC_CERTIFICATIONS
@@ -36,11 +52,25 @@ const searchAdapter = async (query, signal) => {
     courses = list
       .filter((c) => c.title?.toLowerCase().includes(q))
       .slice(0, 6)
-      .map((c) => ({
-        id: c._id, title: c.title, type: "course", path: `/course/${c._id}`,
-        category: c.category, level: c.level,
-        discountedPrice: c.discountedPrice, thumbnail: c.thumbnail,
-      }));
+      .map((c) => {
+        // ✅ Generate slug from metaTitle or title
+        const slug = generateSlugFromMeta(c);
+        
+        return {
+          id: c._id,
+          title: c.title,
+          type: "course",
+          // ✅ Use generated slug for SEO-friendly URL
+          path: `/course/${slug}`,
+          category: c.category,
+          level: c.level,
+          discountedPrice: c.discountedPrice,
+          thumbnail: c.thumbnail,
+          slug: slug,
+          metaTitle: c.metaTitle,
+          metaDescription: c.metaDescription,
+        };
+      });
   } catch (err) {
     if (err.name !== "AbortError") console.warn("[SearchBar] Course API error:", err.message);
   }
@@ -191,6 +221,9 @@ const SearchOverlay = ({ onClose, maxResults = 10 }) => {
               </span>
               {type === "course" && item.level && (
                 <span className={styles.itemMeta}>{item.level}</span>
+              )}
+              {type === "course" && item.discountedPrice && (
+                <span className={styles.itemPrice}>₹{item.discountedPrice}</span>
               )}
               <span className={styles.itemBadge} style={{ background: `${accent}12`, color: accent }}>
                 {type === "course" ? "Course" : type === "certification" ? "Cert" : "Career"}
