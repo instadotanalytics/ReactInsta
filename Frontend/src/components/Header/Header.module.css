@@ -71,7 +71,7 @@ body {
   will-change: transform, backdrop-filter;
 }
 
-@keyframes headerEntrance {
+/* @keyframes headerEntrance {
   from {
     opacity: 0;
     transform: translateY(-14px);
@@ -80,7 +80,7 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
 
 
 /* ─── Container ───────────────────────────────────── */
