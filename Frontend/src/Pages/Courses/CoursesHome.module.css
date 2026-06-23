@@ -2,522 +2,313 @@
 
 .coursesHome {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  overflow: hidden;
   height: 100vh;
+  overflow: hidden;
 }
 
-/* Hero Banner Section */
 .heroSection {
-  height: 100vh;
-  padding: 20px 40px;
-  background:
-    linear-gradient(
-      rgba(99,102,241,.12) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(99,102,241,.12) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      135deg,
-      #030712,
-      #0f172a,
-      #020617
-    );
-
-  background-size:
-    40px 40px,
-    40px 40px,
-    cover;
-  
   position: relative;
+  height: 100vh;
+  width: 100%;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  background: #ffffff;
 }
 
-.canvasBackground {
+/* ── Thin vertical lines — much narrower spacing, very faint ─── */
+.linesBg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  /* repeating thin lines — ~28px apart, very subtle */
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(147, 197, 253, 0.22) 0px,
+    rgba(147, 197, 253, 0.22) 1px,
+    transparent 1px,
+    transparent 28px
+  );
+}
+
+/* ── Blue wash right side + bottom ──────────────────────────── */
+.blueWash {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
   z-index: 1;
+  background:
+    linear-gradient(
+      100deg,
+      rgba(255,255,255,0)    0%,
+      rgba(255,255,255,0)    28%,
+      rgba(147,186,255,0.18) 55%,
+      rgba(99,130,241,0.48)  80%,
+      rgba(67,99,241,0.65)   100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0)    52%,
+      rgba(147,186,255,0.14) 76%,
+      rgba(99,130,241,0.28)  100%
+    );
 }
 
-.heroContainer {
-  max-width: 1200px;
-  margin: auto;
+/* ── Soft top glow ───────────────────────────────────────────── */
+.topGlow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(147,186,255,0.18) 0%,
+    transparent 68%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Text block ──────────────────────────────────────────────── */
+.heroInner {
+  position: relative;
+  z-index: 4;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   text-align: center;
-  /* position: relative;
-  z-index: 2; */
+  padding-top: 46px;
   width: 100%;
-  height: 100%;
+  max-width: 860px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-.centerHero {
-  max-width: 850px;
-  z-index: 2;
-  position: relative;
-}
-
-.topStats {
+.statsRow {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
-
-  margin-bottom: 25px;
+  justify-content: center;
+  margin-bottom: 18px;
 }
 
-.topStats span {
-  padding: 8px 16px;
-
-  border: 1px solid rgba(255,255,255,.08);
-
-  background: rgba(255,255,255,.05);
-
+.statChip {
+  padding: 6px 16px;
+  border: 1px solid rgba(99,102,241,0.2);
+  background: rgba(255,255,255,0.85);
   border-radius: 30px;
-
-  font-size: 13px;
-
-  color: rgba(255,255,255,.8);
-
-  backdrop-filter: blur(10px);
+  font-size: 12px;
+  color: #374151;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
 }
+.statChip b { color: #1e40af; font-weight: 700; }
 
 .heroTitle {
-  font-size: 4rem;
+  font-size: clamp(1.9rem, 4.8vw, 3.5rem);
   font-weight: 800;
   line-height: 1.1;
-  color: #ffffff;
-  margin-bottom: 20px;
+  color: #0f172a;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #4361ee 0%, #7b61ff 50%, #06d6a0 100%);
+  background: linear-gradient(135deg, #4361ee 0%, #7b61ff 55%, #06d6a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% 200%;
-  animation: gradientMove 4s ease infinite;
+  animation: gradShift 5s ease infinite;
+  display: inline-block;
 }
-
-@keyframes gradientMove {
+@keyframes gradShift {
   0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  50%       { background-position: 100% 50%; }
 }
 
 .heroDesc {
-  font-size: 18px;
-  line-height: 1.8;
-  color: rgba(255,255,255,.75);
-  margin: auto;
-  margin-bottom: 35px;
-  max-width: 650px;
+  font-size: clamp(12px, 1.5vw, 14px);
+  line-height: 1.7;
+  color: #4b5563;
+  max-width: 520px;
+  margin: 0 auto 14px;
 }
 
-.courseStats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  padding: 10px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.statItem {
+.featureRow {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.statItem:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
-}
-
-.statIcon {
-  font-size: 18px;
-  color: #4361ee;
-  opacity: 0.8;
-}
-
-.statInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.statValue {
-  font-size: 18px;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.2;
-}
-
-.statLabel {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.courseFeatures {
-  display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 35px;
+  justify-content: center;
+  gap: 8px;
 }
 
 .featureBadge {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 7px 10px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.featureBadge:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-  border-color: rgba(67, 97, 238, 0.3);
-}
-
-.featureBadge svg {
-  color: #06d6a0;
-  font-size: 12px;
-  flex-shrink: 0;
-}
-
-.popularCourses {
-  margin-bottom: 12px;
-}
-
-.popularText {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #4b5563;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  border-radius: 30px;
+  padding: 5px 14px;
+  backdrop-filter: blur(6px);
 }
 
-.popularIcon {
-  color: #4361ee;
-}
-
-.courseTags {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-.courseTag {
+/* ════════════════════════════════════════════════════════════════
+   CARDS — overlapping wave, negative margins for overlap
+   ════════════════════════════════════════════════════════════════ */
+.cardsStage {
+  position: relative;
+  z-index: 3;
   display: flex;
   align-items: center;
-  color: #fff;
-  font-weight: 600;
-  gap: 10px;
-  padding: 12px 18px;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255, 255, 255, .08);
-  border-radius: 14px;
-  transition: .3s;
-}
-
-.courseTag::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(123, 97, 255, 0.05));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.courseTag:hover {
-  transform: translateY(-4px);
-  border-color: rgba(99,102,241,.4);
-  background: rgba(99,102,241,.08);
-}
-
-.courseTag:hover::before {
-  opacity: 1;
-}
-
-.courseIcon {
-  font-size: 18px;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.courseInfo {
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 16px;
   flex: 1;
-  position: relative;
-  z-index: 1;
-  min-width: 0;
+  margin-top: 18px;
+  /* negative gap to force overlap */
+  gap: 0;
 }
 
-.courseName {
+.floatingCard {
+  border-radius: 22px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  /* White border ring */
+  outline: 5px solid #ffffff;
+  box-shadow:
+    0 10px 36px rgba(30,58,138,0.14),
+    0 2px 8px rgba(0,0,0,0.08);
+  transition:
+    transform 0.4s cubic-bezier(0.22,1,0.36,1),
+    box-shadow 0.3s,
+    z-index 0s;
+  /* overlap: each card shifts left by ~35px into the previous */
+  margin-left: -30px;
+}
+
+/* First card — no negative margin */
+.card0 { margin-left: 0; }
+
+.floatingCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
+}
+
+.floatingCard:hover {
+  box-shadow:
+    0 22px 56px rgba(67,97,238,0.20),
+    0 4px 14px rgba(0,0,0,0.10);
+  z-index: 10;
+}
+
+/*
+  Wave: up → down → up → down
+  Slight tilt per card, translateY alternates positive/negative
+  z-index stacking so each card appears ON TOP of prev (like screenshot)
+*/
+.card0 {
+  width: 188px;
+  height: 235px;
+  transform: rotate(-5deg) translateY(-22px);
+  z-index: 1;
+}
+.card0:hover { transform: rotate(-5deg) translateY(-34px); }
+
+.card1 {
+  width: 188px;
+  height: 235px;
+  transform: rotate(3deg) translateY(28px);
+  z-index: 2;
+}
+.card1:hover { transform: rotate(3deg) translateY(16px); }
+
+.card2 {
+  width: 188px;
+  height: 235px;
+  transform: rotate(-3deg) translateY(-20px);
+  z-index: 3;
+}
+.card2:hover { transform: rotate(-3deg) translateY(-32px); }
+
+.card3 {
+  width: 188px;
+  height: 235px;
+  transform: rotate(5deg) translateY(26px);
+  z-index: 2;
+}
+.card3:hover { transform: rotate(5deg) translateY(14px); }
+
+/* ── Course pills ────────────────────────────────────────────── */
+.coursePills {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 16px 18px;
+}
+
+.coursePill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  border-radius: 12px;
+  color: #1e293b;
   font-size: 12px;
   font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
 }
+.pillIcon { font-size: 15px; flex-shrink: 0; }
 
-.courseDesc {
-  display: block;
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.4);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.courseArrow {
-  color: rgba(255, 255, 255, 0.2);
-  font-size: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-}
-
-.courseTag:hover .courseArrow {
-  color: #4361ee;
-  transform: translateX(4px);
-}
-
-.floatingBadgeTop svg,
-.floatingBadgeBottom svg {
-  color: #f72585;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .heroContainer {
-    gap: 30px;
-  }
-  
-  .heroTitle {
-    font-size: 36px;
-  }
-
-  .contentCard {
-    padding: 28px 30px;
-  }
-
-  .courseFeatures {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+/* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .heroContainer {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    height: auto;
-    padding: 20px 0;
-  }
-
-  .heroSection {
-    height: auto;
-    min-height: 100vh;
-    padding: 30px 20px;
-  }
-
-  .heroTitle {
-    font-size: 34px;
-  }
-
-  .heroImageContainer {
-    max-width: 100%;
-  }
-
-  .heroContent {
-    height: auto;
-  }
-
-  .contentCard {
-    max-height: none;
-    padding: 24px 28px;
-  }
-
-  .courseStats {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .courseTags {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .courseFeatures {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .card0, .card1, .card2, .card3 { width: 165px; height: 208px; }
+  .floatingCard { margin-left: -24px; }
+  .card0 { margin-left: 0; }
 }
 
 @media (max-width: 768px) {
-  .heroSection {
-    padding: 20px 16px;
-    min-height: 100vh;
-  }
-
-  .heroContainer {
-    gap: 20px;
-  }
-
-  .heroTitle {
-    font-size: 28px;
-  }
-
-  .heroDesc {
-    font-size: 14px;
-  }
-
-  .contentCard {
-    padding: 20px;
-  }
-
-  .courseStats {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 10px 12px;
-    gap: 8px;
-  }
-
-  .statItem {
-    padding: 4px 8px;
-  }
-
-  .statValue {
-    font-size: 17px;
-  }
-
-  .statIcon {
-    font-size: 16px;
-  }
-
-  .courseFeatures {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-
-  .featureBadge {
-    font-size: 11px;
-    padding: 6px 10px;
-  }
-
-  .courseTags {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .courseTag {
-    padding: 8px 12px;
-  }
-
-  .courseName {
-    font-size: 12px;
-  }
-
-  .courseDesc {
-    font-size: 10px;
-  }
+  .heroInner { padding-top: 32px; }
+  .card0, .card1, .card2, .card3 { width: 130px; height: 165px; }
+  .floatingCard { margin-left: -18px; outline-width: 4px; }
+  .card0 { margin-left: 0; }
+  .card0 { transform: rotate(-5deg) translateY(-16px); }
+  .card0:hover { transform: rotate(-5deg) translateY(-26px); }
+  .card1 { transform: rotate(3deg) translateY(20px); }
+  .card1:hover { transform: rotate(3deg) translateY(10px); }
+  .card2 { transform: rotate(-3deg) translateY(-14px); }
+  .card2:hover { transform: rotate(-3deg) translateY(-24px); }
+  .card3 { transform: rotate(5deg) translateY(18px); }
+  .card3:hover { transform: rotate(5deg) translateY(8px); }
+  .coursePills { gap: 7px; padding: 10px 12px 12px; }
+  .coursePill  { padding: 8px 14px; font-size: 11px; }
 }
 
 @media (max-width: 480px) {
-  .heroSection {
-    padding: 15px 12px;
-  }
-
-  .heroTitle {
-    font-size: 24px;
-  }
-
-  .heroTag {
-    font-size: 11px;
-    padding: 5px 14px;
-  }
-
-  .heroDesc {
-    font-size: 13px;
-  }
-
-  .courseStats {
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    padding: 8px 10px;
-  }
-
-  .statValue {
-    font-size: 15px;
-  }
-
-  .statLabel {
-    font-size: 9px;
-  }
-
-  .statIcon {
-    font-size: 14px;
-  }
-
-  .courseFeatures {
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-  }
-
-  .featureBadge {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-
-  .courseTags {
-    gap: 6px;
-  }
-
-  .courseTag {
-    padding: 6px 10px;
-  }
-
-  .courseIcon {
-    font-size: 16px;
-  }
-
-  .courseName {
-    font-size: 11px;
-  }
-
-  .courseDesc {
-    font-size: 9px;
-  }
+  .heroTitle { font-size: 1.55rem; }
+  .card0, .card1, .card2 { width: 102px; height: 130px; }
+  .floatingCard { margin-left: -14px; outline-width: 3px; }
+  .card0 { margin-left: 0; }
+  .card3 { display: none; }
+  .card0 { transform: rotate(-5deg) translateY(-12px); }
+  .card0:hover { transform: rotate(-5deg) translateY(-20px); }
+  .card1 { transform: rotate(3deg) translateY(15px); }
+  .card1:hover { transform: rotate(3deg) translateY(7px); }
+  .card2 { transform: rotate(-3deg) translateY(-10px); }
+  .card2:hover { transform: rotate(-3deg) translateY(-18px); }
 }

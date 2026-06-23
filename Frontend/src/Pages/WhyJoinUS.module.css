@@ -107,53 +107,98 @@
 /* RESPONSIVE */
 /* ============================= */
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .container {
     flex-direction: column;
     height: auto;
-    padding: 3rem 2rem;
-    text-align: center;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
   }
 
   .left {
     align-items: center;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 26px;
+    line-height: 1.2;
   }
 
   .description {
     max-width: 100%;
+    font-size: 14px;
   }
 
-  /* Image + Benefits side by side */
   .center {
-    order: 2;
+    display: none;
   }
 
   .right {
-    order: 3;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .right::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #2563eb, #60a5fa, transparent);
   }
 
   .benefit {
-    justify-content: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
+    gap: 10px;
+    position: relative;
+    padding-bottom: 24px;
   }
 
-  .center img {
-    height: 250px;
+  .tick {
+    position: absolute;
+    left: -28px;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #2563eb;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .benefit h4 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .benefit p {
+    font-size: 12px;
+    line-height: 1.4;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+  .right {
+    grid-template-columns: 1fr;
+  }
+
   .title {
     font-size: 22px;
   }
 
-  .center img {
-    height: 200px;
-    display: none;
-  }
-
-  .benefit {
-    gap: 8px;
+  .badge {
+    font-size: 11px;
   }
 }

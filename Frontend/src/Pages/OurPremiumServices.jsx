@@ -15,13 +15,29 @@ if (typeof document !== "undefined" && !document.getElementById("ops-fonts")) {
 
 /* ── Icons ── */
 const ArrowRight = () => (
-  <svg className={styles.btnArrow} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    className={styles.btnArrow}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M5 12h14M12 5l7 7-7 7" />
   </svg>
 );
 
 const CheckIcon = () => (
-  <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    className={styles.checkIcon}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <polyline points="20 6 9 17 4 12" />
   </svg>
 );
@@ -32,6 +48,7 @@ const services = [
     id: 1,
     title: "Internship",
     tagline: "Build Real Experience",
+    description: "Gain practical industry exposure through live projects.",
     route: "/career/internship",
     image: "/intern.png",
     features: [
@@ -45,6 +62,7 @@ const services = [
     id: 2,
     title: "Full Time Job",
     tagline: "Launch Your Career",
+    description: "Find opportunities that match your skills and goals.",
     route: "/career/fulltime",
     image: "/jobseeker.png",
     features: [
@@ -58,6 +76,8 @@ const services = [
     id: 3,
     title: "Placement",
     tagline: "Land Your Dream Role",
+    description:
+      "Get placement support, resume reviews, and interview preparation.",
     route: "/career/placement",
     image: "/placement.png",
     features: [
@@ -84,7 +104,7 @@ const OurPremiumServices = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     cardsRef.current.forEach((card) => {
@@ -112,10 +132,12 @@ const OurPremiumServices = () => {
         <div className={styles.header}>
           <span className={styles.badge}> Our Premium Services</span>
           <h2 className={styles.title}>
-            Your Path to a <span className={styles.highlight}>Successful Career</span>
+            Your Path to a{" "}
+            <span className={styles.highlight}>Successful Career</span>
           </h2>
           <p className={styles.subtitle}>
-            Choose the service that fits your goals — from first internship to full-time placement.
+            Choose the service that fits your goals — from first internship to
+            full-time placement.
           </p>
         </div>
 
@@ -144,19 +166,27 @@ const OurPremiumServices = () => {
               </div>
 
               <div className={styles.cardBody}>
-                <ul className={styles.featuresList}>
-                  {service.features.map((feat, i) => (
-                    <li key={i} className={styles.featureItem}>
-                      <CheckIcon />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
+                <>
+                  {/* <div className={styles.leftContent}> */}
+                  <ul className={styles.featuresList}>
+                    {service.features.map((feat, i) => (
+                      <li key={i} className={styles.featureItem}>
+                        <CheckIcon />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {/* </div> */}
 
-                <button className={styles.ctaButton}>
-                  <span>View All Details</span>
-                  <ArrowRight />
-                </button>
+                  {/* <div className={styles.rightContent}> */}
+                  <p className={styles.description}>{service.description}</p>
+
+                  <button className={styles.ctaButton}>
+                    <span>VIEW ALL DETAILS</span>
+                    <ArrowRight />
+                  </button>
+                  {/* </div> */}
+                </>
               </div>
             </div>
           ))}

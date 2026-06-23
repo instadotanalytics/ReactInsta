@@ -21,7 +21,7 @@ function CourseHero() {
 
   return (
     <section className={styles.hero}>
-      <div className={styles.aurora}></div>
+      {/* <div className={styles.aurora}></div> */}
       <div className={styles.overlay}></div>
 
       <div className={styles.content}>
