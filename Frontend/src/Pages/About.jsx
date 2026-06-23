@@ -9,6 +9,7 @@ import Companypartners from "./Courses/Companypartners";
 import ReviewSection from "./ReviewSection";
 import FAQSection from "./FAQSection";
 
+
 const About = () => {
   // Stats data
   const stats = [
@@ -30,6 +31,7 @@ const About = () => {
   return (
     <>
       <Header />
+      
       <section className={styles.aboutSection}>
         <div className={styles.container}>
           {/* Hero Section with Image */}

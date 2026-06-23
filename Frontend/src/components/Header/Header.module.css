@@ -80,7 +80,7 @@ body {
   will-change: transform, backdrop-filter;
 }
 
-@keyframes headerEntrance {
+/* @keyframes headerEntrance {
   from {
     opacity: 0;
     transform: translateY(-14px);
@@ -89,7 +89,7 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
 
 .scrolled {
   box-shadow:
@@ -1356,5 +1356,106 @@ body {
 @supports (-webkit-touch-callout: none) {
   .mobileMenu {
     height: -webkit-fill-available;
+  }
+}
+/* ─── Header ───────────────────────────────────────── */
+.header {
+  background: linear-gradient(
+    135deg,
+    var(--sky-100) 20%,
+    var(--sky-200) 25%,
+    var(--sky-300) 50%,
+    var(--sky-400) 75%,
+    var(--sky-500) 100%
+  );
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* border-bottom: 2px solid rgba(255, 255, 255, 0.3); */
+  animation: headerEntrance 0.7s var(--ease) both;
+  transition:
+    box-shadow 0.35s var(--ease),
+    background 0.35s var(--ease),
+    backdrop-filter 0.35s var(--ease);
+  will-change: transform, backdrop-filter;
+}
+
+/* Fix for mobile - ensure header background is always visible */
+@media screen and (max-width: 992px) {
+  .header {
+    background: linear-gradient(
+      135deg,
+      var(--sky-100) 20%,
+      var(--sky-200) 25%,
+      var(--sky-300) 50%,
+      var(--sky-400) 75%,
+      var(--sky-500) 100%
+    ) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+}
+
+/* Also fix dark mode for mobile */
+@media (prefers-color-scheme: dark) {
+  .header {
+    background: linear-gradient(
+      135deg,
+      rgba(14, 165, 233, 0.15) 0%,
+      rgba(56, 189, 248, 0.15) 50%,
+      rgba(37, 99, 235, 0.15) 100%
+    );
+    border-bottom: 2px solid rgba(14, 165, 233, 0.2);
+  }
+  
+  /* Fix dark mode mobile */
+  @media screen and (max-width: 992px) {
+    .header {
+      background: linear-gradient(
+        135deg,
+        rgba(14, 165, 233, 0.25) 0%,
+        rgba(56, 189, 248, 0.25) 50%,
+        rgba(37, 99, 235, 0.25) 100%
+      ) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      border-bottom: 2px solid rgba(14, 165, 233, 0.3) !important;
+    }
+  }
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .header {
+    position: fixed !important;
+    top: 0 !important;
+    background: linear-gradient(
+      135deg,
+      var(--sky-100) 20%,
+      var(--sky-200) 25%,
+      var(--sky-300) 50%,
+      var(--sky-400) 75%,
+      var(--sky-500) 100%
+    ) !important;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .header {
+      background: linear-gradient(
+        135deg,
+        rgba(14, 165, 233, 0.25) 0%,
+        rgba(56, 189, 248, 0.25) 50%,
+        rgba(37, 99, 235, 0.25) 100%
+      ) !important;
+    }
+  }
+
+  .container {
+    min-height: 72px;
   }
 }

@@ -147,24 +147,15 @@ export const createCourse = async (req, res) => {
       message: "Course created successfully",
     });
   } catch (err) {
-<<<<<<< HEAD
-  console.error("✗ FULL ERROR:", err);
-  console.error("✗ STACK:", err.stack);
+    console.error("✗ FULL ERROR:", err);
+    console.error("✗ STACK:", err.stack);
 
-  res.status(500).json({
-    success: false,
-    message: err.message,
-    stack: err.stack
-  });
-}
-=======
-    console.error("✗ Error creating course:", err);
     res.status(500).json({
       success: false,
-      message: err.message || "Error creating course",
+      message: err.message,
+      stack: err.stack
     });
   }
->>>>>>> caf238d867a4b0829f14f08208ca71028b6d9f35
 };
 
 // ─── GET ALL COURSES ──────────────────────────────────────────────
