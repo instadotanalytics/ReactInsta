@@ -1,6 +1,37 @@
 // models/Course.js
 import mongoose from "mongoose";
 
+// ─── HELPER: Generate slug from text ────────────────────────────────
+function generateSlug(text) {
+  if (!text) return 'course';
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')  // Remove special characters
+    .replace(/\s+/g, '-')       // Replace spaces with hyphens
+    .replace(/-+/g, '-')        // Replace multiple hyphens with single
+    .replace(/^-+|-+$/g, '');   // Remove leading/trailing hyphens
+}
+
+// ─── HELPER: Find unique slug ──────────────────────────────────────
+async function findUniqueSlug(model, baseSlug, excludeId = null) {
+  let finalSlug = baseSlug;
+  let counter = 1;
+
+  while (true) {
+    const query = { slug: finalSlug };
+    if (excludeId) {
+      query._id = { $ne: excludeId };
+    }
+    const existing = await model.findOne(query);
+    if (!existing) break;
+    finalSlug = `${baseSlug}-${counter}`;
+    counter++;
+  }
+
+  return finalSlug;
+}
+
 const CourseSchema = new mongoose.Schema(
   {
     title: {
@@ -111,58 +142,14 @@ const CourseSchema = new mongoose.Schema(
 CourseSchema.pre('save', async function () {
   if (this.isNew || this.isModified('title') || this.isModified('metaTitle')) {
     const sourceText = this.metaTitle || this.title;
-    const baseSlug = generateSlug(sourceText);
-
-    let finalSlug = baseSlug;
-    let counter = 1;
-
-    while (true) {
-      const existing = await this.constructor.findOne({
-        slug: finalSlug,
-        _id: { $ne: this._id }
-      });
-
-      if (!existing) break;
-
-<<<<<<< HEAD
-    finalSlug = `${baseSlug}-${counter}`; // qa-engineer-2, qa-engineer-3...
-    counter++;
-  }
-
-  return finalSlug;
-};
-
-// ─── PRE-SAVE HOOK ────────────────────────────────────────────────
-CourseSchema.pre("save", async function () {
-  if (this.title && (!this.slug || this.isModified("title"))) {
-    const baseSlug = generateSlug(this.title) || "course";
+    const baseSlug = generateSlug(sourceText) || 'course';
     this.slug = await findUniqueSlug(this.constructor, baseSlug, this._id);
-
     console.log(`🔗 Slug set: "${this.title}" → "${this.slug}"`);
-=======
-      finalSlug = `${baseSlug}-${counter}`;
-      counter++;
-    }
-
-    this.slug = finalSlug;
->>>>>>> caf238d867a4b0829f14f08208ca71028b6d9f35
   }
 });
-// ─── HELPER: Generate slug from text ────────────────────────────────
-function generateSlug(text) {
-  if (!text) return 'course';
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')  // Remove special characters
-    .replace(/\s+/g, '-')       // Replace spaces with hyphens
-    .replace(/-+/g, '-')        // Replace multiple hyphens with single
-    .replace(/^-+|-+$/g, '');   // Remove leading/trailing hyphens
-}
 
-<<<<<<< HEAD
 // ─── PRE-FINDONEANDUPDATE HOOK ────────────────────────────────────
-// Jab admin course title update kare tab bhi slug update ho
+// When admin updates course title, slug updates too
 CourseSchema.pre("findOneAndUpdate", async function () {
   const update = this.getUpdate();
   const newTitle = update?.title || update?.$set?.title;
@@ -184,7 +171,9 @@ CourseSchema.pre("findOneAndUpdate", async function () {
     }
 
     console.log(`🔗 Slug updated: "${newTitle}" → "${uniqueSlug}"`);
-=======
+  }
+});
+
 // ─── STATIC METHOD: Find by slug with fallback to ID ──────────────
 CourseSchema.statics.findBySlugOrId = async function(identifier) {
   // Try to find by slug first
@@ -193,7 +182,6 @@ CourseSchema.statics.findBySlugOrId = async function(identifier) {
   // If not found and identifier looks like MongoDB ObjectId, try by ID
   if (!course && /^[0-9a-fA-F]{24}$/.test(identifier)) {
     course = await this.findById(identifier);
->>>>>>> caf238d867a4b0829f14f08208ca71028b6d9f35
   }
   
   return course;
@@ -208,6 +196,10 @@ CourseSchema.virtual('effectiveMetaTitle').get(function() {
 CourseSchema.virtual('effectiveMetaDescription').get(function() {
   return this.metaDescription || this.shortDescription || '';
 });
+
+// Ensure virtuals are included in JSON output
+CourseSchema.set('toJSON', { virtuals: true });
+CourseSchema.set('toObject', { virtuals: true });
 
 const Course = mongoose.model("Course", CourseSchema);
 
