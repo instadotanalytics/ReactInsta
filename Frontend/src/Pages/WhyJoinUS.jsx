@@ -19,7 +19,7 @@ const WhyJoinUS = () => {
       title: "Expert Mentors",
       desc: "Learn from industry professionals"
     }
-  ];
+  ];   
 
   return (
     <section className={styles.whyJoinUs}>

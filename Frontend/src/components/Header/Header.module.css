@@ -53,21 +53,30 @@ body {
     var(--sky-400) 75%,
     var(--sky-500) 100%
   );
+
   width: 100%;
-  
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
+
+  /* NEW */
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  /* Desktop only blur */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  /* border-bottom: 2px solid rgba(255, 255, 255, 0.3); */
+
   animation: headerEntrance 0.7s var(--ease) both;
+
   transition:
     box-shadow 0.35s var(--ease),
     background 0.35s var(--ease),
     backdrop-filter 0.35s var(--ease);
+
   will-change: transform, backdrop-filter;
 }
 
@@ -82,6 +91,17 @@ body {
   }
 }
 
+.scrolled {
+  box-shadow:
+    0 8px 30px rgb(0, 0, 0),
+    0 2px 10px rgba(0, 0, 0, 0.952);
+
+  background: linear-gradient(
+    135deg,
+    #00558e,
+    #00b3ff
+  );
+}
 
 /* ─── Container ───────────────────────────────────── */
 .container {
@@ -319,7 +339,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   pointer-events: none;
   margin-top: 0;
-  
 }
 
 /* Bridge to prevent hover gap */
@@ -434,7 +453,7 @@ body {
 
 .categoryIcon {
   font-size: 18px;
-  color:rgb(0, 145, 255);
+  color: rgb(0, 145, 255);
   background: linear-gradient(135deg, var(--sky-100), var(--sky-200));
   padding: 10px;
   border-radius: 12px;
@@ -729,21 +748,21 @@ body {
 
 /* ─── Hamburger ───────────────────────────────────── */
 .menuIcon {
- background: rgba(0, 187, 255, 0);
-  border: 1.5px solid rgba(255, 255, 255, 0);
+   background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: white;
   font-size: 22px;
   cursor: pointer;
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  transition: all 0.4s var(--ease-spring);
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  /* flex-shrink: 0;
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); */
 }
 
 .menuIcon:hover {
@@ -1047,6 +1066,28 @@ body {
 
 /* Tablet and mobile */
 @media screen and (max-width: 992px) {
+   .header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+
+    background: linear-gradient(
+      135deg,
+      #00558e,
+      #00b3ff
+    );
+
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    z-index: -1;
+  }
+
   .navDesktop,
   .desktopRight {
     display: none !important;

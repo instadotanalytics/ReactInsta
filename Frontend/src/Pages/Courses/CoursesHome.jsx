@@ -1,266 +1,117 @@
 // CoursesHome.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styles from "./CoursesHome.module.css";
 import {
-  FaRocket,
-  FaArrowRight,
-  FaStar,
-  FaUsers,
   FaCheckCircle,
-  FaGraduationCap,
-  FaPlayCircle,
-  FaBook,
-  FaClock,
-  FaCertificate,
-  FaLaptopCode,
-  FaChartLine,
-  FaGlobe,
-  FaBriefcase,
   FaCode,
   FaDatabase,
   FaBullhorn,
+  FaArrowRight,
 } from "react-icons/fa";
 
 const CoursesHome = () => {
-  const canvasRef = useRef(null);
-
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    // Canvas Animation with Checkered Pattern
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationFrameId;
-    let particles = [];
-    let checkeredSquares = [];
-
-    const resizeCanvas = () => {
-      const parent = canvas.parentElement;
-      canvas.width = parent.offsetWidth;
-      canvas.height = parent.offsetHeight;
-    };
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    // Create checkered pattern squares
-    const createCheckeredPattern = () => {
-      const gridSize = 40;
-      const cols = Math.ceil(canvas.width / gridSize);
-      const rows = Math.ceil(canvas.height / gridSize);
-
-      checkeredSquares = [];
-      for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-          if ((i + j) % 2 === 0) {
-            checkeredSquares.push({
-              x: i * gridSize,
-              y: j * gridSize,
-              width: gridSize,
-              height: gridSize,
-              opacity: Math.random() * 0.18 + 0.08,
-              pulse: Math.random() * Math.PI * 2,
-              pulseSpeed: Math.random() * 0.01 + 0.005,
-            });
-          }
-        }
-      }
-    };
-
-    createCheckeredPattern();
-
-    // Particle class
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.opacity = Math.random() * 0.3 + 0.1;
-        this.pulse = Math.random() * Math.PI * 2;
-        this.pulseSpeed = Math.random() * 0.02 + 0.005;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.pulse += this.pulseSpeed;
-
-        // Wrap around edges
-        if (this.x > canvas.width) this.x = 0;
-        if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0;
-        if (this.y < 0) this.y = canvas.height;
-      }
-
-      draw() {
-        const pulseOpacity = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
-        ctx.fillStyle = `rgba(99, 102, 241, ${pulseOpacity * 0.8})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    // Create particles
-    const particleCount = 100;
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    // Draw connections
-    const drawConnections = () => {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 150) {
-            const opacity = 0.05 * (1 - distance / 150);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.8})`;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-    };
-
-    // Animation loop
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw checkered pattern
-      checkeredSquares.forEach((square) => {
-        square.pulse += square.pulseSpeed;
-        const pulseOpacity =
-          square.opacity * (0.7 + 0.3 * Math.sin(square.pulse));
-        ctx.fillStyle = `rgba(99,102,241, ${pulseOpacity})`;
-        ctx.fillRect(square.x, square.y, square.width, square.height);
-
-        // Add border to checkered squares
-        ctx.strokeStyle = `rgba(99,102,241, ${pulseOpacity * 0.8})`;
-        ctx.lineWidth = 0.5;
-        ctx.strokeRect(square.x, square.y, square.width, square.height);
-      });
-
-      // Draw particles
-      particles.forEach((particle) => {
-        particle.update();
-        particle.draw();
-      });
-
-      drawConnections();
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    // Recreate checkered pattern on resize
-    const handleResize = () => {
-      resizeCanvas();
-      createCheckeredPattern();
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
-  const courseStats = [
-    { value: "25+", label: "Courses", icon: <FaBook /> },
-    { value: "5000+", label: "Students", icon: <FaUsers /> },
-    { value: "150+", label: "Batches", icon: <FaClock /> },
-    { value: "4.9", label: "Rating", icon: <FaStar /> },
-  ];
+  const features = ["Live Classes", "1:1 Mentorship", "Placement Support", "Certification"];
 
   const popularCourses = [
-    {
-      name: "Full Stack Development",
-      icon: <FaCode />,
-      description: "MERN, Python, Cloud",
-      color: "#4361ee",
-    },
-    {
-      name: "Data Science",
-      icon: <FaDatabase />,
-      description: "ML, AI, Analytics",
-      color: "#f72585",
-    },
-    {
-      name: "Digital Marketing",
-      icon: <FaBullhorn />,
-      description: "SEO, Social Media, Ads",
-      color: "#06d6a0",
-    },
+    { name: "Full Stack Development", icon: <FaCode />,     color: "#4361ee" },
+    { name: "Data Science",           icon: <FaDatabase />, color: "#f72585" },
+    { name: "Digital Marketing",      icon: <FaBullhorn />, color: "#06d6a0" },
   ];
 
-  const features = [
-    "Live Classes",
-    "1:1 Mentorship",
-    "Placement Support",
-    "Certification",
+  // Matching the exact vibe of Focusway screenshot images
+  const cardImages = [
+    {
+      src: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&q=85",
+      alt: "Student studying with headphones",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=500&q=85",
+      alt: "Writing notes in notebook",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      alt: "Person sitting by mountain lake",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      alt: "Cyclist on open road",
+    },
   ];
 
   return (
     <div className={styles.coursesHome}>
       <section className={styles.heroSection}>
-        <canvas ref={canvasRef} className={styles.canvasBackground} />
 
-        <div className={styles.heroContainer}>
-          <div className={styles.centerHero}>
-            <div className={styles.topStats}>
-              <span>25+ Courses</span>
-              <span>5000+ Students</span>
-              <span>150+ Batches</span>
-              <span>4.9 Rating</span>
-            </div>
+        {/* Thin vertical lines */}
+        <div className={styles.linesBg} aria-hidden="true">
+          {Array.from({ length: 22 }).map((_, i) => (
+            <div key={i} className={styles.line} />
+          ))}
+        </div>
 
-            <h1 className={styles.heroTitle}>
-              Upskill Yourself
-              <br />
-              <span className={styles.gradientText}>
-                with Industry-Ready Courses
-              </span>
-            </h1>
+        {/* Blue gradient wash */}
+        <div className={styles.blueWash} aria-hidden="true" />
 
-            <p className={styles.heroDesc}>
-              Learn in-demand skills with expert mentors, industry-recognized
-              certifications, and career-focused training programs.
-            </p>
+        {/* Soft top glow */}
+        <div className={styles.topGlow} aria-hidden="true" />
 
-            <div className={styles.courseFeatures}>
-              {features.map((feature, index) => (
-                <span key={index} className={styles.featureBadge}>
-                  <FaCheckCircle />
-                  {feature}
+        {/* ── Text content ── */}
+        <div className={styles.heroInner}>
+          {/* <div className={styles.statsRow}>
+            {[["25+","Courses"],["5,000+","Students"],["150+","Batches"],["4.9★","Rating"]].map(
+              ([val, label]) => (
+                <span key={label} className={styles.statChip}>
+                  <b>{val}</b> {label}
                 </span>
-              ))}
-            </div>
+              )
+            )}
+          </div> */}
 
-            <div className={styles.courseTags}>
-              {popularCourses.map((course, index) => (
-                <div key={index} className={styles.courseTag}>
-                  <span
-                    className={styles.courseIcon}
-                    style={{ color: course.color }}
-                  >
-                    {course.icon}
-                  </span>
+          <h1 className={styles.heroTitle}>
+            Upskill Yourself
+            <br />
+            <span className={styles.gradientText}>with Industry-Ready Courses</span>
+          </h1>
 
-                  <span>{course.name}</span>
-                </div>
-              ))}
-            </div>
+          <p className={styles.heroDesc}>
+            Learn in-demand skills with expert mentors, industry-recognized
+            certifications, and career-focused training programs.
+          </p>
+
+          <div className={styles.featureRow}>
+            {features.map((f, i) => (
+              <span key={i} className={styles.featureBadge}>
+                <FaCheckCircle className={styles.checkIcon} />
+                {f}
+              </span>
+            ))}
           </div>
         </div>
+
+        {/* ── Up/Down wave image cards ── */}
+        <div className={styles.cardsStage}>
+          {cardImages.map((img, i) => (
+            <div key={i} className={`${styles.floatingCard} ${styles[`card${i}`]}`}>
+              <img src={img.src} alt={img.alt} loading="lazy" />
+            </div>
+          ))}
+        </div>
+
+        {/* ── Course pills ── */}
+        <div className={styles.coursePills}>
+          {popularCourses.map((c, i) => (
+            <div key={i} className={styles.coursePill}>
+              <span className={styles.pillIcon} style={{ color: c.color }}>{c.icon}</span>
+              <span>{c.name}</span>
+              {/* <FaArrowRight className={styles.pillArrow} /> */}
+            </div>
+          ))}
+        </div>
+
       </section>
     </div>
   );
