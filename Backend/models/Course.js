@@ -124,11 +124,28 @@ CourseSchema.pre('save', async function () {
 
       if (!existing) break;
 
+<<<<<<< HEAD
+    finalSlug = `${baseSlug}-${counter}`; // qa-engineer-2, qa-engineer-3...
+    counter++;
+  }
+
+  return finalSlug;
+};
+
+// ─── PRE-SAVE HOOK ────────────────────────────────────────────────
+CourseSchema.pre("save", async function () {
+  if (this.title && (!this.slug || this.isModified("title"))) {
+    const baseSlug = generateSlug(this.title) || "course";
+    this.slug = await findUniqueSlug(this.constructor, baseSlug, this._id);
+
+    console.log(`🔗 Slug set: "${this.title}" → "${this.slug}"`);
+=======
       finalSlug = `${baseSlug}-${counter}`;
       counter++;
     }
 
     this.slug = finalSlug;
+>>>>>>> caf238d867a4b0829f14f08208ca71028b6d9f35
   }
 });
 // ─── HELPER: Generate slug from text ────────────────────────────────
@@ -143,6 +160,31 @@ function generateSlug(text) {
     .replace(/^-+|-+$/g, '');   // Remove leading/trailing hyphens
 }
 
+<<<<<<< HEAD
+// ─── PRE-FINDONEANDUPDATE HOOK ────────────────────────────────────
+// Jab admin course title update kare tab bhi slug update ho
+CourseSchema.pre("findOneAndUpdate", async function () {
+  const update = this.getUpdate();
+  const newTitle = update?.title || update?.$set?.title;
+
+  if (newTitle) {
+    const baseSlug = generateSlug(newTitle) || "course";
+    const doc = await this.model.findOne(this.getQuery());
+
+    const uniqueSlug = await findUniqueSlug(
+      this.model,
+      baseSlug,
+      doc?._id
+    );
+
+    if (update.$set) {
+      update.$set.slug = uniqueSlug;
+    } else {
+      update.slug = uniqueSlug;
+    }
+
+    console.log(`🔗 Slug updated: "${newTitle}" → "${uniqueSlug}"`);
+=======
 // ─── STATIC METHOD: Find by slug with fallback to ID ──────────────
 CourseSchema.statics.findBySlugOrId = async function(identifier) {
   // Try to find by slug first
@@ -151,6 +193,7 @@ CourseSchema.statics.findBySlugOrId = async function(identifier) {
   // If not found and identifier looks like MongoDB ObjectId, try by ID
   if (!course && /^[0-9a-fA-F]{24}$/.test(identifier)) {
     course = await this.findById(identifier);
+>>>>>>> caf238d867a4b0829f14f08208ca71028b6d9f35
   }
   
   return course;
