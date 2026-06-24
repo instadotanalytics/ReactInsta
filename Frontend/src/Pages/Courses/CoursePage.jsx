@@ -345,13 +345,10 @@ const CoursePage = () => {
       <Companypartners />
       <WhyJoinUS />
       <OurPremiumServices />
-<<<<<<< HEAD
       <CourseHero />
       {/* <ReviewSection /> */}
-=======
       <WhyChooseUs/>
       <ReviewSection />
->>>>>>> bf7502575f0c3560a1af06112c80229292fdb806
       <FAQSection />
       <Footer />
     </div>
