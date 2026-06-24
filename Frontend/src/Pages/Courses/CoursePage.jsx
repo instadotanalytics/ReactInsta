@@ -19,6 +19,7 @@ import OurPremiumServices from '../OurPremiumServices'
 import CoursesHome from './CoursesHome'
 import CourseHero from './CourseHero'
 import FontAnimation from './FontAnimation'
+import WhyChooseUs from '../WhyChooseUs'
 
 // Lazy loaded skeleton card component
 const SkeletonCard = ({ delay = 0 }) => (
@@ -344,8 +345,13 @@ const CoursePage = () => {
       <Companypartners />
       <WhyJoinUS />
       <OurPremiumServices />
+<<<<<<< HEAD
       <CourseHero />
       {/* <ReviewSection /> */}
+=======
+      <WhyChooseUs/>
+      <ReviewSection />
+>>>>>>> bf7502575f0c3560a1af06112c80229292fdb806
       <FAQSection />
       <Footer />
     </div>

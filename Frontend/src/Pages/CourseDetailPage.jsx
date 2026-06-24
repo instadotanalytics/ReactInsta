@@ -23,7 +23,7 @@ import ReviewSection from './ReviewSection';
 import CareerSection from './CareerSection';
 import FAQSection from './FAQSection';
 import OurPremiumServices from './OurPremiumServices';
-import CourseMetaTags from '../components/SEO/CourseMetaTags';
+import CourseMetaTags from '../components/SEO/CourseMetaTags'; // ✅ Import Meta Tags
 
 // ─── Skeleton Components (Compact) ──────────────────────────────────
 const SkeletonHero = () => (
@@ -238,6 +238,7 @@ const CourseDetailPage = () => {
           <OurPremiumServices />
           <CareerSection />
           <ReviewSection />
+        
           <FAQSection />
           <Footer />
         </div>
