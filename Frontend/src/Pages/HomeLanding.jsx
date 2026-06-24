@@ -125,10 +125,10 @@ export default function HomeLanding() {
       <div className={styles.spotlight} aria-hidden="true" />
 
       <div className={styles.content}>
-        <span className={styles.badge}>
+        {/* <span className={styles.badge}>
           <HiSparkles />
           Venture-Grade Engineering Partner
-        </span>
+        </span> */}
 
         <h1 className={styles.title}>
           Built for <span className={styles.accent}>Scale</span> &amp; <span className={styles.accent}>Intelligence.</span>

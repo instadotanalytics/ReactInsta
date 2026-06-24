@@ -1,8 +1,11 @@
-/* CoursesHome.module.css */
-
 .coursesHome {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  height: 100vh;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  min-height: auto;
   overflow: hidden;
 }
 
@@ -23,7 +26,6 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  /* repeating thin lines — ~28px apart, very subtle */
   background-image: repeating-linear-gradient(
     90deg,
     rgba(147, 197, 253, 0.22) 0px,
@@ -42,17 +44,17 @@
   background:
     linear-gradient(
       100deg,
-      rgba(255,255,255,0)    0%,
-      rgba(255,255,255,0)    28%,
-      rgba(147,186,255,0.18) 55%,
-      rgba(99,130,241,0.48)  80%,
-      rgba(67,99,241,0.65)   100%
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 28%,
+      rgba(147, 186, 255, 0.18) 55%,
+      rgba(99, 130, 241, 0.48) 80%,
+      rgba(67, 99, 241, 0.65) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(255,255,255,0)    52%,
-      rgba(147,186,255,0.14) 76%,
-      rgba(99,130,241,0.28)  100%
+      rgba(255, 255, 255, 0) 52%,
+      rgba(147, 186, 255, 0.14) 76%,
+      rgba(99, 130, 241, 0.28) 100%
     );
 }
 
@@ -64,8 +66,9 @@
   transform: translateX(-50%);
   width: 600px;
   height: 300px;
-  background: radial-gradient(ellipse at 50% 0%,
-    rgba(147,186,255,0.18) 0%,
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(147, 186, 255, 0.18) 0%,
     transparent 68%
   );
   pointer-events: none;
@@ -87,26 +90,6 @@
   padding-right: 16px;
 }
 
-.statsRow {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-
-.statChip {
-  padding: 6px 16px;
-  border: 1px solid rgba(99,102,241,0.2);
-  background: rgba(255,255,255,0.85);
-  border-radius: 30px;
-  font-size: 12px;
-  color: #374151;
-  backdrop-filter: blur(8px);
-  white-space: nowrap;
-}
-.statChip b { color: #1e40af; font-weight: 700; }
-
 .heroTitle {
   font-size: clamp(1.9rem, 4.8vw, 3.5rem);
   font-weight: 800;
@@ -126,8 +109,13 @@
   display: inline-block;
 }
 @keyframes gradShift {
-  0%, 100% { background-position: 0% 50%; }
-  50%       { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .heroDesc {
@@ -138,16 +126,21 @@
   margin: 0 auto 14px;
 }
 
+/* ── Feature Row - Fixed for mobile ── */
 .featureRow {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 4px 0;
 }
 
 .featureBadge {
   display: flex;
   align-items: center;
+  gap: 6px;
   font-size: 11px;
   font-weight: 500;
   color: #4b5563;
@@ -156,6 +149,13 @@
   border-radius: 30px;
   padding: 5px 14px;
   backdrop-filter: blur(6px);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.checkIcon {
+  font-size: 10px;
+  color: #4361ee;
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -172,7 +172,6 @@
   padding: 0 16px;
   flex: 1;
   margin-top: 18px;
-  /* negative gap to force overlap */
   gap: 0;
 }
 
@@ -181,21 +180,20 @@
   overflow: hidden;
   flex-shrink: 0;
   position: relative;
-  /* White border ring */
   outline: 5px solid #ffffff;
   box-shadow:
-    0 10px 36px rgba(30,58,138,0.14),
-    0 2px 8px rgba(0,0,0,0.08);
+    0 10px 36px rgba(30, 58, 138, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.08);
   transition:
-    transform 0.4s cubic-bezier(0.22,1,0.36,1),
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.3s,
     z-index 0s;
-  /* overlap: each card shifts left by ~35px into the previous */
   margin-left: -30px;
 }
 
-/* First card — no negative margin */
-.card0 { margin-left: 0; }
+.card0 {
+  margin-left: 0;
+}
 
 .floatingCard img {
   width: 100%;
@@ -206,15 +204,14 @@
 
 .floatingCard:hover {
   box-shadow:
-    0 22px 56px rgba(67,97,238,0.20),
-    0 4px 14px rgba(0,0,0,0.10);
+    0 22px 56px rgba(67, 97, 238, 0.2),
+    0 4px 14px rgba(0, 0, 0, 0.1);
   z-index: 10;
 }
 
 /*
   Wave: up → down → up → down
   Slight tilt per card, translateY alternates positive/negative
-  z-index stacking so each card appears ON TOP of prev (like screenshot)
 */
 .card0 {
   width: 188px;
@@ -222,7 +219,9 @@
   transform: rotate(-5deg) translateY(-22px);
   z-index: 1;
 }
-.card0:hover { transform: rotate(-5deg) translateY(-34px); }
+.card0:hover {
+  transform: rotate(-5deg) translateY(-34px);
+}
 
 .card1 {
   width: 188px;
@@ -230,7 +229,9 @@
   transform: rotate(3deg) translateY(28px);
   z-index: 2;
 }
-.card1:hover { transform: rotate(3deg) translateY(16px); }
+.card1:hover {
+  transform: rotate(3deg) translateY(16px);
+}
 
 .card2 {
   width: 188px;
@@ -238,7 +239,9 @@
   transform: rotate(-3deg) translateY(-20px);
   z-index: 3;
 }
-.card2:hover { transform: rotate(-3deg) translateY(-32px); }
+.card2:hover {
+  transform: rotate(-3deg) translateY(-32px);
+}
 
 .card3 {
   width: 188px;
@@ -246,17 +249,22 @@
   transform: rotate(5deg) translateY(26px);
   z-index: 2;
 }
-.card3:hover { transform: rotate(5deg) translateY(14px); }
+.card3:hover {
+  transform: rotate(5deg) translateY(14px);
+}
 
-/* ── Course pills ────────────────────────────────────────────── */
+/* ── Course pills - Fixed for mobile ── */
 .coursePills {
   position: relative;
   z-index: 5;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 10px;
   padding: 14px 16px 18px;
+  width: 100%;
+  overflow-x: auto;
+  max-width: 900px;
 }
 
 .coursePill {
@@ -272,43 +280,246 @@
   font-weight: 600;
   cursor: pointer;
   backdrop-filter: blur(8px);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
-.pillIcon { font-size: 15px; flex-shrink: 0; }
+.pillIcon {
+  font-size: 15px;
+  flex-shrink: 0;
+}
 
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .card0, .card1, .card2, .card3 { width: 165px; height: 208px; }
-  .floatingCard { margin-left: -24px; }
-  .card0 { margin-left: 0; }
+  .card0,
+  .card1,
+  .card2,
+  .card3 {
+    width: 165px;
+    height: 208px;
+  }
+  .floatingCard {
+    margin-left: -24px;
+  }
+  .card0 {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 768px) {
-  .heroInner { padding-top: 32px; }
-  .card0, .card1, .card2, .card3 { width: 130px; height: 165px; }
-  .floatingCard { margin-left: -18px; outline-width: 4px; }
-  .card0 { margin-left: 0; }
-  .card0 { transform: rotate(-5deg) translateY(-16px); }
-  .card0:hover { transform: rotate(-5deg) translateY(-26px); }
-  .card1 { transform: rotate(3deg) translateY(20px); }
-  .card1:hover { transform: rotate(3deg) translateY(10px); }
-  .card2 { transform: rotate(-3deg) translateY(-14px); }
-  .card2:hover { transform: rotate(-3deg) translateY(-24px); }
-  .card3 { transform: rotate(5deg) translateY(18px); }
-  .card3:hover { transform: rotate(5deg) translateY(8px); }
-  .coursePills { gap: 7px; padding: 10px 12px 12px; }
-  .coursePill  { padding: 8px 14px; font-size: 11px; }
+  .coursesHome {
+    height: auto;
+  }
+  .heroSection {
+    height: auto;
+    min-height: 580px; /* adjust */
+  }
+  .heroInner {
+    padding-top: 18px;
+  }
+  .cardsStage {
+    flex: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  .heroDesc {
+    margin-bottom: 8px;
+  }
+
+  .featureRow {
+    margin-bottom: 4px;
+  }
+  .card0,
+  .card1,
+  .card2,
+  .card3 {
+    width: 130px;
+    height: 165px;
+  }
+  .floatingCard {
+    margin-left: -18px;
+    outline-width: 4px;
+  }
+  .card0 {
+    margin-left: 0;
+  }
+  .card0 {
+    transform: rotate(-5deg) translateY(-16px);
+  }
+  .card0:hover {
+    transform: rotate(-5deg) translateY(-26px);
+  }
+  .card1 {
+    transform: rotate(3deg) translateY(20px);
+  }
+  .card1:hover {
+    transform: rotate(3deg) translateY(10px);
+  }
+  .card2 {
+    transform: rotate(-3deg) translateY(-14px);
+  }
+  .card2:hover {
+    transform: rotate(-3deg) translateY(-24px);
+  }
+  .card3 {
+    transform: rotate(5deg) translateY(18px);
+  }
+  .card3:hover {
+    transform: rotate(5deg) translateY(8px);
+  }
+  .coursePills {
+    gap: 7px;
+    padding: 10px 12px 12px;
+  }
+  .coursePill {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+  .featureRow {
+    gap: 6px;
+  }
+  .featureBadge {
+    font-size: 10px;
+    padding: 4px 12px;
+  }
 }
 
 @media (max-width: 480px) {
-  .heroTitle { font-size: 1.55rem; }
-  .card0, .card1, .card2 { width: 102px; height: 130px; }
-  .floatingCard { margin-left: -14px; outline-width: 3px; }
-  .card0 { margin-left: 0; }
-  .card3 { display: none; }
-  .card0 { transform: rotate(-5deg) translateY(-12px); }
-  .card0:hover { transform: rotate(-5deg) translateY(-20px); }
-  .card1 { transform: rotate(3deg) translateY(15px); }
-  .card1:hover { transform: rotate(3deg) translateY(7px); }
-  .card2 { transform: rotate(-3deg) translateY(-10px); }
-  .card2:hover { transform: rotate(-3deg) translateY(-18px); }
+  .heroTitle {
+    font-size: 1.55rem;
+  }
+
+  /* ── Show all 4 cards with reduced sizes ── */
+  .card0,
+  .card1,
+  .card2,
+  .card3 {
+    width: 110px;
+    height: 145px;
+  }
+
+  .floatingCard {
+    margin-left: -10px;
+    border-radius: 12px;
+  }
+  .card0 {
+    margin-left: 0;
+  }
+
+  .card0 {
+    transform: rotate(-4deg) translateY(-10px);
+  }
+  .card0:hover {
+    transform: rotate(-4deg) translateY(-16px);
+  }
+  .card1 {
+    transform: rotate(2deg) translateY(12px);
+  }
+  .card1:hover {
+    transform: rotate(2deg) translateY(6px);
+  }
+  .card2 {
+    transform: rotate(-2deg) translateY(-8px);
+  }
+  .card2:hover {
+    transform: rotate(-2deg) translateY(-14px);
+  }
+  .card3 {
+    transform: rotate(4deg) translateY(10px);
+  }
+  .card3:hover {
+    transform: rotate(4deg) translateY(4px);
+  }
+
+  .heroInner {
+    padding-top: 20px;
+  }
+
+  .cardsStage {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* ── Course pills in a line ── */
+  .coursePills {
+    gap: 6px;
+    padding-top: 4px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .coursePill {
+    padding: 6px 12px;
+    font-size: 10px;
+    gap: 6px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .pillIcon {
+    font-size: 12px;
+  }
+
+  /* ── Feature badges in a line ── */
+  .featureRow {
+    gap: 5px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 0;
+  }
+
+  .featureBadge {
+    font-size: 9px;
+    padding: 3px 10px;
+    gap: 4px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .checkIcon {
+    font-size: 8px;
+  }
+
+  .heroDesc {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  
+}
+
+/* Even smaller screens */
+@media (max-width: 400px) {
+  .card0,
+  .card1,
+  .card2,
+  .card3 {
+    width: 64px;
+    height: 82px;
+  }
+
+  .floatingCard {
+    margin-left: -10px;
+    outline-width: 2px;
+    border-radius: 12px;
+  }
+  .card0 {
+    margin-left: 0;
+  }
+
+  .coursePill {
+    font-size: 9px;
+    padding: 5px 10px;
+    gap: 4px;
+  }
+
+  .pillIcon {
+    font-size: 10px;
+  }
+
+  .featureBadge {
+    font-size: 8px;
+    padding: 2px 8px;
+  }
 }

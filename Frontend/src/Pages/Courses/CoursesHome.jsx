@@ -1,4 +1,3 @@
-// CoursesHome.jsx
 import React, { useEffect } from "react";
 import styles from "./CoursesHome.module.css";
 import {
@@ -6,7 +5,7 @@ import {
   FaCode,
   FaDatabase,
   FaBullhorn,
-  FaArrowRight,
+  FaCloud,
 } from "react-icons/fa";
 
 const CoursesHome = () => {
@@ -17,12 +16,12 @@ const CoursesHome = () => {
   const features = ["Live Classes", "1:1 Mentorship", "Placement Support", "Certification"];
 
   const popularCourses = [
-    { name: "Full Stack Development", icon: <FaCode />,     color: "#4361ee" },
-    { name: "Data Science",           icon: <FaDatabase />, color: "#f72585" },
-    { name: "Digital Marketing",      icon: <FaBullhorn />, color: "#06d6a0" },
+    { name: "Full Stack Development", icon: <FaCode />, color: "#4361ee" },
+    { name: "Data Science", icon: <FaDatabase />, color: "#f72585" },
+    { name: "Digital Marketing", icon: <FaBullhorn />, color: "#06d6a0" },
+    { name: "Cloud Computing", icon: <FaCloud />, color: "#f97316" },
   ];
 
-  // Matching the exact vibe of Focusway screenshot images
   const cardImages = [
     {
       src: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&q=85",
@@ -45,13 +44,8 @@ const CoursesHome = () => {
   return (
     <div className={styles.coursesHome}>
       <section className={styles.heroSection}>
-
         {/* Thin vertical lines */}
-        <div className={styles.linesBg} aria-hidden="true">
-          {Array.from({ length: 22 }).map((_, i) => (
-            <div key={i} className={styles.line} />
-          ))}
-        </div>
+        <div className={styles.linesBg} aria-hidden="true" />
 
         {/* Blue gradient wash */}
         <div className={styles.blueWash} aria-hidden="true" />
@@ -61,16 +55,6 @@ const CoursesHome = () => {
 
         {/* ── Text content ── */}
         <div className={styles.heroInner}>
-          {/* <div className={styles.statsRow}>
-            {[["25+","Courses"],["5,000+","Students"],["150+","Batches"],["4.9★","Rating"]].map(
-              ([val, label]) => (
-                <span key={label} className={styles.statChip}>
-                  <b>{val}</b> {label}
-                </span>
-              )
-            )}
-          </div> */}
-
           <h1 className={styles.heroTitle}>
             Upskill Yourself
             <br />
@@ -105,13 +89,13 @@ const CoursesHome = () => {
         <div className={styles.coursePills}>
           {popularCourses.map((c, i) => (
             <div key={i} className={styles.coursePill}>
-              <span className={styles.pillIcon} style={{ color: c.color }}>{c.icon}</span>
+              <span className={styles.pillIcon} style={{ color: c.color }}>
+                {c.icon}
+              </span>
               <span>{c.name}</span>
-              {/* <FaArrowRight className={styles.pillArrow} /> */}
             </div>
           ))}
         </div>
-
       </section>
     </div>
   );

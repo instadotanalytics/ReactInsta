@@ -166,27 +166,21 @@ const OurPremiumServices = () => {
               </div>
 
               <div className={styles.cardBody}>
-                <>
-                  {/* <div className={styles.leftContent}> */}
-                  <ul className={styles.featuresList}>
-                    {service.features.map((feat, i) => (
-                      <li key={i} className={styles.featureItem}>
-                        <CheckIcon />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {/* </div> */}
+                <ul className={styles.featuresList}>
+                  {service.features.map((feat, i) => (
+                    <li key={i} className={styles.featureItem}>
+                      <CheckIcon />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
 
-                  {/* <div className={styles.rightContent}> */}
-                  <p className={styles.description}>{service.description}</p>
+                <p className={styles.description}>{service.description}</p>
 
-                  <button className={styles.ctaButton}>
-                    <span>VIEW ALL DETAILS</span>
-                    <ArrowRight />
-                  </button>
-                  {/* </div> */}
-                </>
+                <button className={styles.ctaButton}>
+                  <span>VIEW ALL DETAILS</span>
+                  <ArrowRight />
+                </button>
               </div>
             </div>
           ))}
