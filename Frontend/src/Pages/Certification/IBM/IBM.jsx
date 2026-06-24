@@ -80,6 +80,13 @@ const IBM = () => {
 
       {/* ── HERO ── */}
       <section className={styles.heroSection}>
+
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+
         <div className={styles.heroInner}>
 
           {/* LEFT */}
