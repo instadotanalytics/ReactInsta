@@ -18,7 +18,7 @@ body {
   background: linear-gradient(135deg, #f5f9ff 0%, #e8f0fe 30%, #dbeafe 60%, #f0f7ff 100%);
   background-size: 400% 400%;
   animation: gradientMove 22s ease-in-out infinite;
-  height: 95vh;
+  height: 100vh;
   min-height: 680px;
   position: relative;
   overflow: hidden;
