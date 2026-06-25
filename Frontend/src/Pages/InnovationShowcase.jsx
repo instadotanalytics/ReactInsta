@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { 
   FaRocket, FaCode, FaCloud, FaBrain, 
@@ -9,13 +9,20 @@ import styles from './InnovationShowcase.module.css';
 const InnovationShowcase = () => {
   const controls = useAnimation();
   const ref = useRef(null);
-  const inView = useInView(ref, { once: false });
+  const [hasAnimated, setHasAnimated] = useState(false);
+  
+  // Use once: true to trigger only when element first comes into view
+  const inView = useInView(ref, { 
+    once: true,  // This ensures it only triggers once
+    amount: 0.1  // Trigger when 10% of the component is visible
+  });
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !hasAnimated) {
       controls.start("visible");
+      setHasAnimated(true);
     }
-  }, [controls, inView]);
+  }, [inView, controls, hasAnimated]);
 
   const features = [
     { icon: FaRocket, title: "Innovation", desc: "Cutting-edge solutions", color: "#7C3AED" },
@@ -35,7 +42,7 @@ const InnovationShowcase = () => {
         <div className={styles.gradientOrb3} />
       </div>
 
-      {/* Floating Particles */}
+      {/* Floating Particles - These will keep animating continuously */}
       <div className={styles.particles}>
         {[...Array(15)].map((_, i) => (
           <motion.div
@@ -70,13 +77,21 @@ const InnovationShowcase = () => {
             <motion.div
               className={styles.leftContent}
               initial={{ x: -50, opacity: 0 }}
-              animate={inView ? { x: 0, opacity: 1 } : {}}
+              animate={controls}
+              variants={{
+                hidden: { x: -50, opacity: 0 },
+                visible: { x: 0, opacity: 1 }
+              }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <motion.div
                 className={styles.badge}
                 initial={{ scale: 0 }}
-                animate={inView ? { scale: 1 } : {}}
+                animate={controls}
+                variants={{
+                  hidden: { scale: 0 },
+                  visible: { scale: 1 }
+                }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <span className={styles.badgeDot} />
@@ -86,7 +101,11 @@ const InnovationShowcase = () => {
               <motion.h1
                 className={styles.mainHeading}
                 initial={{ y: 30, opacity: 0 }}
-                animate={inView ? { y: 0, opacity: 1 } : {}}
+                animate={controls}
+                variants={{
+                  hidden: { y: 30, opacity: 0 },
+                  visible: { y: 0, opacity: 1 }
+                }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 <span className={styles.gradientText}>Innovation</span>
@@ -99,7 +118,11 @@ const InnovationShowcase = () => {
               <motion.p
                 className={styles.description}
                 initial={{ y: 20, opacity: 0 }}
-                animate={inView ? { y: 0, opacity: 1 } : {}}
+                animate={controls}
+                variants={{
+                  hidden: { y: 20, opacity: 0 },
+                  visible: { y: 0, opacity: 1 }
+                }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
                 Empowering businesses with cutting-edge technology solutions 
@@ -111,7 +134,11 @@ const InnovationShowcase = () => {
             <motion.div
               className={styles.rightContent}
               initial={{ x: 50, opacity: 0 }}
-              animate={inView ? { x: 0, opacity: 1 } : {}}
+              animate={controls}
+              variants={{
+                hidden: { x: 50, opacity: 0 },
+                visible: { x: 0, opacity: 1 }
+              }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <div className={styles.featuresGrid}>
@@ -122,7 +149,11 @@ const InnovationShowcase = () => {
                       key={idx}
                       className={styles.featureCard}
                       initial={{ opacity: 0, y: 30 }}
-                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      animate={controls}
+                      variants={{
+                        hidden: { opacity: 0, y: 30 },
+                        visible: { opacity: 1, y: 0 }
+                      }}
                       transition={{ duration: 0.5, delay: 0.5 + idx * 0.1 }}
                       whileHover={{ 
                         y: -8,

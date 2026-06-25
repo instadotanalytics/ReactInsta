@@ -2,10 +2,10 @@
 
 .showcaseSection {
   position: relative;
-  height: 90vh;
+  height: 95vh;
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #d0daff 50%, #a7dcff 100%);
   display: flex;
   align-items: center;
 }
