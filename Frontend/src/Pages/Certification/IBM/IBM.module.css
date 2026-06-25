@@ -18,7 +18,7 @@ body {
   background: linear-gradient(135deg, #f5f9ff 0%, #e8f0fe 30%, #dbeafe 60%, #f0f7ff 100%);
   background-size: 400% 400%;
   animation: gradientMove 22s ease-in-out infinite;
-  height: 100vh;
+  height: 75vh;
   min-height: 750px;
   position: relative;
   overflow: hidden;
@@ -519,7 +519,7 @@ body {
 
 /* ─── FEATURES BAR ─── */
 .featuresBar {
-  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  background: linear-gradient(135deg, #add3ff 0%, #6bb0ff 100%);
   border-top: 1px solid #E2E8F0;
   border-bottom: none;
   padding: 2.8rem 3rem;
@@ -610,8 +610,9 @@ body {
 
 .feat p {
   font-size: 0.82rem;
-  color: #64748B;
+  color: #4b5768;
   line-height: 1.55;
+  font-weight: 500;
 }
 
 /* ─── CERT TRACKS ─── */
