@@ -161,7 +161,7 @@
 /* Image Container */
 .cardImageWrap {
   width: 100%;
-  height: 255px;
+  height: 250px;
   background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
   display: flex;
   align-items: center;
