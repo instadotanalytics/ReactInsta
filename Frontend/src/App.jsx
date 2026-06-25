@@ -17,7 +17,7 @@ import FullTimeJob from "./Pages/Career/FullTimeJob/FullTimeJob";
 import PlacementRoute from "./Pages/Career/Placement/PlacementRoute";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-import MicrosoftHeroSection from "./Pages/Certification/Microsoft/MicrosoftHeroSecton";
+import MicrosoftHeroSection from "./Pages/Certification/Microsoft/MicrosoftHeroSection";
 import IBM from "./Pages/Certification/IBM/IBM";
 import AWS from "./Pages/Certification/Aws/AWS";
 import Redhat from "./Pages/Certification/RedHat/Redhat";
