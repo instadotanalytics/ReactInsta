@@ -1,315 +1,279 @@
-/* AboutRedhat.module.css */
-
-.aboutSection {
-  padding: 80px 0;
-  background: #ffffff;
+/* ─────────────────────────────────────────
+   SECTION
+───────────────────────────────────────── */
+.section {
   position: relative;
+  background: #FAFCFF;
+  padding: 6rem 0 7rem;
   overflow: hidden;
 }
 
-/* Subtle background pattern */
-.aboutSection::before {
-  content: '';
+.dotGrid {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: radial-gradient(#f0f0f0 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.5;
+  inset: 0;
+  background-image: radial-gradient(rgba(147,197,253,0.22) 1px, transparent 1px);
+  background-size: 28px 28px;
   pointer-events: none;
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 2rem;
   position: relative;
   z-index: 1;
 }
 
-.contentWrapper {
-  display: flex;
+/* ─────────────────────────────────────────
+   HEADER
+───────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
   align-items: center;
-  gap: 60px;
-}
-
-/* Left Content Styles */
-.contentLeft {
-  flex: 1;
-  max-width: 600px;
-}
-
-.subtitle {
-  display: inline-block;
-  font-size: 16px;
+  padding: 0.3rem 0.9rem;
+  background: #EEF6FF;
+  border: 1px solid #DCEEFF;
+  border-radius: 999px;
+  font-size: 0.72rem;
   font-weight: 600;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #e00;
-  background: rgba(238, 0, 0, 0.05);
-  padding: 8px 16px;
-  border-radius: 30px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(238, 0, 0, 0.1);
+  color: #3B82F6;
+  margin-bottom: 1rem;
 }
 
 .title {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #1a1a1a;
-  margin-bottom: 24px;
+  font-size: clamp(1.85rem, 4vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #0F172A;
+  margin: 0 0 0.8rem;
+  line-height: 1.1;
 }
 
-.highlight {
-  color: #e00;
+.sub {
+  font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+  color: #64748B;
+  line-height: 1.65;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────
+   ROADMAP WRAPPER
+───────────────────────────────────────── */
+.roadmap {
   position: relative;
-  display: inline-block;
-}
-
-.highlight::after {
-  content: '';
-  position: absolute;
-  bottom: 5px;
-  left: 0;
   width: 100%;
-  height: 8px;
-  background: rgba(238, 0, 0, 0.1);
-  z-index: -1;
 }
 
-.description {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #4a4a4a;
-  margin-bottom: 32px;
-}
-
-/* Stats Section */
-.statsContainer {
-  display: flex;
-  gap: 40px;
-  margin-bottom: 32px;
-}
-
-.statItem {
-  text-align: left;
-}
-
-.statNumber {
-  font-size: 32px;
-  font-weight: 700;
-  color: #e00;
-  margin: 0 0 4px 0;
-}
-
-.statLabel {
-  font-size: 14px;
-  color: #666;
-  margin: 0;
-}
-
-/* Features List */
-.featuresList {
-  margin-bottom: 40px;
-}
-
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  color: #333;
-}
-
-.checkIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: #e00;
-  color: white;
-  border-radius: 50%;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(238, 0, 0, 0.2);
-}
-
-/* CTA Buttons */
-.ctaButtons {
-  display: flex;
-  gap: 16px;
-}
-
-.primaryBtn {
-  padding: 14px 32px;
-  background: #e00;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(238, 0, 0, 0.2);
-}
-
-.primaryBtn:hover {
-  background: #b00;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(238, 0, 0, 0.3);
-}
-
-.secondaryBtn {
-  padding: 14px 32px;
-  background: transparent;
-  color: #e00;
-  border: 2px solid #e00;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.secondaryBtn:hover {
-  background: rgba(238, 0, 0, 0.02);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(238, 0, 0, 0.1);
-}
-
-/* Right Image Styles */
-.contentRight {
-  flex: 1;
-  position: relative;
-}
-
-.imageWrapper {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-
-}
-
-.image {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
+/* ── SVG ── */
+.svg {
   display: block;
-  transition: transform 0.6s ease;
+  width: 100%;
+  height: auto;
+  /* crisp on retina */
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
 }
 
-
-
-.imageOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;    
-  pointer-events: none;
+/* ─────────────────────────────────────────
+   CARDS LAYER
+   Uses a 4-column grid overlaid on the SVG.
+   Cards sit in their column; top/bottom
+   alignment mirrors the SVG anchor positions.
+───────────────────────────────────────── */
+.cardsLayer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  /* pull the layer up to overlap the SVG */
+  margin-top: -560px; /* matches SVG viewBox height in px at full width */
+  position: relative;
+  z-index: 2;
+  pointer-events: none; /* let SVG hover-pass through */
 }
 
-/* Experience Badge */
-.experienceBadge {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-
+/* each card re-enables pointer events */
+.card {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 280px;
+  min-height: 230px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(180,220,255,0.35);
+  border-radius: 20px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 40px rgba(59,130,246,0.08), 0 2px 8px rgba(15,23,42,0.05);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-width: 120px;
-  border: 1px solid rgba(238, 0, 0, 0.1);
+  gap: 0.55rem;
+  cursor: default;
+  transition: transform 0.22s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.22s ease, border-color 0.22s ease;
+  animation: floatCard 4.5s ease-in-out infinite;
 }
 
-.badgeNumber {
-  font-size: 36px;
-  font-weight: 700;
-  color: #e00;
+.card:nth-child(1) { animation-delay: 0s;    }
+.card:nth-child(2) { animation-delay: 0.4s;  }
+.card:nth-child(3) { animation-delay: 0.8s;  }
+.card:nth-child(4) { animation-delay: 1.2s;  }
+
+@keyframes floatCard {
+  0%,100% { transform: translateY(0);   }
+  50%      { transform: translateY(-6px); }
+}
+
+.card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 60px rgba(59,130,246,0.14), 0 4px 12px rgba(15,23,42,0.07);
+  border-color: #93C5FD;
+  animation-play-state: paused;
+}
+
+/*
+  Top cards sit in the upper half of their SVG cell.
+  Bottom cards align to the lower half.
+  We implement this with align-self + margin tricks.
+*/
+.cardTop {
+  align-self: start;
+  /* top of viewBox is ~130/560 ≈ 23% from top */
+  margin-top: calc(560px * 0.04);
+  justify-self: center;
+}
+
+.cardBottom {
+  align-self: end;
+  /* bottom anchor is ~420/560 ≈ 75% from top */
+  margin-top: calc(560px * 0.40);
+  justify-self: center;
+}
+
+/* ─────────────────────────────────────────
+   CARD INTERNALS
+───────────────────────────────────────── */
+.stepRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepNum {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+.cardLevel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 0.18rem 0.55rem;
+  background: #EEF6FF;
+  color: #64748B;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+}
+
+.cardCode {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   line-height: 1;
 }
 
-.badgeText {
-  font-size: 14px;
-  color: #333;
+.cardFull {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.cardDesc {
+  font-size: 0.76rem;
+  color: #64748B;
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.skillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.skillPill {
+  font-size: 0.65rem;
   font-weight: 500;
+  padding: 0.18rem 0.55rem;
+  background: #F8FBFF;
+  border: 1px solid #DCEEFF;
+  border-radius: 999px;
+  color: #334155;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.card:hover .skillPill {
+  background: #EEF6FF;
+  border-color: #93C5FD;
+  color: #2563EB;
 }
 
-/* Responsive Design */
-@media (max-width: 968px) {
-  .contentWrapper {
-    flex-direction: column;
-    gap: 40px;
+.cardBar {
+  height: 2.5px;
+  border-radius: 999px;
+  width: 40px;
+  opacity: 0.6;
+  margin-top: 0.2rem;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+
+/* tablet: 2 col, no SVG overlay */
+@media (max-width: 900px) {
+  .svg { display: none; }
+
+  .cardsLayer {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+    margin-top: 0;
   }
 
-  .contentLeft {
+  .cardTop,
+  .cardBottom {
+    align-self: auto;
+    justify-self: auto;
+    margin-top: 0;
     max-width: 100%;
-    text-align: center;
-  }
-
-  .title {
-    font-size: 36px;
-  }
-
-  .statsContainer {
-    justify-content: center;
-  }
-
-  .feature {
-    justify-content: center;
-  }
-
-  .ctaButtons {
-    justify-content: center;
-  }
-
-  .imageWrapper {
-    max-width: 600px;
-    margin: 0 auto;
+    min-height: 210px;
   }
 }
 
-@media (max-width: 576px) {
-  .aboutSection {
-    padding: 60px 0;
+/* mobile: single column */
+@media (max-width: 520px) {
+  .cardsLayer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .title {
-    font-size: 28px;
+  .section {
+    padding: 4rem 0 5rem;
   }
+}
 
-  .statsContainer {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .statItem {
-    text-align: center;
-  }
-
-  .ctaButtons {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .experienceBadge {
-    bottom: 20px;
-    right: 20px;
-    padding: 15px;
-    min-width: 100px;
-  }
-
-  .badgeNumber {
-    font-size: 28px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+  .card:hover { transform: none !important; }
 }
