@@ -348,7 +348,7 @@ const CoursePage = () => {
       <CourseHero />
       {/* <ReviewSection /> */}
       <WhyChooseUs/>
-      <ReviewSection />
+      {/* <ReviewSection /> */}
       <FAQSection />
       <Footer />
     </div>
