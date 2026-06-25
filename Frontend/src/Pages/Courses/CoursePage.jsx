@@ -12,7 +12,7 @@ import { API_BASE_URL, SERVER_BASE_URL } from '../../config/api'
 import styles from './CoursePage.module.css'
 import Companypartners from './Companypartners'
 import WhyJoinUS from '../WhyJoinUS'
-// import ReviewSection from '../ReviewSection'
+import ReviewSection from '../ReviewSection'
 import FAQSection from '../FAQSection'
 import Footer from '../../components/Footer/Footer'
 import OurPremiumServices from '../OurPremiumServices'
@@ -346,7 +346,6 @@ const CoursePage = () => {
       <WhyJoinUS />
       <OurPremiumServices />
       <CourseHero />
-      {/* <ReviewSection /> */}
       <WhyChooseUs/>
       {/* <ReviewSection /> */}
       <FAQSection />
