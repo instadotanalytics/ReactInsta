@@ -1,3 +1,4 @@
+// Courses.jsx - Complete Component with Meta Fields
 import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from "../../config/api";
 import style from "./Courses.module.css";
@@ -34,6 +35,9 @@ const Courses = () => {
     internshipIncluded: false,
     placementAssistance: false,
     downloadableResources: false,
+    // ✅ NEW: Meta fields
+    metaTitle: "",
+    metaDescription: "",
   });
 
   const [thumbnailFile, setThumbnailFile] = useState(null);
@@ -102,6 +106,9 @@ const Courses = () => {
       internshipIncluded: false,
       placementAssistance: false,
       downloadableResources: false,
+      // ✅ NEW: Reset meta fields
+      metaTitle: "",
+      metaDescription: "",
     });
     setThumbnailFile(null);
     setInstructorImageFile(null);
@@ -139,6 +146,9 @@ const Courses = () => {
       internshipIncluded: course.internshipIncluded || false,
       placementAssistance: course.placementAssistance || false,
       downloadableResources: course.downloadableResources || false,
+      // ✅ NEW: Set meta fields from course
+      metaTitle: course.metaTitle || "",
+      metaDescription: course.metaDescription || "",
     });
     setThumbnailPreview(course.thumbnail || null);
     setInstructorPreview(course.instructor?.image || null);
@@ -439,11 +449,11 @@ const Courses = () => {
             <div className={style.progressBar}>
               <div 
                 className={style.progressFill} 
-                style={{ width: `${((currentStep - 1) / 5) * 100}%` }}
+                style={{ width: `${((currentStep - 1) / 6) * 100}%` }}
               ></div>
             </div>
             <div className={style.steps}>
-              {[1, 2, 3, 4, 5, 6].map((step) => (
+              {[1, 2, 3, 4, 5, 6, 7].map((step) => (
                 <div 
                   key={step}
                   className={`${style.step} ${currentStep >= step ? style.active : ''} ${currentStep > step ? style.completed : ''}`}
@@ -458,7 +468,8 @@ const Courses = () => {
                     {step === 3 && 'Details'}
                     {step === 4 && 'Pricing'}
                     {step === 5 && 'Instructor'}
-                    {step === 6 && 'Extras'}
+                    {step === 6 && 'SEO'}
+                    {step === 7 && 'Extras'}
                   </div>
                 </div>
               ))}
@@ -473,9 +484,10 @@ const Courses = () => {
                 {currentStep === 3 && '🔧 Course Details'}
                 {currentStep === 4 && '💰 Pricing'}
                 {currentStep === 5 && '👨‍🏫 Instructor Details'}
-                {currentStep === 6 && '✨ Additional Features'}
+                {currentStep === 6 && '🔍 SEO & Meta Data'}
+                {currentStep === 7 && '✨ Additional Features'}
               </h3>
-              <span className={style.stepIndicator}>Step {currentStep} of 6</span>
+              <span className={style.stepIndicator}>Step {currentStep} of 7</span>
             </div>
 
             {/* Step 1: Basic Info */}
@@ -798,8 +810,95 @@ const Courses = () => {
               </div>
             )}
 
-            {/* Step 6: Extras */}
+            {/* ✅ Step 6: SEO / Meta Data - NEW */}
             {currentStep === 6 && (
+              <div className={style.stepContent}>
+                <div className={style.seoInfoBox}>
+                  <p className={style.seoInfoText}>
+                    🔍 <strong>SEO Meta Tags</strong> - These help search engines understand your course content.
+                    Good meta tags improve your course visibility in search results.
+                  </p>
+                </div>
+
+                <div className={style.formGroup}>
+                  <label>Meta Title (for SEO)</label>
+                  <input
+                    type="text"
+                    name="metaTitle"
+                    value={formData.metaTitle}
+                    onChange={handleChange}
+                    placeholder="Leave empty to use course title"
+                    maxLength="60"
+                    className={errors.metaTitle ? style.error : ''}
+                  />
+                  <div className={style.charCounter}>
+                    <span className={formData.metaTitle.length > 60 ? style.exceeded : ''}>
+                      {formData.metaTitle.length}/60 characters
+                    </span>
+                    {formData.metaTitle.length === 0 && (
+                      <span className={style.hintText}>📌 Will use: "{formData.title || 'Course Title'}"</span>
+                    )}
+                    {formData.metaTitle.length > 0 && formData.metaTitle.length < 30 && (
+                      <span className={style.hintText}>💡 Consider making it longer for better SEO</span>
+                    )}
+                    {formData.metaTitle.length > 60 && (
+                      <span className={style.warningText}>⚠️ Title is too long! Google may truncate it.</span>
+                    )}
+                  </div>
+                  {errors.metaTitle && <span className={style.errorMsg}>{errors.metaTitle}</span>}
+                </div>
+                
+                <div className={style.formGroup}>
+                  <label>Meta Description (for SEO)</label>
+                  <textarea
+                    name="metaDescription"
+                    value={formData.metaDescription}
+                    onChange={handleChange}
+                    rows="3"
+                    placeholder="Leave empty to use short description"
+                    maxLength="160"
+                    className={errors.metaDescription ? style.error : ''}
+                  />
+                  <div className={style.charCounter}>
+                    <span className={formData.metaDescription.length > 160 ? style.exceeded : ''}>
+                      {formData.metaDescription.length}/160 characters
+                    </span>
+                    {formData.metaDescription.length === 0 && (
+                      <span className={style.hintText}>📌 Will use short description</span>
+                    )}
+                    {formData.metaDescription.length > 0 && formData.metaDescription.length < 120 && (
+                      <span className={style.hintText}>💡 Consider making it longer for better SEO</span>
+                    )}
+                    {formData.metaDescription.length > 160 && (
+                      <span className={style.warningText}>⚠️ Description is too long! Google may truncate it.</span>
+                    )}
+                  </div>
+                  {errors.metaDescription && <span className={style.errorMsg}>{errors.metaDescription}</span>}
+                </div>
+
+                <div className={style.seoPreviewBox}>
+                  <h4>📱 Search Result Preview</h4>
+                  <div className={style.seoPreview}>
+                    <div className={style.previewUrl}>
+                      yourdomain.com/course/
+                      {formData.metaTitle ? 
+                        formData.metaTitle.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : 
+                        formData.title?.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') || 'course-slug'
+                      }
+                    </div>
+                    <div className={style.previewTitle}>
+                      {formData.metaTitle || formData.title || 'Course Title'}
+                    </div>
+                    <div className={style.previewDescription}>
+                      {formData.metaDescription || formData.shortDescription || 'Course description will appear here...'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 7: Extras */}
+            {currentStep === 7 && (
               <div className={style.stepContent}>
                 <div className={style.formGroup}>
                   <label>Course Type <span className={style.required}>*</span></label>
@@ -866,7 +965,7 @@ const Courses = () => {
               )}
               
               <div className={style.navRight}>
-                {currentStep < 6 ? (
+                {currentStep < 7 ? (
                   <button type="button" onClick={nextStep} className={style.nextBtn}>
                     Continue →
                   </button>
@@ -942,7 +1041,7 @@ const Courses = () => {
                   <th>Instructor</th>
                   <th>Price</th>
                   <th>Level</th>
-                  <th>Status</th>
+                  <th>SEO Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -992,9 +1091,15 @@ const Courses = () => {
                       </span>
                     </td>
                     <td>
-                      <span className={`${style.statusBadge} ${style.active}`}>
-                        Active
-                      </span>
+                      {course.metaTitle || course.metaDescription ? (
+                        <span className={style.seoBadge} title={`Meta: ${course.metaTitle || course.title}`}>
+                          ✅ SEO
+                        </span>
+                      ) : (
+                        <span className={style.seoBadgeMissing} title="No meta tags set">
+                          ⚠️ No SEO
+                        </span>
+                      )}
                     </td>
                     <td>
                       <div className={style.actionButtons}>

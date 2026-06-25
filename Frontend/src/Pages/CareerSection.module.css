@@ -188,9 +188,7 @@
   transition: transform 0.3s ease;
 }
 
-.card:hover .cardImage {
-  transform: scale(1.05);
-}
+
 
 /* Card Content */
 .cardContent {

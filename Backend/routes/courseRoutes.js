@@ -1,3 +1,4 @@
+// routes/courseRoutes.js
 import express from "express";
 import multer from "multer";
 import path from 'path';
@@ -9,9 +10,11 @@ import {
   getCourseBySlug,
   updateCourse,
   deleteCourse,
-  generateSlugsForAllCourses // ✅ New import
+  generateSlugsForAllCourses,
+  getCourseMeta
 } from "../controller/courseController.js";
 import { verifyAdmin } from "../middleware/adminAuth.js";
+import Course from "../models/Course.js";
 
 const router = express.Router();
 
@@ -55,66 +58,40 @@ const upload = multer({
 
 // ---------- ROUTES ---------- //
 
-// ✅ NEW: Generate slugs for all existing courses (Admin only)
+// ✅ 1. GENERATE SLUGS FOR ALL COURSES
 router.post("/generate-slugs", verifyAdmin, generateSlugsForAllCourses);
 
-// ✅ IMPORTANT: Slug route MUST come BEFORE :id route
-router.get("/slug/:slug", getCourseBySlug);
+// ✅ 2. GET COURSE META DATA
+router.get("/meta/:slug", getCourseMeta);
 
-// CREATE COURSE
-router.post(
-  "/", 
-  verifyAdmin, 
-  upload.fields([
-    { name: 'thumbnail', maxCount: 1 },
-    { name: 'instructorImage', maxCount: 1 }
-  ]),
-  createCourse
-);
-
-// GET ALL COURSES
-router.get("/", getCourses);
-
-// GET COURSE BY ID
-router.get("/:id", getCourseById);
-
-// UPDATE COURSE
-router.put(
-  "/:id", 
-  verifyAdmin, 
-  upload.fields([
-    { name: 'thumbnail', maxCount: 1 },
-    { name: 'instructorImage', maxCount: 1 }
-  ]),
-  updateCourse
-);
-
-// DELETE COURSE
-router.delete("/:id", verifyAdmin, deleteCourse);
-// TEMPORARY — ek baar use karo phir hata do
+// ✅ 3. CLEAR ALL SLUGS
 router.post("/clear-slugs", verifyAdmin, async (req, res) => {
   try {
     await Course.updateMany({}, { $unset: { slug: "" } });
-    res.json({ success: true, message: "All slugs cleared" });
+    res.json({ 
+      success: true, 
+      message: "All slugs cleared successfully" 
+    });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    res.status(500).json({ 
+      success: false, 
+      message: err.message 
+    });
   }
 });
 
-
-// TEMPORARY — saare slugs reset karne ke liye
+// ✅ 4. RESET ALL SLUGS
 router.post("/reset-all-slugs", verifyAdmin, async (req, res) => {
   try {
-    // Pehle saare slugs clear karo
     await Course.updateMany({}, { $unset: { slug: "" } });
     console.log('✅ All slugs cleared');
 
-    // Ab saare courses fetch karo
     const courses = await Course.find({});
     const results = [];
 
-    const generateSlug = (title) => {
-      return title
+    const generateSlug = (text) => {
+      if (!text) return 'course';
+      return text
         .toLowerCase()
         .trim()
         .replace(/[^\w\s-]/g, '')
@@ -124,10 +101,10 @@ router.post("/reset-all-slugs", verifyAdmin, async (req, res) => {
     };
 
     for (const course of courses) {
-      let baseSlug = generateSlug(course.title);
+      const sourceText = course.metaTitle || course.title;
+      let baseSlug = generateSlug(sourceText);
       if (!baseSlug) baseSlug = 'course';
 
-      // Unique check — counter se, timestamp nahi
       let finalSlug = baseSlug;
       let counter = 1;
       while (true) {
@@ -140,13 +117,24 @@ router.post("/reset-all-slugs", verifyAdmin, async (req, res) => {
         counter++;
       }
 
-      // Direct update — pre-save hook bypass
+      const updateData = { slug: finalSlug };
+      if (!course.metaTitle) {
+        updateData.metaTitle = course.title;
+      }
+      if (!course.metaDescription) {
+        updateData.metaDescription = course.shortDescription || '';
+      }
+
       await Course.updateOne(
         { _id: course._id },
-        { $set: { slug: finalSlug } }
+        { $set: updateData }
       );
 
-      results.push({ title: course.title, slug: finalSlug });
+      results.push({ 
+        title: course.title, 
+        metaTitle: updateData.metaTitle || course.metaTitle,
+        slug: finalSlug 
+      });
       console.log(`✅ ${course.title} → ${finalSlug}`);
     }
 
@@ -158,30 +146,45 @@ router.post("/reset-all-slugs", verifyAdmin, async (req, res) => {
 
   } catch (err) {
     console.error('❌ Error:', err);
-    res.status(500).json({ success: false, message: err.message });
+    res.status(500).json({ 
+      success: false, 
+      message: err.message 
+    });
   }
 });
 
-// ---------- GLOBAL ERROR HANDLER ---------- //
-router.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    if (err.code === 'LIMIT_FILE_SIZE') {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'File too large. Maximum size is 5MB.' 
-      });
-    }
-    return res.status(400).json({ 
-      success: false, 
-      message: err.message 
-    });
-  } else if (err) {
-    return res.status(400).json({ 
-      success: false, 
-      message: err.message 
-    });
-  }
-  next();
-});
+// ✅ 5. GET COURSE BY SLUG
+router.get("/slug/:slug", getCourseBySlug);
+
+// ✅ 6. CREATE COURSE
+router.post(
+  "/", 
+  verifyAdmin, 
+  upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'instructorImage', maxCount: 1 }
+  ]),
+  createCourse
+);
+
+// ✅ 7. GET ALL COURSES
+router.get("/", getCourses);
+
+// ✅ 8. GET COURSE BY ID
+router.get("/:id", getCourseById);
+
+// ✅ 9. UPDATE COURSE
+router.put(
+  "/:id", 
+  verifyAdmin, 
+  upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'instructorImage', maxCount: 1 }
+  ]),
+  updateCourse
+);
+
+// ✅ 10. DELETE COURSE
+router.delete("/:id", verifyAdmin, deleteCourse);
 
 export default router;

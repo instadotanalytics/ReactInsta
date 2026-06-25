@@ -1,24 +1,22 @@
-/* OurPremiumServices.module.css */
+/* OurPremiumServices.module.css - Updated with reduced white shadows */
 :root {
-  --ps-bg: #ffffff;
-  --ps-bg-soft: #f0f7ff;
+  --ps-bg: #f0f5ff;
+  --ps-card-bg: #ffffff;
   --ps-ink: #0a1628;
-  --ps-ink-soft: #1a2a4a;
-  --ps-ink-muted: #5a6a8a;
-  --ps-blue: #1a56db;
-  --ps-blue-dark: #0a2a6a;
+  --ps-ink-soft: #1e293b;
+  --ps-ink-muted: #64748b;
+  --ps-blue: #2563eb;
+  --ps-blue-dark: #1e40af;
   --ps-blue-light: #3b82f6;
-  --ps-blue-lighter: #93bbfc;
-  --ps-blue-glow: rgba(26, 86, 219, 0.12);
-  --ps-blue-glow-strong: rgba(26, 86, 219, 0.25);
-  --ps-border: rgba(10, 22, 40, 0.06);
+  --ps-blue-bg: #eff6ff;
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans:
+    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .premiumSection {
-  padding: 100px 24px 120px;
+  padding: 80px 24px 100px;
   background: var(--ps-bg);
   position: relative;
   overflow: hidden;
@@ -26,122 +24,83 @@
   min-height: 100vh;
 }
 
-/* ── Canvas Background ── */
-.canvasBackground {
+/* ── Gradient Background ── */
+.gradientBg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  inset: 0;
   z-index: 0;
-}
-
-/* ── Wavy Background ── */
-.wavesContainer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60%;
   overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(37, 99, 235, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 50%,
+      rgba(37, 99, 235, 0.10) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(37, 99, 235, 0.06) 0%,
+      transparent 50%
+    );
 }
 
-.waves {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 320px;
-  animation: waveRise 2s ease-out forwards;
-}
-
-.wave1 {
-  fill: rgba(26, 86, 219, 0.04);
-  animation: waveFloat 8s ease-in-out infinite;
-}
-
-.wave2 {
-  fill: rgba(26, 86, 219, 0.06);
-  animation: waveFloat 10s ease-in-out infinite reverse;
-}
-
-.wave3 {
-  fill: rgba(26, 86, 219, 0.03);
-  animation: waveFloat 12s ease-in-out infinite;
-}
-
-@keyframes waveRise {
-  0% { transform: translateY(100px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes waveFloat {
-  0% { transform: translateX(0) scaleY(1); }
-  50% { transform: translateX(-30px) scaleY(1.1); }
-  100% { transform: translateX(30px) scaleY(0.9); }
-}
-
-/* ── Floating Shapes ── */
-.floatingShape1,
-.floatingShape2,
-.floatingShape3,
-.floatingShape4 {
+.gradientOrb1,
+.gradientOrb2,
+.gradientOrb3 {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.06;
-  pointer-events: none;
-  animation: floatShape 20s ease-in-out infinite;
-  z-index: 0;
+  filter: blur(100px);
+  opacity: 0.3;
+  animation: orbFloat 25s ease-in-out infinite;
 }
 
-.floatingShape1 {
-  width: 300px;
-  height: 300px;
-  top: 10%;
-  left: -100px;
-  background: radial-gradient(circle, var(--ps-blue) 0%, transparent 70%);
+.gradientOrb1 {
+  width: 500px;
+  height: 500px;
+  top: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.15), transparent 70%);
   animation-delay: 0s;
 }
 
-.floatingShape2 {
-  width: 200px;
-  height: 200px;
-  bottom: 30%;
-  right: -50px;
-  background: radial-gradient(circle, var(--ps-blue-light) 0%, transparent 70%);
-  animation-delay: -7s;
+.gradientOrb2 {
+  width: 400px;
+  height: 400px;
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.10), transparent 70%);
+  animation-delay: -8s;
 }
 
-.floatingShape3 {
-  width: 150px;
-  height: 150px;
+.gradientOrb3 {
+  width: 300px;
+  height: 300px;
   top: 50%;
-  left: 5%;
-  background: radial-gradient(circle, var(--ps-blue-dark) 0%, transparent 70%);
-  animation-delay: -14s;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08), transparent 70%);
+  animation-delay: -16s;
 }
 
-.floatingShape4 {
-  width: 100px;
-  height: 100px;
-  bottom: 20%;
-  left: 40%;
-  background: radial-gradient(circle, var(--ps-blue-lighter) 0%, transparent 70%);
-  animation-delay: -4s;
-  animation-duration: 25s;
-}
-
-@keyframes floatShape {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  25% { transform: translate(50px, -60px) scale(1.2) rotate(90deg); }
-  50% { transform: translate(-40px, 40px) scale(0.8) rotate(180deg); }
-  75% { transform: translate(60px, 50px) scale(1.1) rotate(270deg); }
+@keyframes orbFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(80px, -60px) scale(1.1);
+  }
+  66% {
+    transform: translate(-60px, 80px) scale(0.9);
+  }
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1100px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -150,76 +109,48 @@
 /* ── Header ── */
 .header {
   text-align: center;
-  margin-bottom: 72px;
-  position: relative;
+  margin-bottom: 48px;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
+.badge {
+  display: inline-block;
+  padding: 6px 20px;
+  background: var(--ps-blue-bg);
+  color: var(--ps-blue);
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ps-blue);
-  margin-bottom: 20px;
-}
-
-.eyebrowLine {
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--ps-blue));
-  border-radius: 2px;
-  animation: expandLine 2s ease-in-out infinite;
-}
-
-.eyebrowLine:last-child {
-  background: linear-gradient(90deg, var(--ps-blue), transparent);
-  animation-delay: 1s;
-}
-
-@keyframes expandLine {
-  0%, 100% { transform: scaleX(1); opacity: 0.5; }
-  50% { transform: scaleX(1.5); opacity: 1; }
+  border-radius: 20px;
+  margin-bottom: 16px;
 }
 
 .title {
-  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
   font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   color: var(--ps-ink);
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 }
 
 .highlight {
-  background: linear-gradient(135deg, var(--ps-blue) 0%, var(--ps-blue-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--ps-blue) 0%,
+    var(--ps-blue-dark) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.titleUnderline {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--ps-blue), var(--ps-blue-dark));
-  border-radius: 2px;
-  margin: 0 auto 20px;
-  animation: pulseUnderline 3s ease-in-out infinite;
-}
-
-@keyframes pulseUnderline {
-  0%, 100% { transform: scaleX(1); opacity: 0.6; }
-  50% { transform: scaleX(1.5); opacity: 1; }
-}
-
 .subtitle {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--ps-ink-muted);
-  max-width: 460px;
+  max-width: 500px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.6;
   font-weight: 400;
 }
 
@@ -227,398 +158,198 @@
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  align-items: stretch;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 /* ── Card ── */
 .card {
-  background: var(--ps-bg);
-  border-radius: 24px;
+  background: var(--ps-card-bg);
+  border-radius: 16px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  position: relative;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s var(--ease-spring);
-  cursor: pointer;
-  box-shadow: 0 4px 30px rgba(10, 22, 40, 0.05);
-  overflow: hidden;
-  border: 1px solid rgba(26, 86, 219, 0.06);
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  padding: 1.5px;
-  background: linear-gradient(135deg, 
-    rgba(26, 86, 219, 0.2),
-    rgba(26, 86, 219, 0.05),
-    rgba(26, 86, 219, 0.2)
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.card:hover::before {
-  opacity: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(37, 99, 235, 0.06);
 }
 
 .card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 60px rgba(26, 86, 219, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.10);
+  border-color: rgba(37, 99, 235, 0.12);
 }
 
-/* ── Card Gradient Background ── */
-.cardGradientBg {
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  background: linear-gradient(135deg, 
-    rgba(26, 86, 219, 0.03) 0%,
-    transparent 30%,
-    transparent 70%,
-    rgba(26, 86, 219, 0.02) 100%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.card:hover .cardGradientBg {
-  opacity: 1;
-}
-
-/* ── Popular Card ── */
-.popularCard {
-  border-color: rgba(26, 86, 219, 0.15);
-  box-shadow: 0 4px 30px rgba(26, 86, 219, 0.08);
-}
-
-.popularCard::before {
-  background: linear-gradient(135deg, 
-    var(--ps-blue),
-    var(--ps-blue-light),
-    var(--ps-blue)
-  );
-  opacity: 1;
-}
-
-.popularCard:hover {
-  box-shadow: 0 20px 60px rgba(26, 86, 219, 0.18);
-}
-
-/* ── Popular Badge ── */
-.popularBadge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: linear-gradient(135deg, var(--ps-blue) 0%, var(--ps-blue-dark) 100%);
-  color: #ffffff;
-  padding: 6px 16px 6px 12px;
-  border-radius: 20px;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 16px rgba(26, 86, 219, 0.3);
-  animation: badgeFloat 3s ease-in-out infinite;
-}
-
-@keyframes badgeFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-.popularDot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #fff;
-  animation: pulseDot 2s ease-in-out infinite;
-}
-
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
-}
-
-/* ── Image Section ── */
-.imageContainer {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
+/* ── Image ── */
+.imageWrapper {
   position: relative;
-  background: linear-gradient(180deg, var(--ps-bg-soft) 0%, var(--ps-bg) 100%);
-  flex-shrink: 0;
-}
-
-.imageOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 30%, var(--ps-bg) 100%);
-  z-index: 1;
+  height: 210px;
   overflow: hidden;
-}
-
-.imageShine {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 70%
-  );
-  transform: rotate(45deg) translateX(-100%);
-  transition: transform 0.8s ease;
-}
-
-.card:hover .imageShine {
-  transform: rotate(45deg) translateX(100%);
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
 }
 
 .cardImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s var(--ease-smooth), filter 0.7s;
-  filter: brightness(0.92) saturate(0.8) contrast(1.05);
+  object-fit: contain;
+  object-position: center right;
+  /* Removed white drop-shadow entirely */
+  filter: none;
 }
 
-.card:hover .cardImage {
-  transform: scale(1.08);
-  filter: brightness(1) saturate(1) contrast(1);
-}
-
-/* ── Icon Circle on Image ── */
-.iconCircle {
+.imageOverlay {
   position: absolute;
-  bottom: -30px;
-  left: 28px;
-  z-index: 2;
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  inset: 0;
+  /* Reduced white overlay significantly */
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.30) 0%,  /* Reduced from 0.85 */
+      rgba(255,255,255,0.15) 35%, /* Reduced from 0.60 */
+      rgba(255,255,255,0.05) 70%, /* Reduced from 0.10 */
+      transparent 100%
+    );
 }
 
-.iconPulse {
+/* ── Title on Image ── */
+.imageTitle {
   position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--ps-blue) 0%, var(--ps-blue-dark) 100%);
-  opacity: 0.15;
-  animation: iconPulse 3s ease-in-out infinite;
+  bottom: 14px;
+  left: 14px;
+  z-index: 5;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  /* Reduced shadow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 70%;
 }
 
-@keyframes iconPulse {
-  0%, 100% { transform: scale(1); opacity: 0.15; }
-  50% { transform: scale(1.2); opacity: 0.25; }
+.imageTitleText {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.1;
 }
 
-.iconWrapper {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--ps-blue) 0%, var(--ps-blue-dark) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 8px 30px rgba(26, 86, 219, 0.3);
-  transition: all 0.4s var(--ease-spring);
-  position: relative;
-  z-index: 1;
+.imageTagline {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #1e40af;
 }
 
-.card:hover .iconWrapper {
-  transform: scale(1.08) rotate(-4deg);
-  box-shadow: 0 12px 40px rgba(26, 86, 219, 0.4);
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-.iconWrapper svg {
-  width: 26px;
-  height: 26px;
+.description {
+  display: none;
 }
 
-/* ── Content ── */
-.cardContent {
-  padding: 40px 28px 28px;
+/* ── Card Body ── */
+.cardBody {
+  padding: 16px 20px 18px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 16px;
-  position: relative;
-  z-index: 2;
-}
-
-.cardHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.serviceTitle {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--ps-ink);
-  line-height: 1.2;
-  margin: 0;
-  transition: color 0.3s ease;
-}
-
-.card:hover .serviceTitle {
-  color: var(--ps-blue);
-}
-
-.serviceTagline {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ps-blue);
-  opacity: 0.8;
-}
-
-.cardDivider {
-  width: 40px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--ps-blue), var(--ps-blue-dark));
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-.card:hover .cardDivider {
-  width: 60px;
 }
 
 /* ── Features ── */
 .featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
   flex: 1;
-  padding: 4px 0;
 }
 
 .featureItem {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: var(--ps-ink-muted);
-  font-size: 0.85rem;
-  font-weight: 500;
-  line-height: 1.4;
-  transition: all 0.3s ease;
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
-}
-
-.featureItem:hover {
-  color: var(--ps-ink-soft);
-  transform: translateX(4px);
-  border-bottom-color: rgba(26, 86, 219, 0.05);
-}
-
-.checkWrap {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(26, 86, 219, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.featureItem:hover .checkWrap {
-  background: rgba(26, 86, 219, 0.15);
-  transform: scale(1.1);
-}
-
-.checkIcon {
-  width: 10px;
-  height: 10px;
-  color: var(--ps-blue);
-  flex-shrink: 0;
-}
-
-/* ── CTA ── */
-.detailsButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ps-ink-muted);
+  padding: 3px 0;
+}
+
+.featureItem svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--ps-blue);
+}
+
+/* ── CTA Button ── */
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  padding: 12px 24px;
-  border: 2px solid rgba(26, 86, 219, 0.15);
-  border-radius: 12px;
+  padding: 9px 18px;
+  border: 2px solid rgba(37, 99, 235, 0.10);
+  border-radius: 10px;
+  background: transparent;
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ps-blue);
   cursor: pointer;
-  transition: all 0.4s var(--ease-spring);
+  transition: all 0.35s var(--ease-spring);
   position: relative;
   overflow: hidden;
-  margin-top: auto;
-  background: transparent;
-  z-index: 2;
+  margin-top: 2px;
 }
 
-.detailsButton::before {
-  content: '';
+.ctaButton::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--ps-blue) 0%, var(--ps-blue-dark) 100%);
+  background: linear-gradient(135deg, var(--ps-blue), var(--ps-blue-dark));
   transform: translateY(100%);
-  transition: transform 0.4s var(--ease-smooth);
+  transition: transform 0.35s var(--ease-smooth);
   z-index: 0;
 }
 
-.detailsButton:hover::before {
+.ctaButton:hover::before {
   transform: translateY(0);
 }
 
-.detailsButton:hover {
+.ctaButton:hover {
   color: #ffffff;
   border-color: var(--ps-blue);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(26, 86, 219, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
 }
 
-.detailsButton span,
-.detailsButton svg {
+.ctaButton span,
+.ctaButton svg {
   position: relative;
   z-index: 1;
 }
 
 .btnArrow {
-  width: 14px;
-  height: 14px;
-  transition: transform 0.3s var(--ease-spring);
+  width: 12px;
+  height: 12px;
+  transition: transform 0.3s ease;
 }
 
-.detailsButton:hover .btnArrow {
+.ctaButton:hover .btnArrow {
   transform: translateX(4px);
 }
 
@@ -626,80 +357,100 @@
 @media (max-width: 1024px) {
   .cardGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-  
-  .wavesContainer {
-    height: 40%;
+    gap: 20px;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 768px) {
-  .floatingShape1,
-  .floatingShape2,
-  .floatingShape3,
-  .floatingShape4 {
-    opacity: 0.03;
+  .cardGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
   }
-  
-  .wavesContainer {
-    height: 30%;
+
+  .card {
+    width: 88%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .imageWrapper {
+    height: 160px;
+  }
+
+  .imageTitle {
+    max-width: 75%;
+    padding: 6px 12px;
+  }
+
+  .imageTitleText {
+    font-size: 1.1rem;
+  }
+
+  .imageTagline {
+    font-size: 0.5rem;
+  }
+
+  .description {
+    display: block;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin: 10px 0 14px;
+    color: #64748b;
+  }
+
+  .cardBody {
+    padding: 14px 16px;
+  }
+
+  .featureItem {
+    font-size: 0.74rem;
+  }
+
+  .ctaButton {
+    height: 42px;
+    font-size: 0.6rem;
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 480px) {
   .premiumSection {
-    padding: 60px 16px 72px;
+    padding: 40px 10px;
   }
-  
-  .cardGrid {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    margin: 0 auto;
-    gap: 24px;
+
+  .card {
+    width: 86%;
+    max-width: 300px;
   }
-  
+
+  .imageWrapper {
+    height: 145px;
+  }
+
+  .imageTitleText {
+    font-size: 1rem;
+  }
+
+  .imageTagline {
+    font-size: 0.45rem;
+  }
+
+  .featureItem {
+    font-size: 0.7rem;
+  }
+
   .title {
-    font-size: 2rem;
-  }
-  
-  .header {
-    margin-bottom: 48px;
-  }
-  
-  .iconCircle {
-    width: 56px;
-    height: 56px;
-    bottom: -26px;
-    left: 20px;
-  }
-  
-  .iconWrapper {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .iconWrapper svg {
-    width: 22px;
-    height: 22px;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card,
-  .detailsButton,
-  .featureItem,
-  .wave1,
-  .wave2,
-  .wave3,
-  .floatingShape1,
-  .floatingShape2,
-  .floatingShape3,
-  .floatingShape4,
-  .iconPulse,
-  .popularBadge,
-  .imageShine {
-    animation: none !important;
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

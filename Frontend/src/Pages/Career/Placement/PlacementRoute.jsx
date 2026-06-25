@@ -8,115 +8,116 @@ import WhyJoinUS from "../../WhyJoinUS";
 import OurImpact from "../../OurImpact";
 import FAQSection from "../../FAQSection";
 import PlacementList from "../../PlacementList";
+import {
+  FaChalkboardTeacher,
+  FaUserGraduate,
+  FaBriefcase,
+  FaCertificate
+} from "react-icons/fa";
 
 
 
 const PlacementSection = () => {
   return (
     <>
-    <Header/>
-    <section className={styles.section}>
-      <div className={styles.container}>
-        
-        {/* LEFT CONTENT */}
-        <div className={styles.leftContent}>
-          <h1 className={styles.title}>
-            Upskill Yourself with <span className={styles.highlight}>Industry-Ready Courses</span>
-          </h1>
-          
-          <p className={styles.description}>
-            Choose from 25+ professional courses designed by industry experts. 
-            Get certified and boost your career with 100% placement assistance.
-          </p>
+      <Header />
+      <section className={styles.section}>
+        <div className={styles.container}>
 
-          {/* STATS */}
-          <div className={styles.statsGrid}>
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>25+</span>
-              <span className={styles.statLabel}>Courses</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>5000+</span>
-              <span className={styles.statLabel}>Students</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>150+</span>
-              <span className={styles.statLabel}>Batches</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>4.9</span>
-              <span className={styles.statLabel}>Rating</span>
-            </div>
-          </div>
+          {/* LEFT CONTENT */}
+          <div className={styles.leftContent}>
 
-          {/* FEATURES */}
-          <div className={styles.featuresList}>
-            <div className={styles.featureItem}>
-              <span className={styles.featureIcon}>📹</span>
-              <span>Live Classes</span>
-            </div>
-            <div className={styles.featureItem}>
-              <span className={styles.featureIcon}>👥</span>
-              <span>1:1 Mentorship</span>
-            </div>
-            <div className={styles.featureItem}>
-              <span className={styles.featureIcon}>💼</span>
-              <span>Placement Support</span>
-            </div>
-            <div className={styles.featureItem}>
-              <span className={styles.featureIcon}>📜</span>
-              <span>Certification</span>
-            </div>
-          </div>
-
-          {/* POPULAR COURSES */}
-          <div className={styles.popularCourses}>
-            <h3 className={styles.popularTitle}>Popular Courses:</h3>
-            <div className={styles.courseTags}>
-              <span className={styles.courseTag}>Full Stack Development</span>
-              <span className={styles.courseTag}>Data Science</span>
-              <span className={styles.courseTag}>Digital Marketing</span>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT IMAGE */}
-        <div className={styles.rightContent}>
-          <div className={styles.imageWrapper}>
-            <img 
-              src="https://i.pinimg.com/1200x/56/c0/98/56c098ab543f35f23ba003d9ef87e3ae.jpg" 
-              alt="Students learning"
-              className={styles.image}
-            />
+            {/* TOP BADGE */}
             
-            {/* FLOATING BADGES */}
-            <div className={`${styles.floatingBadge} ${styles.badge1}`}>
-              <span className={styles.badgeIcon}>🎓</span>
-              <div>
-                <strong>100%</strong>
-                <span>Placement</span>
+
+            {/* TITLE */}
+            <h1 className={styles.title}>
+              Upskill Yourself with{" "}
+              <span className={styles.highlight}>
+                Industry-Ready Courses
+              </span>
+            </h1>
+
+            {/* DESCRIPTION */}
+            <p className={styles.description}>
+              Choose from 25+ professional courses designed by industry experts.
+              Get certified, build real-world projects, and boost your career
+              with placement support.
+            </p>
+
+
+            {/* STATS */}
+            <div className={styles.statsGrid}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>25+</span>
+                <span className={styles.statLabel}>Courses</span>
+              </div>
+
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>5000+</span>
+                <span className={styles.statLabel}>Students</span>
+              </div>
+
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>150+</span>
+                <span className={styles.statLabel}>Batches</span>
+              </div>
+
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>4.9★</span>
+                <span className={styles.statLabel}>Rating</span>
               </div>
             </div>
-            
-            <div className={`${styles.floatingBadge} ${styles.badge2}`}>
-              <span className={styles.badgeIcon}>⏰</span>
-              <div>
-                <strong>Flexible</strong>
-                <span>Timings</span>
+
+            {/* FEATURES */}
+            <div className={styles.featuresList}>
+
+              <div className={styles.featureItem}>
+                <FaChalkboardTeacher className={styles.featureIcon} />
+                <span>Live Classes</span>
+              </div>
+
+              <div className={styles.featureItem}>
+                <FaUserGraduate className={styles.featureIcon} />
+                <span>1:1 Mentorship</span>
+              </div>
+
+              <div className={styles.featureItem}>
+                <FaBriefcase className={styles.featureIcon} />
+                <span>Placement Support</span>
+              </div>
+
+              <div className={styles.featureItem}>
+                <FaCertificate className={styles.featureIcon} />
+                <span>Certification</span>
+              </div>
+
+            </div>
+
+            {/* POPULAR COURSES */}
+            <div className={styles.popularCourses}>
+              <h3>Popular Courses</h3>
+
+              <div className={styles.courseTags}>
+                <span className={styles.courseTag}>Full Stack</span>
+                <span className={styles.courseTag}>Data Science</span>
+                <span className={styles.courseTag}>Digital Marketing</span>
               </div>
             </div>
-          </div>
-        </div>
 
-      </div>
-    </section>
-    <Companypartners/>
-    <PlacementList/>
-     <ReviewSection/>
-      <WhyJoinUS/>
-      <OurImpact/>
-      <FAQSection/>
-    <Footer/>
+          </div>
+
+          {/* RIGHT IMAGE */}
+
+        </div>
+      </section>
+      <Companypartners />
+      <PlacementList />
+      <ReviewSection />
+      <WhyJoinUS />
+      <OurImpact />
+      <FAQSection />
+      <Footer />
     </>
   );
 };

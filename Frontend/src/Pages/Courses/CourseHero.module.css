@@ -1,0 +1,156 @@
+.hero {
+  height: 30vh;
+  min-height: 50vh;
+  padding: 120px 40px;
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at left center,
+      rgba(0, 45, 120, 0.45),
+      transparent 35%
+    ),
+    linear-gradient(90deg, #04163d 0%, #01050d 35%, #000000 100%);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+
+  background-size: 45px 45px;
+
+  opacity: 0.35;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  left: -250px;
+  top: -150px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle, rgba(0, 76, 255, 0.22), transparent 70%);
+
+  filter: blur(60px);
+}
+
+/* .aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.aurora::before {
+  background: #0f172a; /* dark navy */
+/* top: -200px;
+  left: -100px;
+  animation: float1 12s infinite alternate;
+}
+
+.aurora::after {
+  background: #1e3a8a; /* deep blue */
+/* bottom: -200px;
+  right: -100px;
+  animation: float2 14s infinite alternate;
+} */
+
+/* .aurora::before,
+.aurora::after {
+  opacity: 0.15;
+  filter: blur(160px);
+} */
+
+/* @keyframes float1 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(150px, 80px);
+  }
+} */
+
+/* @keyframes float2 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-150px, -80px);
+  }
+} */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.45)
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+  max-width: 1000px;
+  padding: 40px;
+}
+
+.tag {
+  color: #7dd3fc;
+
+  letter-spacing: 3px;
+
+  font-size: 0.9rem;
+
+  margin-bottom: 25px;
+}
+
+.heading {
+  background: linear-gradient(90deg, #ffffff, #dbeafe, #93c5fd);
+
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.desc {
+  color: #cbd5e1;
+
+  margin-top: 30px;
+
+  font-size: 1.2rem;
+
+  max-width: 700px;
+
+  margin-inline: auto;
+}
+
+@keyframes slideText {
+  from {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

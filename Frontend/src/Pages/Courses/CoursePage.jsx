@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { 
+  FaSearch, 
+  FaSpinner,
+  FaSync,
+  FaTimes
+} from 'react-icons/fa'
+import { IoMdSchool } from 'react-icons/io'
 import Header from '../../components/Header/Header'
 import { API_BASE_URL, SERVER_BASE_URL } from '../../config/api'
 import styles from './CoursePage.module.css'
@@ -10,6 +17,9 @@ import FAQSection from '../FAQSection'
 import Footer from '../../components/Footer/Footer'
 import OurPremiumServices from '../OurPremiumServices'
 import CoursesHome from './CoursesHome'
+import CourseHero from './CourseHero'
+import FontAnimation from './FontAnimation'
+import WhyChooseUs from '../WhyChooseUs'
 
 // Lazy loaded skeleton card component
 const SkeletonCard = ({ delay = 0 }) => (
@@ -20,7 +30,6 @@ const SkeletonCard = ({ delay = 0 }) => (
     <div className={styles.skeletonImage} />
     <div className={styles.skeletonContent}>
       <div className={styles.skeletonTitle} />
-      <div className={styles.skeletonCategory} />
       <div className={styles.skeletonDescription} />
       <div className={styles.skeletonButton} />
     </div>
@@ -57,35 +66,18 @@ const CourseCard = React.memo(({ course, index, onViewMore }) => {
             }}
           />
         </div>
-        {course.category && (
-          <span className={styles.categoryBadge}>{course.category}</span>
-        )}
       </div>
 
       <div className={styles.cardContent}>
         <h3 className={styles.courseTitle}>{course.title || 'Untitled Course'}</h3>
-        {course.category && (
-          <div className={styles.categoryText}>{course.category}</div>
-        )}
         {course.shortDescription && (
           <p className={styles.courseDescription}>
-            {course.shortDescription.length > 80
-              ? `${course.shortDescription.substring(0, 80)}…`
+            {course.shortDescription.length > 60
+              ? `${course.shortDescription.substring(0, 60)}...`
               : course.shortDescription}
           </p>
         )}
       </div>
-
-      <button
-        className={styles.viewMoreBtn}
-        onClick={(e) => {
-          e.stopPropagation()
-          onViewMore(course)
-        }}
-      >
-        View Details
-        <span className={styles.arrow}>→</span>
-      </button>
     </div>
   )
 }, (prevProps, nextProps) => {
@@ -105,15 +97,6 @@ const CoursePage = () => {
   const [isRendering, setIsRendering] = useState(false)
   
   const renderTimerRef = useRef(null)
-  const observerRef = useRef(null)
-  const isFirstRender = useRef(true)
-
-
-
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  // Banner auto-slide
-
 
   // Progressive rendering of remaining courses
   const renderRemainingCourses = useCallback((filtered, startIndex) => {
@@ -126,14 +109,14 @@ const CoursePage = () => {
         return
       }
 
-      const batchSize = 2 // Render 2 cards at a time for better UX
+      const batchSize = 2
       const endIndex = Math.min(currentIndex + batchSize, filtered.length)
       
       setVisibleCount(endIndex)
       currentIndex = endIndex
 
       if (currentIndex < filtered.length) {
-        const delay = 80 + Math.random() * 70 // 80-150ms delay
+        const delay = 80 + Math.random() * 70
         renderTimerRef.current = setTimeout(renderNext, delay)
       } else {
         setIsRendering(false)
@@ -167,10 +150,8 @@ const CoursePage = () => {
         setCategories(uniqueCategories)
         setError(null)
         
-        // Initially show first 10 courses
         setVisibleCount(Math.min(10, coursesData.length))
         
-        // Start progressive rendering for remaining courses
         if (coursesData.length > 10) {
           renderRemainingCourses(coursesData, 10)
         }
@@ -209,19 +190,15 @@ const CoursePage = () => {
     
     setFilteredCourses(filtered)
     
-    // Reset visible count and start progressive rendering for filtered results
     if (filtered.length > 0) {
-      // Clear existing timer
       if (renderTimerRef.current) {
         clearTimeout(renderTimerRef.current)
         renderTimerRef.current = null
       }
       
-      // Reset visible count to show first 10 immediately
       const initialVisible = Math.min(10, filtered.length)
       setVisibleCount(initialVisible)
       
-      // Render remaining progressively
       if (filtered.length > 10) {
         renderRemainingCourses(filtered, 10)
       } else {
@@ -233,23 +210,15 @@ const CoursePage = () => {
     }
   }, [searchTerm, selectedCategory, courses, renderRemainingCourses])
 
-  const getImageUrl = useCallback((imagePath) => {
-    if (!imagePath) return '/default-course-image.jpg'
-    if (imagePath.startsWith('http')) return imagePath
-    return `${SERVER_BASE_URL}/${imagePath}`
-  }, [])
-
   const handleViewMore = useCallback((course) => {
     const identifier = course.slug || course._id || course.id
     navigate(`/course/${identifier}`)
   }, [navigate])
 
-  // Get visible courses
   const visibleCourses = useMemo(() => {
     return filteredCourses.slice(0, visibleCount)
   }, [filteredCourses, visibleCount])
 
-  // Calculate skeleton count for loading state
   const skeletonCount = useMemo(() => {
     if (isLoading) return 10
     if (filteredCourses.length > visibleCount) {
@@ -265,7 +234,10 @@ const CoursePage = () => {
 
       <div className={styles.coursesSection}>
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionEyebrow}>What We Offer</p>
+          <p className={styles.sectionEyebrow}>
+            <IoMdSchool className={styles.eyebrowIcon} />
+            What We Offer
+          </p>
           <h2 className={styles.sectionTitle}>
             Our <span>Courses</span>
           </h2>
@@ -275,7 +247,7 @@ const CoursePage = () => {
         {/* Search & Filter */}
         <div className={styles.searchFilterContainer}>
           <div className={styles.searchWrapper}>
-            <span className={styles.searchIcon}>🔍</span>
+            <FaSearch className={styles.searchIcon} />
             <input
               type="text"
               placeholder="Search by title, category, or description…"
@@ -308,8 +280,12 @@ const CoursePage = () => {
         {/* Error State */}
         {error && (
           <div className={styles.errorContainer}>
-            <p className={styles.errorMessage}>{error}</p>
+            <p className={styles.errorMessage}>
+              <FaTimes className={styles.errorIcon} />
+              {error}
+            </p>
             <button onClick={() => window.location.reload()} className={styles.retryButton}>
+              <FaSync className={styles.buttonIcon} />
               Retry
             </button>
           </div>
@@ -324,6 +300,7 @@ const CoursePage = () => {
                 onClick={() => { setSearchTerm(''); setSelectedCategory('All') }}
                 className={styles.clearFiltersBtn}
               >
+                <FaTimes className={styles.buttonIcon} />
                 Clear Filters
               </button>
             )}
@@ -364,12 +341,13 @@ const CoursePage = () => {
         )}
       </div>
 
-   
-
+      <FontAnimation />
       <Companypartners />
       <WhyJoinUS />
       <OurPremiumServices />
-      <ReviewSection />
+      <CourseHero />
+      <WhyChooseUs/>
+      {/* <ReviewSection /> */}
       <FAQSection />
       <Footer />
     </div>

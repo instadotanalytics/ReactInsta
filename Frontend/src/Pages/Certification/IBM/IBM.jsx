@@ -3,7 +3,8 @@ import styles from "./IBM.module.css";
 import Header from "../../../components/Header/Header";
 import Footer from "../../../components/Footer/Footer";
 import CertificationApplyForm from "../../CertificationApplyForm";
-import Companypartners from "../../Courses/Companypartners";
+// import Companypartners from "../../Courses/Companypartners";
+import InnovationShowcase from "../../InnovationShowcase";
 import AboutIBM from "./AboutIBM";
 import ReviewSection from "../../ReviewSection";
 
@@ -22,6 +23,7 @@ import {
   RiGlobalLine,
 } from "react-icons/ri";
 import { TbCertificate } from "react-icons/tb";
+
 
 const IBM = () => {
   const certifications = [
@@ -80,6 +82,13 @@ const IBM = () => {
 
       {/* ── HERO ── */}
       <section className={styles.heroSection}>
+
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+        <div className={styles.particle}></div>
+
         <div className={styles.heroInner}>
 
           {/* LEFT */}
@@ -124,19 +133,11 @@ const IBM = () => {
           <div className={styles.rightContent}>
             <div className={styles.imgWrapper}>
               <img
-                src="https://i.pinimg.com/1200x/d2/71/7c/d2717c8f0072c85b264b762ab436a513.jpg"
-                alt="IBM Professional Certification"
+                src="/ibmlogo.png"
+                alt="IBM"
                 className={styles.heroImg}
               />
-              <div className={styles.imgBadge}>
-                <div className={styles.badgeIconWrap}>
-                  <HiOutlineBadgeCheck size={18} color="#2563EB" />
-                </div>
-                <div className={styles.badgeText}>
-                  <strong>IBM Certified</strong>
-                  <span>Premium Partner</span>
-                </div>
-              </div>
+
             </div>
 
             <div className={styles.certGrid}>
@@ -172,7 +173,6 @@ const IBM = () => {
       {/* ── CERT TRACKS ── */}
       <section className={styles.certsSection}>
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionTag}>Certification Tracks</div>
           <h2 className={styles.sectionTitle}>Choose Your Specialization</h2>
           <p className={styles.sectionSub}>
             From cloud to AI — find the track that accelerates your career
@@ -196,7 +196,8 @@ const IBM = () => {
       </section>
 
       <CertificationApplyForm />
-      <Companypartners />
+            {/* <Companypartners /> */}
+      <InnovationShowcase/>
       <AboutIBM />
       <ReviewSection />
 
