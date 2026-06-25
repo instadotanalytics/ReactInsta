@@ -1,0 +1,341 @@
+/* InnovationShowcase.module.css - Light Theme */
+
+.showcaseSection {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+  display: flex;
+  align-items: center;
+}
+
+/* Animated Background - Light Theme */
+.animatedBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gradientOrb1 {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.12), transparent 70%);
+  animation: floatOrb 15s ease-in-out infinite;
+}
+
+.gradientOrb2 {
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.10), transparent 70%);
+  animation: floatOrb 20s ease-in-out infinite reverse;
+}
+
+.gradientOrb3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(219, 39, 119, 0.06), transparent 70%);
+  animation: floatOrb 25s ease-in-out infinite;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+/* Particles - Light Theme */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.15);
+  animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50px, -100px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Content Wrapper */
+.contentWrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 2rem;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 0;
+}
+
+/* Left Content - Light Theme */
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  color: #6d28d9;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.badgeDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #7C3AED;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.mainHeading {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .mainHeading {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainHeading {
+    font-size: 5.5rem;
+  }
+}
+
+.gradientText {
+  background: linear-gradient(to right, #7C3AED, #DB2777);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradientText2 {
+  background: linear-gradient(to right, #2563EB, #0891B2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.darkText {
+  color: #1e293b;
+}
+
+.description {
+  color: #475569;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+@media (min-width: 768px) {
+  .description {
+    font-size: 1.25rem;
+  }
+}
+
+/* Right Content - Features Grid Light Theme */
+.rightContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.featureCard {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  cursor: default;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.featureCard:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+.featureIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.featureTitle {
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.featureDesc {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .mainContent {
+    gap: 2rem;
+  }
+  
+  .mainHeading {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .showcaseSection {
+    height: auto;
+    min-height: 90vh;
+    padding: 3rem 0;
+  }
+
+  .contentWrapper {
+    height: auto;
+    min-height: 90vh;
+    padding: 1rem;
+  }
+
+  .mainContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
+    height: auto;
+  }
+  
+  .leftContent {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .mainHeading {
+    font-size: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  
+  .featuresGrid {
+    max-width: 100%;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+  }
+
+  .featureCard {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .featureCard {
+    padding: 0.75rem;
+  }
+  
+  .mainHeading {
+    font-size: 2rem;
+  }
+  
+  .featureIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .featureIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .featureTitle {
+    font-size: 0.875rem;
+  }
+  
+  .featureDesc {
+    font-size: 0.75rem;
+  }
+}
