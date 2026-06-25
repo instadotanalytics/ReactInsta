@@ -3,8 +3,8 @@ import styles from "./IBM.module.css";
 import Header from "../../../components/Header/Header";
 import Footer from "../../../components/Footer/Footer";
 import CertificationApplyForm from "../../CertificationApplyForm";
-import Companypartners from "../../Courses/Companypartners";
-// import InnovationShowcase from "../../InnovationShowcase";
+// import Companypartners from "../../Courses/Companypartners";
+import InnovationShowcase from "../../InnovationShowcase";
 import AboutIBM from "./AboutIBM";
 import ReviewSection from "../../ReviewSection";
 
@@ -196,8 +196,8 @@ const IBM = () => {
       </section>
 
       <CertificationApplyForm />
-            <Companypartners />
-      {/* <InnovationShowcase/> */}
+            {/* <Companypartners /> */}
+      <InnovationShowcase/>
       <AboutIBM />
       <ReviewSection />
 
