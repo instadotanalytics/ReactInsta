@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* ── HERO SECTION ── */
+── HERO SECTION ──
 .hero {
   padding: 80px 0 100px;
   background: #ffffff;
@@ -20,7 +20,7 @@
   align-items: center;
 }
 
-/* ── CONTENT (LEFT) ── */
+── CONTENT (LEFT) ──
 .content {
   animation: fadeInLeft 0.9s ease both;
 }
@@ -90,7 +90,7 @@
   max-width: 520px;
 }
 
-/* ── FEATURES LIST ── */
+── FEATURES LIST ──
 .features {
   margin-bottom: 36px;
   display: flex;
@@ -122,7 +122,7 @@
   flex-shrink: 0;
 }
 
-/* ── BUTTONS ── */
+── BUTTONS ──
 .buttons {
   display: flex;
   gap: 14px;
@@ -165,7 +165,7 @@
   transform: translateY(-2px);
 }
 
-/* ── STATS ── */
+── STATS ──
 .stats {
   display: flex;
   gap: 36px;
@@ -196,7 +196,7 @@
   font-weight: 600;
 }
 
-/* ── IMAGE (RIGHT) ── */
+── IMAGE (RIGHT) ──
 .imageWrapper {
   position: relative;
   animation: fadeInRight 0.9s ease both;
@@ -218,7 +218,7 @@
 }
 .heroImage:hover { transform: scale(1.02); }
 
-/* Decorative corner accent */
+Decorative corner accent
 .imgFrame::before {
   content: '';
   position: absolute;
@@ -253,7 +253,7 @@
   font-size: 10px;
 }
 
-/* Floating stat card */
+Floating stat card
 .floatingCard {
   position: absolute;
   top: 24px;
@@ -283,7 +283,7 @@
   letter-spacing: 0.08em;
 }
 
-/* Decorative dots grid */
+Decorative dots grid
 .dotsGrid {
   position: absolute;
   bottom: -30px;
@@ -296,7 +296,7 @@
   z-index: -1;
 }
 
-/* ── ANIMATIONS ── */
+── ANIMATIONS ──
 @keyframes fadeInLeft {
   from { opacity: 0; transform: translateX(-40px); }
   to   { opacity: 1; transform: translateX(0); }
@@ -320,26 +320,26 @@
 ════════════════════════════════════ */
 
 /* Tablet ≤ 1024px */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .hero { padding: 64px 0 80px; }
   .container { gap: 48px; padding: 0 32px; }
   .title { font-size: 42px; }
   .description { font-size: 16px; }
   .floatingCard { right: -10px; }
-}
+} */
 
 /* Small Tablet ≤ 768px */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .hero { padding: 60px 0 72px; min-height: auto; }
   .container {
     grid-template-columns: 1fr;
     gap: 40px;
     padding: 0 24px;
     text-align: center;
-  }
+  } */
 
   /* Reorder: image first on mobile */
-  .imageWrapper { order: -1; }
+  /* .imageWrapper { order: -1; }
   .content { order: 1; }
 
   .eyebrow { margin: 0 auto 18px; }
@@ -352,10 +352,10 @@
 
   .floatingCard { right: 10px; top: 16px; }
   .dotsGrid { display: none; }
-}
+} */
 
 /* Mobile ≤ 480px */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .hero { padding: 44px 0 56px; }
   .container { padding: 0 16px; gap: 32px; }
   .title { font-size: 28px; }
@@ -367,11 +367,29 @@
   .statItem h3 { font-size: 24px; }
   .floatingCard { display: none; }
   .certificateBadge { bottom: 14px; left: 14px; font-size: 12px; padding: 8px 16px; }
-}
+} */
 
 /* Very small ≤ 360px */
-@media (max-width: 360px) {
+/* @media (max-width: 360px) {
   .title { font-size: 24px; }
   .eyebrow { font-size: 10px; }
   .description { font-size: 13px; }
+}  */
+
+
+
+
+/* Custom.module.css - Only keep styles that are used by other components */
+/* Most styles are now in CertificationCustom.module.css */
+
+/* Any additional styles for CustomAbout, IndustryShowcase, etc. can go here */
+/* If you have any specific styles for the Custom component wrapper, add them below */
+
+/* Example: If you need spacing between sections */
+.customWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
+
+/* Any other shared styles */

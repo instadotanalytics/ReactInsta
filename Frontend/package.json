@@ -19,10 +19,7 @@
     "framer-motion": "^12.42.0",
     "gsap": "^3.15.0",
     "helmet": "^8.2.0",
-<<<<<<< HEAD
-=======
     "motion": "^12.42.0",
->>>>>>> 8085d616bb0b7617e0a6542a154c1063a8fbab60
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-helmet-async": "^3.0.0",

@@ -56,42 +56,65 @@ const CertificationCustom = () => {
       <div className={styles.orb2}></div>
       <div className={styles.orb3}></div>
 
-      {/* Hero Section */}
+      {/* Hero Section with Image */}
       <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <h1>
-            Create Custom Certificates
-            <span className={styles.gradientText}> That Impress</span>
-          </h1>
-          <p>
-            Design professional, personalized certificates for your achievements,
-            training programs, and special recognitions. Fully customizable templates
-            with your company branding.
-          </p>
-        </div>
+        <div className={styles.heroGrid}>
+          {/* Left Content */}
+          <div className={styles.heroContent}>
+            <span className={styles.eyebrow}>
+              <span className={styles.eyebrowDot} />
+              Custom Certificates
+            </span>
 
-        {/* Floating stats cards */}
-        <div className={styles.statsGrid} ref={statsRef}>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{counts.certs.toLocaleString()}+</div>
-            <div className={styles.statLabel}>Certificates Created</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{counts.companies}+</div>
-            <div className={styles.statLabel}>Happy Companies</div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statNumber}>{counts.templates}+</div>
-            <div className={styles.statLabel}>Design Templates</div>
-          </div>
-        </div>
+            <h1 className={styles.heroTitle}>
+              Create <span className={styles.gradientText}>Custom Certificates</span> That Impress
+            </h1>
 
-        {/* Feature badges */}
-        <div className={styles.featureBadges}>
-          <span>✓ Premium certificate templates</span>
-          <span>✓ Add company logo & branding</span>
-          <span>✓ Digital & print ready formats</span>
-          <span>✓ Bulk certificate generation</span>
+            <p className={styles.heroDescription}>
+              Design professional, personalized certificates for your achievements,
+              training programs, and special recognitions. Fully customizable templates
+              with your company branding.
+            </p>
+
+            <div className={styles.featureBadges}>
+              <span>✓ Premium certificate templates</span>
+              <span>✓ Add company logo & branding</span>
+              <span>✓ Digital & print ready formats</span>
+              <span>✓ Bulk certificate generation</span>
+            </div>
+
+            {/* Stats */}
+            <div className={styles.statsGrid} ref={statsRef}>
+              <div className={styles.statCard}>
+                <div className={styles.statNumber}>{counts.certs.toLocaleString()}+</div>
+                <div className={styles.statLabel}>Certificates Created</div>
+              </div>
+              <div className={styles.statCard}>
+                <div className={styles.statNumber}>{counts.companies}+</div>
+                <div className={styles.statLabel}>Happy Companies</div>
+              </div>
+              <div className={styles.statCard}>
+                <div className={styles.statNumber}>{counts.templates}+</div>
+                <div className={styles.statLabel}>Design Templates</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Image */}
+          <div className={styles.heroImageWrapper}>
+            <div className={styles.imgFrame}>
+              <img
+                src="https://i.pinimg.com/1200x/83/8c/cc/838ccc2629857f40606a3d6927de1e72.jpg"
+                alt="Custom certificate preview"
+                className={styles.heroImage}
+              />
+              {/* Corner decorations */}
+              <div className={`${styles.corner} ${styles.cornerTL}`}></div>
+              <div className={`${styles.corner} ${styles.cornerTR}`}></div>
+              <div className={`${styles.corner} ${styles.cornerBL}`}></div>
+              <div className={`${styles.corner} ${styles.cornerBR}`}></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -138,7 +161,6 @@ const CertificationCustom = () => {
             {['Microsoft', 'Amazon', 'Apple', 'Meta', 'IBM', 'Intel', 'Cisco', 'Oracle', 'Salesforce', 'Adobe', 'NVIDIA'].map((company) => (
               <span key={company} className={styles.companyLogo}>{company}</span>
             ))}
-            {/* Duplicate for seamless loop */}
             {['Microsoft', 'Amazon', 'Apple', 'Meta', 'IBM', 'Intel', 'Cisco', 'Oracle', 'Salesforce', 'Adobe', 'NVIDIA'].map((company) => (
               <span key={company + '-dup'} className={styles.companyLogo}>{company}</span>
             ))}
