@@ -1,8 +1,8 @@
 import React from "react";
-import BackgroundCanvas from "./BackgroundCanvas";
+import BackgroundCanvas from "../BackgroundCanvas";
 import styles from "./WhyChooseUs.module.css";
 
-import studentImg from "../../public/anshupop.png"; // put your png here
+// import studentImg from "../../public/anshupop.png"; // put your png here
 
 const WhyChooseUs = () => {
     return (
@@ -29,7 +29,7 @@ const WhyChooseUs = () => {
                 {/* Right Image */}
                 <div className={styles.imageContainer}>
                     <img
-                        src={studentImg}
+                        src="anshupop.png"
                         alt="students"
                         className={styles.image}
                     />

@@ -19,7 +19,7 @@ import OurPremiumServices from '../OurPremiumServices'
 import CoursesHome from './CoursesHome'
 import CourseHero from './CourseHero'
 import FontAnimation from './FontAnimation'
-import WhyChooseUs from '../WhyChooseUs'
+import WhyChooseUs from './WhyChooseUs'
 
 // Lazy loaded skeleton card component
 const SkeletonCard = ({ delay = 0 }) => (
