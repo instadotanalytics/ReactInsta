@@ -17,10 +17,12 @@ const stats = [
 const CustomAbout = () => {
   const [counts, setCounts] = useState({ years: 0, certs: 0, clients: 0 })
   const statsRef = useRef(null)
+  const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
   const animationRef = useRef(null)
   const hasAnimatedRef = useRef(false)
+  const [isInViewport, setIsInViewport] = useState(false)
 
   // Memoize features to prevent re-renders
   const memoizedFeatures = useMemo(() => features, [])
@@ -34,7 +36,7 @@ const CustomAbout = () => {
 
   // Optimized counter animation
   const animateCounts = useCallback(() => {
-    if (!isVisible) return
+    if (!isInViewport) return
     
     // Reset counts before starting animation
     setCounts({ years: 0, certs: 0, clients: 0 })
@@ -65,16 +67,19 @@ const CustomAbout = () => {
     }
 
     animationRef.current = requestAnimationFrame(animate)
-  }, [isVisible])
+  }, [isInViewport])
 
-  // Optimized intersection observer with reset on leave
+  // Optimized intersection observer with strict viewport detection
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          const isIntersecting = entry.isIntersecting
+          setIsInViewport(isIntersecting)
+          
+          if (isIntersecting) {
             setIsVisible(true)
-            // Only animate if not already animated or if we want to re-animate
+            // Only animate if not already animated
             if (!hasAnimatedRef.current) {
               animateCounts()
             }
@@ -82,17 +87,22 @@ const CustomAbout = () => {
             setIsVisible(false)
             // Reset counts when element leaves viewport
             resetCounts()
+            // Cancel any ongoing animation
+            if (animationRef.current) {
+              cancelAnimationFrame(animationRef.current)
+              animationRef.current = null
+            }
           }
         })
       },
       { 
-        threshold: 0.1,
-        rootMargin: '50px'
+        threshold: 0.15, // Slightly higher threshold
+        rootMargin: '-50px 0px -50px 0px' // Negative margin to trigger only when fully visible
       }
     )
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current)
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
     }
 
     return () => {
@@ -105,10 +115,10 @@ const CustomAbout = () => {
 
   // Start animation when visible
   useEffect(() => {
-    if (isVisible && !hasAnimatedRef.current) {
+    if (isInViewport && !hasAnimatedRef.current) {
       animateCounts()
     }
-  }, [isVisible, animateCounts])
+  }, [isInViewport, animateCounts])
 
   const handleImageLoad = useCallback(() => {
     setImageLoaded(true)
@@ -119,14 +129,21 @@ const CustomAbout = () => {
   }, [])
 
   return (
-    <section className={styles.about}>
+    <section 
+      className={styles.about} 
+      ref={sectionRef}
+      style={{
+        opacity: isInViewport ? 1 : 0.3,
+        transition: 'opacity 0.5s ease'
+      }}
+    >
       <div className={styles.orb1}></div>
       <div className={styles.orb2}></div>
       <div className={styles.orb3}></div>
 
       <div className={styles.container}>
         {/* ── Left: Image ── */}
-        <div className={`${styles.imageWrapper} ${isVisible ? styles.fadeInLeft : ''}`}>
+        <div className={`${styles.imageWrapper} ${isInViewport ? styles.fadeInLeft : ''}`}>
           <div className={styles.imgOuter}>
             <div className={styles.imageGlow}></div>
             
@@ -161,7 +178,7 @@ const CustomAbout = () => {
         </div>
 
         {/* ── Right: Content ── */}
-        <div className={`${styles.content} ${isVisible ? styles.fadeInRight : ''}`}>
+        <div className={`${styles.content} ${isInViewport ? styles.fadeInRight : ''}`}>
           <span className={styles.subtitle}>
             <span className={styles.subtitleDot}></span>
             About Our Company
