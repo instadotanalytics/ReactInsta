@@ -79,7 +79,6 @@ const IBM = () => {
   return (
     <>
       <Header />
-
       {/* ── HERO ── */}
       <section className={styles.heroSection}>
 
