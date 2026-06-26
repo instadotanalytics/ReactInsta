@@ -6,21 +6,20 @@ const CallToAction = () => {
   return (
     <section className={styles.ctaSection}>
       <div className={styles.container}>
-
         {/* LEFT SIDE CONTENT */}
-        
-<div className={styles.left}>
-        <h2>
-  Take the <span>Next Step</span> in
-  <br />
-  Your IT Career
-</h2>
+
+        <div className={styles.left}>
+          <h2>
+            Take the <span>Next Step</span> in
+            <br />
+            Your IT Career
+          </h2>
 
           <p>
-            Microsoft certifications validate your technical expertise and 
-            make you stand out in the competitive IT industry. Whether you 
-            are starting your career or upgrading your skills, certification 
-            helps you unlock better job roles and higher salary opportunities.
+            Microsoft certifications validate your technical expertise and make
+            you stand out in the competitive IT industry. Whether you are
+            starting your career or upgrading your skills, certification helps
+            you unlock better job roles and higher salary opportunities.
           </p>
 
           <div className={styles.stats}>
@@ -41,19 +40,15 @@ const CallToAction = () => {
           </div>
 
           <div className={styles.noteBox}>
-            Start preparing today and move confidently towards becoming a 
+            Start preparing today and move confidently towards becoming a
             certified IT professional.
           </div>
         </div>
 
         {/* RIGHT SIDE IMAGE */}
         <div className={styles.right}>
-          <img
-            src={Microsoftmiddle}
-            alt="Microsoft Career Growth"
-          />
+          <img src={Microsoftmiddle} alt="Microsoft Career Growth" />
         </div>
-
       </div>
     </section>
   );
