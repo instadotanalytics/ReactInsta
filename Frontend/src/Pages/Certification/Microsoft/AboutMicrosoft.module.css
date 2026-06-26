@@ -1,103 +1,571 @@
+
+/* ============================
+   ABOUT MICROSOFT SECTION
+============================ */
+
 .aboutSection {
-  padding: 120px 0;
-  background: white;
+  width: 100%;
+  background: #eef5fc;
+  padding: 60px 0 80px;
+  overflow: hidden;
+  position: relative;
 }
 
 .container {
   max-width: 1400px;
-  margin: auto;
-  padding: 0 60px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
 
+/* ============================
+   HERO SECTION
+============================ */
+.heroSection {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  min-height: 580px;
+  background: #dceefb;
+  overflow: hidden;
+  align-items: stretch;
+  position: relative;
+  border-radius: 20px;
+}
+
+.heroSection::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 200px;
+  height: 200px;
+  background-image: radial-gradient(#9CC8FF 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ============================
+   LEFT CONTENT
+============================ */
+.leftContent {
+  padding: 70px 40px 70px 70px;
+  background: transparent;
   display: flex;
-  align-items: center;
-  gap: 80px;
-
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
 }
 
-.imageWrapper {
-  flex: 1;
-}
-
-.image {
-  width: 100%;
-  border-radius: 24px;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,.08);
-}
-
-.content {
-  flex: 1;
-}
-
-.content h2 {
-  font-size: 42px;
-  margin-bottom: 25px;
-  color: #111827;
-  line-height: 1.2;
-}
-
-.content p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.content ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 25px;
-}
-
-.content ul li {
-  margin-bottom: 10px;
-  font-size: 15px;
-  color: #333;
-}
-
-.btn {
-  padding: 12px 25px;
-  background-color: #0078d4;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #005fa3;
-}
-
-.benefits {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-.benefits li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
-  font-size: 1rem;
+.leftContent h1 {
+  font-size: 38px;
   font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 22px;
+  color: #071B46;
 }
 
-.icon {
-  font-size: 1.3rem;
-  color: #0078d4; /* Microsoft Blue */
+.leftContent h1 span {
+  display: block;
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #071B46;
+}
+
+.leftContent p {
+  font-size: 19px;
+  line-height: 1.5;
+  max-width: 480px;
+  color: #344054;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+/* ============================
+   BUTTONS
+============================ */
+.buttonGroup {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  height: 54px;
+  padding: 0 30px;
+  font-size: 17px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  background: #1565C0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(21, 101, 192, 0.38);
+  background: #0D47A1;
+}
+
+.secondaryBtn {
+  height: 54px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: #1565C0;
+  border: 2px solid #1565C0;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.secondaryBtn:hover {
+  background: #1565C0;
+  color: #fff;
+}
+
+/* ============================
+   RIGHT IMAGE
+============================ */
+.rightContent {
+  height: 580px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ============================
+   TECHNOLOGIES SECTION
+============================ */
+.techSection {
+  width: 92%;
+  margin: -24px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  z-index: 20;
+}
+
+.techCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  background: #fff;
+  padding: 20px;
+  border-right: 1px solid #EDF2F7;
+  position: relative;
+  cursor: pointer;
+  transition: 0.25s;
+  overflow: hidden;
+}
+
+.techCard:last-child {
+  border-right: none;
+}
+
+.techCard:hover {
+  background: #f7fbff;
+}
+
+/* Azure icon */
+.azureIcon {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* AI icon */
+.aiIcon {
+  font-size: 54px;
+  color: #1565C0;
+  margin-bottom: 14px;
+}
+
+/* Power BI icon */
+.powerBiIcon {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Security icon */
+.securityIcon {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shieldIcon {
+  font-size: 54px;
+  color: #1565C0;
+}
+
+.techCard h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1E293B;
+  margin: 0;
+}
+
+/* Glass shine hover effect */
+.techCard::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 220px;
+  background: rgba(255, 255, 255, 0.18);
+  top: -70px;
+  left: -140px;
+  transform: rotate(25deg);
+  transition: 0.8s;
+}
+
+.techCard:hover::after {
+  left: 130%;
+}
+
+/* Float animations */
+.techCard:nth-child(1) { animation: floatOne 4s ease-in-out infinite; }
+.techCard:nth-child(2) { animation: floatTwo 4.5s ease-in-out infinite; }
+.techCard:nth-child(3) { animation: floatThree 5s ease-in-out infinite; }
+.techCard:nth-child(4) { animation: floatFour 4.3s ease-in-out infinite; }
+
+@keyframes floatOne {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes floatTwo {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes floatThree {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes floatFour {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================
+   FEATURE SECTION
+============================ */
+.featureSection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 24px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  gap: 0;
+}
+
+.featureCard {
+  background: #fff;
+  border: none;
+  padding: 34px 30px;
+  border-right: 1px solid #E8EDF4;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.featureCard:last-child {
+  border-right: none;
+}
+
+/* Icon wrap — circular outline style matching reference image */
+.featureIconWrap {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #EEF4FB;
+  border: 2px solid #D0E4F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: 0.3s;
+}
+
+.featureIcon {
+  font-size: 26px;
+  color: #1565C0;
+  transition: 0.3s;
+}
+
+/* Hover effects */
+.featureCard:hover {
+  box-shadow: 0 8px 32px rgba(21, 101, 192, 0.12);
+  z-index: 2;
+}
+
+.featureCard:hover .featureIconWrap {
+  background: #1565C0;
+  border-color: #1565C0;
+  transform: scale(1.08);
+}
+
+.featureCard:hover .featureIcon {
+  color: #fff;
+}
+
+.featureCard h4 {
+  font-size: 19px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 6px 0;
+}
+
+.featureCard p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6B7280;
+  margin: 0;
+}
+
+/* float animations for feature cards */
+.featureCard:nth-child(1) { animation: featureFloat1 5s ease-in-out infinite; }
+.featureCard:nth-child(2) { animation: featureFloat2 6s ease-in-out infinite; }
+.featureCard:nth-child(3) { animation: featureFloat3 5.5s ease-in-out infinite; }
+.featureCard:nth-child(4) { animation: featureFloat4 6.2s ease-in-out infinite; }
+
+@keyframes featureFloat1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes featureFloat2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes featureFloat3 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes featureFloat4 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* ============================
+   STATS SECTION
+============================ */
+.statsSection {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: linear-gradient(90deg, #0a2a7a, #1445c7);
+  border-radius: 20px;
+  overflow: hidden;
+  gap: 0;
+}
+
+.statCard {
+  background: transparent;
+  border: none;
+  padding: 38px 28px;
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.statCard:last-child {
+  border-right: none;
+}
+
+/* Circular icon background */
+.statIconWrap {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
-/* Responsive */
-@media (max-width: 992px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-  }
 
-  .content {
-    margin-top: 30px;
+.statIcon {
+  font-size: 32px;
+  color: #fff;
+}
+
+/* Trophy gets a gold tint like the reference image */
+.trophyIcon {
+  color: #F2C811;
+}
+
+.statCard h2 {
+  color: white;
+  font-size: 48px;
+  font-weight: 800;
+  margin: 0 0 4px 0;
+  line-height: 1;
+}
+
+.statCard p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 1200px) {
+  .leftContent {
+    padding: 50px 30px 50px 50px;
+  }
+  .leftContent h1 span {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 992px) {
+  .heroSection {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .leftContent {
+    padding: 50px 30px;
+    order: 2;
+  }
+  .rightContent {
+    height: 380px;
+    order: 1;
+  }
+  .leftContent h1 span {
+    font-size: 44px;
+  }
+  .techSection,
+  .featureSection,
+  .statsSection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .techCard:nth-child(2) {
+    border-right: 1px solid #edf2f7;
+  }
+  .techCard:nth-child(3),
+  .techCard:nth-child(4) {
+    border-right: none;
+    border-top: 1px solid #edf2f7;
+  }
+  .featureCard:nth-child(2) {
+    border-right: 1px solid #E8EDF4;
+  }
+  .featureCard:nth-child(3),
+  .featureCard:nth-child(4) {
+    border-top: 1px solid #E8EDF4;
+    border-right: none;
+  }
+  .featureCard:nth-child(3) {
+    border-right: 1px solid #E8EDF4;
+  }
+  .statCard:nth-child(2) {
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .statCard:nth-child(3),
+  .statCard:nth-child(4) {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .statCard:nth-child(3) {
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 40px 0;
+  }
+  .leftContent h1 {
+    font-size: 28px;
+  }
+  .leftContent h1 span {
+    font-size: 38px;
+  }
+  .leftContent p {
+    font-size: 16px;
+  }
+  .buttonGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    justify-content: center;
+  }
+  .statCard h2 {
+    font-size: 36px;
+  }
+  .featureCard {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .techSection,
+  .featureSection,
+  .statsSection {
+    grid-template-columns: 1fr;
+  }
+  .techCard {
+    border-right: none !important;
+    border-bottom: 1px solid #edf2f7;
+    height: 110px;
+  }
+  .techCard:last-child { border-bottom: none; }
+  .featureCard {
+    border-right: none !important;
+    border-bottom: 1px solid #E8EDF4;
+  }
+  .featureCard:last-child { border-bottom: none; }
+  .statCard {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .statCard:last-child { border-bottom: none; }
+  .leftContent h1 span {
+    font-size: 32px;
+  }
+  .rightContent {
+    height: 240px;
   }
 }

@@ -17,8 +17,6 @@ import Header from "../../../components/Header/Header";
 import AboutMicrosoft from "./AboutMicrosoft";
 import CertificationApplyForm from "../../CertificationApplyForm";
 import CallToAction from "./CallToAction";
-import WhyJoinUS from "../../WhyJoinUS";
-import ReviewSection from "../../ReviewSection";
 import Companypartners from "../../Courses/Companypartners";
 
 import MicroRight from "../../../assets/Microsoftright.png";
@@ -204,9 +202,7 @@ const MicrosoftHeroSection = () => {
       <AboutMicrosoft />
       <Companypartners />
       <CertificationApplyForm />
-      <WhyJoinUS />
       <CallToAction />
-      <ReviewSection />
       <Footer />
     </>
   );
