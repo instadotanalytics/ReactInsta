@@ -6,7 +6,8 @@ import CertificationApplyForm from "../../CertificationApplyForm";
 // import Companypartners from "../../Courses/Companypartners";
 import InnovationShowcase from "../../InnovationShowcase";
 import AboutIBM from "./AboutIBM";
-import ReviewSection from "../../ReviewSection";
+// import ReviewSection from "../../ReviewSection";
+import IBMValueProposition from "./IBMValueProposition";
 
 import { FiArrowRight, FiClock, FiCheckCircle } from "react-icons/fi";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
@@ -194,12 +195,12 @@ const IBM = () => {
         </div>
       </section>
 
-      <CertificationApplyForm />
             {/* <Companypartners /> */}
       <InnovationShowcase/>
       <AboutIBM />
-      <ReviewSection />
-
+      {/* <ReviewSection /> */}
+      <IBMValueProposition/>
+      <CertificationApplyForm />
    
 
       <Footer />
