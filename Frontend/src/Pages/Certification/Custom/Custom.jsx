@@ -7,6 +7,8 @@ import Header from "../../../components/Header/Header"
 import Companypartners from "../../Courses/Companypartners"
 import CertificationApplyForm from "../../CertificationApplyForm"
 import ReviewSection from "../../ReviewSection"
+import IndustryShowcase from './CareerJourney'
+import CertificationCustom from './CertificationCustom'
 
 const Custom = () => {
   return (
@@ -90,9 +92,11 @@ const Custom = () => {
       </section>
 
       <CustomAbout />
-      <Companypartners />
+      <IndustryShowcase/>
+      {/* <Companypartners /> */}
+      <CertificationCustom/>
       <CertificationApplyForm />
-      <ReviewSection />
+      {/* <ReviewSection /> */}
       <Footer />
     </>
   )
