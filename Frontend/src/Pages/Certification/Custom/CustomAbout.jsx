@@ -1,31 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import styles from './CustomAbout.module.css'
 
 const features = [
-  {
-    icon: '🎯',
-    title: 'Premium Quality',
-    desc: 'High-quality paper and printing materials',
-    color: '#3b82f6'
-  },
-  {
-    icon: '⚡',
-    title: 'Fast Turnaround',
-    desc: '24-48 hour delivery for bulk orders',
-    color: '#4f46e5'
-  },
-  {
-    icon: '🎨',
-    title: 'Custom Designs',
-    desc: 'Fully customizable templates for your brand',
-    color: '#06b6d4'
-  },
-  {
-    icon: '🔒',
-    title: 'Secure Verification',
-    desc: 'QR codes and unique IDs for authenticity',
-    color: '#10b981'
-  },
+  { icon: '🎯', title: 'Premium Quality', desc: 'High-quality paper and printing materials', color: '#3b82f6' },
+  { icon: '⚡', title: 'Fast Turnaround', desc: '24-48 hour delivery for bulk orders', color: '#4f46e5' },
+  { icon: '🎨', title: 'Custom Designs', desc: 'Fully customizable templates for your brand', color: '#06b6d4' },
+  { icon: '🔒', title: 'Secure Verification', desc: 'QR codes and unique IDs for authenticity', color: '#10b981' },
 ]
 
 const stats = [
@@ -38,29 +18,29 @@ const CustomAbout = () => {
   const [counts, setCounts] = useState({ years: 0, certs: 0, clients: 0 })
   const statsRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const animationRef = useRef(null)
+  const hasAnimatedRef = useRef(false)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true)
-            animateCounts()
-          }
-        });
-      },
-      { threshold: 0.3 }
-    )
+  // Memoize features to prevent re-renders
+  const memoizedFeatures = useMemo(() => features, [])
+  const memoizedStats = useMemo(() => stats, [])
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current)
-    }
-
-    return () => observer.disconnect()
+  // Reset counts when becoming invisible
+  const resetCounts = useCallback(() => {
+    setCounts({ years: 0, certs: 0, clients: 0 })
+    hasAnimatedRef.current = false
   }, [])
 
-  const animateCounts = () => {
-    const duration = 2000
+  // Optimized counter animation
+  const animateCounts = useCallback(() => {
+    if (!isVisible) return
+    
+    // Reset counts before starting animation
+    setCounts({ years: 0, certs: 0, clients: 0 })
+    hasAnimatedRef.current = false
+
+    const duration = 1500
     const startTime = performance.now()
     const targetYears = 8
     const targetCerts = 15000
@@ -78,16 +58,68 @@ const CustomAbout = () => {
       })
 
       if (progress < 1) {
-        requestAnimationFrame(animate)
+        animationRef.current = requestAnimationFrame(animate)
+      } else {
+        hasAnimatedRef.current = true
       }
     }
 
-    requestAnimationFrame(animate)
-  }
+    animationRef.current = requestAnimationFrame(animate)
+  }, [isVisible])
+
+  // Optimized intersection observer with reset on leave
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+            // Only animate if not already animated or if we want to re-animate
+            if (!hasAnimatedRef.current) {
+              animateCounts()
+            }
+          } else {
+            setIsVisible(false)
+            // Reset counts when element leaves viewport
+            resetCounts()
+          }
+        })
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
+    )
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current)
+    }
+
+    return () => {
+      observer.disconnect()
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [animateCounts, resetCounts])
+
+  // Start animation when visible
+  useEffect(() => {
+    if (isVisible && !hasAnimatedRef.current) {
+      animateCounts()
+    }
+  }, [isVisible, animateCounts])
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true)
+  }, [])
+
+  const imageSrc = useMemo(() => {
+    return 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&auto=format&q=80'
+  }, [])
 
   return (
     <section className={styles.about}>
-      {/* Animated background orbs */}
       <div className={styles.orb1}></div>
       <div className={styles.orb2}></div>
       <div className={styles.orb3}></div>
@@ -97,26 +129,35 @@ const CustomAbout = () => {
         <div className={`${styles.imageWrapper} ${isVisible ? styles.fadeInLeft : ''}`}>
           <div className={styles.imgOuter}>
             <div className={styles.imageGlow}></div>
-            <img
-              src="https://i.pinimg.com/1200x/33/a4/f1/33a4f14dbb3e2e4a2b9a14f88371f6cf.jpg"
-              alt="Certificate creation process"
-              className={styles.aboutImage}
-            />
+            
+            <div className={styles.imageContainer}>
+              {!imageLoaded && <div className={styles.imagePlaceholder} />}
+              <img
+                src={imageSrc}
+                alt="Certificate creation process"
+                className={`${styles.aboutImage} ${imageLoaded ? styles.imageLoaded : ''}`}
+                loading="lazy"
+                onLoad={handleImageLoad}
+                width="600"
+                height="400"
+                decoding="async"
+              />
+            </div>
+            
             <div className={styles.imageOverlay}></div>
             
-            {/* Corner decorations */}
             <div className={`${styles.corner} ${styles.cornerTL}`}></div>
             <div className={`${styles.corner} ${styles.cornerTR}`}></div>
             <div className={`${styles.corner} ${styles.cornerBL}`}></div>
             <div className={`${styles.corner} ${styles.cornerBR}`}></div>
           </div>
 
-          <div className={styles.experienceBadge}>
+          {/* <div className={styles.experienceBadge}>
             <span className={styles.years}>{counts.years}+</span>
             <span className={styles.badgeText}>
               Years of<br />Excellence
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* ── Right: Content ── */}
@@ -139,7 +180,7 @@ const CustomAbout = () => {
           </p>
 
           <div className={styles.features}>
-            {features.map((f, i) => (
+            {memoizedFeatures.map((f, i) => (
               <div 
                 key={i} 
                 className={styles.featureItem}
@@ -157,7 +198,7 @@ const CustomAbout = () => {
           </div>
 
           <div className={styles.stats} ref={statsRef}>
-            {stats.map((s, i) => (
+            {memoizedStats.map((s, i) => (
               <div key={i} className={styles.statBox}>
                 <div className={styles.statNumber}>
                   <h4>

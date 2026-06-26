@@ -7,7 +7,7 @@ import Header from "../../../components/Header/Header"
 import Companypartners from "../../Courses/Companypartners"
 import CertificationApplyForm from "../../CertificationApplyForm"
 import ReviewSection from "../../ReviewSection"
-import IndustryShowcase from './CareerJourney'
+import CareerJourney from './CareerJourney'
 import CertificationCustom from './CertificationCustom'
 
 const Custom = () => {
@@ -93,7 +93,7 @@ const Custom = () => {
 
       {/* <Companypartners /> */}
       <CertificationCustom/>
-      <IndustryShowcase/>
+      <CareerJourney/>
       <CustomAbout />
       <CertificationApplyForm />
       {/* <ReviewSection /> */}
