@@ -6,8 +6,10 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import WhyJoinUS from "./WhyJoinUS";
 import CareerSection from "./CareerSection";
-import OurImpact from "./OurImpact";
-import Companypartners from "./Courses/Companypartners";
+// import OurImpact from "./OurImpact";
+import ImpactGrid from "./About/ImpactGrid";
+// import Companypartners from "./Courses/Companypartners";
+import ImpactShowcase from "./About/ImpactShowcase";
 import ReviewSection from "./ReviewSection";
 import FAQSection from "./FAQSection";
 import {
@@ -175,7 +177,8 @@ const About = () => {
             </motion.div>
           </div>
 
-          <Companypartners />
+          {/* <Companypartners /> */}
+          <ImpactShowcase/>    
 
           {/* Features Section - Redesigned */}
           <motion.div 
@@ -218,7 +221,8 @@ const About = () => {
             </div>
           </motion.div>
 
-          <OurImpact />
+          {/* <OurImpact /> */}
+          <ImpactGrid/>
 
           {/* Journey Section */}
           <motion.div 

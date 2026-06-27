@@ -1,0 +1,471 @@
+/* ImpactShowcase.module.css */
+
+.impactShowcase {
+  width: 100%;
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fe 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* ===== CANVAS BACKGROUND ===== */
+.canvasBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== PATTERN OVERLAY ===== */
+.patternOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(108, 99, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 99, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(60px, 60px);
+  }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.animateIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.08), rgba(168, 85, 247, 0.08));
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6C63FF;
+  border: 1px solid rgba(108, 99, 255, 0.1);
+  animation: pulseBadge 2s ease-in-out infinite;
+}
+
+@keyframes pulseBadge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  background: #6C63FF;
+  border-radius: 50%;
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+} */
+
+.title {
+  margin-top: 1rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.titleLine1 {
+  display: block;
+  color: #1a1a2e;
+}
+
+.titleLine2 {
+  display: block;
+  background: linear-gradient(135deg, #6C63FF, #A855F7, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ===== METRICS GRID ===== */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.metricCard {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 1rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(15px) scale(0.95);
+  position: relative;
+  overflow: hidden;
+}
+
+.metricCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.5));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.metricCard:hover::before {
+  opacity: 1;
+}
+
+.metricCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--card-color, #6C63FF), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.metricCard:hover::after {
+  opacity: 1;
+}
+
+.animateMetric {
+  animation: cardPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes cardPop {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.metricCard:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(108, 99, 255, 0.12);
+  border-color: rgba(108, 99, 255, 0.2);
+}
+
+.metricIconWrapper {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 0.5rem;
+}
+
+.metricIcon {
+  font-size: 1.8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -60%) scale(1.1); }
+}
+
+.metricRing {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid;
+  opacity: 0.2;
+  animation: ringPulse 2s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.metricValue {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+  transition: all 0.3s ease;
+}
+
+.metricLabel {
+  font-size: 0.8rem;
+  color: #4a4a6a;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metricBar {
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.metricProgress {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: progressGlow 2s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ===== TIMELINE ===== */
+.timelineSection {
+  margin-top: 1rem;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.subtitleLine {
+  position: relative;
+}
+
+.subtitleLine::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #6C63FF, transparent);
+  animation: lineGrow 2s ease-in-out infinite;
+}
+
+@keyframes lineGrow {
+  0%, 100% { transform: scaleX(0.3); }
+  50% { transform: scaleX(1); }
+}
+
+.subtitleDecor {
+  display: inline-block;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.animateTimeline {
+  animation: slideTimeline 0.5s ease forwards;
+}
+
+@keyframes slideTimeline {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timelineDot {
+  min-width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.timelineContent {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.timelineContent:hover {
+  transform: translateX(5px);
+  box-shadow: 0 8px 25px rgba(108, 99, 255, 0.08);
+}
+
+.timelineYear {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #6C63FF;
+  min-width: 45px;
+}
+
+.timelineTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  min-width: 80px;
+}
+
+.timelineDescription {
+  font-size: 0.85rem;
+  color: #4a4a6a;
+  flex: 1;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .impactShowcase {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .metricCard {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .metricValue {
+    font-size: 1.6rem;
+  }
+
+  .timelineContent {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .timelineYear {
+    min-width: 35px;
+    font-size: 0.8rem;
+  }
+
+  .timelineTitle {
+    min-width: 60px;
+    font-size: 0.85rem;
+  }
+
+  .timelineDescription {
+    font-size: 0.8rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .metricsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .metricCard {
+    padding: 1rem 0.5rem;
+  }
+
+  .metricValue {
+    font-size: 1.4rem;
+  }
+
+  .metricIcon {
+    font-size: 1.5rem;
+  }
+
+  .metricIconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .timelineContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+}
