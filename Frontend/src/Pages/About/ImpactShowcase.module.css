@@ -135,7 +135,7 @@
 .metricCard {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
-  padding: 1.5rem 1rem;
+  padding: 1.3rem 0.5rem;
   border-radius: 16px;
   text-align: center;
   border: 2px solid transparent;
@@ -206,7 +206,7 @@
 }
 
 .metricIcon {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -223,7 +223,7 @@
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 2px solid;
+  border: 1px solid;
   opacity: 0.2;
   animation: ringPulse 2s ease-in-out infinite;
 }
@@ -234,7 +234,7 @@
 }
 
 .metricValue {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.1rem;
   transition: all 0.3s ease;

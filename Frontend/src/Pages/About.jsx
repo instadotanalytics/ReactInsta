@@ -4,13 +4,15 @@ import { useInView } from "react-intersection-observer";
 import styles from "./About.module.css";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import WhyJoinUS from "./WhyJoinUS";
+// import WhyJoinUS from "./WhyJoinUS";
+import ValueProposition from "./About/ValueProposition";
 import CareerSection from "./CareerSection";
 // import OurImpact from "./OurImpact";
 import ImpactGrid from "./About/ImpactGrid";
 // import Companypartners from "./Courses/Companypartners";
 import ImpactShowcase from "./About/ImpactShowcase";
-import ReviewSection from "./ReviewSection";
+// import ReviewSection from "./ReviewSection";
+import ClientTestimonials from "./About/ClientTestimonials";
 import FAQSection from "./FAQSection";
 import {
   FiUsers,
@@ -287,7 +289,8 @@ const About = () => {
             </motion.div>
           </motion.div>
 
-          <WhyJoinUS />
+          {/* <WhyJoinUS /> */}
+          <ValueProposition/>
 
           {/* Success Stories Section */}
           <motion.div 
@@ -332,7 +335,8 @@ const About = () => {
       </section>
 
       <CareerSection />
-      <ReviewSection />
+      {/* <ReviewSection /> */}
+      <ClientTestimonials/>
       <FAQSection />
       <Footer />
     </>
