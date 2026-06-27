@@ -19,7 +19,7 @@
 
 .careerSection {
   padding: 100px 0;
-  background: var(--cs-bg);
+  /* background: var(--cs-bg); */
   font-family: var(--font-body);
   overflow: hidden;
 }
@@ -42,7 +42,7 @@
 
   font-size: clamp(32px, 5vw, 64px);
   font-weight: 600;
-  color: var(--cs-ink);
+  /* color: var(--cs-ink); */
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin: 0 auto 20px;

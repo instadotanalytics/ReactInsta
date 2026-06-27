@@ -1,0 +1,785 @@
+/* FeaturedJobs.module.css */
+.section {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc, #ffffff, #eff6ff);
+  overflow: hidden;
+  padding: 80px 16px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 80px 32px;
+  }
+}
+
+/* Background Decorations */
+.backgroundDecorations {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bgOrb1 {
+  position: absolute;
+  top: -160px;
+  right: -160px;
+  width: 384px;
+  height: 384px;
+  background: rgba(59, 130, 246, 0.06);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.bgOrb2 {
+  position: absolute;
+  bottom: -160px;
+  left: -160px;
+  width: 384px;
+  height: 384px;
+  background: rgba(147, 51, 234, 0.06);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.bgOrb3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: rgba(59, 130, 246, 0.03);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Badge */
+.badgeWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.badgeContainer {
+  position: relative;
+}
+
+.badgeGlow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  border-radius: 9999px;
+  filter: blur(24px);
+  opacity: 0.2;
+  transition: opacity 0.5s;
+}
+
+.badgeContainer:hover .badgeGlow {
+  opacity: 0.4;
+}
+
+.badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  padding: 12px 24px;
+}
+
+.badgeIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconSmall {
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+.badgeText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badgeHighlight {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.badgeLabel {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.badgeDivider {
+  width: 1px;
+  height: 24px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+}
+
+.badgeVerified {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.iconTiny {
+  width: 16px;
+  height: 16px;
+}
+
+.badgeVerifiedText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2563eb;
+}
+
+/* Hero Section */
+.heroSection {
+  text-align: center;
+  max-width: 896px;
+  margin: 0 auto 64px;
+}
+
+.trendingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+  padding: 8px 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.trendingText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 72px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroTitle {
+    font-size: 96px;
+  }
+}
+
+.heroTitleDark {
+  background: linear-gradient(to right, #0f172a, #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroTitleGradient {
+  background: linear-gradient(to right, #2563eb, #7c3aed, #2563eb);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient 6s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.heroDescription {
+  font-size: 20px;
+  color: #475569;
+  max-width: 672px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .heroDescription {
+    font-size: 17px;
+  }
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.primaryBtn {
+  position: relative;
+  padding: 16px 32px;
+  background: linear-gradient(to right, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-weight: 600;
+  box-shadow: 0 12px 32px -8px rgba(37, 99, 235, 0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.primaryBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 16px 48px -8px rgba(37, 99, 235, 0.4);
+}
+
+.primaryBtnContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconMedium {
+  width: 20px;
+  height: 20px;
+}
+
+.primaryBtnGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(to right, #2563eb, #7c3aed);
+  opacity: 0;
+  transition: opacity 0.3s;
+  filter: blur(16px);
+}
+
+.primaryBtn:hover .primaryBtnGlow {
+  opacity: 1;
+}
+
+.secondaryBtn {
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.secondaryBtn:hover {
+  border-color: #60a5fa;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  transform: scale(1.05);
+}
+
+/* Three Feature Cards - Pattern Style */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1024px;
+  margin: 0 auto 48px;
+}
+
+@media (min-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+.featureCard {
+  position: relative;
+  border-radius: 24px;
+  padding: 28px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+/* Pattern Overlay */
+.featureCardPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: 
+    radial-gradient(circle at 20% 50%, currentColor 1px, transparent 1px),
+    radial-gradient(circle at 80% 50%, currentColor 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Card Variants */
+.featureCardBlue {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  border-color: rgba(59, 130, 246, 0.1);
+}
+
+.featureCardBlue .featureCardPattern {
+  color: #3b82f6;
+}
+
+.featureCardPurple {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
+  border-color: rgba(139, 92, 246, 0.1);
+}
+
+.featureCardPurple .featureCardPattern {
+  color: #8b5cf6;
+}
+
+.featureCardOrange {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+  border-color: rgba(251, 146, 60, 0.1);
+}
+
+.featureCardOrange .featureCardPattern {
+  color: #fb923c;
+}
+
+.featureCard:hover {
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  border-color: transparent;
+}
+
+.featureCardGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.featureCardBlue .featureCardGlow {
+  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.04), transparent 70%);
+}
+
+.featureCardPurple .featureCardGlow {
+  background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.04), transparent 70%);
+}
+
+.featureCardOrange .featureCardGlow {
+  background: radial-gradient(circle at 50% 0%, rgba(251, 146, 60, 0.04), transparent 70%);
+}
+
+.featureCard:hover .featureCardGlow {
+  opacity: 1;
+}
+
+.featureCardContent {
+  position: relative;
+  z-index: 10;
+}
+
+.featureCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.featureCardLogo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logoContainer {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.logoContainerBlue {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+
+.logoContainerPurple {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+}
+
+.logoContainerOrange {
+  background: linear-gradient(135deg, #fb923c, #fbbf24);
+}
+
+.companyName {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.companyTag {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+  font-weight: 500;
+}
+
+.featuredBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.roleTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.salarySection {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.salary {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.applicants {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.cardAction {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 8px 0;
+}
+
+.featureCardPurple .cardAction {
+  color: #7c3aed;
+}
+
+.featureCardOrange .cardAction {
+  color: #ea580c;
+}
+
+.cardAction:hover {
+  transform: translateX(4px);
+}
+
+.featureCardDeco {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s;
+  filter: blur(60px);
+  z-index: -10;
+}
+
+.featureCard:hover .featureCardDeco {
+  opacity: 0.15;
+}
+
+.featureCardDecoBlue {
+  background: #3b82f6;
+}
+
+.featureCardDecoPurple {
+  background: #8b5cf6;
+}
+
+.featureCardDecoOrange {
+  background: #fb923c;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+.statCard {
+  position: relative;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+}
+
+.statCardBlue {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(239, 246, 255, 0.8));
+}
+
+.statCardPurple {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(245, 243, 255, 0.8));
+}
+
+.statCardGreen {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(236, 253, 245, 0.8));
+}
+
+.statCardOrange {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 247, 237, 0.8));
+}
+
+.statCard:hover {
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.06);
+  border-color: transparent;
+  transform: translateY(-4px);
+}
+
+.statCardGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.statCard:hover .statCardGlow {
+  opacity: 1;
+}
+
+.statCardGlowBlue {
+  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.06), transparent 70%);
+}
+
+.statCardGlowPurple {
+  background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.06), transparent 70%);
+}
+
+.statCardGlowGreen {
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.06), transparent 70%);
+}
+
+.statCardGlowOrange {
+  background: radial-gradient(circle at 50% 0%, rgba(251, 146, 60, 0.06), transparent 70%);
+}
+
+.statCardContent {
+  position: relative;
+  z-index: 10;
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.statCard:hover .statIcon {
+  transform: scale(1.1);
+}
+
+.statIconBlue {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: white;
+}
+
+.statIconPurple {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  color: white;
+}
+
+.statIconGreen {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  color: white;
+}
+
+.statIconOrange {
+  background: linear-gradient(135deg, #fb923c, #fbbf24);
+  color: white;
+}
+
+.statNumber {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.statLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.statCardDeco {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s;
+  filter: blur(40px);
+  z-index: -10;
+}
+
+.statCard:hover .statCardDeco {
+  opacity: 0.1;
+}
+
+.statCardDecoBlue {
+  background: #3b82f6;
+}
+
+.statCardDecoPurple {
+  background: #8b5cf6;
+}
+
+.statCardDecoGreen {
+  background: #10b981;
+}
+
+.statCardDecoOrange {
+  background: #fb923c;
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.scrollContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: 500;
+}
