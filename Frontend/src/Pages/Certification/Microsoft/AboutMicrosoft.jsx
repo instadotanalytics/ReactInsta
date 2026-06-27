@@ -14,7 +14,7 @@ import {
   FaHeadset,
 } from "react-icons/fa";
 
-import HeroImage from "../../../assets/leftimage.png";
+import HeroImage from "../../../assets/MIcrosoftleftimage.png";
 
 import { TbChartHistogram } from "react-icons/tb";
 import { PiBrainBold } from "react-icons/pi";
