@@ -69,8 +69,8 @@ function useHeroFX(heroRef, canvasRef) {
 
         if (dot.glow > 0.04) {
           const grad = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, radius * 5);
-          grad.addColorStop(0, `rgba(4,159,219,${0.55 * dot.glow})`);
-          grad.addColorStop(1, 'rgba(4,159,219,0)');
+          grad.addColorStop(0, `rgba(255,255,255,${0.85 * dot.glow})`);
+          grad.addColorStop(1, 'rgba(255,255,255,0)');
           ctx.beginPath();
           ctx.arc(dot.x, dot.y, radius * 5, 0, Math.PI * 2);
           ctx.fillStyle = grad;
@@ -79,7 +79,7 @@ function useHeroFX(heroRef, canvasRef) {
 
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${dot.glow > 0.3 ? '120,210,250' : '4,159,219'},${opacity})`;
+        ctx.fillStyle = `rgba(255,255,255,${opacity})`;
         ctx.fill();
       }
 
@@ -153,10 +153,10 @@ export default function HomeLanding() {
           </a>
         </div>
 
-        <span className={styles.trust}>
+        {/* <span className={styles.trust}>
           <FaStar />
           Trusted by 14+ companies
-        </span>
+        </span> */}
       </div>
     </section>
   );

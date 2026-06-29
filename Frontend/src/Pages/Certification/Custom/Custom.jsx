@@ -7,7 +7,7 @@ import Header from "../../../components/Header/Header"
 import Companypartners from "../../Courses/Companypartners"
 import CertificationApplyForm from "../../CertificationApplyForm"
 import ReviewSection from "../../ReviewSection"
-import IndustryShowcase from './CareerJourney'
+import CareerJourney from './CareerJourney'
 import CertificationCustom from './CertificationCustom'
 
 const Custom = () => {
@@ -15,11 +15,11 @@ const Custom = () => {
     <>
       <Header />
 
-      <section className={styles.hero}>
-        <div className={styles.container}>
+      {/* <section className={styles.hero}> */}
+        {/* <div className={styles.container}>
 
           {/* ── Left: Content ── */}
-          <div className={styles.content}>
+          {/* <div className={styles.content}>
 
             <span className={styles.eyebrow}>
               <span className={styles.eyebrowDot} />
@@ -64,10 +64,10 @@ const Custom = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */} 
 
           {/* ── Right: Image ── */}
-          <div className={styles.imageWrapper}>
+          {/* <div className={styles.imageWrapper}>
             <div className={styles.imgFrame}>
               <img
                 src="https://i.pinimg.com/1200x/83/8c/cc/838ccc2629857f40606a3d6927de1e72.jpg"
@@ -88,13 +88,13 @@ const Custom = () => {
             <div className={styles.dotsGrid} />
           </div>
 
-        </div>
-      </section>
+        </div> */}
+      {/* </section> */}
 
-      <CustomAbout />
-      <IndustryShowcase/>
       {/* <Companypartners /> */}
       <CertificationCustom/>
+      <CareerJourney/>
+      <CustomAbout />
       <CertificationApplyForm />
       {/* <ReviewSection /> */}
       <Footer />

@@ -1,0 +1,364 @@
+/* WhyChooseUs.module.css - Light Theme with Animated Background */
+
+.whyChooseUs {
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 900px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+}
+
+/* ===== CANVAS BACKGROUND ===== */
+.canvasBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== PATTERN OVERLAY ===== */
+.patternOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(108, 99, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 99, 255, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  animation: patternMove 30s linear infinite;
+}
+
+@keyframes patternMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(60px, 60px); }
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animateHeader {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badgeWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 0.5rem 1.5rem;
+  background: rgba(108, 99, 255, 0.04);
+  border: 1px solid rgba(108, 99, 255, 0.06);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6C63FF;
+  letter-spacing: 0.5px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+}
+
+.highlight {
+  font-weight: 700;
+  background: linear-gradient(135deg, #6C63FF, #818CF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #6a6a8a;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== VALUE GRID ===== */
+.valueGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.valueCard {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  perspective: 1000px;
+}
+
+.animateCard {
+  animation: cardReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes cardReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cardInner {
+  position: relative;
+  padding: 2rem 1.5rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100%;
+  overflow: hidden;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.valueCard:hover .cardInner {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 60px rgba(108, 99, 255, 0.06);
+  border-color: rgba(108, 99, 255, 0.05);
+}
+
+/* Card Border */
+.cardBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  opacity: 0.3;
+  transition: opacity 0.5s ease;
+}
+
+.valueCard:hover .cardBorder {
+  opacity: 1;
+}
+
+/* Icon */
+.iconWrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconPulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0.06;
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); opacity: 0.06; }
+  50% { transform: scale(1.2); opacity: 0.12; }
+}
+
+.cardIcon {
+  font-size: 2rem;
+  position: relative;
+  z-index: 2;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Content */
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+}
+
+.cardDescription {
+  font-size: 0.9rem;
+  color: #6a6a8a;
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+/* Stat */
+.cardStat {
+  margin-top: auto;
+}
+
+.statValue {
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.statBar {
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.statProgress {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 0%;
+}
+
+/* Glow Effect */
+.cardGlow {
+  position: absolute;
+  top: -30%;
+  right: -30%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.glowActive {
+  opacity: 0.04;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .whyChooseUs {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    padding: 4rem 0;
+  }
+
+  .valueGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .whyChooseUs {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .valueGrid {
+    gap: 1rem;
+  }
+
+  .cardInner {
+    padding: 1.5rem;
+    min-height: 220px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .whyChooseUs {
+    padding: 2rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .valueGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .cardInner {
+    padding: 1.25rem;
+    min-height: 200px;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+  }
+
+  .cardDescription {
+    font-size: 0.85rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .iconWrapper {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cardIcon {
+    font-size: 1.5rem;
+  }
+}

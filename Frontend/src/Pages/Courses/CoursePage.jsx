@@ -10,12 +10,12 @@ import { IoMdSchool } from 'react-icons/io'
 import Header from '../../components/Header/Header'
 import { API_BASE_URL, SERVER_BASE_URL } from '../../config/api'
 import styles from './CoursePage.module.css'
-import Companypartners from './Companypartners'
-import WhyJoinUS from '../WhyJoinUS'
+// import Companypartners from './Companypartners'
+import CareerTrack from './Careertrack'
+import Projectshowcase from './Projectshowcase'
 import ReviewSection from '../ReviewSection'
 import FAQSection from '../FAQSection'
 import Footer from '../../components/Footer/Footer'
-import OurPremiumServices from '../OurPremiumServices'
 import CoursesHome from './CoursesHome'
 import CourseHero from './CourseHero'
 import FontAnimation from './FontAnimation'
@@ -342,9 +342,9 @@ const CoursePage = () => {
       </div>
 
       <FontAnimation />
-      <Companypartners />
-      <WhyJoinUS />
-      <OurPremiumServices />
+    
+    <CareerTrack />
+    <Projectshowcase />
       <CourseHero />
       <WhyChooseUs/>
       {/* <ReviewSection /> */}
