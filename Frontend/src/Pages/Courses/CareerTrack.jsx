@@ -12,8 +12,8 @@
 // import styles from "./";
 import React from "react";
 import styles from "./CareerTrack.module.css";
-import React from "react";
-import styles from "./CareerTrack.module.css";
+// import React from "react";
+// import styles from "./CareerTrack.module.css";
 import {
   FaBullseye,
   FaChalkboardTeacher,

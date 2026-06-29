@@ -339,8 +339,11 @@
   .card1,
   .card2,
   .card3 {
-    width: 130px;
-    height: 165px;
+    width: 110px;
+    height: 130px;
+  }
+  .course-card img {
+    height: 90px;
   }
   .floatingCard {
     margin-left: -18px;
@@ -392,157 +395,95 @@
 
 @media (max-width: 480px) {
   .heroSection {
-    padding: 18px 0 24px;
+    padding: 24px 0 20px;
+    height: auto;
   }
   .heroTitle {
-    font-size: 1.55rem;
-    line-height:1.15;
-    margin-bottom:8px;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .heroDesc {
+    font-size: 12px;
+    max-width: 300px;
+    margin-bottom: 12px;
   }
 
-  /* ── Show all 4 cards with reduced sizes ── */
-  .card0,
-  .card1,
-  .card2,
-  .card3 {
-    width: 130px;
-    height: 170px;
+  /* Cards — small enough for 375px screens */
+  .card0, .card1, .card2, .card3 {
+    width: 90px;
+    height: 112px;
   }
-
   .floatingCard {
-    margin-left: -10px;
-    border-radius: 12px;
+    margin-left: -14px;
+    outline-width: 3px;
+    border-radius: 14px;
   }
-  .card0 {
-    margin-left: 0;
-  }
-
-  .card0 {
-    transform: rotate(-4deg) translateY(-4px);
-  }
-  .card0:hover {
-    transform: rotate(-4deg) translateY(-16px);
-  }
-  .card1 {
-    transform: rotate(2deg) translateY(6px);
-  }
-  .card1:hover {
-    transform: rotate(2deg) translateY(6px);
-  }
-  .card2 {
-    transform: rotate(-2deg) translateY(-4px);
-  }
-  .card2:hover {
-    transform: rotate(-2deg) translateY(-14px);
-  }
-  .card3 {
-    transform: rotate(4deg) translateY(6px);
-  }
-  .card3:hover {
-    transform: rotate(4deg) translateY(4px);
-  }
-
-  .heroInner {
-    padding-top: 8px;
-  }
+  .card0 { margin-left: 0; }
+  .card0 { transform: rotate(-5deg) translateY(-10px); }
+  .card0:hover { transform: rotate(-5deg) translateY(-18px); }
+  .card1 { transform: rotate(3deg) translateY(14px); }
+  .card1:hover { transform: rotate(3deg) translateY(6px); }
+  .card2 { transform: rotate(-3deg) translateY(-10px); }
+  .card2:hover { transform: rotate(-3deg) translateY(-18px); }
+  .card3 { transform: rotate(5deg) translateY(14px); }
+  .card3:hover { transform: rotate(5deg) translateY(6px); }
 
   .cardsStage {
     margin-top: 8px;
     margin-bottom: 8px;
   }
 
-  /* ── Course pills in a line ── */
-  .coursePills {
-    gap: 6px;
-    padding-top: 12px 12px 0;
-    justify-content: flex-start;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  /* Feature badges — wrap into 2 rows, centered */
+  .featureRow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    overflow-x: visible;
+    padding: 0 12px;
+    margin-bottom: 14px;
+  }
+  .featureBadge {
+    font-size: 10px;
+    padding: 5px 10px;
+    gap: 4px;
   }
 
+  /* Pills — wrap too, no scroll */
+  .coursePills {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-x: visible;
+    gap: 6px;
+    padding: 12px 12px 0;   /* ← was broken: "12px 12px 0" as padding shorthand */
+  }
   .coursePill {
-    padding: 12px 12px 0;
+    padding: 7px 12px;       /* ← was broken */
     font-size: 10px;
     gap: 6px;
     border-radius: 8px;
     flex-shrink: 0;
   }
-
-  .pillIcon {
-    font-size: 12px;
-  }
-
-  /* ── Feature badges in a line ── */
-  .featureRow {
-    gap: 5px;
-    justify-content: center;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 2px 0;
-    padding-inline:16px;
-  }
-
-  .featureBadge {
-    font-size: 11px;
-    padding: 7px 14px;
-    gap: 4px;
-    border-radius: 20px;
-    flex-shrink: 0;
-  }
-
-  .checkIcon {
-    font-size: 8px;
-  }
-
-  .heroDesc {
-    max-width:320px;
-    font-size:13px;
-    margin-bottom:14px;
-  }
-
-  .featureRow::-webkit-scrollbar,
-  .coursePills::-webkit-scrollbar {
-    display: none;
-  }
-
-  .featureRow,
-  .coursePills {
-    -ms-overflow-style:none;
-    scrollbar-width: none;
-  }
+  .pillIcon { font-size: 12px; }
 }
 
-/* Even smaller screens */
 @media (max-width: 400px) {
-  .card0,
-  .card1,
-  .card2,
-  .card3 {
-    width: 125px;
-    height: 165px;
+  .card0, .card1, .card2, .card3 {
+    width: 82px;
+    height: 102px;
   }
-
   .floatingCard {
-    margin-left: -28px;
+    margin-left: -18px;
     outline-width: 2px;
-    border-radius: 12px;
   }
-  .card0 {
-    margin-left: 0;
+  .card0 { margin-left: 0; }
+  .featureBadge {
+    font-size: 9px;
+    padding: 4px 8px;
   }
-
   .coursePill {
     font-size: 9px;
-    padding: 5px 10px;
-    gap: 4px;
+    padding: 6px 10px;
   }
-
-  .pillIcon {
-    font-size: 10px;
-  }
-
-  .featureBadge {
-    font-size: 8px;
-    padding: 2px 8px;
-  }
+  .pillIcon { font-size: 11px; }
 }

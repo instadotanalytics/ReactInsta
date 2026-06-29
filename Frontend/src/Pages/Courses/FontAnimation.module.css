@@ -196,28 +196,47 @@
 /* ── Mobile ── */
 @media (max-width: 600px) {
   .blueprint {
-    min-height: 100svh; /* safe-area aware on iOS        */
+    min-height: unset;           /* don't force full viewport height */
+    height: auto;                /* shrink-wrap to content           */
+    padding: 2rem 0 1.5rem;      /* controlled top/bottom breathing  */
   }
+
+  .centerBlock {
+    padding-bottom: 1rem;        /* was 4rem — huge saving           */
+  }
+
   .grid {
     background-size: 30px 30px;
   }
-  .gh1 {
-    top: 20%;
-  }
-  .gh2 {
-    top: 30%;
-  }
-  .gh3 {
-    top: 75%;
-  }
-  .gh4 {
-    top: 83%;
-  }
+
+  .gh1 { top: 20%; }
+  .gh2 { top: 30%; }
+  .gh3 { top: 75%; }
+  .gh4 { top: 83%; }
+
   .tagline {
     font-size: 12px;
     max-width: 90vw;
+    margin: 1rem 0 0;            /* was 2rem                         */
+  }
+
+  .fadeOut {
+    height: 60px;                /* was 250px — massive space saving */
+  }
+}
+
+@media (max-width: 400px) {
+  .blueprint {
+    padding: 1.5rem 0 1rem;
+  }
+  .centerBlock {
+    padding-bottom: 0.5rem;
+  }
+  .tagline {
+    font-size: 11px;
+    margin-top: 0.75rem;
   }
   .fadeOut {
-    height: 100px;
+    height: 40px;
   }
 }
