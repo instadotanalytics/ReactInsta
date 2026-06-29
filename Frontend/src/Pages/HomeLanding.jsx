@@ -156,20 +156,16 @@ export default function HomeLanding() {
 
       <div className={styles.topGlow}></div>
 
-      <div className={styles.content}></div>
-
       <div className={styles.spotlight} aria-hidden="true" />
 
       <div className={styles.content}>
-        {/* <span className={styles.badge}>
-          <HiSparkles />
-          Venture-Grade Engineering Partner
-        </span> */}
-
         <h1 className={styles.title}>
-          Built for <span className={styles.accent}>Scale</span> &amp;{" "}
-          <span className={styles.accent}>Intelligence.</span>
-          Powered by <span className={styles.accent}>AI.</span>
+          Built for <span className={styles.accent}>Scale</span> &amp;
+          <br />
+          <span className={styles.noWrap}>
+            <span className={styles.accent}>Intelligence.</span> Powered by{" "}
+            <span className={styles.accent}>AI.</span>
+          </span>
         </h1>
 
         <p className={styles.desc}>
@@ -189,11 +185,6 @@ export default function HomeLanding() {
             <FaExternalLinkAlt className={styles.arrowIcon} />
           </a>
         </div>
-
-        {/* <span className={styles.trust}>
-          <FaStar />
-          Trusted by 14+ companies
-        </span> */}
       </div>
     </section>
   );

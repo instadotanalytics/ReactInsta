@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * CareerTrack.jsx
  * Premium futuristic metro-style career journey section.
@@ -9,11 +8,9 @@
  *   <CareerTrack />
  */
 
-import styles from "./";
-=======
+// import styles from "./";
 import React from "react";
 import styles from "./CareerTrack.module.css";
->>>>>>> c6381e38fbe5ae89948851c0fd5ea08e7e02e6f3
 
 /* ─────────────────────────────────────────────────────────────────
    Data

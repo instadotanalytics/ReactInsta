@@ -133,16 +133,15 @@
 .content {
   position: relative;
   z-index: 5;
-  /* width: 100%; */
-  max-width: 720px;
+  width: 100%;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transform: translateX(-220px);
-  /* padding-inline: 24px; */
+  padding-inline: 24px;
 }
 
 .badge {
@@ -168,15 +167,21 @@
 }
 
 .title {
-  font-size: clamp(34px, 5.6vw, 64px);
-  line-height: 1.14;
+  font-size: clamp(42px, 6.8vw, 78px);
+  line-height: 1.18;
   font-weight: 800;
-  letter-spacing: -0.01em;
-  margin-bottom: 26px;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
   animation: fadeUp 0.65s 0.08s ease both;
   color: #111827;
-  max-width: 700px;
-    margin-inline: auto;
+  /* max-width: 700px; */
+  text-align: center;
+  /* margin-left: auto; */
+  margin-right: auto;
+}
+
+.noWrap {
+  white-space: nowrap;
 }
 
 .accent {
@@ -200,6 +205,9 @@
   margin-bottom: 40px;
   animation: fadeUp 0.65s 0.16s ease both;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ctaRow {
@@ -336,6 +344,9 @@
     font-size: 12.5px;
     text-align: left;
     padding: 11px 18px;
+  }
+  .noWrap {
+    white-space: normal;
   }
 }
 
