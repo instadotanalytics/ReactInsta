@@ -3,12 +3,11 @@ import styles from "./IBM.module.css";
 import Header from "../../../components/Header/Header";
 import Footer from "../../../components/Footer/Footer";
 import CertificationApplyForm from "../../CertificationApplyForm";
-// import Companypartners from "../../Courses/Companypartners";
 import InnovationShowcase from "../../InnovationShowcase";
 import AboutIBM from "./AboutIBM";
-// import ReviewSection from "../../ReviewSection";
 import IBMValueProposition from "./IBMValueProposition";
 
+// React Icons imports
 import { FiArrowRight, FiClock, FiCheckCircle } from "react-icons/fi";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import {
@@ -25,7 +24,6 @@ import {
 } from "react-icons/ri";
 import { TbCertificate } from "react-icons/tb";
 
-
 const IBM = () => {
   const certifications = [
     { icon: <MdOutlineCloud size={22} />, title: "Cloud Computing", description: "AWS, Azure, hybrid cloud architecture" },
@@ -34,7 +32,6 @@ const IBM = () => {
     { icon: <MdOutlineShield size={22} />, title: "Cybersecurity", description: "Threat management, compliance" },
   ];
 
- 
   const features = [
     { icon: <RiTrophyLine size={28} />, title: "Industry Trust", desc: "Recognized by 90% of Fortune 500 companies" },
     { icon: <RiRefreshLine size={28} />, title: "Always Updated", desc: "Curriculum aligned with latest tech trends" },
@@ -82,7 +79,6 @@ const IBM = () => {
       <Header />
       {/* ── HERO ── */}
       <section className={styles.heroSection}>
-
         <div className={styles.particle}></div>
         <div className={styles.particle}></div>
         <div className={styles.particle}></div>
@@ -90,7 +86,6 @@ const IBM = () => {
         <div className={styles.particle}></div>
 
         <div className={styles.heroInner}>
-
           {/* LEFT */}
           <div className={styles.leftContent}>
             <div className={styles.eyebrow}>
@@ -108,8 +103,6 @@ const IBM = () => {
               Artificial Intelligence, Data Science, and Cybersecurity with
               professional IBM certification programs.
             </p>
-
-            
 
             <div className={styles.statsRow}>
               <div className={styles.statItem}>
@@ -137,7 +130,6 @@ const IBM = () => {
                 alt="IBM"
                 className={styles.heroImg}
               />
-
             </div>
 
             <div className={styles.certGrid}>
@@ -151,8 +143,6 @@ const IBM = () => {
                 </div>
               ))}
             </div>
-
-         
           </div>
         </div>
       </section>
@@ -195,14 +185,10 @@ const IBM = () => {
         </div>
       </section>
 
-            {/* <Companypartners /> */}
       <InnovationShowcase/>
       <AboutIBM />
-      {/* <ReviewSection /> */}
       <IBMValueProposition/>
       <CertificationApplyForm />
-   
-
       <Footer />
     </>
   );
