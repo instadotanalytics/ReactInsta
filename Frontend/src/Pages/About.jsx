@@ -4,13 +4,15 @@ import { useInView } from "react-intersection-observer";
 import styles from "./About.module.css";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import WhyJoinUS from "./WhyJoinUS";
+// import WhyJoinUS from "./WhyJoinUS";
+import ValueProposition from "./About/ValueProposition";
 import CareerSection from "./CareerSection";
 // import OurImpact from "./OurImpact";
 import ImpactGrid from "./About/ImpactGrid";
 // import Companypartners from "./Courses/Companypartners";
 import ImpactShowcase from "./About/ImpactShowcase";
-import ReviewSection from "./ReviewSection";
+// import ReviewSection from "./ReviewSection";
+import ClientTestimonials from "./About/ClientTestimonials";
 import FAQSection from "./FAQSection";
 import {
   FiUsers,
@@ -89,7 +91,7 @@ const About = () => {
                 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <span className={styles.badge}>🎯 About Us</span>
+                <span className={styles.badge}>About Us</span>
               </motion.div>
 
               <motion.h1 
@@ -287,7 +289,8 @@ const About = () => {
             </motion.div>
           </motion.div>
 
-          <WhyJoinUS />
+          {/* <WhyJoinUS /> */}
+          <ValueProposition/>
 
           {/* Success Stories Section */}
           <motion.div 
@@ -301,7 +304,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <div className={styles.successHeader}>
-              <span className={styles.sectionBadge}>🏆 Success Stories</span>
+              <span className={styles.sectionBadge}>Success Stories</span>
               <h2>750+ Success Stories <span className={styles.highlight}>and Counting!</span></h2>
               <p>Join our alumni network working at India's top companies</p>
             </div>
@@ -332,7 +335,8 @@ const About = () => {
       </section>
 
       <CareerSection />
-      <ReviewSection />
+      {/* <ReviewSection /> */}
+      <ClientTestimonials/>
       <FAQSection />
       <Footer />
     </>

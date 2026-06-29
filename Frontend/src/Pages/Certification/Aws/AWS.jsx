@@ -14,9 +14,11 @@ import {
 import Header from '../../../components/Header/Header';
 import Footer from '../../../components/Footer/Footer';
 import AboutAWSCertificate from './AboutAWScetificate';
-import AWSProjects from "./AWSProjects";
+
 import CertificationApplyForm from "../../CertificationApplyForm";
-import Companypartners from "../../Courses/Companypartners";
+import AwsCloudSection from './AwsCloudSection';
+import Awsprojects from './Awsprojects'; 
+// import Companypartners from "../../Courses/Companypartners";
 // import ReviewSection from "../../ReviewSection";
 
 const AWS = () => {
@@ -186,10 +188,12 @@ const AWS = () => {
       </section>
 
       <AboutAWSCertificate />
-      <CertificationApplyForm />
-      <Companypartners />
-      <AWSProjects />
+      
+      {/* <Companypartners /> */}
+      <Awsprojects />
+      <AwsCloudSection />
       {/* <ReviewSection /> */}
+      <CertificationApplyForm />
       <Footer />
     </>
   );

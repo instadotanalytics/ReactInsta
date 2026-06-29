@@ -286,7 +286,7 @@ const IBMValueProposition = () => {
                     transition={{ duration: 0.6, delay: 0.5 }}
                 >
                     <div className={styles.careerHeader}>
-                        <span className={styles.sectionBadge}>🎯 Career Paths</span>
+                        <span className={styles.sectionBadge}>Career Paths</span>
                         <h3 className={styles.sectionTitle}>Choose Your <span className={styles.highlight}>Future</span></h3>
                         <p className={styles.sectionSubtitle}>Four specialized tracks to accelerate your career</p>
                     </div>
@@ -336,7 +336,7 @@ const IBMValueProposition = () => {
                     transition={{ duration: 0.6, delay: 0.7 }}
                 >
                     <div className={styles.specHeader}>
-                        <span className={styles.sectionBadge}>📜 Certifications</span>
+                        <span className={styles.sectionBadge}>Certifications</span>
                         <h3 className={styles.sectionTitle}>
                             <span className={styles.highlight}>50+</span> Certifications Available
                         </h3>

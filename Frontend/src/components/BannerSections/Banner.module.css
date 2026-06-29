@@ -8,7 +8,11 @@
   margin: 0;
   height: 520px;
   overflow: hidden;
-  background: #040020;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(4,159,219,.10), transparent 35%),
+    radial-gradient(circle at 85% 25%, rgba(4,159,219,.08), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(4,159,219,.05), transparent 40%),
+    linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);
   font-family: "DM Sans", sans-serif;
   user-select: none;
 }
@@ -19,8 +23,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 55% at 30% 50%, rgba(24, 95, 165, 0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 45% at 75% 50%, rgba(15, 110, 86, 0.08) 0%, transparent 70%);
+    radial-gradient(circle at 25% 35%, rgba(4,159,219,.08), transparent 45%),
+    radial-gradient(circle at 75% 65%, rgba(111,214,255,.06), transparent 45%);
   pointer-events: none;
   z-index: 1;
 }

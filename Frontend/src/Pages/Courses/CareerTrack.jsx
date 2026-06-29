@@ -1,3 +1,4 @@
+
 /**
  * CareerTrack.jsx
  * Premium futuristic metro-style career journey section.
@@ -8,12 +9,12 @@
  *   <CareerTrack />
  */
 
+import React from "react";
 import styles from "./CareerTrack.module.css";
 import {
   FaBullseye,
   FaChalkboardTeacher,
   FaLaptopCode,
-  FaAward,
   FaFileAlt,
   FaMicrophone,
   FaBriefcase,
@@ -26,15 +27,10 @@ import {
   MdWorkspacePremium,
 } from "react-icons/md";
 
-import {
-  HiRocketLaunch,
-} from "react-icons/hi2";
-
-import {
-  PiSparkleFill,
-} from "react-icons/pi";
 
 import { PiCrownSimpleFill } from "react-icons/pi";
+
+
 
 /* ─────────────────────────────────────────────────────────────────
    Data
@@ -312,9 +308,9 @@ function Station({ icon, label, cx, cy, labelY, delay }) {
 function TrackDot({ delayS, color }) {
   return (
     <circle r="5" fill="white" stroke={color} strokeWidth="2">
-      <animateMotion dur="2.8s" repeatCount="indefinite" begin={`${delayS}s`}>
-        <mpath href="#ct_mainTrack" />
-      </animateMotion>
+      <animateMotion dur="2.8s" repeatCount="indefinite">
+    <mpath xlinkHref="#ct_mainTrack" />
+</animateMotion>
       <animate
         attributeName="opacity"
         values="0;0;1;1;0"

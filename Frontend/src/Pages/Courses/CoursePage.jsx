@@ -11,7 +11,6 @@ import Header from '../../components/Header/Header'
 import { API_BASE_URL, SERVER_BASE_URL } from '../../config/api'
 import styles from './CoursePage.module.css'
 // import Companypartners from './Companypartners'
-import CareerTrack from './Careertrack'
 import Projectshowcase from './Projectshowcase'
 import ReviewSection from '../ReviewSection'
 import FAQSection from '../FAQSection'
@@ -20,6 +19,7 @@ import CoursesHome from './CoursesHome'
 import CourseHero from './CourseHero'
 import FontAnimation from './FontAnimation'
 import WhyChooseUs from './WhyChooseUs'
+import CareerTrack from './CareerTrack'
 
 // Lazy loaded skeleton card component
 const SkeletonCard = ({ delay = 0 }) => (
@@ -343,7 +343,7 @@ const CoursePage = () => {
 
       <FontAnimation />
     
-    <CareerTrack />
+    <CareerTrack/>
     <Projectshowcase />
       <CourseHero />
       <WhyChooseUs/>

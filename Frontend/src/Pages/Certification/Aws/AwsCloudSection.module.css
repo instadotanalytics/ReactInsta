@@ -1,0 +1,716 @@
+/* ==========================================
+   AWS CLOUD SECTION
+========================================== */
+
+.section{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:100px 0;
+
+    background:linear-gradient(
+        180deg,
+        #edf8ff 0%,
+        #dcefff 40%,
+        #cde7ff 100%
+    );
+
+    opacity:0;
+    transform:translateY(80px);
+    transition:1s ease;
+}
+
+.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =====================
+Background
+===================== */
+
+.background{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+}
+
+/* light */
+
+.background::before{
+
+content:"";
+
+position:absolute;
+
+width:700px;
+height:700px;
+
+left:-200px;
+top:-200px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(circle,
+rgba(255,255,255,.9),
+transparent 70%);
+
+filter:blur(30px);
+
+}
+
+/* another light */
+
+.background::after{
+
+content:"";
+
+position:absolute;
+
+width:650px;
+height:650px;
+
+right:-180px;
+top:-120px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(circle,
+rgba(173,220,255,.5),
+transparent 70%);
+
+filter:blur(60px);
+
+}
+
+/* ======================
+Clouds
+====================== */
+
+.cloud{
+
+position:absolute;
+
+pointer-events:none;
+
+opacity:.75;
+
+animation:cloudFloat 18s ease-in-out infinite;
+
+}
+
+.leftCloud{
+
+width:520px;
+
+left:-180px;
+
+top:90px;
+
+}
+
+.rightCloud{
+
+width:430px;
+
+right:-130px;
+
+top:120px;
+
+animation-delay:3s;
+
+}
+
+.bottomCloud{
+
+width:800px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+bottom:-180px;
+
+opacity:.55;
+
+}
+
+/* ==========================
+Glass Card
+========================== */
+
+.card{
+
+position:relative;
+
+width:min(1180px,90%);
+
+height:820px;
+
+background:
+
+rgba(255,255,255,.18);
+
+backdrop-filter:blur(30px);
+
+-webkit-backdrop-filter:blur(30px);
+
+border-radius:36px;
+
+border:1px solid rgba(255,255,255,.35);
+
+box-shadow:
+
+0 40px 90px rgba(94,162,255,.12),
+
+0 10px 30px rgba(94,162,255,.08),
+
+inset 0 1px 0 rgba(255,255,255,.7);
+
+overflow:hidden;
+
+}
+
+/* subtle gradient */
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+
+linear-gradient(
+
+180deg,
+
+rgba(255,255,255,.25),
+
+rgba(255,255,255,.05)
+
+);
+
+pointer-events:none;
+
+}
+
+/* =====================
+Header
+===================== */
+
+.header{
+
+position:relative;
+
+z-index:2;
+
+text-align:center;
+
+padding-top:50px;
+
+}
+
+.badge{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:10px 24px;
+
+border-radius:999px;
+
+background:#eef6ff;
+
+color:#3b82f6;
+
+font-size:.85rem;
+
+font-weight:600;
+
+letter-spacing:.08em;
+
+text-transform:uppercase;
+
+box-shadow:
+
+0 5px 18px rgba(59,130,246,.08);
+
+}
+
+.header h2{
+
+margin-top:22px;
+
+font-size:54px;
+
+font-weight:700;
+
+line-height:1.15;
+
+color:#0f172a;
+
+}
+
+.header h2 span{
+
+display:block;
+
+margin-top:8px;
+
+background:
+
+linear-gradient(
+90deg,
+#2563eb,
+#60a5fa
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+.header p{
+
+max-width:720px;
+
+margin:24px auto 0;
+
+font-size:17px;
+
+line-height:1.9;
+
+color:#64748b;
+
+}
+
+/* ==========================
+Diagram
+========================== */
+
+.diagram{
+
+position:relative;
+
+width:100%;
+
+height:680px;
+
+margin-top:-10px;
+
+}
+
+/* ==========================================
+   CENTER CLOUD
+========================================== */
+
+.center{
+    position:absolute;
+
+    left:50%;
+    top:49%;
+
+    transform:translate(-50%,-50%);
+
+    width:300px;
+    height:220px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:5;
+}
+
+.centerImage{
+
+    position:absolute;
+
+    width:100%;
+    max-width:300px;
+
+    filter:
+    drop-shadow(0 20px 45px rgba(95,170,255,.25));
+
+    animation:centerFloat 7s ease-in-out infinite;
+}
+
+.center::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(circle,
+    rgba(255,255,255,.95),
+    rgba(185,220,255,.25),
+    transparent);
+
+    filter:blur(45px);
+
+    z-index:-1;
+}
+
+.centerText{
+
+    position:relative;
+
+    z-index:6;
+
+    text-align:center;
+}
+
+.centerText h3{
+
+    margin:0;
+
+    font-size:38px;
+
+    font-weight:800;
+
+    color:#2563eb;
+
+    letter-spacing:4px;
+}
+
+.centerText span{
+
+    display:block;
+
+    margin-top:6px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#4f8df5;
+
+    letter-spacing:5px;
+}
+
+/* ==========================================
+   SVG LINES
+========================================== */
+
+.lines{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    z-index:1;
+}
+
+.lines line{
+
+    stroke:#8bbcff;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+
+    stroke-opacity:.45;
+
+    stroke-dasharray:7 8;
+
+    animation:dashMove 10s linear infinite;
+}
+
+/* ==========================================
+   NODES
+========================================== */
+
+.node{
+
+    position:absolute;
+
+    transform:translate(-50%,-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:8;
+}
+
+.nodeCircle{
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,.95),
+        rgba(238,246,255,.9)
+    );
+
+    border:1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+
+    0 15px 40px rgba(88,145,255,.16),
+
+    inset 0 2px 0 rgba(255,255,255,.8);
+
+    transition:.35s ease;
+
+    position:relative;
+}
+
+.nodeCircle::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+    height:10px;
+
+    left:16px;
+    top:12px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.8);
+
+    filter:blur(1px);
+}
+
+.node span{
+
+    margin-top:10px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:#1d4ed8;
+
+    white-space:nowrap;
+}
+
+/* Hover */
+
+.node:hover .nodeCircle{
+
+    transform:
+
+    translateY(-8px)
+    scale(1.08);
+
+    box-shadow:
+
+    0 22px 55px rgba(59,130,246,.30);
+
+}
+
+/* ==========================================
+   GLOW RINGS
+========================================== */
+
+.icon{
+
+width:55px;
+
+height:55px;
+
+object-fit:contain;
+
+}
+
+.diagram::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:54%;
+
+    transform:translate(-50%,-50%);
+
+    width:430px;
+    height:430px;
+
+    border-radius:50%;
+
+    border:1px dashed rgba(150,190,255,.22);
+
+}
+
+.diagram::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:54%;
+
+    transform:translate(-50%,-50%);
+
+    width:320px;
+    height:320px;
+
+    border-radius:50%;
+
+    border:1px dashed rgba(170,210,255,.18);
+
+}
+
+/* ==========================================
+   FLOATING PARTICLES
+========================================== */
+
+.particle{
+
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#7db8ff;
+
+    box-shadow:
+
+    0 0 12px #8bc8ff;
+
+    animation:particle 6s linear infinite;
+
+    z-index:3;
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes centerFloat{
+
+    0%,100%{
+
+        transform:
+        translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+        translateY(-14px);
+
+    }
+
+}
+
+@keyframes dashMove{
+
+    from{
+
+        stroke-dashoffset:0;
+
+    }
+
+    to{
+
+        stroke-dashoffset:-150;
+
+    }
+
+}
+
+@keyframes particle{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+
+        translateY(40px)
+        scale(.6);
+
+    }
+
+    20%{
+
+        opacity:1;
+
+    }
+
+    80%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+
+        translateY(-120px)
+        scale(1.2);
+
+    }
+
+}
+
+@keyframes cloudFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-20px);
+
+    }
+
+}
