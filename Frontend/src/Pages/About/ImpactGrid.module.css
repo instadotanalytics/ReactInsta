@@ -30,7 +30,9 @@
 }
 
 .badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.25rem 1rem;
   background: #f0f0f5;
   border-radius: 20px;
@@ -40,6 +42,11 @@
   text-transform: uppercase;
   color: #6C63FF;
   margin-bottom: 1.5rem;
+}
+
+.badge svg {
+  width: 14px;
+  height: 14px;
 }
 
 .title {
@@ -76,7 +83,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  margin-bottom: 4rem;
+  margin: 0 4rem 4rem 4rem;
 }
 
 .metricCard {
@@ -117,11 +124,26 @@
 
 .metricIcon {
   font-size: 1.5rem;
-  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.metricCard:hover .metricIcon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.metricIcon svg {
+  width: 32px;
+  height: 32px;
 }
 
 .metricValue {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
   letter-spacing: -0.5px;
   transition: all 0.3s ease;
@@ -159,26 +181,25 @@
   transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-
-
 /* ===== FOCUS GRID ===== */
 .focusGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  margin-bottom: 3rem;
+  margin: 0 5rem 3rem 5rem;
   padding-top: 1.5rem;
   border-top: 1px solid #e8e8ee;
 }
 
 .focusCard {
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 12px;
   background: #fafafe;
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(10px);
   position: relative;
+  text-align: center;
 }
 
 .animateFocus {
@@ -195,13 +216,31 @@
 .focusCard:hover {
   background: #f0f0f8;
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
 
 .focusIcon {
-  font-size: 1.3rem;
-  display: block;
-  margin-bottom: 0.5rem;
-  opacity: 0.6;
+  font-size:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1rem;
+  background: rgba(108, 99, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  color: #6C63FF;
+}
+
+.focusCard:hover .focusIcon {
+  transform: scale(1.1) rotate(-5deg);
+  background: rgba(108, 99, 255, 0.15);
+}
+
+.focusIcon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .focusTitle {
@@ -223,9 +262,10 @@
   width: 30px;
   height: 2px;
   background: #6C63FF;
-  margin-top: 0.75rem;
+  margin: 0.75rem auto 0;
   transition: width 0.3s ease;
   opacity: 0.3;
+  border-radius: 2px;
 }
 
 .focusCard:hover .focusLine {
@@ -244,11 +284,25 @@
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.8s ease;
+  flex-wrap: wrap;
 }
 
 .animateFooter {
   opacity: 1;
   transform: translateY(0);
+}
+
+.footerIcon {
+  font-size: 1.2rem;
+  color: #6C63FF;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+}
+
+.footerIcon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .footerNumber {
@@ -308,6 +362,27 @@
   .footerLabel {
     font-size: 0.8rem;
   }
+
+  .metricIcon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .metricIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .focusIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .focusIcon svg {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -331,5 +406,14 @@
 
   .metricCard {
     padding: 1.2rem;
+  }
+
+  .footerIcon {
+    font-size: 1rem;
+  }
+
+  .footerIcon svg {
+    width: 16px;
+    height: 16px;
   }
 }

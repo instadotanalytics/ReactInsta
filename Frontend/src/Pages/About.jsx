@@ -4,16 +4,14 @@ import { useInView } from "react-intersection-observer";
 import styles from "./About.module.css";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-// import WhyJoinUS from "./WhyJoinUS";
 import ValueProposition from "./About/ValueProposition";
 import CareerSection from "./CareerSection";
-// import OurImpact from "./OurImpact";
 import ImpactGrid from "./About/ImpactGrid";
-// import Companypartners from "./Courses/Companypartners";
 import ImpactShowcase from "./About/ImpactShowcase";
-// import ReviewSection from "./ReviewSection";
 import ClientTestimonials from "./About/ClientTestimonials";
 import FAQSection from "./FAQSection";
+
+// React Icons imports - Feather Icons (Fi) - ONLY VALID ONES
 import {
   FiUsers,
   FiUserCheck,
@@ -22,8 +20,64 @@ import {
   FiTrendingUp,
   FiBriefcase,
   FiStar,
-  FiCheckCircle
+  FiCheckCircle,
+  FiTarget,
+  FiCompass,
+  FiZap,
+  FiLayers,
+  FiGlobe,
+  FiClock,
+  FiTool,
+  FiBarChart2,
+  FiCode,
+  FiDollarSign
 } from "react-icons/fi";
+
+// React Icons imports - Font Awesome (Fa) - ONLY VALID ONES
+import {
+  FaRocket,
+  FaFlask,
+  FaMicrochip,
+  FaMoneyBillWave,
+  FaSuitcase,
+  FaBullseye,
+  FaBolt,
+  FaLayerGroup,
+  FaGlobeAmericas,
+  FaClock,
+  FaGraduationCap,
+  FaChartLine,
+  FaCode as FaCodeIcon,
+  FaTools,
+  FaAward as FaAwardIcon,
+  FaStar as FaStarIcon,
+  FaUsers as FaUsersIcon,
+  FaUserCheck as FaUserCheckIcon,
+  FaBookOpen as FaBookOpenIcon
+} from "react-icons/fa";
+
+// React Icons imports - Material Design (Md) - ONLY VALID ONES
+import {
+  MdRocket,
+  MdScience,
+  MdMemory,
+  MdAttachMoney,
+  MdWork,
+  MdTrackChanges,
+  MdExplore,
+  MdFlashOn,
+  MdViewModule,
+  MdPublic,
+  MdAccessTime,
+  MdSchool,
+  MdTrendingUp,
+  MdCode,
+  MdBuild,
+  MdStar,
+  MdPeople,
+  MdPerson,
+  MdBook
+} from "react-icons/md";
 
 const About = () => {
   const controls = useAnimation();
@@ -39,18 +93,18 @@ const About = () => {
   }, [inView, controls]);
 
   const stats = [
-    { value: "750+", label: "Students", icon: <FiUsers />, color: "#3b82f6" },
-    { value: "12+", label: "Experts", icon: <FiUserCheck />, color: "#7c3aed" },
-    { value: "6+", label: "Courses Offered", icon: <FiBookOpen />, color: "#06b6d4" },
-    { value: "5+", label: "Years Experience", icon: <FiAward />, color: "#10b981" },
+    { value: "750+", label: "Students", icon: <FaUsersIcon />, color: "#3b82f6" },
+    { value: "12+", label: "Experts", icon: <FaUserCheckIcon />, color: "#7c3aed" },
+    { value: "6+", label: "Courses Offered", icon: <FaBookOpenIcon />, color: "#06b6d4" },
+    { value: "5+", label: "Years Experience", icon: <FaAwardIcon />, color: "#10b981" },
   ];
 
   const features = [
-    { icon: "🚀", text: "Scratch to Advanced Courses", color: "#3b82f6" },
-    { icon: "🔬", text: "Hands-on Experimentation", color: "#7c3aed" },
-    { icon: "📡", text: "Latest Technology Updates", color: "#06b6d4" },
-    { icon: "💰", text: "Affordable Learning", color: "#10b981" },
-    { icon: "💼", text: "Job Ready Skills", color: "#f59e0b" },
+    { icon: <FaRocket />, text: "Scratch to Advanced Courses", color: "#3b82f6" },
+    { icon: <FaFlask />, text: "Hands-on Experimentation", color: "#7c3aed" },
+    { icon: <FaMicrochip />, text: "Latest Technology Updates", color: "#06b6d4" },
+    { icon: <FaMoneyBillWave />, text: "Affordable Learning", color: "#10b981" },
+    { icon: <FaSuitcase />, text: "Job Ready Skills", color: "#f59e0b" },
   ];
 
   const successStories = [
@@ -179,7 +233,6 @@ const About = () => {
             </motion.div>
           </div>
 
-          {/* <Companypartners /> */}
           <ImpactShowcase/>    
 
           {/* Features Section - Redesigned */}
@@ -223,7 +276,6 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* <OurImpact /> */}
           <ImpactGrid/>
 
           {/* Journey Section */}
@@ -245,7 +297,9 @@ const About = () => {
                 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <span className={styles.sectionBadge}>📖 Our Journey</span>
+                <span className={styles.sectionBadge}>
+                 Our Journey
+                </span>
                 <h2 className={styles.sectionTitle}>
                   Our Journey for <span className={styles.highlight}>Students Career Growth</span>
                 </h2>
@@ -289,7 +343,6 @@ const About = () => {
             </motion.div>
           </motion.div>
 
-          {/* <WhyJoinUS /> */}
           <ValueProposition/>
 
           {/* Success Stories Section */}
@@ -304,7 +357,9 @@ const About = () => {
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <div className={styles.successHeader}>
-              <span className={styles.sectionBadge}>Success Stories</span>
+              <span className={styles.sectionBadge}>
+                <FaStarIcon size={14} /> Success Stories
+              </span>
               <h2>750+ Success Stories <span className={styles.highlight}>and Counting!</span></h2>
               <p>Join our alumni network working at India's top companies</p>
             </div>
@@ -335,7 +390,6 @@ const About = () => {
       </section>
 
       <CareerSection />
-      {/* <ReviewSection /> */}
       <ClientTestimonials/>
       <FAQSection />
       <Footer />

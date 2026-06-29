@@ -2,20 +2,80 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './ImpactGrid.module.css';
 
+// React Icons imports - Feather Icons (Fi) - ONLY VALID ONES
+import { 
+  FiUsers, 
+  FiTrendingUp, 
+  FiBriefcase, 
+  FiBookOpen,
+  FiTarget,
+  FiEdit2,
+  FiZap,
+  FiBarChart2,
+  FiAward,
+  FiStar,
+  FiCheckCircle,
+  FiGlobe,
+  FiClock,
+  FiLayers,
+  FiCompass
+} from 'react-icons/fi';
+
+// React Icons imports - Font Awesome (Fa) - ONLY VALID ONES
+import {
+  FaUsers,
+  FaChartLine,
+  FaSuitcase,
+  FaBook,
+  FaBullseye,
+  FaPenFancy,
+  FaBolt,
+  FaChartBar,
+  FaTrophy,
+  FaStar as FaStarIcon,
+  FaCheckCircle as FaCheckCircleIcon,
+  FaGlobeAmericas,
+  FaBuilding,
+  FaClock as FaClockIcon,
+  FaLayerGroup,
+  FaCompass as FaCompassIcon,
+  FaRocket
+} from 'react-icons/fa';
+
+// React Icons imports - Material Design (Md) - ONLY VALID ONES
+import {
+  MdPeople,
+  MdTrendingUp as MdTrendingUpIcon,
+  MdWork,
+  MdMenuBook,
+  MdTrackChanges,
+  MdEdit,
+  MdFlashOn,
+  MdBarChart,
+  MdEmojiEvents,
+  MdStar as MdStarIcon,
+  MdVerified,
+  MdPublic,
+  MdBusinessCenter,
+  MdAccessTime,
+  MdViewModule,
+  MdExplore
+} from 'react-icons/md';
+
 const ImpactGrid = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [counters, setCounters] = useState({});
   const sectionRef = useRef(null);
   const [activeMetric, setActiveMetric] = useState(null);
 
-  // Professional metrics data
+  // Professional metrics data with React Icons
   const metrics = [
     {
       id: 'students',
       label: 'Students Trained',
       value: 750,
       suffix: '+',
-      icon: '👥',
+      icon: <FaUsers />,
       description: 'Across 15+ countries',
       color: '#6C63FF'
     },
@@ -24,7 +84,7 @@ const ImpactGrid = () => {
       label: 'Placement Rate',
       value: 92,
       suffix: '%',
-      icon: '📈',
+      icon: <FiTrendingUp />,
       description: 'Industry average: 65%',
       color: '#10B981'
     },
@@ -33,7 +93,7 @@ const ImpactGrid = () => {
       label: 'Hiring Partners',
       value: 120,
       suffix: '+',
-      icon: '🏢',
+      icon: <FaBuilding />,
       description: 'Including Fortune 500',
       color: '#F59E0B'
     },
@@ -42,33 +102,33 @@ const ImpactGrid = () => {
       label: 'Courses Available',
       value: 50,
       suffix: '+',
-      icon: '📚',
+      icon: <FiBookOpen />,
       description: 'Updated quarterly',
       color: '#EC4899'
     }
   ];
 
-  // Professional focus areas
+  // Professional focus areas with React Icons
   const focusAreas = [
     {
       title: 'Strategy',
       description: 'Data-driven learning paths aligned with industry demands',
-      icon: '🎯'
+      icon: <FiTarget />
     },
     {
       title: 'Design',
       description: 'Curriculum designed for practical, hands-on application',
-      icon: '✏️'
+      icon: <FiEdit2 />
     },
     {
       title: 'Development',
       description: 'Cutting-edge tech stacks used by top companies',
-      icon: '⚡'
+      icon: <FiZap />
     },
     {
       title: 'Growth',
       description: 'Continuous career support and skill advancement',
-      icon: '📊'
+      icon: <FiBarChart2 />
     }
   ];
 
@@ -108,7 +168,9 @@ const ImpactGrid = () => {
       <div className={styles.container}>
         {/* Header */}
         <div className={`${styles.header} ${isVisible ? styles.animateIn : ''}`}>
-          <span className={styles.badge}>Impact</span>
+          <span className={styles.badge}>
+            <FiAward size={14} /> Impact
+          </span>
           <h2 className={styles.title}>
             <span className={styles.lightText}>Creating</span>
             <span className={styles.highlight}> Measurable</span>
@@ -135,7 +197,9 @@ const ImpactGrid = () => {
               onMouseLeave={() => setActiveMetric(null)}
             >
               <div className={styles.metricHeader}>
-                <span className={styles.metricIcon}>{metric.icon}</span>
+                <span className={styles.metricIcon} style={{ color: metric.color }}>
+                  {metric.icon}
+                </span>
                 <span 
                   className={styles.metricValue}
                   style={{ color: metric.color }}
@@ -158,12 +222,6 @@ const ImpactGrid = () => {
                   }}
                 />
               </div>
-
-              {/* {activeMetric === metric.id && (
-                <div className={styles.metricTooltip}>
-                  <span>Detail</span>
-                </div>
-              )} */}
             </div>
           ))}
         </div>
@@ -176,7 +234,9 @@ const ImpactGrid = () => {
               className={`${styles.focusCard} ${isVisible ? styles.animateFocus : ''}`}
               style={{ animationDelay: `${index * 0.08}s` }}
             >
-              <span className={styles.focusIcon}>{area.icon}</span>
+              <span className={styles.focusIcon} style={{ color: '#6C63FF' }}>
+                {area.icon}
+              </span>
               <h4 className={styles.focusTitle}>{area.title}</h4>
               <p className={styles.focusDescription}>{area.description}</p>
               <div className={styles.focusLine} />
@@ -186,9 +246,15 @@ const ImpactGrid = () => {
 
         {/* Additional stat - clean and minimal */}
         <div className={`${styles.footerStat} ${isVisible ? styles.animateFooter : ''}`}>
+          <span className={styles.footerIcon}>
+            <FiAward />
+          </span>
           <span className={styles.footerNumber}>8.5 LPA</span>
           <span className={styles.footerLabel}>Highest package • 2024</span>
           <span className={styles.footerDivider}>•</span>
+          <span className={styles.footerIcon}>
+            <FiTrendingUp />
+          </span>
           <span className={styles.footerNumber}>92%</span>
           <span className={styles.footerLabel}>Placement rate</span>
         </div>

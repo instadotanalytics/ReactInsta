@@ -66,7 +66,6 @@
 .container {
   max-width: 100vw;
   margin: 0 auto;
-  /* padding: 0 20px; */
   position: relative;
   z-index: 1;
 }
@@ -86,7 +85,9 @@
 }
 
 .sectionBadge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.25rem 1rem;
   background: rgba(56, 132, 255, 0.06);
   border-radius: 50px;
@@ -258,10 +259,8 @@
 .featuresSection {
   margin: 3rem 3rem;
   padding: 4rem 6rem;
-  /* background: rgba(255, 255, 255, 0.3); */
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  /* border: 1px solid rgba(255, 255, 255, 0.4); */
 }
 
 .featuresHeader {
@@ -280,7 +279,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  padding: 1.9rem 0rem;
+  padding: 1.5rem 0.2rem;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -327,7 +326,6 @@
 .journeyContent {
   display: flex;
   flex-direction: column;
-  /* gap: 0.8rem; */
   margin-left: 20px;
 }
 
@@ -342,10 +340,10 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 1rem 1.2rem;
-  background: rgba(255, 255, 255, 0.5);
+  padding: 1rem 0em;
+  /* background: rgba(255, 255, 255, 0.5); */
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* border: 1px solid rgba(255, 255, 255, 0.5); */
   margin-top: 0.3rem;
 }
 
@@ -404,10 +402,8 @@
 .successStories {
   margin: 3rem 7rem;
   padding: 2.5rem 5rem;
-  /* background: rgba(255, 255, 255, 0.3); */
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  /* border: 1px solid rgba(255, 255, 255, 0.4); */
 }
 
 .successHeader {
