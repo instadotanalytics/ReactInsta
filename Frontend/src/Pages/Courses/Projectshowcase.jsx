@@ -224,14 +224,7 @@ export default function ProjectShowcase() {
       ══════════════════════════════════════════ */}
       <section className={styles.projectsSection}>
         <div className={styles.container}>
-          <motion.div
-            className={styles.badge}
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            🚀 HANDS-ON LEARNING
-          </motion.div>
+          
 
           <motion.h1
             className={styles.mainHeading}

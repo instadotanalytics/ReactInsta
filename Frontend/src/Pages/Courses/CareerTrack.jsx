@@ -9,18 +9,86 @@
  */
 
 import styles from "./CareerTrack.module.css";
+import {
+  FaBullseye,
+  FaChalkboardTeacher,
+  FaLaptopCode,
+  FaAward,
+  FaFileAlt,
+  FaMicrophone,
+  FaBriefcase,
+  FaUserTie,
+  FaTools,
+  FaShieldAlt,
+} from "react-icons/fa";
+
+import {
+  MdWorkspacePremium,
+} from "react-icons/md";
+
+import {
+  HiRocketLaunch,
+} from "react-icons/hi2";
+
+import {
+  PiSparkleFill,
+} from "react-icons/pi";
+
+import { PiCrownSimpleFill } from "react-icons/pi";
 
 /* ─────────────────────────────────────────────────────────────────
    Data
 ───────────────────────────────────────────────────────────────── */
 const STATIONS = [
-  { icon: "🎯", label: "Choose Course", cx: 62, cy: 210, labelY: "below" },
-  { icon: "👨‍🏫", label: "Live Classes", cx: 210, cy: 118, labelY: "above" },
-  { icon: "💻", label: "Real Projects", cx: 358, cy: 210, labelY: "below" },
-  { icon: "🏆", label: "Certification", cx: 506, cy: 118, labelY: "above" },
-  { icon: "📄", label: "Resume", cx: 654, cy: 210, labelY: "below" },
-  { icon: "🎤", label: "Interview", cx: 802, cy: 118, labelY: "above" },
-  { icon: "💼", label: "Placement", cx: 920, cy: 210, labelY: "below" },
+  {
+    icon: <FaBullseye />,
+    label: "Choose Course",
+    cx: 62,
+    cy: 210,
+    labelY: "below",
+  },
+  {
+    icon: <FaChalkboardTeacher />,
+    label: "Live Classes",
+    cx: 210,
+    cy: 118,
+    labelY: "above",
+  },
+  {
+    icon: <FaLaptopCode />,
+    label: "Real Projects",
+    cx: 358,
+    cy: 210,
+    labelY: "below",
+  },
+  {
+    icon: <MdWorkspacePremium />,
+    label: "Certification",
+    cx: 506,
+    cy: 118,
+    labelY: "above",
+  },
+  {
+    icon: <FaFileAlt />,
+    label: "Resume",
+    cx: 654,
+    cy: 210,
+    labelY: "below",
+  },
+  {
+    icon: <FaMicrophone />,
+    label: "Interview",
+    cx: 802,
+    cy: 118,
+    labelY: "above",
+  },
+  {
+    icon: <FaBriefcase />,
+    label: "Placement",
+    cx: 920,
+    cy: 210,
+    labelY: "below",
+  },
 ];
 
 const TRACK_PATH =
@@ -35,24 +103,24 @@ const TRACK_PATH =
 
 const FEATURE_CARDS = [
   {
-    icon: "🧑‍💼",
+    icon: <FaUserTie />,
     title: "Expert Mentors",
-    desc: "Industry veterans guiding your path from classroom to career.",
+    desc: "Industry veterans guiding your journey from classroom to career.",
   },
   {
-    icon: "🔧",
+    icon: <FaTools />,
     title: "Real Projects",
-    desc: "Build a portfolio that speaks louder than any certificate.",
+    desc: "Build a portfolio with real-world enterprise projects.",
   },
   {
-    icon: "🛡️",
+    icon: <FaShieldAlt />,
     title: "Career Support",
-    desc: "Dedicated support at every milestone on your journey.",
+    desc: "Resume reviews, interview  and continuous guidance.",
   },
   {
-    icon: "🎯",
+    icon: <FaBriefcase />,
     title: "Placement Assistance",
-    desc: "Direct referrals, mock interviews, and offer negotiations.",
+    desc: "Job referrals, mock interviews and hiring support.",
   },
 ];
 
@@ -166,15 +234,26 @@ function Station({ icon, label, cx, cy, labelY, delay }) {
           stroke="#a855f7"
           strokeWidth="1.5"
         />
-        <text
-          x={cx}
-          y={cy + 1}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="17"
-        >
-          {icon}
-        </text>
+        <foreignObject
+  x={cx - 12}
+  y={cy - 12}
+  width="24"
+  height="24"
+>
+  <div
+    style={{
+      width: "24px",
+      height: "24px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#7c3aed",
+      fontSize: "16px",
+    }}
+  >
+    {icon}
+  </div>
+</foreignObject>
       </g>
 
       {/* Label pill — above or below */}
@@ -284,20 +363,20 @@ function Destination() {
       />
 
       {/* Trophy */}
-      <text
-        x={cx}
-        y={cy + 2}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fontSize="24"
-        className={styles.trophyGlow}
-      >
-        🏅
-      </text>
+    <foreignObject
+  x={cx - 16}
+  y={cy - 16}
+  width="32"
+  height="32"
+>
+  <div className={styles.destinationIcon}>
+    <PiCrownSimpleFill />
+  </div>
+</foreignObject>
 
       {/* Rocket */}
       <text x={cx + 52} y={cy - 32} fontSize="16" className={styles.rocket}>
-        🚀
+        
       </text>
 
       {/* Floating stars */}
@@ -308,7 +387,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "0s" }}
       >
-        ⭐
+        
       </text>
       <text
         x={cx + 38}
@@ -317,7 +396,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "0.6s" }}
       >
-        ⭐
+        
       </text>
       <text
         x={cx + 58}
@@ -326,7 +405,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "1.2s" }}
       >
-        ✨
+      
       </text>
       <text
         x={cx - 60}
@@ -335,7 +414,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "1.8s" }}
       >
-        ✨
+      
       </text>
 
       {/* Confetti sparks */}
@@ -346,7 +425,7 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "0s" }}
       >
-        ✦
+        
       </text>
       <text
         x={cx - 20}
@@ -355,7 +434,7 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "0.5s" }}
       >
-        ✦
+        
       </text>
       <text
         x={cx + 46}
@@ -364,7 +443,7 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "1s" }}
       >
-        ✦
+        
       </text>
       <text
         x={cx - 44}
@@ -373,7 +452,7 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "1.5s" }}
       >
-        ✦
+        
       </text>
 
       {/* Dream Job label */}
@@ -381,20 +460,7 @@ function Destination() {
         Dream Job
       </text>
 
-      {/* Industry Ready badge */}
-      <rect
-        x={cx - 46}
-        y={cy + 76}
-        width="92"
-        height="20"
-        rx="10"
-        fill="rgba(139,92,246,0.15)"
-        stroke="rgba(139,92,246,0.4)"
-        strokeWidth="1"
-      />
-      <text x={cx} y={cy + 90} textAnchor="middle" className={styles.destBadge}>
-        INDUSTRY READY
-      </text>
+      
     </g>
   );
 }
@@ -471,9 +537,9 @@ function MetroMap() {
 function FeatureCard({ icon, title, desc }) {
   return (
     <div className={styles.glassCard}>
-      <span className={styles.cardIcon} aria-hidden="true">
-        {icon}
-      </span>
+      <div className={styles.cardIcon}>
+    {icon}
+</div>
       <h3 className={styles.cardTitle}>{title}</h3>
       <p className={styles.cardDesc}>{desc}</p>
     </div>
@@ -493,11 +559,7 @@ export default function CareerTrack() {
 
       {/* ── Section header ── */}
       <header className={styles.header}>
-        <div className={styles.labelPill} aria-hidden="true">
-          <span className={styles.dot} />
-          Career Track
-        </div>
-
+      
         <h1 className={styles.heading}>
           Your Journey to
           <br />

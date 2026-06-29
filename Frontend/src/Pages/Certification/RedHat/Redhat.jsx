@@ -4,9 +4,8 @@ import Footer from '../../../components/Footer/Footer';
 import Header from '../../../components/Header/Header';
 import AboutRedhat from './AboutRedhat';
 import CertificationApplyForm from '../../CertificationApplyForm';
-import ReviewSection from '../../ReviewSection';
-import Companypartners from '../../Courses/Companypartners';
 import BenefitsRedhat from './BenefitsRedhat';
+import Enterpriseproject from './Enterpriseprojects';
 
 const certifications = [
   { code: 'RHCSA',     name: 'Linux Administration',     level: 'Foundational', color: '#3B82F6' },
@@ -73,10 +72,9 @@ const Redhat = () => {
       </section>
 
       <AboutRedhat />
-      <Companypartners />
       <CertificationApplyForm />
       <BenefitsRedhat />
-      <ReviewSection />
+      <Enterpriseproject />
       <Footer />
     </>
   );
