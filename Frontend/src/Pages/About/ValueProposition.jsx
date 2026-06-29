@@ -2,6 +2,58 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './ValueProposition.module.css';
 
+// React Icons imports - Feather Icons (Fi) - ONLY VALID ONES
+import { 
+  FiTarget, 
+  FiGlobe, 
+  FiMonitor, 
+  FiStar,
+  FiAward,
+  FiTrendingUp,
+  FiBriefcase,
+  FiBookOpen,
+  FiUsers,
+  FiUserCheck,
+  FiLayers,
+  FiZap,
+  FiCheckCircle
+} from 'react-icons/fi';
+
+// React Icons imports - Font Awesome (Fa) - ONLY VALID ONES
+import {
+  FaBullseye,
+  FaGlobeAmericas,
+  FaLaptop,
+  FaStar as FaStarIcon,
+  FaTrophy,
+  FaChartLine,
+  FaSuitcase,
+  FaBook,
+  FaUsers as FaUsersIcon,
+  FaUserCheck as FaUserCheckIcon,
+  FaLayerGroup,
+  FaBolt,
+  FaCheckCircle as FaCheckCircleIcon,
+  FaRocket
+} from 'react-icons/fa';
+
+// React Icons imports - Material Design (Md) - ONLY VALID ONES
+import {
+  MdTrackChanges,
+  MdPublic,
+  MdComputer,
+  MdStar as MdStarIcon,
+  MdEmojiEvents,
+  MdTrendingUp as MdTrendingUpIcon,
+  MdWork,
+  MdMenuBook,
+  MdPeople,
+  MdPerson,
+  MdViewModule,
+  MdFlashOn,
+  MdVerified
+} from 'react-icons/md';
+
 const ValueProposition = () => {
 
   const [isVisible, setIsVisible] = useState(false);
@@ -9,11 +61,11 @@ const ValueProposition = () => {
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // Value propositions
+  // Value propositions with React Icons
   const values = [
     {
       id: 1,
-      icon: '🎯',
+      icon: <FiTarget />,
       title: 'Industry-Aligned Curriculum',
       description: 'Built with input from 50+ industry experts ensuring you learn exactly what employers demand.',
       stat: '94% Relevance',
@@ -22,7 +74,7 @@ const ValueProposition = () => {
     },
     {
       id: 2,
-      icon: '🌍',
+      icon: <FiGlobe />,
       title: 'Global Recognition',
       description: 'Internationally recognized certificates accepted by 200+ companies across 15+ countries.',
       stat: 'Global Reach',
@@ -31,7 +83,7 @@ const ValueProposition = () => {
     },
     {
       id: 3,
-      icon: '💻',
+      icon: <FiMonitor />,
       title: 'Hands-on Projects',
       description: 'Build real-world portfolio projects that demonstrate your skills to potential employers.',
       stat: '50+ Projects',
@@ -40,7 +92,7 @@ const ValueProposition = () => {
     },
     {
       id: 4,
-      icon: '🌟',
+      icon: <FiStar />,
       title: 'Expert Mentorship',
       description: 'Learn from industry veterans who provide personalized guidance and career insights.',
       stat: '12+ Mentors',
@@ -98,7 +150,6 @@ const ValueProposition = () => {
       update(mouseX, mouseY) {
         this.rotation += this.speed;
         
-        // Gentle mouse influence
         const dx = mouseX * canvas.width - this.x;
         const dy = mouseY * canvas.height - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -179,7 +230,6 @@ const ValueProposition = () => {
 
     // Draw connections
     const drawConnections = (mouseX, mouseY) => {
-      // Draw connections between shapes
       for (let i = 0; i < shapes.length; i++) {
         for (let j = i + 1; j < shapes.length; j++) {
           const dx = shapes[i].x - shapes[j].x;
@@ -198,7 +248,6 @@ const ValueProposition = () => {
         }
       }
 
-      // Draw connections to mouse
       const mouseXPos = mouseX * canvas.width;
       const mouseYPos = mouseY * canvas.height;
       shapes.forEach(shape => {
@@ -242,7 +291,6 @@ const ValueProposition = () => {
       time++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Light background
       const bgGradient = ctx.createRadialGradient(
         canvas.width / 2,
         canvas.height / 2,
@@ -307,7 +355,9 @@ const ValueProposition = () => {
         {/* Header */}
         <div className={`${styles.header} ${isVisible ? styles.animateHeader : ''}`}>
           <div className={styles.badgeWrapper}>
-            <span className={styles.badge}>Why Choose Us</span>
+            <span className={styles.badge}>
+              <FiAward size={14} /> Why Choose Us
+            </span>
           </div>
           <h2 className={styles.title}>
             Transform Your Career With
@@ -343,7 +393,9 @@ const ValueProposition = () => {
                     background: value.color,
                     boxShadow: `0 0 40px ${value.color}20`
                   }} />
-                  <span className={styles.cardIcon}>{value.icon}</span>
+                  <span className={styles.cardIcon} style={{ color: value.color }}>
+                    {value.icon}
+                  </span>
                 </div>
                 
                 <h3 className={styles.cardTitle}>{value.title}</h3>
@@ -379,6 +431,5 @@ const ValueProposition = () => {
     </section>
   );
 };
-
 
 export default ValueProposition;

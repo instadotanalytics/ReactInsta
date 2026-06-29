@@ -1,4 +1,4 @@
-/* WhyChooseUs.module.css - Light Theme with Animated Background */
+/* ValueProposition.module.css - Light Theme with Animated Background */
 
 .whyChooseUs {
   width: 100%;
@@ -75,6 +75,8 @@
 
 .badge {
   display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1.5rem;
   background: rgba(108, 99, 255, 0.04);
   border: 1px solid rgba(108, 99, 255, 0.06);
@@ -83,6 +85,11 @@
   font-weight: 600;
   color: #356eff;
   letter-spacing: 0.5px;
+}
+
+.badge svg {
+  width: 14px;
+  height: 14px;
 }
 
 .title {
@@ -200,6 +207,16 @@
   position: relative;
   z-index: 2;
   animation: iconFloat 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.cardIcon svg {
+  width: 32px;
+  height: 32px;
 }
 
 @keyframes iconFloat {
@@ -311,6 +328,17 @@
   .subtitle {
     font-size: 1rem;
   }
+
+  .cardIcon {
+    font-size: 1.8rem;
+    width: 35px;
+    height: 35px;
+  }
+
+  .cardIcon svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -349,6 +377,11 @@
     padding: 0.3rem 1rem;
   }
 
+  .badge svg {
+    width: 12px;
+    height: 12px;
+  }
+
   .subtitle {
     font-size: 0.9rem;
   }
@@ -360,5 +393,12 @@
 
   .cardIcon {
     font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+  }
+
+  .cardIcon svg {
+    width: 24px;
+    height: 24px;
   }
 }
