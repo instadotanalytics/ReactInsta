@@ -81,7 +81,7 @@
   border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #6C63FF;
+  color: #356eff;
   letter-spacing: 0.5px;
 }
 
@@ -95,7 +95,7 @@
 
 .highlight {
   font-weight: 700;
-  background: linear-gradient(135deg, #6C63FF, #818CF8);
+  background: linear-gradient(135deg, #2fafff, #4557ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -91,7 +91,7 @@ const About = () => {
                 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <span className={styles.badge}>🎯 About Us</span>
+                <span className={styles.badge}>About Us</span>
               </motion.div>
 
               <motion.h1 
@@ -304,7 +304,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <div className={styles.successHeader}>
-              <span className={styles.sectionBadge}>🏆 Success Stories</span>
+              <span className={styles.sectionBadge}>Success Stories</span>
               <h2>750+ Success Stories <span className={styles.highlight}>and Counting!</span></h2>
               <p>Join our alumni network working at India's top companies</p>
             </div>
