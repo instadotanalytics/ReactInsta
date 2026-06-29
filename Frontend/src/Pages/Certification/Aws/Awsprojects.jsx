@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import styles from "./AwsProjects.module.css";
+import styles from "./Awsprojects.module.css";
 
 const projects = [
   {
