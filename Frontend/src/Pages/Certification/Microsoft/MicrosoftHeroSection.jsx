@@ -10,7 +10,6 @@ import {
   FaBullhorn,
 } from "react-icons/fa";
 import { MdLiveTv, MdSupportAgent, MdVerified, MdSchool } from "react-icons/md";
-import { GiCheckMark } from "react-icons/gi";
 import { BsLightningFill, BsTrophy } from "react-icons/bs";
 import Footer from "../../../components/Footer/Footer";
 import Header from "../../../components/Header/Header";
@@ -161,41 +160,6 @@ const MicrosoftHeroSection = () => {
 </div>
 </div>
 
-          {/* Row 5: Bottom CTA Section */}
-          <div className={styles.row}>
-            <div className={styles.col12}>
-              
-              <div className={styles.bottomCTA}>
-  <div className={styles.ctaContent}>
-    <h3>
-      Start Your Professional Certification Journey Today
-    </h3>
-
-    <p>
-      Learn from industry experts, gain practical skills,
-      and get placement assistance to accelerate your career.
-    </p>
-
-    <div className={styles.ctaPoints}>
-      <span>
-        <GiCheckMark />
-        Industry Experts
-      </span>
-
-      <span>
-        <GiCheckMark />
-        25+ Courses
-      </span>
-
-      <span>
-        <GiCheckMark />
-        Placement Support
-      </span>
-    </div>
-  </div>
-</div>
-            </div>
-          </div>
         </div>
       </section>
 

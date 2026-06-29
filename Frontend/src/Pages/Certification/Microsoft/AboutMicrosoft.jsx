@@ -41,18 +41,7 @@ const AboutMicrosoft = () => {
               Master Azure, AI, Security &amp; Power Platform
               with Real Projects and Expert Mentors.
             </p>
-
-            <div className={styles.buttonGroup}>
-              <button className={styles.primaryBtn}>
-                Explore Courses
-                <FaArrowRight />
-              </button>
-
-              <button className={styles.secondaryBtn}>
-                <FaCalendarAlt />
-                Free Demo
-              </button>
-            </div>
+            
           </div>
 
           {/* RIGHT */}
@@ -171,52 +160,6 @@ const AboutMicrosoft = () => {
           </div>
 
         </div>
-
-        {/* ================= STATS ================= */}
-        <div className={styles.statsSection}>
-
-          <div className={styles.statCard}>
-            <div className={styles.statIconWrap}>
-              <FaGraduationCap className={styles.statIcon} />
-            </div>
-            <div>
-              <h2>1000+</h2>
-              <p>Students Trained</p>
-            </div>
-          </div>
-
-          <div className={styles.statCard}>
-            <div className={styles.statIconWrap}>
-              <FaTrophy className={`${styles.statIcon} ${styles.trophyIcon}`} />
-            </div>
-            <div>
-              <h2>98%</h2>
-              <p>Certification Success</p>
-            </div>
-          </div>
-
-          <div className={styles.statCard}>
-            <div className={styles.statIconWrap}>
-              <FaUsers className={styles.statIcon} />
-            </div>
-            <div>
-              <h2>50+</h2>
-              <p>Hiring Partners</p>
-            </div>
-          </div>
-
-          <div className={styles.statCard}>
-            <div className={styles.statIconWrap}>
-              <FaHeadset className={styles.statIcon} />
-            </div>
-            <div>
-              <h2>24×7</h2>
-              <p>Learning Support</p>
-            </div>
-          </div>
-
-        </div>
-
       </div>
     </section>
   );
