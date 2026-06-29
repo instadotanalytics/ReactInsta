@@ -18,7 +18,7 @@ import {
   SiPrometheus,
   SiLinux,
 } from "react-icons/si";
-import styles from "./EnterpriseProject.module.css";
+import styles from "./Enterpriseproject.module.css";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const PROJECTS = [
