@@ -1,13 +1,4 @@
-/**
- * CareerTrack.jsx
- * Premium futuristic metro-style career journey section.
- * Uses CSS Modules → import styles from "./CareerTrack.module.css"
- *
- * Drop-in usage:
- *   import CareerTrack from "./CareerTrack";
- *   <CareerTrack />
- */
-
+import React from "react";
 import styles from "./CareerTrack.module.css";
 
 /* ─────────────────────────────────────────────────────────────────
