@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./MicrosoftHeroSection.module.css";
 import {
   FaStar,
@@ -18,148 +18,160 @@ import CertificationApplyForm from "../../CertificationApplyForm";
 import CallToAction from "./CallToAction";
 import Companypartners from "../../Courses/Companypartners";
 
-import MicroRight from "../../../assets/Microsoftright.png";
+// ─── Static data (easy to swap for API calls) ─────────────────────────────────
+
+const STATS = [
+  { icon: <FaCode />, number: "25+", label: "Professional Courses" },
+  { icon: <FaUsers />, number: "5000+", label: "Students Enrolled" },
+  { icon: <MdSchool />, number: "150+", label: "Batches Completed" },
+  { icon: <BsTrophy />, number: "4.9", label: "Student Rating" },
+];
+
+const FEATURES = [
+  {
+    icon: <MdLiveTv />,
+    title: "Live Interactive Classes",
+    desc: "Real-time learning with industry experts",
+  },
+  {
+    icon: <FaChalkboardTeacher />,
+    title: "1:1 Mentorship",
+    desc: "Personalized guidance for career growth",
+  },
+  {
+    icon: <MdSupportAgent />,
+    title: "Placement Support",
+    desc: "100% assistance with job placement",
+  },
+  {
+    icon: <MdVerified />,
+    title: "Industry Certification",
+    desc: "Globally recognized certifications",
+  },
+];
+
+const COURSES = [
+  { icon: <FaCode />, label: "Full Stack Development" },
+  { icon: <FaChartLine />, label: "Data Science" },
+  { icon: <FaBullhorn />, label: "Digital Marketing" },
+  { icon: <FaCode />, label: "Cloud Computing" },
+  { icon: <FaChartLine />, label: "AI & Machine Learning" },
+];
+
+// ─── Animated counter hook ────────────────────────────────────────────────────
+
+function useCountUp(target, duration = 1800, start = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    const numeric = parseFloat(target.replace(/[^0-9.]/g, ""));
+    const suffix = target.replace(/[0-9.]/g, "");
+    if (isNaN(numeric)) {
+      setCount(target);
+      return;
+    }
+    let startTime = null;
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current =
+        numeric % 1 === 0
+          ? Math.floor(eased * numeric)
+          : parseFloat((eased * numeric).toFixed(1));
+      setCount(current + suffix);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [start, target, duration]);
+  return count;
+}
+
+// ─── Stat Card with animated number ──────────────────────────────────────────
+
+function StatCard({ icon, number, label, animate }) {
+  const animated = useCountUp(number, 1800, animate);
+  return (
+    <div className={styles.statCard}>
+      <div className={styles.statIcon}>{icon}</div>
+      <div className={styles.statNumber}>{animate ? animated : number}</div>
+      <div className={styles.statLabel}>{label}</div>
+    </div>
+  );
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
 
 const MicrosoftHeroSection = () => {
+  const [animateStats, setAnimateStats] = useState(false);
+  const statsRef = useRef(null);
+
+  // Trigger counter animation when stats section enters viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setAnimateStats(true);
+      },
+      { threshold: 0.3 },
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Header />
+
       <section className={styles.heroSection}>
-
         <div className={styles.container}>
-          {/* Row 1: Header Section */}
-          <div className={styles.row}>
-            <div className={styles.col12}>
-              <div className={styles.headerContent}>
-              
-                <h1 className={styles.mainHeading}>
-                  Upskill Yourself with <br />
-                  <span className={styles.highlight}>Industry-Ready</span>{" "}
-                  Courses
-                </h1>
-                <p className={styles.description}>
-                  Choose from 25+ professional courses designed by industry
-                  experts. Get certified and boost your career with 100%
-                  placement assistance.
-                </p>
-              </div>
+          {/* ── Heading ── */}
+          <div className={styles.headingBlock}>
+            <h1 className={styles.mainHeading}>
+              Upskill Yourself with{" "}
+              <span className={styles.highlight}>Industry-Ready</span> Courses
+            </h1>
+            <p className={styles.description}>
+              Choose from 25+ professional courses designed by industry experts.
+              Get certified and boost your career with 100% placement
+              assistance.
+            </p>
+          </div>
+
+          {/* ── Stats ── */}
+          <div className={styles.statsGrid} ref={statsRef}>
+            {STATS.map((s, i) => (
+              <StatCard key={i} {...s} animate={animateStats} />
+            ))}
+          </div>
+
+          {/* ── Why Choose Us ── */}
+          <div className={styles.featuresBlock}>
+            <h2 className={styles.sectionTitle}>Why Choose Us</h2>
+            <div className={styles.featuresGrid}>
+              {FEATURES.map((f, i) => (
+                <div className={styles.featureItem} key={i}>
+                  <span className={styles.featureIcon}>{f.icon}</span>
+                  <div>
+                    <h4>{f.title}</h4>
+                    <p>{f.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Row 2: Stats Section */}
-          <div className={styles.row}>
-            <div className={styles.col12}>
-              <div className={styles.statsContainer}>
-                <div className={styles.statCard}>
-                  <div className={styles.statIcon}>
-                    <FaCode />
-                  </div>
-                  <div className={styles.statNumber}>25+</div>
-                  <div className={styles.statLabel}>Professional Courses</div>
+          {/* ── Popular Courses ── */}
+          <div className={styles.coursesBlock}>
+            <h2 className={styles.sectionTitle}>Popular Courses</h2>
+            <div className={styles.coursesGrid}>
+              {COURSES.map((c, i) => (
+                <div className={styles.courseTag} key={i}>
+                  <span className={styles.tagIcon}>{c.icon}</span>
+                  <span>{c.label}</span>
                 </div>
-                <div className={styles.statCard}>
-                  <div className={styles.statIcon}>
-                    <FaUsers />
-                  </div>
-                  <div className={styles.statNumber}>5000+</div>
-                  <div className={styles.statLabel}>Students Enrolled</div>
-                </div>
-                <div className={styles.statCard}>
-                  <div className={styles.statIcon}>
-                    <MdSchool />
-                  </div>
-                  <div className={styles.statNumber}>150+</div>
-                  <div className={styles.statLabel}>Batches Completed</div>
-                </div>
-                <div className={styles.statCard}>
-                  <div className={styles.statIcon}>
-                    <BsTrophy />
-                  </div>
-                  <div className={styles.statNumber}>4.9</div>
-                  <div className={styles.statLabel}>Student Rating</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
-
-          {/* Row 3: Features and Image Section */}
-          <div className={styles.row}>
-            <div className={styles.col2}>
-              <div className={styles.featuresSection}>
-                <h2 className={styles.sectionTitle}>Why Choose Us</h2>
-                <div className={styles.featuresGrid}>
-                  <div className={styles.featureItem}>
-                    <MdLiveTv className={styles.featureIcon} />
-                    <div>
-                      <h4>Live Interactive Classes</h4>
-                      <p>Real-time learning with industry experts</p>
-                    </div>
-                  </div>
-                  <div className={styles.featureItem}>
-                    <FaChalkboardTeacher className={styles.featureIcon} />
-                    <div>
-                      <h4>1:1 Mentorship</h4>
-                      <p>Personalized guidance for career growth</p>
-                    </div>
-                  </div>
-                  <div className={styles.featureItem}>
-                    <MdSupportAgent className={styles.featureIcon} />
-                    <div>
-                      <h4>Placement Support</h4>
-                      <p>100% assistance with job placement</p>
-                    </div>
-                  </div>
-                  <div className={styles.featureItem}>
-                    <MdVerified className={styles.featureIcon} />
-                    <div>
-                      <h4>Industry Certification</h4>
-                      <p>Globally recognized certifications</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            
-          </div>
-
-          {/* Row 4: Popular Courses Section */}
-          <div className={styles.row}>
-            <div className={styles.col12}>
-             
-             <div className={styles.coursesSection}>
-  <h2 className={styles.sectionTitle}>Popular Courses</h2>
-
-  <div className={styles.courseTags}>
-    <div className={styles.courseTag}>
-      <FaCode className={styles.tagIcon} />
-      <span>Full Stack Development</span>
-    </div>
-
-    <div className={styles.courseTag}>
-      <FaChartLine className={styles.tagIcon} />
-      <span>Data Science</span>
-    </div>
-
-    <div className={styles.courseTag}>
-      <FaBullhorn className={styles.tagIcon} />
-      <span>Digital Marketing</span>
-    </div>
-
-    <div className={styles.courseTag}>
-      <FaCode className={styles.tagIcon} />
-      <span>Cloud Computing</span>
-    </div>
-
-    <div className={styles.courseTag}>
-      <FaChartLine className={styles.tagIcon} />
-      <span>AI & Machine Learning</span>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
         </div>
       </section>
 
