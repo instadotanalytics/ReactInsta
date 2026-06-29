@@ -249,7 +249,7 @@ body {
   line-height: 1.15;
   letter-spacing: -1.5px;
   margin-bottom: 3.5rem;
-  color: #0F172A;
+  color: #2150bd;
   position: relative;
 }
 .highlight {
@@ -621,7 +621,7 @@ body {
   max-width: 100%;
   margin: 0 auto;
   position: relative;
-  background: linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0a1628 100%);
+  background: linear-gradient(135deg, #d1f4ff 0%, #3b8fc0 50%, #d1f4ff 100%);
 }
 
 .certsSection::before {
