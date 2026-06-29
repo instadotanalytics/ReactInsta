@@ -8,7 +8,7 @@
  *   <CareerTrack />
  */
 
-import styles from "./CareerTrack.module.css";
+import styles from "./";
 
 /* ─────────────────────────────────────────────────────────────────
    Data

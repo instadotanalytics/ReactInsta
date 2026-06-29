@@ -311,22 +311,29 @@
   }
   .heroSection {
     height: auto;
-    min-height: 580px; /* adjust */
+    min-height: auto; /* adjust */
+    padding: 24px 0 28px;
   }
   .heroInner {
-    padding-top: 18px;
+    padding-top: 0;
   }
+  .heroTitle {
+    margin-bottom: 10px;
+  }
+
   .cardsStage {
-    flex: 0;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    flex: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin: 0;
   }
+
   .heroDesc {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
   .featureRow {
-    margin-bottom: 4px;
+    margin-bottom: 18px;
   }
   .card0,
   .card1,
@@ -368,7 +375,7 @@
   }
   .coursePills {
     gap: 7px;
-    padding: 10px 12px 12px;
+    padding: 0 12px;
   }
   .coursePill {
     padding: 8px 14px;
@@ -384,8 +391,13 @@
 }
 
 @media (max-width: 480px) {
+  .heroSection {
+    padding: 18px 0 24px;
+  }
   .heroTitle {
     font-size: 1.55rem;
+    line-height:1.15;
+    margin-bottom:8px;
   }
 
   /* ── Show all 4 cards with reduced sizes ── */
@@ -393,8 +405,8 @@
   .card1,
   .card2,
   .card3 {
-    width: 110px;
-    height: 145px;
+    width: 130px;
+    height: 170px;
   }
 
   .floatingCard {
@@ -406,32 +418,32 @@
   }
 
   .card0 {
-    transform: rotate(-4deg) translateY(-10px);
+    transform: rotate(-4deg) translateY(-4px);
   }
   .card0:hover {
     transform: rotate(-4deg) translateY(-16px);
   }
   .card1 {
-    transform: rotate(2deg) translateY(12px);
+    transform: rotate(2deg) translateY(6px);
   }
   .card1:hover {
     transform: rotate(2deg) translateY(6px);
   }
   .card2 {
-    transform: rotate(-2deg) translateY(-8px);
+    transform: rotate(-2deg) translateY(-4px);
   }
   .card2:hover {
     transform: rotate(-2deg) translateY(-14px);
   }
   .card3 {
-    transform: rotate(4deg) translateY(10px);
+    transform: rotate(4deg) translateY(6px);
   }
   .card3:hover {
     transform: rotate(4deg) translateY(4px);
   }
 
   .heroInner {
-    padding-top: 20px;
+    padding-top: 8px;
   }
 
   .cardsStage {
@@ -442,14 +454,14 @@
   /* ── Course pills in a line ── */
   .coursePills {
     gap: 6px;
-    padding-top: 4px;
+    padding-top: 12px 12px 0;
     justify-content: flex-start;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
   .coursePill {
-    padding: 6px 12px;
+    padding: 12px 12px 0;
     font-size: 10px;
     gap: 6px;
     border-radius: 8px;
@@ -463,15 +475,16 @@
   /* ── Feature badges in a line ── */
   .featureRow {
     gap: 5px;
-    justify-content: flex-start;
+    justify-content: center;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding: 2px 0;
+    padding-inline:16px;
   }
 
   .featureBadge {
-    font-size: 9px;
-    padding: 3px 10px;
+    font-size: 11px;
+    padding: 7px 14px;
     gap: 4px;
     border-radius: 20px;
     flex-shrink: 0;
@@ -482,11 +495,21 @@
   }
 
   .heroDesc {
-    font-size: 11px;
-    margin-bottom: 10px;
+    max-width:320px;
+    font-size:13px;
+    margin-bottom:14px;
   }
 
-  
+  .featureRow::-webkit-scrollbar,
+  .coursePills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .featureRow,
+  .coursePills {
+    -ms-overflow-style:none;
+    scrollbar-width: none;
+  }
 }
 
 /* Even smaller screens */
@@ -495,12 +518,12 @@
   .card1,
   .card2,
   .card3 {
-    width: 64px;
-    height: 82px;
+    width: 125px;
+    height: 165px;
   }
 
   .floatingCard {
-    margin-left: -10px;
+    margin-left: -28px;
     outline-width: 2px;
     border-radius: 12px;
   }
