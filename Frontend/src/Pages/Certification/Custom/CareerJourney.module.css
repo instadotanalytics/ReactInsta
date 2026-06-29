@@ -57,7 +57,7 @@
     font-size: 42px;
     font-weight: 800;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 60%, #6d28d9 100%);
+    background: linear-gradient(135deg, #69a3f0 0%, #3f76ee 60%, #3d28d9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -271,7 +271,7 @@
     font-size: 17px;
     margin-bottom: 5px;
     font-weight: 700;
-    color: #0f172a;
+    color: #266df3;
     letter-spacing: -0.01em;
 }
 

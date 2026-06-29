@@ -70,20 +70,20 @@
 .heroContent {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.3rem;
 }
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
+  font-size: 0.80rem;
   font-weight: 600;
   color: #3b82f6;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   background: rgba(59, 130, 246, 0.08);
-  padding: 0.4rem 1rem;
+  padding: 0.3rem 1rem;
   border-radius: 50px;
   width: fit-content;
   border: 1px solid rgba(59, 130, 246, 0.1);
@@ -104,7 +104,7 @@
 }
 
 .heroTitle {
-  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-size: clamp(2.3rem, 4.5vw, 3.8rem);
   font-weight: 800;
   line-height: 1.1;
   color: #0f172a;
@@ -112,7 +112,7 @@
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #3b82f6, #7c3aed, #8b5cf6);
+  background: linear-gradient(135deg, #5596ff, #3a90ed, #246cdf);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -177,9 +177,9 @@
 }
 
 .statNumber {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  background: linear-gradient(135deg, #2e8ad6, #205ec2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -14,9 +14,10 @@ import {
 import Header from '../../../components/Header/Header';
 import Footer from '../../../components/Footer/Footer';
 import AboutAWSCertificate from './AboutAWScetificate';
-import AWSProjects from "./AWSProjects";
+
 import CertificationApplyForm from "../../CertificationApplyForm";
 import AwsCloudSection from './AwsCloudSection';
+import Awsprojects from './Awsprojects'; 
 // import Companypartners from "../../Courses/Companypartners";
 // import ReviewSection from "../../ReviewSection";
 
@@ -189,7 +190,7 @@ const AWS = () => {
       <AboutAWSCertificate />
       
       {/* <Companypartners /> */}
-      <AWSProjects />
+      <Awsprojects />
       <AwsCloudSection />
       {/* <ReviewSection /> */}
       <CertificationApplyForm />

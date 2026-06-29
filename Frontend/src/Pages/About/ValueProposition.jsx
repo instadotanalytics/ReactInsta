@@ -307,7 +307,7 @@ const ValueProposition = () => {
         {/* Header */}
         <div className={`${styles.header} ${isVisible ? styles.animateHeader : ''}`}>
           <div className={styles.badgeWrapper}>
-            <span className={styles.badge}>✦ Why Choose Us</span>
+            <span className={styles.badge}>Why Choose Us</span>
           </div>
           <h2 className={styles.title}>
             Transform Your Career With
