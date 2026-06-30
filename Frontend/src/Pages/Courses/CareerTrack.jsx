@@ -100,21 +100,21 @@ const FEATURE_CARDS = [
   {
     icon: <FaUserTie />,
     title: "Expert Mentors",
-    desc: "Industry veterans guiding your journey from classroom to career.",
+    desc: "Industry veterans guiding your career growth journey.",
   },
   {
     icon: <FaTools />,
     title: "Real Projects",
-    desc: "Build a portfolio with real-world enterprise projects.",
+    desc: "Real-world enterprise projects to build your Portfolio.",
   },
   {
     icon: <FaShieldAlt />,
     title: "Career Support",
-    desc: "Resume reviews, interview  and continuous guidance.",
+    desc: "Resume reviews with interview preparation and guidance.",
   },
   {
     icon: <FaBriefcase />,
-    title: "Placement Assistance",
+    title: "Job Support",
     desc: "Job referrals, mock interviews and hiring support.",
   },
 ];
