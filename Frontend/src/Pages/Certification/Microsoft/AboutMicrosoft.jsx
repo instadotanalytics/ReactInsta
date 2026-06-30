@@ -49,12 +49,11 @@ const AboutMicrosoft = () => {
         {/* ================= TECHNOLOGIES ================= */}
         <div className={styles.techSection}>
           <div className={styles.techCard}>
-            <div className={styles.azureIcon}>
+            <div className={styles.iconWrap}>
               <svg
                 viewBox="0 0 96 96"
                 xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
+                className={styles.svgIcon}
               >
                 <defs>
                   <linearGradient
@@ -116,17 +115,18 @@ const AboutMicrosoft = () => {
           </div>
 
           <div className={styles.techCard}>
-            <PiBrainBold className={`${styles.techIcon} ${styles.aiIcon}`} />
+            <div className={styles.iconWrap}>
+              <PiBrainBold className={styles.techIcon} />
+            </div>
             <h3>AI</h3>
           </div>
 
           <div className={styles.techCard}>
-            <div className={styles.powerBiIcon}>
+            <div className={styles.iconWrap}>
               <svg
                 viewBox="0 0 58 58"
                 xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
+                className={styles.svgIcon}
               >
                 <rect
                   x="6"
@@ -158,8 +158,8 @@ const AboutMicrosoft = () => {
           </div>
 
           <div className={styles.techCard}>
-            <div className={styles.securityIcon}>
-              <BsShieldCheck className={styles.shieldIcon} />
+            <div className={styles.iconWrap}>
+              <BsShieldCheck className={styles.techIcon} />
             </div>
             <h3>Security</h3>
           </div>
@@ -171,7 +171,7 @@ const AboutMicrosoft = () => {
             <div className={styles.featureIconWrap}>
               <FaChalkboardTeacher className={styles.featureIcon} />
             </div>
-            <div>
+            <div className={styles.featureText}>
               <h4>Live Training</h4>
               <p>Learn from industry experts</p>
             </div>
@@ -181,7 +181,7 @@ const AboutMicrosoft = () => {
             <div className={styles.featureIconWrap}>
               <FaFlask className={styles.featureIcon} />
             </div>
-            <div>
+            <div className={styles.featureText}>
               <h4>Hands-on Labs</h4>
               <p>Practice with real-time scenarios</p>
             </div>
@@ -191,7 +191,7 @@ const AboutMicrosoft = () => {
             <div className={styles.featureIconWrap}>
               <FaAward className={styles.featureIcon} />
             </div>
-            <div>
+            <div className={styles.featureText}>
               <h4>Certification</h4>
               <p>Get certified &amp; boost your career</p>
             </div>
@@ -201,7 +201,7 @@ const AboutMicrosoft = () => {
             <div className={styles.featureIconWrap}>
               <FaBriefcase className={styles.featureIcon} />
             </div>
-            <div>
+            <div className={styles.featureText}>
               <h4>Placement</h4>
               <p>Get career support &amp; job assistance</p>
             </div>

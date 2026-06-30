@@ -1,11 +1,25 @@
 /* ============================
    ABOUT MICROSOFT SECTION
+   Mobile-first, premium Azure-inspired UI
 ============================ */
 
 .aboutSection {
+  --ms-blue: #1565c0;
+  --ms-blue-dark: #0d47a1;
+  --ms-navy: #071b46;
+  --ms-bg: #eef5fc;
+  --ms-surface: #ffffff;
+  --ms-surface-glass: rgba(255, 255, 255, 0.7);
+  --ms-border: rgba(15, 45, 90, 0.08);
+  --ms-text-muted: #5b677a;
+  --ms-radius-lg: 20px;
+  --ms-radius-md: 16px;
+  --ms-shadow-soft: 0 8px 24px rgba(15, 45, 90, 0.08);
+  --ms-shadow-hover: 0 14px 34px rgba(21, 101, 192, 0.16);
+
   width: 100%;
-  background: #eef5fc;
-  padding: 50px 0 70px;
+  background: var(--ms-bg);
+  padding: 36px 0 56px;
   overflow: hidden;
   position: relative;
 }
@@ -13,7 +27,7 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 /* ============================
@@ -21,60 +35,58 @@
 ============================ */
 .heroSection {
   display: grid;
-  grid-template-columns: 46% 54%;
-  min-height: 520px;
+  grid-template-columns: 1fr;
+  min-height: auto;
   background: #dceefb;
   overflow: hidden;
-  align-items: stretch;
   position: relative;
-  border-radius: 20px;
+  border-radius: var(--ms-radius-md);
 }
 
 .heroSection::after {
   content: "";
   position: absolute;
-  left: 20px;
-  top: 20px;
-  width: 200px;
-  height: 200px;
+  left: 16px;
+  top: 16px;
+  width: 140px;
+  height: 140px;
   background-image: radial-gradient(#9cc8ff 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
+  background-size: 12px 12px;
   opacity: 0.6;
   pointer-events: none;
 }
 
-/* ============================
-   LEFT CONTENT
-============================ */
 .leftContent {
-  padding: 60px 40px 60px 64px;
+  padding: 32px 20px 28px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   position: relative;
   z-index: 2;
+  order: 2;
 }
 
 .leftContent h1 {
-  font-size: clamp(26px, 3vw, 38px);
+  font-size: clamp(22px, 5.5vw, 38px);
   font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
-  margin-bottom: 18px;
-  color: #071b46;
+  line-height: 1.18;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: var(--ms-navy);
 }
 
 .leftContent h1 span {
   display: block;
-  font-size: clamp(34px, 5vw, 58px);
+  font-size: clamp(28px, 7vw, 58px);
   font-weight: 800;
-  line-height: 1.1;
-  color: #071b46;
+  line-height: 1.12;
+  color: var(--ms-navy);
 }
 
 .leftContent p {
-  font-size: clamp(15px, 1.6vw, 19px);
+  font-size: clamp(14px, 2.6vw, 19px);
   line-height: 1.6;
   max-width: 480px;
   color: #344054;
@@ -82,16 +94,12 @@
   font-weight: 400;
 }
 
-/* ============================
-   RIGHT IMAGE
-============================ */
 .rightContent {
-  height: 100%;
-  min-height: 320px;
+  width: 100%;
+  height: 220px;
   overflow: hidden;
   display: flex;
-  align-items: stretch;
-  justify-content: flex-end;
+  order: 1;
   position: relative;
 }
 
@@ -110,173 +118,139 @@
 
 /* ============================
    TECHNOLOGIES SECTION
+   compact glassmorphism grid
 ============================ */
 .techSection {
-  width: 92%;
-  margin: -24px auto 0;
+  width: 100%;
+  margin: 16px auto 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   position: relative;
   z-index: 20;
 }
 
 .techCard {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  height: 140px;
-  background: #fff;
-  padding: 16px;
-  border-right: 1px solid #edf2f7;
+  justify-content: flex-start;
+  gap: 12px;
+  height: 100%;
+  min-height: 76px;
+  background: linear-gradient(
+    160deg,
+    var(--ms-surface-glass),
+    rgba(238, 245, 252, 0.6)
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-md);
+  box-shadow: var(--ms-shadow-soft);
+  padding: 12px 14px;
   position: relative;
   cursor: pointer;
-  transition: 0.25s;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
   overflow: hidden;
 }
 
-.techCard:last-child {
-  border-right: none;
+.techCard:hover,
+.techCard:focus-visible {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: var(--ms-shadow-hover);
 }
 
-.techCard:hover {
-  background: #f7fbff;
-  transform: translateY(-4px);
-}
-
-.azureIcon,
-.powerBiIcon,
-.securityIcon {
-  margin-bottom: 10px;
+.iconWrap {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0 0 0 1px var(--ms-border);
 }
 
-.aiIcon {
-  font-size: 44px;
-  color: #1565c0;
-  margin-bottom: 10px;
+.svgIcon {
+  width: 24px;
+  height: 24px;
 }
 
-.shieldIcon {
-  font-size: 44px;
-  color: #1565c0;
+.techIcon {
+  font-size: 22px;
+  color: var(--ms-blue);
 }
 
 .techCard h3 {
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: clamp(13px, 3.2vw, 18px);
   font-weight: 800;
   color: #1e293b;
   margin: 0;
-  text-align: center;
+  text-align: left;
+  line-height: 1.2;
 }
 
 .techCard::after {
   content: "";
   position: absolute;
-  width: 120px;
-  height: 220px;
-  background: rgba(255, 255, 255, 0.18);
-  top: -70px;
-  left: -140px;
+  width: 90px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.25);
+  top: -50px;
+  left: -120px;
   transform: rotate(25deg);
-  transition: 0.8s;
+  transition: 0.7s;
+  pointer-events: none;
 }
 
 .techCard:hover::after {
   left: 130%;
 }
 
-.techCard:nth-child(1) {
-  animation: floatOne 4s ease-in-out infinite;
-}
-.techCard:nth-child(2) {
-  animation: floatTwo 4.5s ease-in-out infinite;
-}
-.techCard:nth-child(3) {
-  animation: floatThree 5s ease-in-out infinite;
-}
-.techCard:nth-child(4) {
-  animation: floatFour 4.3s ease-in-out infinite;
-}
-
-@keyframes floatOne {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-@keyframes floatTwo {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-7px);
-  }
-}
-@keyframes floatThree {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-@keyframes floatFour {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
 /* ============================
    FEATURE SECTION
+   compact glassmorphism grid
 ============================ */
 .featureSection {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 20px;
-  background: #fff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .featureCard {
-  background: #fff;
-  padding: 28px 22px;
-  border-right: 1px solid #e8edf4;
+  background: linear-gradient(160deg, var(--ms-surface), #f7fbff);
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-md);
+  box-shadow: var(--ms-shadow-soft);
+  padding: 14px;
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
-  transition: all 0.3s ease;
+  gap: 10px;
+  height: 100%;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
   overflow: hidden;
 }
 
-.featureCard:last-child {
-  border-right: none;
+.featureCard:hover,
+.featureCard:focus-visible {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: var(--ms-shadow-hover);
 }
 
 .featureIconWrap {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #eef4fb;
-  border: 2px solid #d0e4f5;
+  border: 1px solid #d0e4f5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,19 +259,14 @@
 }
 
 .featureIcon {
-  font-size: 19px;
-  color: #1565c0;
+  font-size: 16px;
+  color: var(--ms-blue);
   transition: 0.3s;
 }
 
-.featureCard:hover {
-  box-shadow: 0 8px 32px rgba(21, 101, 192, 0.12);
-  z-index: 2;
-}
-
 .featureCard:hover .featureIconWrap {
-  background: #1565c0;
-  border-color: #1565c0;
+  background: var(--ms-blue);
+  border-color: var(--ms-blue);
   transform: scale(1.08);
 }
 
@@ -305,175 +274,204 @@
   color: #fff;
 }
 
+.featureText {
+  min-width: 0;
+}
+
 .featureCard h4 {
-  font-size: clamp(15px, 1.6vw, 18px);
+  font-size: clamp(13px, 3vw, 18px);
   font-weight: 700;
   color: #111827;
-  margin: 0 0 4px 0;
+  margin: 0 0 2px 0;
+  line-height: 1.25;
 }
 
 .featureCard p {
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: #6b7280;
+  font-size: clamp(11px, 2.4vw, 14px);
+  line-height: 1.4;
+  color: var(--ms-text-muted);
   margin: 0;
 }
 
-.featureCard:nth-child(1) {
-  animation: featureFloat1 5s ease-in-out infinite;
-}
-.featureCard:nth-child(2) {
-  animation: featureFloat2 6s ease-in-out infinite;
-}
-.featureCard:nth-child(3) {
-  animation: featureFloat3 5.5s ease-in-out infinite;
-}
-.featureCard:nth-child(4) {
-  animation: featureFloat4 6.2s ease-in-out infinite;
+/* ============================
+   RESPONSIVE — TABLET AND UP
+============================ */
+@media (min-width: 600px) {
+  .aboutSection {
+    padding: 44px 0 64px;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .heroSection {
+    border-radius: var(--ms-radius-lg);
+  }
+
+  .leftContent {
+    padding: 44px 32px;
+  }
+
+  .rightContent {
+    height: 300px;
+  }
+
+  .techSection,
+  .featureSection {
+    gap: 14px;
+  }
+
+  .techCard {
+    min-height: 130px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 16px;
+  }
+
+  .techCard h3 {
+    text-align: center;
+  }
+
+  .iconWrap {
+    width: 52px;
+    height: 52px;
+  }
+
+  .svgIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .techIcon {
+    font-size: 28px;
+  }
+
+  .featureCard {
+    padding: 20px 18px;
+  }
 }
 
-@keyframes featureFloat1 {
-  0%,
-  100% {
-    transform: translateY(0);
+@media (min-width: 992px) {
+  .heroSection {
+    grid-template-columns: 46% 54%;
+    min-height: 520px;
   }
-  50% {
-    transform: translateY(-4px);
+
+  .heroSection::after {
+    left: 20px;
+    top: 20px;
+    width: 200px;
+    height: 200px;
+    background-size: 14px 14px;
+  }
+
+  .leftContent {
+    order: 1;
+    align-items: flex-start;
+    text-align: left;
+    padding: 60px 40px 60px 64px;
+  }
+
+  .leftContent p {
+    max-width: 480px;
+  }
+
+  .rightContent {
+    order: 2;
+    height: 100%;
+    min-height: 320px;
+    justify-content: flex-end;
+  }
+
+  .techSection {
+    width: 92%;
+    margin: -24px auto 0;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--ms-surface);
+    border-radius: var(--ms-radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    gap: 0;
+  }
+
+  .techCard {
+    border-radius: 0;
+    border-right: 1px solid #edf2f7;
+    box-shadow: none;
+    background: var(--ms-surface);
+    min-height: 150px;
+  }
+
+  .techCard:last-child {
+    border-right: none;
+  }
+
+  .techCard:hover {
+    background: #f7fbff;
+    transform: translateY(-4px) scale(1);
+    box-shadow: none;
+  }
+
+  .featureSection {
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--ms-surface);
+    border-radius: var(--ms-radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    gap: 0;
+    margin-top: 20px;
+  }
+
+  .featureCard {
+    border-radius: 0;
+    border-right: 1px solid #e8edf4;
+    box-shadow: none;
+    gap: 16px;
+  }
+
+  .featureCard:last-child {
+    border-right: none;
+  }
+
+  .featureCard:hover {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 8px 32px rgba(21, 101, 192, 0.12);
+    z-index: 2;
+  }
+
+  /* subtle float ambience reserved for desktop only */
+  .techCard:nth-child(1) {
+    animation: floatY 4s ease-in-out infinite;
+  }
+  .techCard:nth-child(2) {
+    animation: floatY 4.5s ease-in-out infinite;
+  }
+  .techCard:nth-child(3) {
+    animation: floatY 5s ease-in-out infinite;
+  }
+  .techCard:nth-child(4) {
+    animation: floatY 4.3s ease-in-out infinite;
   }
 }
-@keyframes featureFloat2 {
+
+@keyframes floatY {
   0%,
   100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-@keyframes featureFloat3 {
-  0%,
-  100% {
-    transform: translateY(0);
+    transform: translateY(0px);
   }
   50% {
     transform: translateY(-5px);
   }
 }
-@keyframes featureFloat4 {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-7px);
-  }
-}
 
-/* ============================
-   RESPONSIVE
-============================ */
-@media (max-width: 1200px) {
-  .leftContent {
-    padding: 48px 30px 48px 44px;
-  }
-}
-
-@media (max-width: 992px) {
-  .heroSection {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    border-radius: 16px;
-  }
-  .leftContent {
-    padding: 40px 28px;
-    order: 2;
-    align-items: center;
-    text-align: center;
-  }
-  .leftContent p {
-    max-width: 100%;
-  }
-  .rightContent {
-    height: 320px;
-    min-height: 0;
-    order: 1;
-  }
-  .techSection,
-  .featureSection {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .techCard:nth-child(2) {
-    border-right: 1px solid #edf2f7;
-  }
-  .techCard:nth-child(3),
-  .techCard:nth-child(4) {
-    border-right: none;
-    border-top: 1px solid #edf2f7;
-  }
-  .techCard:nth-child(3) {
-    border-right: 1px solid #edf2f7;
-  }
-  .featureCard:nth-child(2) {
-    border-right: 1px solid #e8edf4;
-  }
-  .featureCard:nth-child(3),
-  .featureCard:nth-child(4) {
-    border-top: 1px solid #e8edf4;
-    border-right: none;
-  }
-  .featureCard:nth-child(3) {
-    border-right: 1px solid #e8edf4;
-  }
-}
-
-@media (max-width: 768px) {
-  .aboutSection {
-    padding: 36px 0;
-  }
-  .container {
-    padding: 0 16px;
-  }
-  .featureCard {
-    padding: 22px 18px;
-  }
-  .rightContent {
-    height: 260px;
-  }
-}
-
-@media (max-width: 480px) {
-  .techSection,
-  .featureSection {
-    grid-template-columns: 1fr;
-  }
-  .techCard {
-    border-right: none !important;
-    border-bottom: 1px solid #edf2f7;
-    height: 110px;
-    flex-direction: row;
-    gap: 14px;
-  }
-  .techCard:last-child {
-    border-bottom: none;
-  }
-  .azureIcon,
-  .powerBiIcon,
-  .securityIcon,
-  .aiIcon {
-    margin-bottom: 0;
-  }
-  .featureCard {
-    border-right: none !important;
-    border-bottom: 1px solid #e8edf4;
-    padding: 20px 16px;
-  }
-  .featureCard:last-child {
-    border-bottom: none;
-  }
-  .rightContent {
-    height: 200px;
-  }
-  .leftContent {
-    padding: 32px 18px;
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .techCard,
+  .featureCard,
+  .heroImage {
+    animation: none !important;
+    transition: none !important;
   }
 }
