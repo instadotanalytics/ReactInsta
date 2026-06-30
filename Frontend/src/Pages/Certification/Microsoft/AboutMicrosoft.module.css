@@ -1,4 +1,3 @@
-
 /* ============================
    ABOUT MICROSOFT SECTION
 ============================ */
@@ -6,7 +5,7 @@
 .aboutSection {
   width: 100%;
   background: #eef5fc;
-  padding: 60px 0 80px;
+  padding: 50px 0 70px;
   overflow: hidden;
   position: relative;
 }
@@ -14,7 +13,7 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 24px;
 }
 
 /* ============================
@@ -23,7 +22,7 @@
 .heroSection {
   display: grid;
   grid-template-columns: 46% 54%;
-  min-height: 580px;
+  min-height: 520px;
   background: #dceefb;
   overflow: hidden;
   align-items: stretch;
@@ -38,7 +37,7 @@
   top: 20px;
   width: 200px;
   height: 200px;
-  background-image: radial-gradient(#9CC8FF 1.5px, transparent 1.5px);
+  background-image: radial-gradient(#9cc8ff 1.5px, transparent 1.5px);
   background-size: 14px 14px;
   opacity: 0.6;
   pointer-events: none;
@@ -48,8 +47,7 @@
    LEFT CONTENT
 ============================ */
 .leftContent {
-  padding: 70px 40px 70px 70px;
-  background: transparent;
+  padding: 60px 40px 60px 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,88 +57,37 @@
 }
 
 .leftContent h1 {
-  font-size: 38px;
+  font-size: clamp(26px, 3vw, 38px);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.5px;
-  margin-bottom: 22px;
-  color: #071B46;
+  margin-bottom: 18px;
+  color: #071b46;
 }
 
 .leftContent h1 span {
   display: block;
-  font-size: 60px;
+  font-size: clamp(34px, 5vw, 58px);
   font-weight: 800;
   line-height: 1.1;
-  color: #071B46;
+  color: #071b46;
 }
 
 .leftContent p {
-  font-size: 19px;
-  line-height: 1.5;
+  font-size: clamp(15px, 1.6vw, 19px);
+  line-height: 1.6;
   max-width: 480px;
   color: #344054;
-  margin-bottom: 36px;
+  margin: 0;
   font-weight: 400;
-}
-
-/* ============================
-   BUTTONS
-============================ */
-.buttonGroup {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.primaryBtn {
-  height: 54px;
-  padding: 0 30px;
-  font-size: 17px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  background: #1565C0;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.primaryBtn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 36px rgba(21, 101, 192, 0.38);
-  background: #0D47A1;
-}
-
-.secondaryBtn {
-  height: 54px;
-  padding: 0 28px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  color: #1565C0;
-  border: 2px solid #1565C0;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.secondaryBtn:hover {
-  background: #1565C0;
-  color: #fff;
 }
 
 /* ============================
    RIGHT IMAGE
 ============================ */
 .rightContent {
-  height: 580px;
+  height: 100%;
+  min-height: 320px;
   overflow: hidden;
   display: flex;
   align-items: stretch;
@@ -154,6 +101,11 @@
   object-fit: cover;
   object-position: center;
   display: block;
+  transition: transform 0.6s ease;
+}
+
+.heroSection:hover .heroImage {
+  transform: scale(1.04);
 }
 
 /* ============================
@@ -165,7 +117,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: #fff;
-  border-radius: 20px;
+  border-radius: 18px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   position: relative;
@@ -177,10 +129,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 150px;
+  height: 140px;
   background: #fff;
-  padding: 20px;
-  border-right: 1px solid #EDF2F7;
+  padding: 16px;
+  border-right: 1px solid #edf2f7;
   position: relative;
   cursor: pointer;
   transition: 0.25s;
@@ -193,52 +145,37 @@
 
 .techCard:hover {
   background: #f7fbff;
+  transform: translateY(-4px);
 }
 
-/* Azure icon */
-.azureIcon {
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* AI icon */
-.aiIcon {
-  font-size: 54px;
-  color: #1565C0;
-  margin-bottom: 14px;
-}
-
-/* Power BI icon */
-.powerBiIcon {
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Security icon */
+.azureIcon,
+.powerBiIcon,
 .securityIcon {
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.aiIcon {
+  font-size: 44px;
+  color: #1565c0;
+  margin-bottom: 10px;
 }
 
 .shieldIcon {
-  font-size: 54px;
-  color: #1565C0;
+  font-size: 44px;
+  color: #1565c0;
 }
 
 .techCard h3 {
-  font-size: 18px;
+  font-size: clamp(14px, 1.6vw, 18px);
   font-weight: 800;
-  color: #1E293B;
+  color: #1e293b;
   margin: 0;
+  text-align: center;
 }
 
-/* Glass shine hover effect */
 .techCard::after {
   content: "";
   position: absolute;
@@ -255,27 +192,54 @@
   left: 130%;
 }
 
-/* Float animations */
-.techCard:nth-child(1) { animation: floatOne 4s ease-in-out infinite; }
-.techCard:nth-child(2) { animation: floatTwo 4.5s ease-in-out infinite; }
-.techCard:nth-child(3) { animation: floatThree 5s ease-in-out infinite; }
-.techCard:nth-child(4) { animation: floatFour 4.3s ease-in-out infinite; }
+.techCard:nth-child(1) {
+  animation: floatOne 4s ease-in-out infinite;
+}
+.techCard:nth-child(2) {
+  animation: floatTwo 4.5s ease-in-out infinite;
+}
+.techCard:nth-child(3) {
+  animation: floatThree 5s ease-in-out infinite;
+}
+.techCard:nth-child(4) {
+  animation: floatFour 4.3s ease-in-out infinite;
+}
 
 @keyframes floatOne {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 @keyframes floatTwo {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-7px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
 }
 @keyframes floatThree {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 @keyframes floatFour {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 /* ============================
@@ -284,23 +248,21 @@
 .featureSection {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: 24px;
+  margin-top: 20px;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-  gap: 0;
 }
 
 .featureCard {
   background: #fff;
-  border: none;
-  padding: 34px 30px;
-  border-right: 1px solid #E8EDF4;
+  padding: 28px 22px;
+  border-right: 1px solid #e8edf4;
   position: relative;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   transition: all 0.3s ease;
   overflow: hidden;
 }
@@ -309,13 +271,12 @@
   border-right: none;
 }
 
-/* Icon wrap — circular outline style matching reference image */
 .featureIconWrap {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: #EEF4FB;
-  border: 2px solid #D0E4F5;
+  background: #eef4fb;
+  border: 2px solid #d0e4f5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -324,20 +285,19 @@
 }
 
 .featureIcon {
-  font-size: 20px;
-  color: #1565C0;
+  font-size: 19px;
+  color: #1565c0;
   transition: 0.3s;
 }
 
-/* Hover effects */
 .featureCard:hover {
   box-shadow: 0 8px 32px rgba(21, 101, 192, 0.12);
   z-index: 2;
 }
 
 .featureCard:hover .featureIconWrap {
-  background: #1565C0;
-  border-color: #1565C0;
+  background: #1565c0;
+  border-color: #1565c0;
   transform: scale(1.08);
 }
 
@@ -346,104 +306,67 @@
 }
 
 .featureCard h4 {
-  font-size: 18px;
+  font-size: clamp(15px, 1.6vw, 18px);
   font-weight: 700;
   color: #111827;
-  margin: 0 0 6px 0;
+  margin: 0 0 4px 0;
 }
 
 .featureCard p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #6B7280;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #6b7280;
   margin: 0;
 }
 
-/* float animations for feature cards */
-.featureCard:nth-child(1) { animation: featureFloat1 5s ease-in-out infinite; }
-.featureCard:nth-child(2) { animation: featureFloat2 6s ease-in-out infinite; }
-.featureCard:nth-child(3) { animation: featureFloat3 5.5s ease-in-out infinite; }
-.featureCard:nth-child(4) { animation: featureFloat4 6.2s ease-in-out infinite; }
+.featureCard:nth-child(1) {
+  animation: featureFloat1 5s ease-in-out infinite;
+}
+.featureCard:nth-child(2) {
+  animation: featureFloat2 6s ease-in-out infinite;
+}
+.featureCard:nth-child(3) {
+  animation: featureFloat3 5.5s ease-in-out infinite;
+}
+.featureCard:nth-child(4) {
+  animation: featureFloat4 6.2s ease-in-out infinite;
+}
 
 @keyframes featureFloat1 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 @keyframes featureFloat2 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 @keyframes featureFloat3 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 @keyframes featureFloat4 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
-}
-
-/* ============================
-   STATS SECTION
-============================ */
-.statsSection {
-  margin-top: 24px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: linear-gradient(90deg, #0a2a7a, #1445c7);
-  border-radius: 20px;
-  overflow: hidden;
-  gap: 0;
-}
-
-.statCard {
-  background: transparent;
-  border: none;
-  padding: 38px 28px;
-  color: white;
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
-
-.statCard:last-child {
-  border-right: none;
-}
-
-/* Circular icon background */
-.statIconWrap {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.statIcon {
-  font-size: 32px;
-  color: #fff;
-}
-
-/* Trophy gets a gold tint like the reference image */
-.trophyIcon {
-  color: #F2C811;
-}
-
-.statCard h2 {
-  color: white;
-  font-size: 48px;
-  font-weight: 800;
-  margin: 0 0 4px 0;
-  line-height: 1;
-}
-
-.statCard p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
-  margin: 0;
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
 }
 
 /* ============================
@@ -451,10 +374,7 @@
 ============================ */
 @media (max-width: 1200px) {
   .leftContent {
-    padding: 50px 30px 50px 50px;
-  }
-  .leftContent h1 span {
-    font-size: 50px;
+    padding: 48px 30px 48px 44px;
   }
 }
 
@@ -462,21 +382,24 @@
   .heroSection {
     grid-template-columns: 1fr;
     min-height: auto;
+    border-radius: 16px;
   }
   .leftContent {
-    padding: 50px 30px;
+    padding: 40px 28px;
     order: 2;
+    align-items: center;
+    text-align: center;
+  }
+  .leftContent p {
+    max-width: 100%;
   }
   .rightContent {
-    height: 380px;
+    height: 320px;
+    min-height: 0;
     order: 1;
   }
-  .leftContent h1 span {
-    font-size: 44px;
-  }
   .techSection,
-  .featureSection,
-  .statsSection {
+  .featureSection {
     grid-template-columns: repeat(2, 1fr);
   }
   .techCard:nth-child(2) {
@@ -487,85 +410,70 @@
     border-right: none;
     border-top: 1px solid #edf2f7;
   }
+  .techCard:nth-child(3) {
+    border-right: 1px solid #edf2f7;
+  }
   .featureCard:nth-child(2) {
-    border-right: 1px solid #E8EDF4;
+    border-right: 1px solid #e8edf4;
   }
   .featureCard:nth-child(3),
   .featureCard:nth-child(4) {
-    border-top: 1px solid #E8EDF4;
+    border-top: 1px solid #e8edf4;
     border-right: none;
   }
   .featureCard:nth-child(3) {
-    border-right: 1px solid #E8EDF4;
-  }
-  .statCard:nth-child(2) {
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
-  }
-  .statCard:nth-child(3),
-  .statCard:nth-child(4) {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .statCard:nth-child(3) {
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid #e8edf4;
   }
 }
 
 @media (max-width: 768px) {
   .aboutSection {
-    padding: 40px 0;
+    padding: 36px 0;
   }
-  .leftContent h1 {
-    font-size: 28px;
-  }
-  .leftContent h1 span {
-    font-size: 38px;
-  }
-  .leftContent p {
-    font-size: 16px;
-  }
-  .buttonGroup {
-    flex-direction: column;
-    width: 100%;
-  }
-  .primaryBtn,
-  .secondaryBtn {
-    width: 100%;
-    justify-content: center;
-  }
-  .statCard h2 {
-    font-size: 36px;
+  .container {
+    padding: 0 16px;
   }
   .featureCard {
-    padding: 24px 20px;
+    padding: 22px 18px;
+  }
+  .rightContent {
+    height: 260px;
   }
 }
 
 @media (max-width: 480px) {
   .techSection,
-  .featureSection,
-  .statsSection {
+  .featureSection {
     grid-template-columns: 1fr;
   }
   .techCard {
     border-right: none !important;
     border-bottom: 1px solid #edf2f7;
     height: 110px;
+    flex-direction: row;
+    gap: 14px;
   }
-  .techCard:last-child { border-bottom: none; }
+  .techCard:last-child {
+    border-bottom: none;
+  }
+  .azureIcon,
+  .powerBiIcon,
+  .securityIcon,
+  .aiIcon {
+    margin-bottom: 0;
+  }
   .featureCard {
     border-right: none !important;
-    border-bottom: 1px solid #E8EDF4;
+    border-bottom: 1px solid #e8edf4;
+    padding: 20px 16px;
   }
-  .featureCard:last-child { border-bottom: none; }
-  .statCard {
-    border-right: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .statCard:last-child { border-bottom: none; }
-  .leftContent h1 span {
-    font-size: 32px;
+  .featureCard:last-child {
+    border-bottom: none;
   }
   .rightContent {
-    height: 240px;
+    height: 200px;
+  }
+  .leftContent {
+    padding: 32px 18px;
   }
 }
