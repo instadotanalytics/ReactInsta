@@ -66,10 +66,10 @@ const BenefitsRedhat = () => {
       <div className={styles.container}>
 
         {/* ── Top label ── */}
-        <div className={styles.eyebrow}>
+        {/* <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} />
           Why Choose Red Hat
-        </div>
+        </div> */}
 
         {/* ══════════════════════════════════════════
             CONSTELLATION LAYOUT
@@ -143,10 +143,10 @@ const BenefitsRedhat = () => {
           {/* ── CENTER HERO ── */}
           <div className={styles.centerHero}>
             <div className={styles.heroInner}>
-              <div className={styles.heroBadge}>
+              {/* <div className={styles.heroBadge}>
                 <span className={styles.heroBadgeDot} />
                 Enterprise Open Source
-              </div>
+              </div> */}
               <h2 className={styles.heroTitle}>
                 Transform Your<br />
                 <em className={styles.heroAccent}>Business</em> With<br />
@@ -160,10 +160,10 @@ const BenefitsRedhat = () => {
                 <span className={styles.metricNum}>2,000<span className={styles.metricPlus}>+</span></span>
                 <span className={styles.metricLabel}>Certified Technology Partners</span>
               </div>
-              <div className={styles.heroActions}>
+              {/* <div className={styles.heroActions}>
                 <button className={styles.heroCta}>Get Started</button>
                 <button className={styles.heroCtaGhost}>Learn More</button>
-              </div>
+              </div> */}
             </div>
             {/* decorative inner glow */}
             <div className={styles.heroGlow} aria-hidden="true" />

@@ -3,14 +3,20 @@
 /* ─── Hero Section ──────────────────────────────────────── */
 .heroSection {
   position: relative;
-  height: 100vh;            /* Fixed height to prevent scrolling */
+  min-height: 100vh;
+  padding: 90px 0 40px;
+  /* height: 100vh;            Fixed height to prevent scrolling */
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background: #ffffff;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 /* Canvas fills the full section */
@@ -29,12 +35,12 @@
   z-index: 1;
   width: 100%;
   max-width: 780px;
-  padding: 1.5rem 2.5rem;   /* Reduced vertical padding */
+  padding: 1.5rem 2.5rem; /* Reduced vertical padding */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;              /* Tight gap */
+  gap: 0.5rem; /* Tight gap */
   text-align: center;
 }
 
@@ -46,7 +52,7 @@
 }
 
 .awsImage {
-  width: 350px;             /* Increased size */
+  width: 350px; /* Increased size */
   height: auto;
   margin-bottom: -50px;
   display: block;
@@ -54,7 +60,7 @@
   z-index: 2;
   filter: drop-shadow(0 8px 25px rgba(63, 81, 181, 0.15));
   /* transform: translateY(20px);*/
-} 
+}
 
 /* .awsImage:hover {
   transform: translateY(20px) scale(1.05);
@@ -67,14 +73,19 @@
   transform: translate(-50%, -50%);
   width: 130%;
   height: 130%;
-  background: radial-gradient(circle, rgba(63, 81, 181, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(63, 81, 181, 0.08) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
   z-index: 1;
   animation: pulseGlow 3s ease-in-out infinite;
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.6;
   }
@@ -102,8 +113,8 @@
   color: #1a237e;
   border: 1.5px solid #c5cae9;
   border-radius: 100px;
-  padding: 0.35rem 1rem;    /* Slightly smaller padding */
-  font-size: 0.75rem;       /* Slightly smaller font */
+  padding: 0.35rem 1rem; /* Slightly smaller padding */
+  font-size: 0.75rem; /* Slightly smaller font */
   font-weight: 600;
   letter-spacing: 0.01em;
   box-shadow: 0 2px 8px rgba(63, 81, 181, 0.07);
@@ -126,10 +137,10 @@
 .title {
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.08;
   color: #0d1333;
   margin: 0.1rem 0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .highlight {
@@ -139,7 +150,7 @@
 }
 
 .highlight::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 2px;
   left: 0;
@@ -158,6 +169,7 @@
   margin: 0.1rem 0;
   padding-bottom: 20px;
   opacity: 0.9;
+  max-width: 620px;
 }
 
 /* ─── Service Tags ──────────────────────────────────────── */
@@ -202,26 +214,56 @@
 
 /* ─── Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
+  .heroSection {
+    min-height: auto;
+    padding: 90px 0 40px;
+  }
+
   .container {
-    padding: 1rem 1.5rem;
-    gap: 0.4rem;
+    max-width: 360px;
+    padding: 0 18px;
+    gap: 8px;
   }
 
   .awsImage {
-    width: 200px;
+    width: 220px;
+    margin-bottom: -10px;
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.9rem;
+    line-height: 1.1;
+    margin: 4px 0;
   }
 
   .description {
-    font-size: 0.9rem;
+    max-width: 320px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    padding-bottom: 10px;
+  }
+
+  .serviceTags {
+    gap: 8px;
   }
 
   .tag {
     font-size: 0.75rem;
-    padding: 0.35rem 0.85rem;
+    padding: 7px 12px;
+  }
+
+  .partnerRow {
+    gap: 8px;
+    margin-top: 0;
+  }
+
+  .partnerPill {
+    padding: 7px 12px;
+    font-size: 0.72rem;
+  }
+
+  .imageWrapper {
+    margin-bottom: 0;
   }
 }
 
@@ -259,21 +301,21 @@
   .awsImage {
     width: 180px;
   }
-  
+
   .title {
     font-size: 1.8rem;
   }
-  
+
   .container {
     gap: 0.3rem;
     padding: 0.8rem 1.5rem;
   }
-  
+
   .partnerPill {
     padding: 0.25rem 0.8rem;
     font-size: 0.7rem;
   }
-  
+
   .tag {
     padding: 0.3rem 0.8rem;
     font-size: 0.7rem;

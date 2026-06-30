@@ -56,7 +56,7 @@ const AboutRedhat = () => (
 
       {/* ── header ── */}
       <div className={styles.header}>
-        <span className={styles.eyebrow}>Certification Journey</span>
+        {/* <span className={styles.eyebrow}>Certification Journey</span> */}
         <h2 className={styles.title}>Your Red Hat Certification Journey</h2>
         <p className={styles.sub}>
           Progress from Linux fundamentals to enterprise-level automation,

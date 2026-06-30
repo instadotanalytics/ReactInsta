@@ -178,27 +178,27 @@ const FullTimeJob = () => {
         
         {/* Floating decorative elements */}
         <div className={styles.floatingElement1}>
-          <div className={styles.floatingCard}>
-            <FiTrendingUp className={styles.floatingIcon} />
-            <span>Top Companies Hiring</span>
-          </div>
+          {/* <div className={styles.floatingCard}>
+            {/* <FiTrendingUp className={styles.floatingIcon} /> */}
+            {/* <span>Top Companies Hiring</span> */}
+          {/* </div> */} 
         </div>
         <div className={styles.floatingElement2}>
-          <div className={styles.floatingCard}>
+          {/* <div className={styles.floatingCard}>
             <FiMapPin className={styles.floatingIcon} />
             <span>Remote & On-site</span>
-          </div>
+          </div> */}
         </div>
 
         <div className={styles.bannerContainer}>
           {/* Left Content */}
           <div className={styles.left}>
-            <div className={styles.badgeWrapper}>
+            {/* <div className={styles.badgeWrapper}>
               <span className={styles.badge}>
                 <span className={styles.pulse}></span>
                 🚀 1000+ Live Jobs
               </span>
-            </div>
+            </div> */}
 
             <h1 className={styles.title}>
               Find Your Dream

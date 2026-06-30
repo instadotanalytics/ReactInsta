@@ -40,7 +40,7 @@ const Redhat = () => {
 
           {/* Heading block */}
           <div className={styles.topBlock}>
-            <span className={styles.badge}>Red Hat Certification Platform</span>
+            {/* <span className={styles.badge}>Red Hat Certification Platform</span> */}
             <h1 className={styles.heroTitle}>
               Red Hat <span className={styles.heroAccent}>Certifications</span>
             </h1>

@@ -1,18 +1,12 @@
-// FeaturedJobs.jsx — Premium Redesign
+// FeaturedJobs.jsx — Premium Redesign (clean, mobile-responsive)
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import {
-  ArrowRight,
-  MapPin,
   Briefcase,
-  Users,
   CheckCircle,
   Globe,
-  TrendingUp,
   ChevronDown,
   Building2,
-  Star,
-  Clock,
   Sparkles,
 } from "lucide-react";
 import styles from "./FeaturedJobs.module.css";
@@ -39,7 +33,8 @@ const ParticleCanvas = () => {
       a: Math.random() * 0.45 + 0.1,
     });
     resize();
-    for (let i = 0; i < 45; i++) particles.push(mkP());
+    const count = window.innerWidth < 640 ? 22 : 45; // fewer particles on mobile
+    for (let i = 0; i < count; i++) particles.push(mkP());
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p) => {
@@ -56,7 +51,10 @@ const ParticleCanvas = () => {
     };
     draw();
     window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
   return <canvas ref={canvasRef} className={styles.particleCanvas} />;
 };
@@ -82,16 +80,14 @@ const useCounter = (target, duration = 1600, started = false) => {
 const StatCard = ({ icon: Icon, target, suffix, label, colorClass, started }) => {
   const val = useCounter(target, 1600, started);
   const display =
-    target >= 1000
-      ? `${(val / 1000).toFixed(val >= 1000 ? 0 : 1)}K+`
-      : `${val}${suffix}`;
+    target >= 1000 ? `${(val / 1000).toFixed(val >= 1000 ? 0 : 1)}K+` : `${val}${suffix}`;
   return (
     <motion.div
       whileHover={{ y: -5, transition: { type: "spring", stiffness: 300 } }}
       className={`${styles.statCard} ${styles[colorClass]}`}
     >
       <div className={`${styles.statIcon} ${styles[`${colorClass}Icon`]}`}>
-        <Icon size={20} />
+        <Icon size={18} />
       </div>
       <div className={styles.statNum}>{display}</div>
       <div className={styles.statLabel}>{label}</div>
@@ -110,18 +106,18 @@ const SideCard = ({ job }) => (
     </div>
     <div className={styles.sideBody}>
       <span className={`${styles.catTag} ${styles[`cat_${job.color}`]}`}>
-        <MapPin size={10} /> {job.type} · Full-time
+        <Briefcase size={10} /> {job.type} · Full-time
       </span>
       <h3 className={styles.sideTitle}>{job.role}</h3>
-      <p className={styles.sideMeta}>{job.company} · {job.salary} · {job.experience}</p>
+      <p className={styles.sideMeta}>
+        {job.company} · {job.salary} · {job.experience}
+      </p>
       <div className={styles.techRow}>
-        {job.techs.map((t) => <span key={t} className={styles.tech}>{t}</span>)}
-      </div>
-      <div className={styles.cardFooter}>
-        <motion.button whileHover={{ x: 3 }} className={`${styles.applyBtn} ${styles[`applyBtn_${job.color}`]}`}>
-          Apply Now →
-        </motion.button>
-        <span className={styles.ratingBadge}><Star size={11} /> {job.rating}</span>
+        {job.techs.map((t) => (
+          <span key={t} className={styles.tech}>
+            {t}
+          </span>
+        ))}
       </div>
     </div>
   </motion.div>
@@ -144,7 +140,6 @@ const CenterCard = ({ job }) => (
         </div>
       </div>
       <div className={styles.centerOverlay} />
-      <div className={styles.starBadge}><Star size={11} /> {job.rating}</div>
     </div>
     <div className={styles.centerBody}>
       <div className={styles.featuredLabel}>
@@ -153,11 +148,16 @@ const CenterCard = ({ job }) => (
       <h2 className={styles.centerTitle}>{job.role}</h2>
       <p className={styles.centerDesc}>{job.desc}</p>
       <div className={styles.techRow}>
-        {job.techs.map((t) => <span key={t} className={styles.centerTech}>{t}</span>)}
+        {job.techs.map((t) => (
+          <span key={t} className={styles.centerTech}>
+            {t}
+          </span>
+        ))}
       </div>
       <div className={styles.centerActions}>
-        <motion.button whileHover={{ x: 2 }} className={styles.centerApply}>Apply Now →</motion.button>
-        <span className={styles.centerMeta}>{job.type} · {job.salary}</span>
+        <span className={styles.centerMeta}>
+          {job.type} · {job.salary}
+        </span>
       </div>
     </div>
   </motion.div>
@@ -180,27 +180,43 @@ const FeaturedJobs = () => {
   const fade = {
     hidden: { opacity: 0, y: 28 },
     visible: (i = 0) => ({
-      opacity: 1, y: 0,
+      opacity: 1,
+      y: 0,
       transition: { delay: i * 0.12, type: "spring", damping: 22, stiffness: 90 },
     }),
   };
 
   const jobs = [
     {
-      company: "Google", logo: "G", role: "Software Engineer", type: "Remote",
-      salary: "₹28 LPA", experience: "3–5 yrs", rating: "4.8",
-      techs: ["Go", "Kubernetes", "gRPC"], color: "blue",
+      company: "Google",
+      logo: "G",
+      role: "Software Engineer",
+      type: "Remote",
+      salary: "₹28 LPA",
+      experience: "3–5 yrs",
+      techs: ["Go", "Kubernetes", "gRPC"],
+      color: "blue",
     },
     {
-      company: "Microsoft", logo: "M", role: "Frontend Engineer — Design Systems",
-      type: "Hybrid", salary: "₹22 LPA", experience: "2–4 yrs", rating: "4.9",
+      company: "Microsoft",
+      logo: "M",
+      role: "Frontend Engineer — Design Systems",
+      type: "Hybrid",
+      salary: "₹22 LPA",
+      experience: "2–4 yrs",
       desc: "Build the next generation of Fluent UI. Own design tokens and cross-platform consistency across 200M+ users.",
-      techs: ["React", "TypeScript", "Figma", "Azure"], color: "purple",
+      techs: ["React", "TypeScript", "Figma", "Azure"],
+      color: "purple",
     },
     {
-      company: "Amazon", logo: "A", role: "Backend Engineer", type: "On-site",
-      salary: "₹25 LPA", experience: "4–6 yrs", rating: "4.6",
-      techs: ["Java", "AWS", "DynamoDB"], color: "orange",
+      company: "Amazon",
+      logo: "A",
+      role: "Backend Engineer",
+      type: "On-site",
+      salary: "₹25 LPA",
+      experience: "4–6 yrs",
+      techs: ["Java", "AWS", "DynamoDB"],
+      color: "orange",
     },
   ];
 
@@ -221,47 +237,29 @@ const FeaturedJobs = () => {
       <div className={styles.orb3} />
 
       <div className={styles.inner}>
-
-        {/* Badge */}
-        <motion.div custom={0} variants={fade} initial="hidden" animate={controls} className={styles.badgeRow}>
-          <div className={styles.badgePill}>
-            <span className={styles.badgeDot} />
-            Available for work · Open to opportunities
-          </div>
-        </motion.div>
-
         {/* Hero */}
-        <motion.div custom={1} variants={fade} initial="hidden" animate={controls} className={styles.hero}>
-          <div className={styles.heroSub}>
-            <TrendingUp size={13} className={styles.heroSubIcon} />
-            Top companies are hiring now
-          </div>
-          <h1 className={styles.heroTitle}>
-            Land Your<br />
-            <span className={styles.heroGradient}>Dream Job</span>
-          </h1>
+        <motion.div custom={0} variants={fade} initial="hidden" animate={controls} className={styles.hero}>
+          <h1 className={styles.heroTitle}>Land Your Dream Job</h1>
           <p className={styles.heroDesc}>
             Discover thousands of verified full-time opportunities from the world's best companies.
           </p>
-          <div className={styles.heroBtns}>
-            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className={styles.btnPrimary}>
-              Explore Jobs <ArrowRight size={16} />
-            </motion.button>
-            <motion.button whileHover={{ scale: 1.04, borderColor: "#93C5FD" }} whileTap={{ scale: 0.97 }} className={styles.btnSecondary}>
-              Browse Companies
-            </motion.button>
-          </div>
         </motion.div>
 
         {/* Three-card composition */}
-        <motion.div custom={2} variants={fade} initial="hidden" animate={controls} className={styles.composition}>
-          <SideCard job={jobs[0]} />
-          <CenterCard job={jobs[1]} />
-          <SideCard job={jobs[2]} />
+        <motion.div custom={1} variants={fade} initial="hidden" animate={controls} className={styles.composition}>
+          <div className={styles.compositionCenter}>
+            <CenterCard job={jobs[1]} />
+          </div>
+          <div className={styles.compositionSide}>
+            <SideCard job={jobs[0]} />
+          </div>
+          <div className={styles.compositionSide}>
+            <SideCard job={jobs[2]} />
+          </div>
         </motion.div>
 
         {/* Stats */}
-        <motion.div custom={3} variants={fade} initial="hidden" animate={controls} className={styles.statsGrid}>
+        <motion.div custom={2} variants={fade} initial="hidden" animate={controls} className={styles.statsGrid}>
           {stats.map((s) => (
             <StatCard key={s.label} {...s} started={statsStarted} />
           ))}
@@ -269,15 +267,19 @@ const FeaturedJobs = () => {
 
         {/* Scroll hint */}
         <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
           className={styles.scrollHint}
         >
-          <motion.div animate={{ y: [0, 7, 0] }} transition={{ duration: 2, repeat: Infinity }} className={styles.scrollContent}>
-            <span>Scroll to explore</span>
+          <motion.div
+            animate={{ y: [0, 7, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className={styles.scrollContent}
+          >
             <ChevronDown size={14} />
           </motion.div>
         </motion.div>
-
       </div>
     </section>
   );
