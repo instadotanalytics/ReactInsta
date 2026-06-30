@@ -60,6 +60,7 @@ const steps = [
   },
 ];
 
+
 const stats = [
   { icon: <FaUsers />, value: "5000+", label: "Students Trained" },
   { icon: <FaCheckCircle />, value: "98%", label: "Certification Success" },
@@ -67,7 +68,7 @@ const stats = [
   { icon: <FaStar />, value: "4.9/5", label: "Student Rating" },
 ];
 
-const LearningJourney = () => {
+const CallToAction = () => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -116,19 +117,14 @@ const LearningJourney = () => {
           ))}
         </div>
 
-        {/* ── Stats Bar ── */}
-        <div className={styles.statsBar}>
-          {stats.map((s, i) => (
-            <React.Fragment key={s.label}>
-              <div className={styles.statItem}>
-                <span className={styles.statIcon}>{s.icon}</span>
-                <div>
-                  <div className={styles.statValue}>{s.value}</div>
-                  <div className={styles.statLabel}>{s.label}</div>
-                </div>
-              </div>
-              {i < stats.length - 1 && <div className={styles.statDivider} />}
-            </React.Fragment>
+        {/* ── Stats Grid ── */}
+        <div className={styles.statsGrid}>
+          {stats.map((s) => (
+            <div key={s.label} className={styles.statCard}>
+              <span className={styles.statIcon}>{s.icon}</span>
+              <div className={styles.statValue}>{s.value}</div>
+              <div className={styles.statLabel}>{s.label}</div>
+            </div>
           ))}
         </div>
       </div>
@@ -136,4 +132,4 @@ const LearningJourney = () => {
   );
 };
 
-export default LearningJourney;
+export default CallToAction;
