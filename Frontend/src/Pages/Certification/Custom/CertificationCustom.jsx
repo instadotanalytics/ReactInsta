@@ -1,6 +1,64 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './CertificationCustom.module.css';
 
+// React Icons imports
+import { 
+  FiAward, 
+  FiZap, 
+  FiPenTool, 
+  FiLock, 
+  FiTarget, 
+  FiBookOpen, 
+  FiBriefcase, 
+  FiTrendingUp,
+  FiStar,
+  FiCheckCircle,
+  FiUsers,
+  FiGlobe,
+  FiClock,
+  FiCalendar,
+  FiMapPin,
+  FiMessageCircle,
+  FiUser,
+  FiMail
+} from 'react-icons/fi';
+
+import {
+  FaGraduationCap,
+  FaRocket,
+  FaChartLine,
+  FaMedal,
+  FaCertificate,
+  FaStar as FaStarIcon,
+  FaCheckCircle as FaCheckCircleIcon,
+  FaUsers as FaUsersIcon,
+  FaGlobeAmericas,
+  FaClock as FaClockIcon,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaComment,
+  FaUserCircle,
+  FaEnvelope
+} from 'react-icons/fa';
+
+import {
+  MdSchool,
+  MdRocketLaunch,
+  MdTrendingUp as MdTrendingUpIcon,
+  MdEmojiEvents,
+  MdVerified,
+  MdStar as MdStarIcon,
+  MdCheckCircle,
+  MdPeople,
+  MdPublic,
+  MdAccessTime,
+  MdDateRange,
+  MdLocationOn,
+  MdChat,
+  MdPerson,
+  MdEmail
+} from 'react-icons/md';
+
 const CertificationCustom = () => {
   const [activeTab, setActiveTab] = useState('benefits');
   const statsRef = useRef(null);
@@ -63,7 +121,7 @@ const CertificationCustom = () => {
           <div className={styles.heroContent}>
             <span className={styles.eyebrow}>
               <span className={styles.eyebrowDot} />
-              Custom Certificates
+              <FiAward size={14} /> Custom Certificates
             </span>
 
             <h1 className={styles.heroTitle}>
@@ -77,10 +135,10 @@ const CertificationCustom = () => {
             </p>
 
             <div className={styles.featureBadges}>
-              <span>✓ Premium certificate templates</span>
-              <span>✓ Add company logo & branding</span>
-              <span>✓ Digital & print ready formats</span>
-              <span>✓ Bulk certificate generation</span>
+              <span><FiCheckCircle size={12} /> Premium certificate templates</span>
+              <span><FiCheckCircle size={12} /> Add company logo & branding</span>
+              <span><FiCheckCircle size={12} /> Digital & print ready formats</span>
+              <span><FiCheckCircle size={12} /> Bulk certificate generation</span>
             </div>
 
             {/* Stats */}
@@ -131,22 +189,22 @@ const CertificationCustom = () => {
 
         <div className={styles.featuresGrid}>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>🎯</div>
+            <div className={styles.featureIcon}><FiAward size={32} /></div>
             <h3>Premium Quality</h3>
             <p>High-quality paper and printing materials</p>
           </div>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>⚡</div>
+            <div className={styles.featureIcon}><FiZap size={32} /></div>
             <h3>Fast Turnaround</h3>
             <p>24-48 hour delivery for bulk orders</p>
           </div>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>🎨</div>
+            <div className={styles.featureIcon}><FiPenTool size={32} /></div>
             <h3>Custom Designs</h3>
             <p>Fully customizable templates for your brand</p>
           </div>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>🔒</div>
+            <div className={styles.featureIcon}><FiLock size={32} /></div>
             <h3>Secure Verification</h3>
             <p>QR codes and unique IDs for authenticity</p>
           </div>
@@ -171,7 +229,9 @@ const CertificationCustom = () => {
       {/* Certification Journey */}
       <section className={styles.journey}>
         <div className={styles.journeyHeader}>
-          <span className={styles.journeyIcon}>🎓</span>
+          <span className={styles.journeyIcon}>
+            <FaGraduationCap size={40} />
+          </span>
           <h2>Start Your Certification Journey</h2>
           <p>
             Select a program to explore its benefits, curriculum, and career outcomes.
@@ -184,19 +244,19 @@ const CertificationCustom = () => {
               className={`${styles.tab} ${activeTab === 'benefits' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('benefits')}
             >
-              Benefits
+              <FiTarget size={14} /> Benefits
             </button>
             <button
               className={`${styles.tab} ${activeTab === 'curriculum' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('curriculum')}
             >
-              Curriculum
+              <FiBookOpen size={14} /> Curriculum
             </button>
             <button
               className={`${styles.tab} ${activeTab === 'outcomes' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('outcomes')}
             >
-              Career Outcomes
+              <FiTrendingUp size={14} /> Career Outcomes
             </button>
           </div>
 
@@ -214,27 +274,27 @@ const CertificationCustom = () => {
               <div className={styles.curriculumList}>
                 <h4>What You'll Learn</h4>
                 <ul>
-                  <li>✓ Advanced certification design principles</li>
-                  <li>✓ Digital & print production techniques</li>
-                  <li>✓ Brand integration & customization</li>
-                  <li>✓ Quality assurance & verification methods</li>
+                  <li><FiCheckCircle size={16} /> Advanced certification design principles</li>
+                  <li><FiCheckCircle size={16} /> Digital & print production techniques</li>
+                  <li><FiCheckCircle size={16} /> Brand integration & customization</li>
+                  <li><FiCheckCircle size={16} /> Quality assurance & verification methods</li>
                 </ul>
               </div>
             )}
             {activeTab === 'outcomes' && (
               <div className={styles.outcomesGrid}>
                 <div className={styles.outcomeCard}>
-                  <span className={styles.outcomeEmoji}>🚀</span>
+                  <span className={styles.outcomeEmoji}><FaRocket size={32} /></span>
                   <h5>Career Growth</h5>
                   <p>Accelerate your career with recognized certification</p>
                 </div>
                 <div className={styles.outcomeCard}>
-                  <span className={styles.outcomeEmoji}>💼</span>
+                  <span className={styles.outcomeEmoji}><FiBriefcase size={32} /></span>
                   <h5>New Opportunities</h5>
                   <p>Unlock doors to premium job positions</p>
                 </div>
                 <div className={styles.outcomeCard}>
-                  <span className={styles.outcomeEmoji}>📈</span>
+                  <span className={styles.outcomeEmoji}><FaChartLine size={32} /></span>
                   <h5>Higher Earnings</h5>
                   <p>Significantly increase your earning potential</p>
                 </div>
@@ -260,11 +320,17 @@ const CertificationCustom = () => {
             { name: 'Neha Gupta', location: 'Delhi, NCR', text: 'First time joining such a program and I\'m impressed. Customer support responded quickly and professionally.' }
           ].map((testimonial, index) => (
             <div key={index} className={styles.testimonialCard}>
-              <div className={styles.stars}>★★★★★</div>
+              <div className={styles.stars}>
+                <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} />
+              </div>
               <p>"{testimonial.text}"</p>
               <div className={styles.testimonialAuthor}>
-                <strong>{testimonial.name}</strong>
-                <span>{testimonial.location}</span>
+                <strong>
+                  <FiUser size={14} /> {testimonial.name}
+                </strong>
+                <span>
+                  <FiMapPin size={12} /> {testimonial.location}
+                </span>
               </div>
             </div>
           ))}
