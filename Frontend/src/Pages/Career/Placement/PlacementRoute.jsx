@@ -2,12 +2,13 @@ import React from "react";
 import styles from "./PlacementRoute.module.css";
 import Footer from "../../../components/Footer/Footer";
 import Header from "../../../components/Header/Header";
-import Companypartners from "../../Courses/Companypartners";
+// import Companypartners from "../../Courses/Companypartners";
 import ReviewSection from "../../ReviewSection";
 import WhyJoinUS from "../../WhyJoinUS";
 import OurImpact from "../../OurImpact";
 import FAQSection from "../../FAQSection";
 import PlacementList from "../../PlacementList";
+import PlacementMetrics from "./PlacementMetrics";
 
 const PlacementSection = () => {
   return (
@@ -75,7 +76,8 @@ const PlacementSection = () => {
           </div>
         </div>
       </section>
-      <Companypartners />
+      <PlacementMetrics/>
+      {/* <Companypartners /> */}
       <PlacementList />
       <ReviewSection />
       <WhyJoinUS />
