@@ -1,6 +1,6 @@
 /* About.module.css - Light Blue + Very Light Purple Theme */
 .aboutSection {
-  padding: 50px 0 20px;
+  padding: 50px 0px 20px;
   position: relative;
   overflow: hidden;
   width: 100vw;
@@ -317,16 +317,16 @@
 .journeySection {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 5rem;
   align-items: center;
-  margin: 2.5rem 3rem;
+  margin: 2.5rem 4rem;
   height: 90vh;
 }
 
 .journeyContent {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  margin-left: 4px;
 }
 
 .journeyText {
@@ -348,8 +348,8 @@
 }
 
 .badgeIconWrapper {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   display: flex;
   align-items: center;
