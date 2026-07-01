@@ -38,9 +38,9 @@
   z-index: 1;
   display: grid;
   grid-template-columns: 40% 60%;
-  gap: 60px;
-  width: 100%;
-  max-width: 1520px;
+  gap: 48px;
+  width: calc(100% - 48px);
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 60px;
   height: 100%;
@@ -137,7 +137,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 8px;
+  justify-content: center;
+  padding-top: 0;
   flex-shrink: 0;
 }
 
@@ -300,6 +301,12 @@
   position: relative;
   height: 70%;
   max-height: 560px;
+}
+
+.leftContent,
+.rightContent {
+  align-self: center;
+  height: clamp(420px, 68vh, 560px);
 }
 
 .imageContainer {
@@ -529,26 +536,37 @@
     position: relative;
     z-index: 1;
     display: flex;
-    flex-direction: column;
-    padding: 72px 18px;
+    flex-direction: row;
 
-    gap: 28px;
+    overflow-x: auto;
+    overflow-y: hidden;
 
-    max-width: 500px;
+    gap: 20px;
+    padding: 60px 18px 20px;
 
-    margin: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  .mobileCards::-webkit-scrollbar {
+    display: none;
   }
 
   .mobileCard {
-    background: #ffffff;
+    flex: 0 0 72%; /* was 88% */
+    max-width: 280px; /* keeps cards compact */
 
+    scroll-snap-align: center;
+
+    background: #fff;
     border: 1px solid rgba(67, 97, 238, 0.08);
-
-    border-radius: 24px;
-
-    box-shadow: 0 15px 45px rgba(67, 97, 238, 0.08);
-
+    border-radius: 20px;
     overflow: hidden;
+
+    box-shadow: 0 12px 32px rgba(67, 97, 238, 0.08);
+    transition: transform 0.3s ease;
   }
 
   .mobileCard:active,
@@ -586,7 +604,7 @@
   }
 
   .mobileContent {
-    padding: 26px 22px;
+    padding: 16px;
   }
 
   .mobileEyebrow {
@@ -601,16 +619,17 @@
 
   .mobileTitle {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
     font-weight: 700;
     color: #111827;
-    margin: 0 0 12px 0;
+    /* margin: 0 0 12px 0; */
     line-height: 1.25;
   }
 
   .mobileDesc {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.85rem;
+    line-height: 1.55;
     color: #4b5563;
     margin: 0 0 16px 0;
   }
@@ -643,19 +662,30 @@
   .mobileDesc {
     font-size: 0.9rem;
   }
+  .mobileCard {
+    flex: 0 0 84%;
+  }
 }
 
 @media (max-width: 480px) {
   .mobileCards {
-    padding: 40px 16px;
-    gap: 24px;
+    padding: 40px 14px 20px;
+    gap: 14px;
   }
+
+  .mobileCard {
+    flex: 0 0 74%;
+    max-width: 250px;
+  }
+
   .mobileImageWrapper {
-    height: 170px;
+    height: 135px;
   }
+
   .mobileContent {
     padding: 20px 16px;
   }
+
   .mobileTitle {
     font-size: 1.1rem;
   }

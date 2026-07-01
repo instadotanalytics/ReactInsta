@@ -4,16 +4,17 @@
 /* ── CONTAINER ── */
 .mainContainer {
   background: #ffffff;
-  padding: 50px 0 60px;
+  padding: 60px 24px;
   overflow: hidden;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: center;
 }
 
 .contentWrapper {
-  max-width: 1400px;
-  width: 100%;
+  max-width: 1200px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
   position: relative;
 }
 
@@ -63,6 +64,7 @@
   overflow: hidden;
   position: relative;
   padding: 6px 0;
+  width: 100%;
 }
 
 .marqueeWrapper::before,
@@ -434,7 +436,7 @@
 /* ── Small Tablet / Large Mobile (≤ 768px) ── */
 @media (max-width: 768px) {
   .mainContainer {
-    padding: 36px 0 44px;
+    padding:40px 16px;
   }
   .heading {
     font-size: 24px;

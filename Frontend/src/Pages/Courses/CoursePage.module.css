@@ -50,6 +50,14 @@
   pointer-events: none;
 }
 
+.coursesContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
 /* ─── Section Header ─────────────────────────────── */
 .sectionHeader {
   text-align: center;
@@ -112,6 +120,7 @@
 .searchFilterContainer {
   display: flex;
   gap: 12px;
+  width: 100%;
   max-width: 820px;
   margin: 0 auto 28px;
   flex-wrap: wrap;
@@ -206,7 +215,7 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   max-width: 1400px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   position: relative;
 }
 
@@ -587,6 +596,9 @@
 
 /* Mobile: Row by row design */
 @media (max-width: 768px) {
+  .coursesContainer {
+    padding: 0 16px;
+  }
   .coursesSection {
     padding: 56px 20px 64px;
   }
@@ -746,6 +758,9 @@
 
 /* Small mobile */
 @media (max-width: 480px) {
+  .coursesContainer {
+    padding: 0 12px;
+  }
   .coursesSection {
     padding: 44px 16px 52px;
   }
