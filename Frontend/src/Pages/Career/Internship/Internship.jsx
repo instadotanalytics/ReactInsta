@@ -1,63 +1,60 @@
-import React, { useEffect, useCallback } from 'react';
-import styles from './Internship.module.css';
-import { 
+import React, { useEffect } from "react";
+import styles from "./Internship.module.css";
+import {
   FaStar,
   FaBuilding,
   FaUserGraduate,
-  FaRegCalendarAlt
-} from 'react-icons/fa';
-import Header from '../../../components/Header/Header';
-import Footer from '../../../components/Footer/Footer';
-import Companypartners from '../../Courses/Companypartners';
-import InternshipForm from './InternshipForm';
-import ReviewSection from '../../ReviewSection';
-import FAQSection from '../../FAQSection';
-import WhyJoinUS from '../../WhyJoinUS';
-import OurImpact from '../../OurImpact';
+  FaRegCalendarAlt,
+  FaArrowRight,
+  FaThLarge,
+} from "react-icons/fa";
+import Header from "../../../components/Header/Header";
+import Footer from "../../../components/Footer/Footer";
+import Companypartners from "../../Courses/Companypartners";
+import InternshipForm from "./InternshipForm";
+// import ReviewSection from "../../ReviewSection";
+import FAQSection from "../../FAQSection";
+import HowItWorks from "./HowItWorks";
 
-const HERO_IMAGE = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+// import WhyJoinUS from "../../WhyJoinUS";
+// import OurImpact from "../../OurImpact";
 
 const stats = [
-  { icon: <FaBuilding />, value: '50+',  label: 'Partner Companies' },
-  { icon: <FaUserGraduate />, value: '500+', label: 'Interns Placed' },
-  { icon: <FaRegCalendarAlt />, value: '6',    label: 'Programs' },
-  { icon: <FaStar />, value: '4.8', label: 'Rating' },
+  { icon: <FaBuilding />, value: "50+", label: "Partner Companies" },
+  { icon: <FaUserGraduate />, value: "500+", label: "Interns Placed" },
+  { icon: <FaRegCalendarAlt />, value: "6", label: "Programs" },
+  { icon: <FaStar />, value: "4.8", label: "Rating" },
 ];
 
 const scrollTo = (id) => {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
 const Internship = () => {
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
       <Header />
       <div className={styles.internshipPage}>
-
         {/* ── HERO SECTION ── */}
         <section className={styles.heroSection}>
-          {/* full-bleed background image */}
+          {/* light blue gradient + dotted background, no image */}
           <div className={styles.heroBg}>
-            <img
-              src={HERO_IMAGE}
-              alt="Interns collaborating"
-              className={styles.heroBgImg}
-            />
-            {/* layered overlays */}
-            <div className={styles.heroOverlay} />
-            <div className={styles.heroOverlayGradient} />
+            <div className={styles.heroDots} />
           </div>
 
           {/* content */}
           <div className={styles.heroInner}>
-
             {/* headline */}
             <h1 className={styles.heroTitle}>
-              Kickstart Your<br />
-              <span className={styles.heroAccent}>Professional Journey</span>
+              Kickstart Your{" "}
+              <span className={styles.heroAccent}>Professional</span>
+              <br />
+              Journey. <span className={styles.heroAccent}>Powered by AI.</span>
             </h1>
 
             {/* sub-copy */}
@@ -71,11 +68,16 @@ const Internship = () => {
             <div className={styles.heroActions}>
               <button
                 className={styles.ctaPrimary}
-                onClick={() => scrollTo('internship-form')}
+                onClick={() => scrollTo("internship-form")}
               >
-                Start Your Career
+                Start Your Career <FaArrowRight />
               </button>
-              
+              <button
+                className={styles.ctaSecondary}
+                onClick={() => scrollTo("explore-programs")}
+              >
+                <FaThLarge /> Explore Programs
+              </button>
             </div>
 
             {/* stats strip */}
@@ -93,26 +95,28 @@ const Internship = () => {
             <div className={styles.heroCompanies}>
               <span className={styles.companiesLabel}>Our interns work at</span>
               <div className={styles.companiesList}>
-                {['Microsoft', 'Google', 'Amazon', 'Meta', 'Apple'].map((c) => (
-                  <span key={c} className={styles.companyName}>{c}</span>
+                {["Microsoft", "Google", "Amazon", "Meta", "Apple"].map((c) => (
+                  <span key={c} className={styles.companyName}>
+                    {c}
+                  </span>
                 ))}
               </div>
             </div>
           </div>
-
-
         </section>
+        <HowItWorks />
 
         {/* ── REST OF PAGE (unchanged) ── */}
-        <div id="internship-form" style={{ scrollMarginTop: '80px' }}>
+        <div id="internship-form" style={{ scrollMarginTop: "80px" }}>
           <InternshipForm />
         </div>
-        <div id="explore-programs" style={{ scrollMarginTop: '80px' }}>
+        
+        {/* <ReviewSection />
+        <WhyJoinUS />
+        <OurImpact /> */}
+        <div id="explore-programs" style={{ scrollMarginTop: "80px" }}>
           <Companypartners />
         </div>
-        <ReviewSection />
-        <WhyJoinUS />
-        <OurImpact />
         <FAQSection />
         <Footer />
       </div>

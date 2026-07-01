@@ -10,11 +10,8 @@ import {
   FiAward,
   FiTrendingUp,
 } from "react-icons/fi";
-
 import { MdSchool, MdWorkspacePremium } from "react-icons/md";
-
 import { FaAws, FaMicrosoft } from "react-icons/fa";
-
 import { SiRedhat } from "react-icons/si";
 import { FaLaptopCode } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
@@ -61,7 +58,6 @@ const CertificationApplyForm = () => {
     ? certifications.find((c) => c.name === formData.certification)
     : null;
 
-  // ─── Form handlers ────────────────────────────────────────────────
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -114,44 +110,46 @@ const CertificationApplyForm = () => {
       <div className={styles.container}>
         {/* ── LEFT PANEL ── */}
         <div className={styles.left}>
-          <h2>
-            Apply for Your
-            <span> Certification</span>
-          </h2>
+          <div className={styles.leftContent}>
+            <h2>
+              Apply for Your
+              <span> Certification</span>
+            </h2>
 
-          <div className={styles.blueline}></div>
+            <div className={styles.blueline}></div>
 
-          <p className={styles.description}>
-            Take the next step in your professional journey. Choose a program
-            that aligns with your goals and unlock new opportunities.
-          </p>
+            <p className={styles.description}>
+              Take the next step in your professional journey. Choose a program
+              that aligns with your goals and unlock new opportunities.
+            </p>
 
-          <div className={styles.featureList}>
-            <div className={styles.featureItem}>
-              <div className={styles.iconCircle}>
-                <MdWorkspacePremium size={22} />
+            <div className={styles.featureList}>
+              <div className={styles.featureItem}>
+                <div className={styles.iconCircle}>
+                  <MdWorkspacePremium size={22} />
+                </div>
+                <div>
+                  <h4>Industry Recognized</h4>
+                  <p>Globally accepted certifications</p>
+                </div>
               </div>
-              <div>
-                <h4>Industry Recognized</h4>
-                <p>Globally accepted certifications</p>
+              <div className={styles.featureItem}>
+                <div className={styles.iconCircle}>
+                  <MdSchool size={22} />
+                </div>
+                <div>
+                  <h4>Expert Mentors</h4>
+                  <p>Learn from industry professionals</p>
+                </div>
               </div>
-            </div>
-            <div className={styles.featureItem}>
-              <div className={styles.iconCircle}>
-                <MdSchool size={22} />
-              </div>
-              <div>
-                <h4>Expert Mentors</h4>
-                <p>Learn from industry professionals</p>
-              </div>
-            </div>
-            <div className={styles.featureItem}>
-              <div className={styles.iconCircle}>
-                <FiTrendingUp size={20} />
-              </div>
-              <div>
-                <h4>Career Support</h4>
-                <p>Guidance for your career growth</p>
+              <div className={styles.featureItem}>
+                <div className={styles.iconCircle}>
+                  <FiTrendingUp size={20} />
+                </div>
+                <div>
+                  <h4>Career Support</h4>
+                  <p>Guidance for your career growth</p>
+                </div>
               </div>
             </div>
           </div>

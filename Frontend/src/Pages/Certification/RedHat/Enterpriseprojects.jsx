@@ -214,21 +214,7 @@ function ProjectCard({ project, index }) {
         </div>
 
         {/* CTA */}
-        <motion.button
-          className={styles.cta}
-          variants={{ hover: { x: 3 } }}
-          transition={{ type: "spring", stiffness: 300 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          Explore Project
-          <motion.span
-            variants={{ hover: { x: 5 } }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <FaArrowRight className={styles.ctaArrow} />
-          </motion.span>
-        </motion.button>
-      </div>
+        </div>
     </motion.article>
   );
 }
