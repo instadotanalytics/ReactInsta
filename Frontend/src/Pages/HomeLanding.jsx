@@ -160,8 +160,9 @@ export default function HomeLanding() {
 
       <div className={styles.content}>
         <h1 className={styles.title}>
-          Built for <span className={styles.accent}>Scale</span> &amp;
-          <br />
+          Built for <span className={styles.accent}>Scale</span>
+          <span className={styles.mobileBreak}> &amp;</span>
+          <br className={styles.desktopBreak} />
           <span className={styles.noWrap}>
             <span className={styles.accent}>Intelligence.</span> Powered by{" "}
             <span className={styles.accent}>AI.</span>

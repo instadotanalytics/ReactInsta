@@ -180,6 +180,15 @@
   margin-right: auto;
 }
 
+/* Desktop - exactly as it is now */
+.desktopBreak {
+  display: block;
+}
+
+.mobileBreak {
+  display: inline;
+}
+
 .noWrap {
   white-space: nowrap;
 }
@@ -348,6 +357,15 @@
   .noWrap {
     white-space: normal;
   }
+  .desktopBreak {
+    display: none;
+  }
+
+  .mobileBreak::after {
+    content: "";
+    display: block;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -20,7 +20,7 @@ const sections = [
     title: 'Industry-Aligned Curriculum',
     subtitle: 'Built with Industry Experts',
     desc: 'Courses designed with top industry experts. Stay ahead with industry-relevant skills, practical learning experiences, and up-to-date content tailored to employer expectations.',
-    image: '/images/Importancia de la protección de datos y privacidad.jfif',
+    image: '/images/download (4).jfif',
     tag: '02',
   },
   {

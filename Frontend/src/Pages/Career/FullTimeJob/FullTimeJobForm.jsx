@@ -99,7 +99,7 @@ const FullTimeJobForm = () => {
 
         {/* LEFT PANEL */}
         <div className={styles.leftContent}>
-          <span className={styles.badge}>We're hiring</span>
+          {/* <span className={styles.badge}>We're hiring</span> */}
           <h1 className={styles.title}>Build your career with us</h1>
           <p className={styles.description}>
             Join our team and work on projects that matter. We value creativity,

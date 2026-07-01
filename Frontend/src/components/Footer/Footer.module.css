@@ -9,29 +9,36 @@
   --bg-2: #090c11;
   --surface: #0d1119;
   --border: rgba(255, 255, 255, 0.07);
-  --text: #f3f6fa;
-  --muted: #818a97;
+  --text:#111827;
+    --muted:#4b5563;
 }
 
-/* ===== FOOTER BASE ===== */
 .footer {
   position: relative;
+  overflow: hidden;
+  padding-top: 56px;
+
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+
   background:
     radial-gradient(
-      ellipse 600px 320px at 10% 0%,
-      rgba(4, 159, 219, 0.07),
+      ellipse 700px 420px at 15% 0%,
+      rgba(67,97,238,.14),
       transparent 60%
     ),
     radial-gradient(
-      ellipse 500px 300px at 90% 5%,
-      rgba(4, 159, 219, 0.05),
+      ellipse 650px 380px at 100% 10%,
+      rgba(4,159,219,.12),
       transparent 60%
     ),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-  color: var(--muted);
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  overflow: hidden;
-  padding-top: 56px; /* room for the wave */
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8fbff 55%,
+      #edf7ff 100%
+    );
+
+  color: #4b5563;
 }
 
 /* ===== WAVE TOP EDGE ===== */
@@ -42,7 +49,7 @@
   width: 100%;
   height: 56px;
   line-height: 0;
-  color: var(--bg);
+  color:#f8fbff;
   transform: translateY(-1px); /* avoid sub-pixel seam with the section above */
   z-index: 2;
   pointer-events: none;
@@ -100,10 +107,14 @@
   height: 38px;
   width: auto;
   object-fit: contain;
-  background-color: #ffffff;
+  background:#fff;
   padding: 7px 16px;
-  border-radius: 7px;
-  box-shadow: 0 4px 16px rgba(4, 159, 219, 0.15);
+  border-radius:10px;
+
+    border:1px solid rgba(67,97,238,.08);
+
+    box-shadow:
+      0 12px 30px rgba(67,97,238,.08);
 }
 
 .brandDesc {
@@ -143,7 +154,7 @@
 }
 
 .contactIcon {
-  color: var(--accent-lt);
+   color:#4361ee;
   font-size: 12px;
   margin-top: 2px;
   flex-shrink: 0;
@@ -170,7 +181,7 @@
 
 .navLink {
   font-size: 13px;
-  color: var(--muted);
+ color:#374151;
   text-decoration: none;
   transition:
     color 0.2s,
@@ -178,7 +189,7 @@
 }
 
 .navLink:hover {
-  color: var(--accent-lt);
+  color:#4361ee;
   padding-left: 3px;
 }
 
@@ -203,8 +214,11 @@
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
+   background:#ffffff;
+
+    border:1px solid rgba(67,97,238,.12);
+
+    box-shadow:0 8px 20px rgba(67,97,238,.08);
   color: var(--accent-lt);
   font-size: 14px;
   text-decoration: none;
@@ -212,8 +226,9 @@
 }
 
 .socialBtn:hover {
-  border-color: var(--accent);
-  background: rgba(4, 159, 219, 0.1);
+  background:rgba(67,97,238,.05);
+
+    border-color:#4361ee;
   transform: translateY(-2px);
 }
 
@@ -244,7 +259,11 @@
 
 /* ===== BOTTOM BAR ===== */
 .bottomBar {
-  border-top: 1px solid var(--border);
+   border-top:1px solid rgba(67,97,238,.08);
+
+    background:rgba(255,255,255,.45);
+
+    backdrop-filter:blur(12px);
   max-width: 1180px;
   margin: 0 auto;
   padding: 16px 24px;

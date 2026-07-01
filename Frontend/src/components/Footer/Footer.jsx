@@ -144,7 +144,7 @@ const Footer = () => {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(4, 159, 219, ${0.16 * (1 - dist / LINK_DIST)})`;
+            ctx.strokeStyle = `rgba(67,97,238,${0.10 * (1 - dist / LINK_DIST)})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -162,7 +162,7 @@ const Footer = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(92, 200, 240, ${0.3 * (1 - dist / CURSOR_DIST)})`;
+            ctx.strokeStyle = `rgba(67,97,238,${0.18 * (1 - dist / CURSOR_DIST)})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
