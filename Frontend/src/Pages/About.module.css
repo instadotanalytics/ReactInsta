@@ -130,6 +130,7 @@
   min-height: calc(100vh - 120px);
   padding: 2rem 4rem;
   margin-bottom: 2rem;
+  margin-left: 8px;
 }
 
 .heroContent {

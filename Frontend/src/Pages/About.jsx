@@ -117,7 +117,7 @@ const About = () => {
   return (
     <>
       <Header />
-      
+
       <section className={styles.aboutSection} ref={ref}>
         {/* Animated Background Orbs */}
         <div className={styles.orb1}></div>
@@ -128,7 +128,7 @@ const About = () => {
         <div className={styles.container}>
           {/* Hero Section - Full Height */}
           <div className={styles.heroSection}>
-            <motion.div 
+            <motion.div
               className={styles.heroContent}
               initial="hidden"
               animate={controls}
@@ -148,7 +148,7 @@ const About = () => {
                 <span className={styles.badge}>About Us</span>
               </motion.div>
 
-              <motion.h1 
+              <motion.h1
                 className={styles.heroTitle}
                 variants={{
                   hidden: { opacity: 0, y: 30 },
@@ -164,7 +164,7 @@ const About = () => {
 
               <motion.div className={styles.titleUnderline} />
 
-              <motion.p 
+              <motion.p
                 className={styles.heroDescription}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
@@ -181,7 +181,7 @@ const About = () => {
               </motion.p>
 
               {/* Stats Cards */}
-              <motion.div 
+              <motion.div
                 className={styles.statsGrid}
                 variants={{
                   hidden: { opacity: 0 },
@@ -190,8 +190,8 @@ const About = () => {
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
                 {stats.map((stat, index) => (
-                  <motion.div 
-                    key={index} 
+                  <motion.div
+                    key={index}
                     className={styles.statCard}
                     variants={{
                       hidden: { opacity: 0, y: 20 },
@@ -213,7 +213,7 @@ const About = () => {
             </motion.div>
 
             {/* Hero Image */}
-            <motion.div 
+            <motion.div
               className={styles.heroImage}
               initial="hidden"
               animate={controls}
@@ -233,10 +233,10 @@ const About = () => {
             </motion.div>
           </div>
 
-          <ImpactShowcase/>    
+          <ImpactShowcase />
 
           {/* Features Section - Redesigned */}
-          <motion.div 
+          <motion.div
             className={styles.featuresSection}
             initial="hidden"
             animate={controls}
@@ -248,7 +248,7 @@ const About = () => {
           >
             <div className={styles.featuresHeader}>
               <h2 className={styles.sectionTitle}>
-                Upgrade Your Skills with <br/><span className={styles.highlight}>Industry-Focused Training</span>
+                Upgrade Your Skills with <br /><span className={styles.highlight}>Industry-Focused Training</span>
               </h2>
               <p className={styles.sectionSubtitle}>
                 Comprehensive programs designed to make you job-ready
@@ -276,10 +276,10 @@ const About = () => {
             </div>
           </motion.div>
 
-          <ImpactGrid/>
+          <ImpactGrid />
 
           {/* Journey Section */}
-          <motion.div 
+          <motion.div
             className={styles.journeySection}
             initial="hidden"
             animate={controls}
@@ -298,7 +298,7 @@ const About = () => {
                 transition={{ duration: 0.6, delay: 1 }}
               >
                 <span className={styles.sectionBadge}>
-                 Our Journey
+                  Our Journey
                 </span>
                 <h2 className={styles.sectionTitle}>
                   Our Journey for <span className={styles.highlight}>Students Career Growth</span>
@@ -325,7 +325,7 @@ const About = () => {
               </motion.div>
             </div>
 
-            <motion.div 
+            <motion.div
               className={styles.journeyImage}
               variants={{
                 hidden: { opacity: 0, x: 40 },
@@ -343,10 +343,10 @@ const About = () => {
             </motion.div>
           </motion.div>
 
-          <ValueProposition/>
+          <ValueProposition />
 
           {/* Success Stories Section */}
-          <motion.div 
+          <motion.div
             className={styles.successStories}
             initial="hidden"
             animate={controls}
@@ -366,8 +366,8 @@ const About = () => {
 
             <div className={styles.successGrid}>
               {successStories.map((story, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className={styles.successCard}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
@@ -390,7 +390,7 @@ const About = () => {
       </section>
 
       <CareerSection />
-      <ClientTestimonials/>
+      <ClientTestimonials />
       <FAQSection />
       <Footer />
     </>
