@@ -55,7 +55,7 @@
 .hero {
   position: relative;
   z-index: 1;
-  padding: 80px 20px 60px;
+  padding:45px 0px 60px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -63,7 +63,7 @@
 .heroGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 10rem;
   align-items: center;
 }
 
