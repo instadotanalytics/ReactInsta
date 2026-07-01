@@ -1,27 +1,17 @@
-/* HorizontalScrollSection.module.css */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap");
 
 /* ══════════════════════════════════════
-   OUTER  — tall scroll container
+   SECTION - Main container
 ══════════════════════════════════════ */
-.outer {
+.section {
   position: relative;
   width: 100%;
-}
-
-/* ══════════════════════════════════════
-   STICKY — 100vh pinned viewport
-══════════════════════════════════════ */
-.sticky {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: #06090f;
+  padding: 40px 0 30px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 /* ─── Background decorations ─── */
@@ -69,16 +59,15 @@
 }
 
 /* ══════════════════════════════════════
-   HEADER - Centered with auto height
+   HEADER
 ══════════════════════════════════════ */
 .header {
   position: relative;
   z-index: 10;
   text-align: center;
-  padding: 32px 20px 28px;
+  padding: 0 20px 30px;
   pointer-events: none;
   flex-shrink: 0;
-  height: auto;
 }
 
 .eyebrow {
@@ -104,13 +93,12 @@
 
 .heading {
   font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(3rem, 3.5vw, 3rem);
+  font-size: clamp(2.5rem, 3.5vw, 3rem);
   font-weight: 800;
   color: #f1f5f9;
   line-height: 1.1;
   letter-spacing: -0.04em;
   margin: 0 0 10px 0;
-  
 }
 
 .accent {
@@ -126,135 +114,81 @@
   color: #64748b;
   margin: 0;
   font-weight: 400;
-  margin-bottom: 20px;
 }
 
 /* ══════════════════════════════════════
-   TRACK WRAP + TRACK
+   HORIZONTAL SCROLL CONTAINER
 ══════════════════════════════════════ */
-.trackWrap {
+.scrollContainer {
   position: relative;
   z-index: 5;
   width: 100%;
   flex: 1;
-  overflow: visible;
-  display: flex;
-  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  cursor: grab;
+  min-height: 500px;
 }
 
-.track {
-  display: flex;
-  align-items: center;
-  gap: 28px; /* must match CARD_GAP in JSX */
-  padding: 0 56px;
-  will-change: transform;
-  transition: transform 0.07s linear;
+.scrollContainer:active {
+  cursor: grabbing;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollContainer::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+.scrollContainer {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
 /* ══════════════════════════════════════
-   CARD - 80vw width, auto height
-   Layout: Text (Left) + Image (Right)
+   TRACK
+══════════════════════════════════════ */
+.track {
+  display: flex;
+  gap: 28px;
+  padding: 0 56px;
+  height: 100%;
+  align-items: center;
+  min-height: 450px;
+}
+
+/* ══════════════════════════════════════
+   CARD
 ══════════════════════════════════════ */
 .card {
-  min-width: 80vw;
-  width: 80vw;
+  min-width: 75vw;
+  max-width: 75vw;
   height: auto;
-  min-height: 500px;
+  min-height: 400px;
   flex-shrink: 0;
-
   overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
-  cursor: default;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-
-/* ─── Text Body (Left Side) ─── */
-.body {
-  flex: 1 1 50%;
-  padding: 40px 44px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.1);
 }
 
-.tag {
-  display: inline-block;
-  width: fit-content;
-  font-family: "Inter", sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #93c5fd;
-  background: rgba(59, 130, 246, 0.15);
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  padding: 5px 12px;
-  border-radius: 100px;
-  backdrop-filter: blur(8px);
-  margin-bottom: 16px;
-  display: none;
-}
-
-.cardNum {
-  font-family: "Inter", sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: #334155;
-  margin: 0 0 12px 0;
-  text-transform: uppercase;
-  display: none;
-}
-
-.cardTitle {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(4rem, 2.5vw, 2.2rem);
-  font-weight: 700;
-  color: #f1f5f9;
-  margin: 0 0 8px 0;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-}
-
-.cardSub {
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #3b82f6;
-  margin: 0 0 20px 0;
-}
-
-.cardDesc {
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  color: #64748b;
-  line-height: 1.8;
-  margin: 0 0 24px 0;
-  max-width: 480px;
-}
-
-.cardLine {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #818cf8);
-  border-radius: 2px;
-}
-
-/* ─── Image (Right Side) ─── */
+/* ─── Image (Left Side) ─── */
 .imgWrap {
   flex: 1 1 50%;
   position: relative;
   overflow: hidden;
+  min-height: 300px;
 }
 
 .img {
@@ -281,13 +215,86 @@
   );
 }
 
+/* ─── Text Body (Right Side) ─── */
+.body {
+  flex: 1 1 50%;
+  padding: 40px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.tag {
+  display: inline-block;
+  width: fit-content;
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  padding: 5px 12px;
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  margin-bottom: 16px;
+}
+
+.cardNum {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #475569;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.cardSub {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #3b82f6;
+  margin: 0 0 20px 0;
+}
+
+.cardDesc {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #94a3b8;
+  line-height: 1.8;
+  margin: 0 0 24px 0;
+  max-width: 480px;
+}
+
+.cardLine {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #818cf8);
+  border-radius: 2px;
+}
+
 /* ══════════════════════════════════════
    PROGRESS BAR
 ══════════════════════════════════════ */
 .progressBar {
   position: relative;
   z-index: 10;
-  margin: 16px 56px 0;
+  margin: 20px 56px 0;
   height: 2px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 2px;
@@ -309,7 +316,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 14px 0 16px;
+  margin: 14px 0 0;
   flex-shrink: 0;
   position: relative;
   z-index: 10;
@@ -321,6 +328,11 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
   transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .dotActive {
@@ -333,35 +345,32 @@
    RESPONSIVE
 ══════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .header {
-    padding: 28px 36px 24px;
+  .card {
+    min-width: 80vw;
+    max-width: 80vw;
   }
   .track {
     padding: 0 36px;
   }
   .progressBar {
-    margin: 14px 36px 0;
+    margin: 16px 36px 0;
   }
 }
 
 @media (max-width: 768px) {
-  .header {
-    padding: 24px 20px 20px;
-  }
-  .track {
-    padding: 0 20px;
-    gap: 16px;
-  }
-  .progressBar {
-    margin: 12px 20px 0;
+  .section {
+    padding: 30px 0 20px;
   }
 
-  /* Stack vertically on mobile */
+  .header {
+    padding: 0 20px 20px;
+  }
+
   .card {
+    min-width: 85vw;
+    max-width: 85vw;
     flex-direction: column;
-    height: auto;
     min-height: auto;
-    border-radius: 16px;
   }
 
   .body {
@@ -372,6 +381,7 @@
   .imgWrap {
     order: 1;
     height: 220px;
+    min-height: 220px;
     flex: none;
   }
 
@@ -384,8 +394,17 @@
     );
   }
 
+  .track {
+    padding: 0 20px;
+    gap: 16px;
+  }
+
+  .progressBar {
+    margin: 12px 20px 0;
+  }
+
   .cardTitle {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   .cardDesc {
     font-size: 13px;
@@ -394,31 +413,48 @@
 }
 
 @media (max-width: 480px) {
+  .section {
+    padding: 20px 0 15px;
+  }
+
   .header {
-    padding: 20px 16px 16px;
-  }
-  .track {
-    padding: 0 16px;
-    gap: 14px;
-  }
-  .progressBar {
-    margin: 10px 16px 0;
+    padding: 0 16px 16px;
   }
 
   .heading {
     font-size: 1.6rem;
   }
 
+  .card {
+    min-width: 90vw;
+    max-width: 90vw;
+  }
+
+  .track {
+    padding: 0 16px;
+    gap: 14px;
+  }
+
   .body {
     padding: 20px 16px 24px;
   }
+
   .imgWrap {
     height: 180px;
+    min-height: 180px;
   }
+
+  .progressBar {
+    margin: 10px 16px 0;
+  }
+
   .cardTitle {
     font-size: 1.1rem;
   }
   .cardDesc {
     font-size: 12px;
+  }
+  .dots {
+    margin: 10px 0 0;
   }
 }

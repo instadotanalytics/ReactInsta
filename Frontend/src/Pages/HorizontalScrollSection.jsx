@@ -1,4 +1,3 @@
-// HorizontalScrollSection.jsx
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./HorizontalScrollSection.module.css";
 
@@ -45,130 +44,98 @@ const cardData = [
   },
 ];
 
-const CARD_GAP = 28; // px — must match CSS
-
 const HorizontalScrollSection = () => {
-  const outerRef = useRef(null);
-  const trackRef = useRef(null);
-  const [progress, setProgress] = useState(0); // 0–1
-  const [cardWidth, setCardWidth] = useState(0);
+  const scrollContainerRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
 
   useEffect(() => {
-    const updateCardWidth = () => {
-      setCardWidth(window.innerWidth * 0.8);
-    };
-    updateCardWidth();
-    window.addEventListener("resize", updateCardWidth);
-    return () => window.removeEventListener("resize", updateCardWidth);
-  }, []);
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-  useEffect(() => {
-    const outer = outerRef.current;
-    if (!outer) return;
-
-    const onScroll = () => {
-      const rect = outer.getBoundingClientRect();
-      const total = outer.offsetHeight - window.innerHeight;
-      const scrolled = -rect.top;
-      const pct = Math.min(Math.max(scrolled / total, 0), 1);
-      setProgress(pct);
+    const handleScroll = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      const max = scrollWidth - clientWidth;
+      setMaxScroll(max);
+      const progress = max > 0 ? scrollLeft / max : 0;
+      setScrollProgress(progress);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // init
-    return () => window.removeEventListener("scroll", onScroll);
+    container.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial calculation
+
+    return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || cardWidth === 0) return;
-
-    // total distance cards need to travel
-    const maxShift =
-      (cardWidth + CARD_GAP) * cardData.length - window.innerWidth + 120; // right padding
-
-    const shift = Math.max(progress * maxShift, 0);
-    track.style.transform = `translateX(-${shift}px)`;
-  }, [progress, cardWidth]);
-
-  // dots indicator
-  const activeIndex = Math.round(progress * (cardData.length - 1));
+  const activeIndex = Math.round(scrollProgress * (cardData.length - 1));
 
   return (
-    <div
-      ref={outerRef}
-      className={styles.outer}
-      style={{ height: `${100 + cardData.length * 50}vh` }}
-    >
-      {/* sticky viewport */}
-      <div className={styles.sticky}>
-        {/* Background grid + glows */}
-        <div className={styles.bgGrid} />
-        <div className={styles.bgGlowLeft} />
-        <div className={styles.bgGlowRight} />
+    <section className={styles.section}>
+      {/* Background decorations */}
+      <div className={styles.bgGrid} />
+      <div className={styles.bgGlowLeft} />
+      <div className={styles.bgGlowRight} />
 
-        {/* Header - Centered with auto height */}
-        <div className={styles.header}>
-          <span className={styles.eyebrow}>Our Memories</span>
-          <h2 className={styles.heading}>
-            Team & Project{" "}
-            <span className={styles.accent}>Highlights</span>
-          </h2>
-          <p className={styles.sub}>Scroll through our cherished moments together</p>
-        </div>
+      {/* Header */}
+      <div className={styles.header}>
+        <span className={styles.eyebrow}>Our Memories</span>
+        <h2 className={styles.heading}>
+          Team & Project <span className={styles.accent}>Highlights</span>
+        </h2>
+        <p className={styles.sub}>Scroll right to explore our cherished moments</p>
+      </div>
 
-        {/* Cards track */}
-        <div className={styles.trackWrap}>
-          <div ref={trackRef} className={styles.track}>
-            {cardData.map((card, i) => (
-              <article className={styles.card} key={i}>
-                {/* Text content - Left side */}
-                <div className={styles.body}>
-                  <span className={styles.tag}>{card.tag}</span>
-                  <p className={styles.cardNum}>
-                    {String(i + 1).padStart(2, "0")} /{" "}
-                    {String(cardData.length).padStart(2, "0")}
-                  </p>
-                  <h3 className={styles.cardTitle}>{card.title}</h3>
-                  <p className={styles.cardSub}>{card.subtitle}</p>
-                  <p className={styles.cardDesc}>{card.description}</p>
-                  <div className={styles.cardLine} />
-                </div>
+      {/* Horizontal Scroll Container */}
+      <div ref={scrollContainerRef} className={styles.scrollContainer}>
+        <div className={styles.track}>
+          {cardData.map((card, i) => (
+            <article className={styles.card} key={i}>
+              {/* Image - Left side */}
+              <div className={styles.imgWrap}>
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className={styles.img}
+                  loading="lazy"
+                />
+                <div className={styles.imgGrad} />
+              </div>
 
-                {/* Image - Right side */}
-                <div className={styles.imgWrap}>
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className={styles.img}
-                    loading="lazy"
-                  />
-                  <div className={styles.imgGrad} />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        {/* Progress bar */}
-        <div className={styles.progressBar}>
-          <div
-            className={styles.progressFill}
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
-
-        {/* Dot indicators */}
-        <div className={styles.dots}>
-          {cardData.map((_, i) => (
-            <span
-              key={i}
-              className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ""}`}
-            />
+              {/* Text content - Right side */}
+              <div className={styles.body}>
+                <span className={styles.tag}>{card.tag}</span>
+                <p className={styles.cardNum}>
+                  {String(i + 1).padStart(2, "0")} /{" "}
+                  {String(cardData.length).padStart(2, "0")}
+                </p>
+                <h3 className={styles.cardTitle}>{card.title}</h3>
+                <p className={styles.cardSub}>{card.subtitle}</p>
+                <p className={styles.cardDesc}>{card.description}</p>
+                <div className={styles.cardLine} />
+              </div>
+            </article>
           ))}
         </div>
       </div>
-    </div>
+
+      {/* Progress Bar */}
+      <div className={styles.progressBar}>
+        <div
+          className={styles.progressFill}
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
+      {/* Dot Indicators */}
+      <div className={styles.dots}>
+        {cardData.map((_, i) => (
+          <span
+            key={i}
+            className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ""}`}
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 
