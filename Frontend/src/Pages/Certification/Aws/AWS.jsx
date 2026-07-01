@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import styles from './AWS.module.css';
+import React, { useEffect, useRef } from "react";
+import styles from "./AWS.module.css";
 import {
   FaAws,
   FaCloud,
@@ -9,15 +9,15 @@ import {
   FaCheckCircle,
   FaUsers,
   FaServer,
-  FaGlobe
-} from 'react-icons/fa';
-import Header from '../../../components/Header/Header';
-import Footer from '../../../components/Footer/Footer';
-import AboutAWSCertificate from './AboutAWScetificate';
+  FaGlobe,
+} from "react-icons/fa";
+import Header from "../../../components/Header/Header";
+import Footer from "../../../components/Footer/Footer";
+import AboutAWSCertificate from "./AboutAWScetificate";
 
 import CertificationApplyForm from "../../CertificationApplyForm";
-import AwsCloudSection from './AwsCloudSection';
-import Awsprojects from './Awsprojects'; 
+import AwsCloudSection from "./AwsCloudSection";
+import Awsprojects from "./Awsprojects";
 // import Companypartners from "../../Courses/Companypartners";
 // import ReviewSection from "../../ReviewSection";
 
@@ -28,7 +28,7 @@ const AWS = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     let animId;
     let t = 0;
 
@@ -37,24 +37,28 @@ const AWS = () => {
       canvas.height = canvas.offsetHeight;
     };
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
 
     const draw = () => {
       const { width, height } = canvas;
       ctx.clearRect(0, 0, width, height);
 
       // Base white background
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, width, height);
 
       // Blob 1 — large top-right radial
       const g1 = ctx.createRadialGradient(
-        width * 0.78, height * 0.18, 0,
-        width * 0.78, height * 0.18, width * 0.52
+        width * 0.78,
+        height * 0.18,
+        0,
+        width * 0.78,
+        height * 0.18,
+        width * 0.52,
       );
-      g1.addColorStop(0, 'rgba(180,175,255,0.55)');
-      g1.addColorStop(0.5, 'rgba(200,195,255,0.28)');
-      g1.addColorStop(1, 'rgba(255,255,255,0)');
+      g1.addColorStop(0, "rgba(180,175,255,0.55)");
+      g1.addColorStop(0.5, "rgba(200,195,255,0.28)");
+      g1.addColorStop(1, "rgba(255,255,255,0)");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
 
@@ -65,10 +69,10 @@ const AWS = () => {
         0,
         width * 0.18 + Math.sin(t * 0.4) * 30,
         height * 0.6 + Math.cos(t * 0.3) * 20,
-        width * 0.38
+        width * 0.38,
       );
-      g2.addColorStop(0, 'rgba(160,155,255,0.30)');
-      g2.addColorStop(1, 'rgba(255,255,255,0)');
+      g2.addColorStop(0, "rgba(160,155,255,0.30)");
+      g2.addColorStop(1, "rgba(255,255,255,0)");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, width, height);
 
@@ -88,8 +92,8 @@ const AWS = () => {
       ctx.closePath();
 
       const waveGrad = ctx.createLinearGradient(0, height * 0.45, 0, height);
-      waveGrad.addColorStop(0, 'rgba(140,130,255,0.18)');
-      waveGrad.addColorStop(1, 'rgba(200,195,255,0.06)');
+      waveGrad.addColorStop(0, "rgba(140,130,255,0.18)");
+      waveGrad.addColorStop(1, "rgba(200,195,255,0.06)");
       ctx.fillStyle = waveGrad;
       ctx.fill();
       ctx.restore();
@@ -100,7 +104,7 @@ const AWS = () => {
       ctx.moveTo(0, height * 0.62);
       for (let x = 0; x <= width; x += 4) {
         const y =
-          height * 0.60 +
+          height * 0.6 +
           Math.sin((x / width) * Math.PI * 1.8 + t * 0.5 + 1) * height * 0.06 +
           Math.sin((x / width) * Math.PI * 0.9 + t * 0.3) * height * 0.03;
         ctx.lineTo(x, y);
@@ -109,8 +113,8 @@ const AWS = () => {
       ctx.lineTo(0, height);
       ctx.closePath();
       const waveGrad2 = ctx.createLinearGradient(0, height * 0.55, 0, height);
-      waveGrad2.addColorStop(0, 'rgba(120,110,245,0.10)');
-      waveGrad2.addColorStop(1, 'rgba(255,255,255,0)');
+      waveGrad2.addColorStop(0, "rgba(120,110,245,0.10)");
+      waveGrad2.addColorStop(1, "rgba(255,255,255,0)");
       ctx.fillStyle = waveGrad2;
       ctx.fill();
       ctx.restore();
@@ -122,15 +126,31 @@ const AWS = () => {
     draw();
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
     };
   }, []);
 
   const services = [
-    { icon: <FaCloud />, name: 'EC2, S3, Lambda' },
-    { icon: <FaDatabase />, name: 'RDS, DynamoDB' },
-    { icon: <FaShieldAlt />, name: 'IAM, Security' },
-    { icon: <FaRocket />, name: 'DevOps & ML' },
+    { icon: <FaCloud />, name: "Amazon EC2" },
+    { icon: <FaDatabase />, name: "Amazon S3" },
+    { icon: <FaServer />, name: "Elastic Beanstalk" },
+    { icon: <FaCloud />, name: "Lambda" },
+    { icon: <FaDatabase />, name: "Amazon RDS" },
+    { icon: <FaDatabase />, name: "DynamoDB" },
+    { icon: <FaShieldAlt />, name: "IAM" },
+    { icon: <FaShieldAlt />, name: "VPC" },
+    { icon: <FaRocket />, name: "CloudFormation" },
+    { icon: <FaRocket />, name: "CodePipeline" },
+    { icon: <FaRocket />, name: "CloudFront" },
+    { icon: <FaUsers />, name: "ECS" },
+    { icon: <FaUsers />, name: "EKS" },
+    { icon: <FaServer />, name: "Route 53" },
+    { icon: <FaGlobe />, name: "API Gateway" },
+    { icon: <FaCloud />, name: "SNS" },
+    { icon: <FaCloud />, name: "SQS" },
+    { icon: <FaShieldAlt />, name: "AWS Security" },
+    { icon: <FaDatabase />, name: "Redshift" },
+    { icon: <FaRocket />, name: "Bedrock AI" },
   ];
 
   return (
@@ -144,8 +164,8 @@ const AWS = () => {
         <div className={styles.container}>
           {/* AWS Image - placed above text with stylish container */}
           <div className={styles.imageWrapper}>
-            <img 
-              src="https://exahost.com/wp-content/uploads/2021/10/AWS-cloud_.png" 
+            <img
+              src="https://exahost.com/wp-content/uploads/2021/10/AWS-cloud_.png"
               alt="AWS Big Data Analytics"
               className={styles.awsImage}
             />
@@ -164,7 +184,8 @@ const AWS = () => {
 
           {/* Headline — centered, dark */}
           <h1 className={styles.title}>
-            Master Cloud Computing<br />
+            Master Cloud Computing
+            <br />
             with <span className={styles.highlight}>AWS Certification</span>
           </h1>
 
@@ -175,20 +196,22 @@ const AWS = () => {
             accelerated their careers with AWS.
           </p>
 
-           {/* Service tags — single row, pill style */}
-          <div className={styles.serviceTags}>
-            {services.map((s, i) => (
-              <span key={i} className={styles.tag}>
-                <span className={styles.tagIcon}>{s.icon}</span>
-                {s.name}
-              </span>
-            ))}
+          {/* Service tags — single row, pill style */}
+          <div className={styles.slider}>
+            <div className={styles.track}>
+              {[...services, ...services].map((item, index) => (
+                <span key={index} className={styles.tag}>
+                  <span className={styles.tagIcon}>{item.icon}</span>
+                  {item.name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       <AboutAWSCertificate />
-      
+
       {/* <Companypartners /> */}
       <Awsprojects />
       <AwsCloudSection />

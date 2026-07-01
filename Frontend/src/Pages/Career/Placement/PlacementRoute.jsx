@@ -8,34 +8,28 @@ import WhyJoinUS from "../../WhyJoinUS";
 import OurImpact from "../../OurImpact";
 import FAQSection from "../../FAQSection";
 import PlacementList from "../../PlacementList";
-import {
-  FaChalkboardTeacher,
-  FaUserGraduate,
-  FaBriefcase,
-  FaCertificate
-} from "react-icons/fa";
-
-
 
 const PlacementSection = () => {
   return (
     <>
       <Header />
       <section className={styles.section}>
+        {/* soft silky background layers */}
+        <div className={styles.bgBase} aria-hidden="true" />
+        <div className={styles.bgRibbon1} aria-hidden="true" />
+        <div className={styles.bgRibbon2} aria-hidden="true" />
+        <div className={styles.bgRibbon3} aria-hidden="true" />
+        <div className={styles.bgSheen} aria-hidden="true" />
+
         <div className={styles.container}>
-
-          {/* LEFT CONTENT */}
+          {/* CONTENT */}
           <div className={styles.leftContent}>
-
-            {/* TOP BADGE */}
             
 
             {/* TITLE */}
             <h1 className={styles.title}>
               Upskill Yourself with{" "}
-              <span className={styles.highlight}>
-                Industry-Ready Courses
-              </span>
+              <span className={styles.highlight}>Industry-Ready Courses</span>
             </h1>
 
             {/* DESCRIPTION */}
@@ -44,7 +38,6 @@ const PlacementSection = () => {
               Get certified, build real-world projects, and boost your career
               with placement support.
             </p>
-
 
             {/* STATS */}
             <div className={styles.statsGrid}>
@@ -69,31 +62,6 @@ const PlacementSection = () => {
               </div>
             </div>
 
-            {/* FEATURES */}
-            <div className={styles.featuresList}>
-
-              <div className={styles.featureItem}>
-                <FaChalkboardTeacher className={styles.featureIcon} />
-                <span>Live Classes</span>
-              </div>
-
-              <div className={styles.featureItem}>
-                <FaUserGraduate className={styles.featureIcon} />
-                <span>1:1 Mentorship</span>
-              </div>
-
-              <div className={styles.featureItem}>
-                <FaBriefcase className={styles.featureIcon} />
-                <span>Placement Support</span>
-              </div>
-
-              <div className={styles.featureItem}>
-                <FaCertificate className={styles.featureIcon} />
-                <span>Certification</span>
-              </div>
-
-            </div>
-
             {/* POPULAR COURSES */}
             <div className={styles.popularCourses}>
               <h3>Popular Courses</h3>
@@ -104,11 +72,7 @@ const PlacementSection = () => {
                 <span className={styles.courseTag}>Digital Marketing</span>
               </div>
             </div>
-
           </div>
-
-          {/* RIGHT IMAGE */}
-
         </div>
       </section>
       <Companypartners />

@@ -1,12 +1,17 @@
 /* ── BASE ── */
 .internshipPage {
   background-color: #ffffff;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   overflow-x: hidden;
 }
 
 /* ═══════════════════════════════════════════
-   HERO SECTION  — full-bleed image layout
+   HERO SECTION  — light blue gradient + dots
 ═══════════════════════════════════════════ */
 .heroSection {
   position: relative;
@@ -18,42 +23,30 @@
   overflow: hidden;
 }
 
-/* ── background image ── */
+/* ── background: soft blue gradient (matches header brand blue) ── */
 .heroBg {
   position: absolute;
   inset: 0;
   z-index: 0;
-}
-
-.heroBgImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  transform: scale(1.04);
-  transition: transform 10s ease;
-}
-.heroSection:hover .heroBgImg {
-  transform: scale(1);
-}
-
-/* base dark veil */
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(5, 10, 20, 0.54);
-}
-
-/* bottom-up gradient so text pops */
-.heroOverlayGradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(5, 10, 20, 0.92) 0%,
-    rgba(5, 10, 20, 0.55) 45%,
-    rgba(5, 10, 20, 0.15) 100%
+  background: radial-gradient(
+    circle at 25% 15%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(214, 230, 255, 0.9) 40%,
+    rgba(150, 190, 250, 0.85) 100%
   );
+}
+
+/* dotted texture overlay */
+.heroDots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(60, 110, 220, 0.28) 1.4px,
+    transparent 1.4px
+  );
+  background-size: 26px 26px;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 /* ── content block ── */
@@ -62,7 +55,7 @@
   z-index: 2;
   width: 100%;
   max-width: 900px;
-  padding: 0 64px 72px;
+  padding: 120px 64px 72px;
   margin: 0 auto;
   text-align: center;
   display: flex;
@@ -72,25 +65,26 @@
 
 /* headline */
 .heroTitle {
-  font-size: clamp(35px, 4vw, 75px);
+  font-size: clamp(35px, 4vw, 68px);
   font-weight: 800;
-  line-height: 1.1;
-  color: #ffffff;
+  line-height: 1.15;
+  color: #0f1a2e;
   margin: 0 0 24px;
   letter-spacing: -1.5px;
 }
 
 .heroAccent {
+  background: linear-gradient(90deg, #2563eb 0%, #4361ee 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 2px #ffffff;
-  /* hollow outline text — distinctive, not generic */
 }
 
 /* description */
 .heroDesc {
-  font-size: clamp(12px, 1.2vw, 15px);
+  font-size: clamp(14px, 1.2vw, 16px);
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(15, 26, 46, 0.62);
   max-width: 580px;
   margin: 0 0 36px;
   text-align: center;
@@ -109,45 +103,47 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #4361ee;
+  background: linear-gradient(90deg, #2563eb 0%, #4361ee 100%);
   color: #fff;
   font-size: 15px;
   font-weight: 600;
   padding: 14px 32px;
-  border-radius: 8px;
+  border-radius: 50px;
   border: none;
   cursor: pointer;
   font-family: inherit;
   text-decoration: none;
-  transition: background 0.25s ease, transform 0.2s ease;
-  letter-spacing: 0.05cm;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 8px 24px rgba(67, 97, 238, 0.35);
 }
 .ctaPrimary:hover {
-  background: #3451d1;
   transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(67, 97, 238, 0.45);
 }
 
 .ctaSecondary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: #ffffff;
+  color: #0f1a2e;
   font-size: 15px;
   font-weight: 500;
   padding: 14px 32px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  border: 1px solid rgba(15, 26, 46, 0.14);
   cursor: pointer;
   font-family: inherit;
   text-decoration: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 .ctaSecondary:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(15, 26, 46, 0.04);
+  border-color: rgba(15, 26, 46, 0.25);
 }
 
 /* ── stats strip ── */
@@ -163,8 +159,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(15, 26, 46, 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
@@ -172,11 +168,11 @@
   transition: background 0.25s;
 }
 .statPill:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .statPillIcon {
-  color: #4361ee;
+  color: #2563eb;
   font-size: 18px;
   display: flex;
 }
@@ -184,13 +180,13 @@
 .statPillValue {
   font-size: 20px;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f1a2e;
   line-height: 1;
 }
 
 .statPillLabel {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(15, 26, 46, 0.55);
   line-height: 1.3;
 }
 
@@ -205,7 +201,7 @@
 
 .companiesLabel {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(15, 26, 46, 0.45);
   white-space: nowrap;
 }
 
@@ -218,65 +214,13 @@
 .companyName {
   font-size: 15px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(15, 26, 46, 0.55);
   letter-spacing: 0.02em;
   transition: color 0.2s;
   cursor: default;
 }
 .companyName:hover {
-  color: #ffffff;
-}
-
-/* ── floating badges ── */
-.badge {
-  position: absolute;
-  z-index: 3;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 14px;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-  animation: floatBadge 3.5s ease-in-out infinite;
-}
-
-.badgeTop {
-  top: 22%;
-  right: 6%;
-  animation-delay: 0s;
-}
-.badgeBottom {
-  bottom: 22%;
-  right: 10%;
-  animation-delay: 1.2s;
-}
-
-.badgeIcon {
-  font-size: 22px;
-  color: #4361ee;
-}
-
-.badge div {
-  display: flex;
-  flex-direction: column;
-}
-.badge strong {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a1a;
-  line-height: 1.1;
-}
-.badge span {
-  font-size: 12px;
-  color: #6b6b6b;
-}
-
-@keyframes floatBadge {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+  color: #0f1a2e;
 }
 
 /* ═══════════════════════════════════════════
@@ -284,35 +228,26 @@
 ═══════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .heroInner {
-    padding: 0 48px 60px;
+    padding: 100px 48px 60px;
     max-width: 100%;
   }
-  .badgeTop  { right: 3%; top: 18%; }
-  .badgeBottom { right: 3%; bottom: 18%; }
 }
 
 @media (max-width: 768px) {
   .heroSection {
     min-height: 100svh;
-    align-items: flex-end;
   }
   .heroInner {
-    padding: 0 24px 52px;
+    padding: 90px 24px 52px;
   }
   .heroTitle {
     letter-spacing: -0.5px;
-  }
-  .heroAccent {
-    -webkit-text-stroke: 1.5px #ffffff;
   }
   .statsStrip {
     gap: 8px;
   }
   .statPill {
     padding: 8px 14px;
-  }
-  .badge {
-    display: none; /* hide on small screens to reduce clutter */
   }
   .heroActions {
     flex-direction: column;
@@ -327,9 +262,8 @@
 
 @media (max-width: 480px) {
   .heroInner {
-    padding: 0 20px 44px;
+    padding: 80px 20px 44px;
   }
-  /* 2×2 grid for stats */
   .statsStrip {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -346,8 +280,6 @@
   .statPillLabel {
     font-size: 11px;
   }
- 
-  /* companies: single line, horizontal scroll, no wrap */
   .heroCompanies {
     flex-direction: column;
     align-items: center;
@@ -360,7 +292,6 @@
     gap: 18px;
     width: 100%;
     padding-bottom: 4px;
-    /* hide scrollbar visually but keep it functional */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
