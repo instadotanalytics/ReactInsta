@@ -3,9 +3,10 @@
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   overflow: hidden;
-  padding: 0 6%;
+  padding: 0 24px;
+  justify-content: center;
 
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 55%, #ffffff 100%);
 }
@@ -141,7 +142,7 @@
   gap: 60px;
   align-items: center;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -504,11 +505,28 @@
   }
 
   .features {
-    gap: 10px;
+    display: flex;
+    flex-wrap: nowrap;      /* Don't wrap */
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    overflow-x: auto;       /* Prevent breaking on tiny phones */
+    scrollbar-width: none;
+  }
+
+  .features::-webkit-scrollbar {
+    display: none;
   }
 
   .featureItem {
-    font-size: 12px;
-    padding: 8px 14px;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    font-size: 11px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .featureIcon {
+    font-size: 13px;
   }
 }
