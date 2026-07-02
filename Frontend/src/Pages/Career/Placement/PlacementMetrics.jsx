@@ -35,7 +35,6 @@ const PlacementMetrics = () => {
     <section className={styles['placement-metrics-section']}>
       <div className={styles['placement-metrics-container']}>
         <div className={styles['metrics-header']}>
-          <span className={styles['metrics-badge']}>Placement Impact</span>
           <h2 className={styles['metrics-title']}>
             Your <span className={styles['highlight-blue']}>Career Numbers</span> Speak
           </h2>
@@ -57,9 +56,9 @@ const PlacementMetrics = () => {
 
         <div className={styles['metrics-footer']}>
           <div className={styles['testimonial-highlight']}>
-            <span className={styles['quote-icon']}>"</span>
+            
             <p className={styles['quote-text']}>
-              Insta Dot Analytics didn't just train me - they placed me in my dream role at Genpact with ₹6 LPA
+              <span className={styles['quote-icon']}>"</span>Insta Dot Analytics didn't just train me - they placed me in my dream role at Genpact with ₹6 LPA
             </p>
             <span className={styles['quote-author']}>- Om Prashant Kasar, Software Engineer</span>
           </div>

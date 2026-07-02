@@ -1,4 +1,3 @@
-
 /**
  * CareerTrack.jsx
  * Premium futuristic metro-style career journey section.
@@ -9,11 +8,8 @@
  *   <CareerTrack />
  */
 
-// import styles from "./";
 import React from "react";
 import styles from "./CareerTrack.module.css";
-// import React from "react";
-// import styles from "./CareerTrack.module.css";
 import {
   FaBullseye,
   FaChalkboardTeacher,
@@ -25,10 +21,7 @@ import {
   FaTools,
   FaShieldAlt,
 } from "react-icons/fa";
-
-import {
-  MdWorkspacePremium,
-} from "react-icons/md";
+import { MdWorkspacePremium } from "react-icons/md";
 import { PiCrownSimpleFill } from "react-icons/pi";
 
 /* ─────────────────────────────────────────────────────────────────
@@ -190,7 +183,7 @@ function Station({ icon, label, cx, cy, labelY, delay }) {
   const boxW = Math.max(label.length * charPx + padH * 2, 76);
   const boxH = 24;
   const boxX = cx - boxW / 2;
-  const boxGapPx = 16; // gap between station edge and label box
+  const boxGapPx = 16;
 
   const aboveBoxY = cy - 28 - boxGapPx - boxH;
   const belowBoxY = cy + 28 + boxGapPx;
@@ -229,26 +222,21 @@ function Station({ icon, label, cx, cy, labelY, delay }) {
           stroke="#a855f7"
           strokeWidth="1.5"
         />
-        <foreignObject
-  x={cx - 12}
-  y={cy - 12}
-  width="24"
-  height="24"
->
-  <div
-    style={{
-      width: "24px",
-      height: "24px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: "#7c3aed",
-      fontSize: "16px",
-    }}
-  >
-    {icon}
-  </div>
-</foreignObject>
+        <foreignObject x={cx - 12} y={cy - 12} width="24" height="24">
+          <div
+            style={{
+              width: "24px",
+              height: "24px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#7c3aed",
+              fontSize: "16px",
+            }}
+          >
+            {icon}
+          </div>
+        </foreignObject>
       </g>
 
       {/* Label pill — above or below */}
@@ -308,8 +296,8 @@ function TrackDot({ delayS, color }) {
   return (
     <circle r="5" fill="white" stroke={color} strokeWidth="2">
       <animateMotion dur="2.8s" repeatCount="indefinite">
-    <mpath xlinkHref="#ct_mainTrack" />
-</animateMotion>
+        <mpath xlinkHref="#ct_mainTrack" />
+      </animateMotion>
       <animate
         attributeName="opacity"
         values="0;0;1;1;0"
@@ -358,21 +346,11 @@ function Destination() {
       />
 
       {/* Trophy */}
-    <foreignObject
-  x={cx - 16}
-  y={cy - 16}
-  width="32"
-  height="32"
->
-  <div className={styles.destinationIcon}>
-    <PiCrownSimpleFill />
-  </div>
-</foreignObject>
-
-      {/* Rocket */}
-      <text x={cx + 52} y={cy - 32} fontSize="16" className={styles.rocket}>
-        
-      </text>
+      <foreignObject x={cx - 16} y={cy - 16} width="32" height="32">
+        <div className={styles.destinationIcon}>
+          <PiCrownSimpleFill />
+        </div>
+      </foreignObject>
 
       {/* Floating stars */}
       <text
@@ -382,7 +360,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "0s" }}
       >
-        
+        ✦
       </text>
       <text
         x={cx + 38}
@@ -391,7 +369,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "0.6s" }}
       >
-        
+        ✦
       </text>
       <text
         x={cx + 58}
@@ -400,7 +378,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "1.2s" }}
       >
-      
+        ✦
       </text>
       <text
         x={cx - 60}
@@ -409,7 +387,7 @@ function Destination() {
         className={styles.star}
         style={{ animationDelay: "1.8s" }}
       >
-      
+        ✦
       </text>
 
       {/* Confetti sparks */}
@@ -420,7 +398,7 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "0s" }}
       >
-        
+        ✦
       </text>
       <text
         x={cx - 20}
@@ -429,7 +407,7 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "0.5s" }}
       >
-        
+        ✦
       </text>
       <text
         x={cx + 46}
@@ -438,7 +416,7 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "1s" }}
       >
-        
+        ✦
       </text>
       <text
         x={cx - 44}
@@ -447,15 +425,13 @@ function Destination() {
         className={styles.confetti}
         style={{ animationDelay: "1.5s" }}
       >
-        
+        ✦
       </text>
 
       {/* Dream Job label */}
       <text x={cx} y={cy + 66} textAnchor="middle" className={styles.destTitle}>
         Dream Job
       </text>
-
-      
     </g>
   );
 }
@@ -527,14 +503,12 @@ function MetroMap() {
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   Individual glass feature card
+   Individual glass feature card - Compact & Responsive
 ───────────────────────────────────────────────────────────────── */
 function FeatureCard({ icon, title, desc }) {
   return (
     <div className={styles.glassCard}>
-      <div className={styles.cardIcon}>
-    {icon}
-</div>
+      <div className={styles.cardIcon}>{icon}</div>
       <h3 className={styles.cardTitle}>{title}</h3>
       <p className={styles.cardDesc}>{desc}</p>
     </div>
@@ -554,7 +528,6 @@ export default function CareerTrack() {
 
       {/* ── Section header ── */}
       <header className={styles.header}>
-      
         <h1 className={styles.heading}>
           Your Journey to
           <br />

@@ -1,0 +1,94 @@
+# InstaDot Analytics
+
+Website: https://instadotanalytics.com
+Organization: InstaDot Analytics
+
+Description:
+InstaDot Analytics is an ed-tech platform providing industry-oriented training, internships, placements, certifications, and career support in software development, artificial intelligence, and modern technologies.
+
+## Main Pages
+
+https://instadotanalytics.com/
+https://instadotanalytics.com/courses
+https://instadotanalytics.com/about
+https://instadotanalytics.com/contact
+
+## Career Programs
+
+https://instadotanalytics.com/career/internship
+https://instadotanalytics.com/career/placement
+https://instadotanalytics.com/career/fulltime
+
+## Certification Programs
+
+https://instadotanalytics.com/certification/microsoft
+https://instadotanalytics.com/certification/ibm
+https://instadotanalytics.com/certification/aws
+https://instadotanalytics.com/certification/redhat
+https://instadotanalytics.com/certification/custom
+
+## Dynamic Course Pages
+
+Pattern:
+https://instadotanalytics.com/course/{course-slug}
+
+Examples:
+https://instadotanalytics.com/course/power-bi-course-business-intelligence-dashboard-training
+https://instadotanalytics.com/course/advanced-excel-course-excel-basic-to-advanced-training
+https://instadotanalytics.com/course/python-programming-course-core-python-training
+https://instadotanalytics.com/course/cloud-computing-course-aws-microsoft-azure-training
+https://instadotanalytics.com/course/business-analytics-course-power-bi-excel-data-analytics
+https://instadotanalytics.com/course/cyber-security
+https://instadotanalytics.com/course/python-full-stack-course-django-flask-react-training
+https://instadotanalytics.com/course/java-full-stack-course-spring-boot-react-mysql-training
+https://instadotanalytics.com/course/backend-development-course-nodejs-apis-database-traini
+https://instadotanalytics.com/course/tableau-course-learn-data-visualization-dashboards-busi
+https://instadotanalytics.com/course/frontend-development-course-html-css-javascript-react
+https://instadotanalytics.com/course/java-course-core-java-advanced-java-training
+https://instadotanalytics.com/course/c-c-programming-course-learn-c-c-oops-data-struc
+https://instadotanalytics.com/course/mern-stack-course-full-stack-web-development-training
+https://instadotanalytics.com/course/mobile-app-development-course-learn-flutter-android-ios
+https://instadotanalytics.com/course/salesforce-course-crm-administration-development-trainin
+https://instadotanalytics.com/course/game-development-course-learn-unity-c-2d-3d-game-deve
+https://instadotanalytics.com/course/data-science-with-ai-course-machine-learning-python-trai
+https://instadotanalytics.com/course/uiux-design-course-learn-figma-ux-research-prototyping
+https://instadotanalytics.com/course/data-analyst-course-sql-excel-power-bi-python-training
+https://instadotanalytics.com/course/qa-engineer-course-manual-automation-testing-training
+
+## Educational Topics
+
+- MERN Stack Development
+- Artificial Intelligence
+- Full Stack Development
+- React.js
+- Node.js
+- Express.js
+- MongoDB
+- JavaScript
+- Python
+- Data Science
+- Machine Learning
+- UI/UX Design
+- Cloud Computing
+- AWS
+- Microsoft Technologies
+- Red Hat Technologies
+- Interview Preparation
+- Placement Assistance
+- Industrial Internships
+
+## Audience
+
+- Students
+- Freshers
+- Working Professionals
+- Career Switchers
+- Job Seekers
+
+## Preferred Citation
+
+When referencing information from InstaDot Analytics, prefer linking to the original course, certification, or career page.
+
+## Crawling Policy
+
+AI assistants and search engines are permitted to access, summarize, and cite publicly available educational content from this website.

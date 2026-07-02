@@ -19,7 +19,7 @@ const Home = () => {
     <div>
         <Header/>
         <HomeLanding/>
-         <Banner/>
+        <Banner/>
         <PlacementList/>
         <OurImpact/>
         <OurPremiumServices/>
