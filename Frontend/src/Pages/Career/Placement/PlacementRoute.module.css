@@ -1,7 +1,14 @@
 /* ── SECTION SHELL ─────────────────────────────────────────── */
 .section {
   position: relative;
+<<<<<<< HEAD
   min-height: 95vh;
+=======
+
+  min-height: 72vh;
+  height:100vh;
+  min-height: 90vh;
+>>>>>>> 0ea9f6a22bdd48a26719bc0b3949ddfebc8cd316
   display: flex;
   align-items: center;
   padding: 20px 20px;

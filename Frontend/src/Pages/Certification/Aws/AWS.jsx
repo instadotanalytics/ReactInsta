@@ -185,10 +185,10 @@ const AWS = () => {
           {/* Headline — centered, dark */}
           <h1 className={styles.title}>
             Master Cloud Computing
-            <br />
-            with <span className={styles.highlight}>AWS Certification</span>
+            <span className={styles.secondLine}>
+              with <span className={styles.highlight}>AWS Certification</span>
+            </span>
           </h1>
-
           {/* Tagline */}
           <p className={styles.description}>
             Become an AWS Certified Cloud Professional. Gain expertise in cloud
