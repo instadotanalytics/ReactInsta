@@ -251,7 +251,7 @@ const CertificationApplyForm = () => {
           <p className={styles.terms}>
             <FiAward style={{ marginRight: "6px", verticalAlign: "middle" }} />
             By submitting, you agree to our
-            <span> Terms of Service </span>and<span> Privacy Policy</span>.
+            Terms of Service and Privacy Policy
           </p>
         </div>
       </div>

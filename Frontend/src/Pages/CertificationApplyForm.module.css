@@ -12,7 +12,9 @@
 /* ─── Section ────────────────────────────────────────────────────── */
 .section {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f4f4ff 0%, #e8ecff 100%);
+   background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
