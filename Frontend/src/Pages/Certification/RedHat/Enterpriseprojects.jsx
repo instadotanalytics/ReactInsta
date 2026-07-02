@@ -214,7 +214,7 @@ function ProjectCard({ project, index }) {
         </div>
 
         {/* CTA */}
-        </div>
+      </div>
     </motion.article>
   );
 }
@@ -249,19 +249,8 @@ export default function EnterpriseProject() {
       </div>
 
       <div className={styles.container}>
-        {/* Header */}
+        {/* Header - Badge Removed */}
         <div className={styles.headerWrap}>
-          <motion.div
-            className={styles.badge}
-            initial={{ opacity: 0, y: -12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className={styles.badgeDot} />
-            Industry Projects
-          </motion.div>
-
           <motion.h2
             className={styles.heading}
             initial={{ opacity: 0, y: 24 }}
