@@ -124,21 +124,7 @@ const AboutIBMCertifications = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
 
-          <motion.div
-            className={styles.badgeWrapper}
-            initial="hidden"
-            animate={controls}
-            variants={{
-              hidden: { opacity: 0, y: -20 },
-              visible: { opacity: 1, y: 0 }
-            }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <span className={styles.badge}>
-              <HiOutlineBadgeCheck size={18} />
-              IBM CERTIFICATIONS
-            </span>
-          </motion.div>
+          
 
           <motion.h1
             className={styles.title}
@@ -259,9 +245,7 @@ const AboutIBMCertifications = () => {
                   <p>{cert.count}</p>
                 </div>
 
-                <FiArrowRight
-                  className={styles.certArrow}
-                />
+                
               </motion.div>
             ))}
           </motion.div>
