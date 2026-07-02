@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './CertificationCustom.module.css';
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./CertificationCustom.module.css";
 
 // React Icons imports
-import { 
-  FiAward, 
-  FiZap, 
-  FiPenTool, 
-  FiLock, 
-  FiTarget, 
-  FiBookOpen, 
-  FiBriefcase, 
+import {
+  FiAward,
+  FiZap,
+  FiPenTool,
+  FiLock,
+  FiTarget,
+  FiBookOpen,
+  FiBriefcase,
   FiTrendingUp,
   FiStar,
   FiCheckCircle,
@@ -20,8 +20,8 @@ import {
   FiMapPin,
   FiMessageCircle,
   FiUser,
-  FiMail
-} from 'react-icons/fi';
+  FiMail,
+} from "react-icons/fi";
 
 import {
   FaGraduationCap,
@@ -38,8 +38,8 @@ import {
   FaMapMarkerAlt,
   FaComment,
   FaUserCircle,
-  FaEnvelope
-} from 'react-icons/fa';
+  FaEnvelope,
+} from "react-icons/fa";
 
 import {
   MdSchool,
@@ -56,13 +56,17 @@ import {
   MdLocationOn,
   MdChat,
   MdPerson,
-  MdEmail
-} from 'react-icons/md';
+  MdEmail,
+} from "react-icons/md";
 
 const CertificationCustom = () => {
-  const [activeTab, setActiveTab] = useState('benefits');
+  const [activeTab, setActiveTab] = useState("benefits");
   const statsRef = useRef(null);
-  const [counts, setCounts] = useState({ certs: 0, companies: 0, templates: 0 });
+  const [counts, setCounts] = useState({
+    certs: 0,
+    companies: 0,
+    templates: 0,
+  });
 
   // Animation for stats counter
   useEffect(() => {
@@ -74,7 +78,7 @@ const CertificationCustom = () => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (statsRef.current) {
@@ -119,32 +123,39 @@ const CertificationCustom = () => {
         <div className={styles.heroGrid}>
           {/* Left Content */}
           <div className={styles.heroContent}>
-            <span className={styles.eyebrow}>
-              <span className={styles.eyebrowDot} />
-              <FiAward size={14} /> Custom Certificates
-            </span>
-
             <h1 className={styles.heroTitle}>
-              Create <span className={styles.gradientText}>Custom Certificates</span> That Impress
+              Create{" "}
+              <span className={styles.gradientText}>Custom Certificates</span>{" "}
+              That Impress
             </h1>
 
             <p className={styles.heroDescription}>
-              Design professional, personalized certificates for your achievements,
-              training programs, and special recognitions. Fully customizable templates
-              with your company branding.
+              Design professional, personalized certificates for your
+              achievements, training programs, and special recognitions. Fully
+              customizable templates with your company branding.
             </p>
 
             <div className={styles.featureBadges}>
-              <span><FiCheckCircle size={12} /> Premium certificate templates</span>
-              <span><FiCheckCircle size={12} /> Add company logo & branding</span>
-              <span><FiCheckCircle size={12} /> Digital & print ready formats</span>
-              <span><FiCheckCircle size={12} /> Bulk certificate generation</span>
+              <span>
+                <FiCheckCircle size={12} /> Premium certificate templates
+              </span>
+              <span>
+                <FiCheckCircle size={12} /> Add company logo & branding
+              </span>
+              <span>
+                <FiCheckCircle size={12} /> Digital & print ready formats
+              </span>
+              <span>
+                <FiCheckCircle size={12} /> Bulk certificate generation
+              </span>
             </div>
 
             {/* Stats */}
             <div className={styles.statsGrid} ref={statsRef}>
               <div className={styles.statCard}>
-                <div className={styles.statNumber}>{counts.certs.toLocaleString()}+</div>
+                <div className={styles.statNumber}>
+                  {counts.certs.toLocaleString()}+
+                </div>
                 <div className={styles.statLabel}>Certificates Created</div>
               </div>
               <div className={styles.statCard}>
@@ -189,22 +200,30 @@ const CertificationCustom = () => {
 
         <div className={styles.featuresGrid}>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}><FiAward size={32} /></div>
+            <div className={styles.featureIcon}>
+              <FiAward size={32} />
+            </div>
             <h3>Premium Quality</h3>
             <p>High-quality paper and printing materials</p>
           </div>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}><FiZap size={32} /></div>
+            <div className={styles.featureIcon}>
+              <FiZap size={32} />
+            </div>
             <h3>Fast Turnaround</h3>
             <p>24-48 hour delivery for bulk orders</p>
           </div>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}><FiPenTool size={32} /></div>
+            <div className={styles.featureIcon}>
+              <FiPenTool size={32} />
+            </div>
             <h3>Custom Designs</h3>
             <p>Fully customizable templates for your brand</p>
           </div>
           <div className={styles.featureCard}>
-            <div className={styles.featureIcon}><FiLock size={32} /></div>
+            <div className={styles.featureIcon}>
+              <FiLock size={32} />
+            </div>
             <h3>Secure Verification</h3>
             <p>QR codes and unique IDs for authenticity</p>
           </div>
@@ -216,11 +235,39 @@ const CertificationCustom = () => {
         <h3>Trusted by Dreamers, Doers and Leaders</h3>
         <div className={styles.companyMarquee}>
           <div className={styles.marqueeTrack}>
-            {['Microsoft', 'Amazon', 'Apple', 'Meta', 'IBM', 'Intel', 'Cisco', 'Oracle', 'Salesforce', 'Adobe', 'NVIDIA'].map((company) => (
-              <span key={company} className={styles.companyLogo}>{company}</span>
+            {[
+              "Microsoft",
+              "Amazon",
+              "Apple",
+              "Meta",
+              "IBM",
+              "Intel",
+              "Cisco",
+              "Oracle",
+              "Salesforce",
+              "Adobe",
+              "NVIDIA",
+            ].map((company) => (
+              <span key={company} className={styles.companyLogo}>
+                {company}
+              </span>
             ))}
-            {['Microsoft', 'Amazon', 'Apple', 'Meta', 'IBM', 'Intel', 'Cisco', 'Oracle', 'Salesforce', 'Adobe', 'NVIDIA'].map((company) => (
-              <span key={company + '-dup'} className={styles.companyLogo}>{company}</span>
+            {[
+              "Microsoft",
+              "Amazon",
+              "Apple",
+              "Meta",
+              "IBM",
+              "Intel",
+              "Cisco",
+              "Oracle",
+              "Salesforce",
+              "Adobe",
+              "NVIDIA",
+            ].map((company) => (
+              <span key={company + "-dup"} className={styles.companyLogo}>
+                {company}
+              </span>
             ))}
           </div>
         </div>
@@ -234,67 +281,86 @@ const CertificationCustom = () => {
           </span>
           <h2>Start Your Certification Journey</h2>
           <p>
-            Select a program to explore its benefits, curriculum, and career outcomes.
+            Select a program to explore its benefits, curriculum, and career
+            outcomes.
           </p>
         </div>
 
         <div className={styles.tabContainer}>
           <div className={styles.tabs}>
             <button
-              className={`${styles.tab} ${activeTab === 'benefits' ? styles.activeTab : ''}`}
-              onClick={() => setActiveTab('benefits')}
+              className={`${styles.tab} ${activeTab === "benefits" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("benefits")}
             >
               <FiTarget size={14} /> Benefits
             </button>
             <button
-              className={`${styles.tab} ${activeTab === 'curriculum' ? styles.activeTab : ''}`}
-              onClick={() => setActiveTab('curriculum')}
+              className={`${styles.tab} ${activeTab === "curriculum" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("curriculum")}
             >
               <FiBookOpen size={14} /> Curriculum
             </button>
             <button
-              className={`${styles.tab} ${activeTab === 'outcomes' ? styles.activeTab : ''}`}
-              onClick={() => setActiveTab('outcomes')}
+              className={`${styles.tab} ${activeTab === "outcomes" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("outcomes")}
             >
               <FiTrendingUp size={14} /> Career Outcomes
             </button>
           </div>
 
           <div className={styles.tabContent}>
-            {activeTab === 'benefits' && (
+            {activeTab === "benefits" && (
               <div className={styles.factBox}>
                 <h4>Did You Know?</h4>
                 <p>
-                  Certified professionals earn 25–40% higher salaries and are 2× more likely
-                  to be promoted within 12 months.
+                  Certified professionals earn 25–40% higher salaries and are 2×
+                  more likely to be promoted within 12 months.
                 </p>
               </div>
             )}
-            {activeTab === 'curriculum' && (
+            {activeTab === "curriculum" && (
               <div className={styles.curriculumList}>
                 <h4>What You'll Learn</h4>
                 <ul>
-                  <li><FiCheckCircle size={16} /> Advanced certification design principles</li>
-                  <li><FiCheckCircle size={16} /> Digital & print production techniques</li>
-                  <li><FiCheckCircle size={16} /> Brand integration & customization</li>
-                  <li><FiCheckCircle size={16} /> Quality assurance & verification methods</li>
+                  <li>
+                    <FiCheckCircle size={16} /> Advanced certification design
+                    principles
+                  </li>
+                  <li>
+                    <FiCheckCircle size={16} /> Digital & print production
+                    techniques
+                  </li>
+                  <li>
+                    <FiCheckCircle size={16} /> Brand integration &
+                    customization
+                  </li>
+                  <li>
+                    <FiCheckCircle size={16} /> Quality assurance & verification
+                    methods
+                  </li>
                 </ul>
               </div>
             )}
-            {activeTab === 'outcomes' && (
+            {activeTab === "outcomes" && (
               <div className={styles.outcomesGrid}>
                 <div className={styles.outcomeCard}>
-                  <span className={styles.outcomeEmoji}><FaRocket size={32} /></span>
+                  <span className={styles.outcomeEmoji}>
+                    <FaRocket size={32} />
+                  </span>
                   <h5>Career Growth</h5>
                   <p>Accelerate your career with recognized certification</p>
                 </div>
                 <div className={styles.outcomeCard}>
-                  <span className={styles.outcomeEmoji}><FiBriefcase size={32} /></span>
+                  <span className={styles.outcomeEmoji}>
+                    <FiBriefcase size={32} />
+                  </span>
                   <h5>New Opportunities</h5>
                   <p>Unlock doors to premium job positions</p>
                 </div>
                 <div className={styles.outcomeCard}>
-                  <span className={styles.outcomeEmoji}><FaChartLine size={32} /></span>
+                  <span className={styles.outcomeEmoji}>
+                    <FaChartLine size={32} />
+                  </span>
                   <h5>Higher Earnings</h5>
                   <p>Significantly increase your earning potential</p>
                 </div>
@@ -308,20 +374,42 @@ const CertificationCustom = () => {
       <section className={styles.testimonials}>
         <h2>What Our Students Say</h2>
         <p className={styles.testimonialSubtitle}>
-          Real feedback from real learners who transformed their careers with our training programs.
+          Real feedback from real learners who transformed their careers with
+          our training programs.
         </p>
 
         <div className={styles.testimonialGrid}>
           {[
-            { name: 'Priya Sharma', location: 'Mumbai, Maharashtra', text: 'Amazing experience! Everything was delivered exactly as promised. The team guided me throughout the process.' },
-            { name: 'Aarav Mehta', location: 'Ahmedabad, Gujarat', text: 'Excellent quality and service. The pricing is slightly higher, but it\'s absolutely worth it. Highly recommended!' },
-            { name: 'Ananya Desai', location: 'Pune, Maharashtra', text: 'I enrolled online and everything went smoothly. The course content was practical and well-structured.' },
-            { name: 'Vikram Singh', location: 'Jaipur, Rajasthan', text: 'Outstanding training experience. The mentors were very supportive and knowledgeable.' },
-            { name: 'Neha Gupta', location: 'Delhi, NCR', text: 'First time joining such a program and I\'m impressed. Customer support responded quickly and professionally.' }
+            {
+              name: "Priya Sharma",
+              location: "Mumbai, Maharashtra",
+              text: "Amazing experience! Everything was delivered exactly as promised. The team guided me throughout the process.",
+            },
+            {
+              name: "Aarav Mehta",
+              location: "Ahmedabad, Gujarat",
+              text: "Excellent quality and service. The pricing is slightly higher, but it's absolutely worth it. Highly recommended!",
+            },
+            {
+              name: "Ananya Desai",
+              location: "Pune, Maharashtra",
+              text: "I enrolled online and everything went smoothly. The course content was practical and well-structured.",
+            },
+            {
+              name: "Vikram Singh",
+              location: "Jaipur, Rajasthan",
+              text: "Outstanding training experience. The mentors were very supportive and knowledgeable.",
+            },
+            {
+              name: "Neha Gupta",
+              location: "Delhi, NCR",
+              text: "First time joining such a program and I'm impressed. Customer support responded quickly and professionally.",
+            },
           ].map((testimonial, index) => (
             <div key={index} className={styles.testimonialCard}>
               <div className={styles.stars}>
-                <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} />
+                <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} />{" "}
+                <FiStar size={18} /> <FiStar size={18} />
               </div>
               <p>"{testimonial.text}"</p>
               <div className={styles.testimonialAuthor}>

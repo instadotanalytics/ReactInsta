@@ -6,11 +6,17 @@
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
   padding: 0;
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 /* Animated Background Orbs */
-.orb1, .orb2, .orb3 {
+.orb1,
+.orb2,
+.orb3 {
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
@@ -47,15 +53,19 @@
 }
 
 @keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, 30px) scale(1.1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(50px, 30px) scale(1.1);
+  }
 }
 
 /* Hero Section */
 .hero {
   position: relative;
   z-index: 1;
-  padding:45px 0px 60px;
+  padding: 45px 0px 60px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -71,41 +81,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.80rem;
-  font-weight: 600;
-  color: #3b82f6;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: rgba(59, 130, 246, 0.08);
-  padding: 0.3rem 1rem;
-  border-radius: 50px;
-  width: fit-content;
-  border: 1px solid rgba(59, 130, 246, 0.1);
-}
-
-.eyebrow svg {
-  width: 14px;
-  height: 14px;
-}
-
-.eyebrowDot {
-  width: 6px;
-  height: 6px;
-  background: #3b82f6;
-  border-radius: 50%;
-  display: inline-block;
-  animation: pulseDot 2s ease-in-out infinite;
-}
-
-@keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.5; }
 }
 
 .heroTitle {
@@ -223,7 +198,7 @@
   backdrop-filter: blur(20px);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.04),
     0 8px 24px rgba(0, 0, 0, 0.02),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -234,7 +209,7 @@
 
 .imgFrame:hover {
   transform: translateY(-6px);
-  box-shadow: 
+  box-shadow:
     0 30px 80px rgba(59, 130, 246, 0.08),
     0 12px 32px rgba(0, 0, 0, 0.04);
 }
@@ -299,13 +274,14 @@
 .about {
   position: relative;
   z-index: 1;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 2.5rem auto;
   padding: 3rem 1.5rem;
-  background: rgba(255, 255, 255, 0.4);
+   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+
   backdrop-filter: blur(10px);
   border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  
 }
 
 .aboutHeader {
@@ -349,7 +325,7 @@
 }
 
 .featureIcon {
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
@@ -363,7 +339,7 @@
 }
 
 .featureCard h3 {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #0f172a;
   margin-bottom: 0.4rem;
@@ -371,7 +347,7 @@
 
 .featureCard p {
   color: #64748b;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   line-height: 1.5;
 }
 
@@ -393,8 +369,20 @@
 
 .companyMarquee {
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
 }
 
 .marqueeTrack {
@@ -405,8 +393,12 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .companyLogo {
@@ -431,13 +423,12 @@
 .journey {
   position: relative;
   z-index: 1;
-  max-width: 850px;
+  max-width: 1200px;
   margin: 2.5rem auto;
   padding: 2.5rem 1.5rem;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
+   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
   border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px;
   text-align: center;
 }
 
@@ -467,7 +458,8 @@
 }
 
 .tabContainer {
-  background: rgba(255, 255, 255, 0.4);
+   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+
   border-radius: 18px;
   padding: 1.25rem;
   margin-bottom: 0;
@@ -502,7 +494,8 @@
 }
 
 .tab:hover {
-  background: rgba(255, 255, 255, 0.5);
+   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+
   color: #1e293b;
 }
 
@@ -517,10 +510,10 @@
 }
 
 .factBox {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(124, 58, 237, 0.05));
+ background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+
   border-radius: 14px;
   padding: 1.5rem;
-  border-left: 4px solid #3b82f6;
 }
 
 .factBox h4 {
@@ -723,7 +716,7 @@
   .heroGrid {
     gap: 3rem;
   }
-  
+
   .hero {
     padding: 60px 20px 40px;
   }
@@ -733,74 +726,96 @@
   .hero {
     padding: 40px 16px 30px;
   }
-  
+
   .heroGrid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  
+
+  /* Center hero heading, description and badges on mobile */
+  .heroContent {
+    text-align: center;
+    align-items: center;
+  }
+
   .heroDescription {
     max-width: 100%;
   }
-  
+
+  .featureBadges {
+    justify-content: center;
+  }
+
   .statsGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
+    gap: 0.6rem;
   }
-  
+
   .statNumber {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
-  
+
   .statCard {
-    padding: 0.8rem;
+    padding: 0.7rem 0.5rem;
   }
-  
+
   .imgFrame {
     max-width: 400px;
     padding: 1rem;
   }
-  
+
   .corner {
     width: 28px;
     height: 28px;
   }
-  
-  .cornerTL { top: 0.5rem; left: 0.5rem; }
-  .cornerTR { top: 0.5rem; right: 0.5rem; }
-  .cornerBL { bottom: 0.5rem; left: 0.5rem; }
-  .cornerBR { bottom: 0.5rem; right: 0.5rem; }
-  
+
+  .cornerTL {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+  .cornerTR {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  .cornerBL {
+    bottom: 0.5rem;
+    left: 0.5rem;
+  }
+  .cornerBR {
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
   .featuresGrid {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
-  
+
   .testimonialGrid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .tabs {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .tab {
     text-align: center;
     justify-content: center;
   }
-  
+
   /* Responsive Icon Sizes */
   .featureIcon svg {
     width: 28px;
     height: 28px;
   }
-  
+
   .outcomeEmoji svg {
     width: 28px;
     height: 28px;
   }
-  
+
   .stars svg {
     width: 16px;
     height: 16px;
@@ -811,79 +826,104 @@
   .hero {
     padding: 30px 12px 20px;
   }
-  
+
   .heroGrid {
     gap: 1.5rem;
   }
-  
+
   .heroTitle {
     font-size: 1.8rem;
   }
-  
+
   .statsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
   }
-  
+
+  .statNumber {
+    font-size: 1rem;
+  }
+
+  .statLabel {
+    font-size: 0.65rem;
+  }
+
+  .statCard {
+    padding: 0.6rem 0.35rem;
+  }
+
   .featureBadges span {
     font-size: 0.7rem;
     padding: 0.3rem 0.8rem;
   }
-  
+
   .featuresGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
   }
-  
+
+  .featureCard {
+    padding: 1rem 0.5rem;
+  }
+
   .testimonialGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .outcomesGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .imgFrame {
     max-width: 300px;
     padding: 0.8rem;
   }
-  
+
   .corner {
     width: 20px;
     height: 20px;
   }
-  
-  .cornerTL { top: 0.4rem; left: 0.4rem; }
-  .cornerTR { top: 0.4rem; right: 0.4rem; }
-  .cornerBL { bottom: 0.4rem; left: 0.4rem; }
-  .cornerBR { bottom: 0.4rem; right: 0.4rem; }
-  
+
+  .cornerTL {
+    top: 0.4rem;
+    left: 0.4rem;
+  }
+  .cornerTR {
+    top: 0.4rem;
+    right: 0.4rem;
+  }
+  .cornerBL {
+    bottom: 0.4rem;
+    left: 0.4rem;
+  }
+  .cornerBR {
+    bottom: 0.4rem;
+    right: 0.4rem;
+  }
+
   /* Small Screen Icon Sizes */
   .featureIcon svg {
     width: 24px;
     height: 24px;
   }
-  
+
   .outcomeEmoji svg {
     width: 24px;
     height: 24px;
   }
-  
+
   .stars svg {
     width: 14px;
     height: 14px;
   }
-  
+
   .tab svg {
     width: 12px;
     height: 12px;
   }
-  
+
   .curriculumList li svg {
     width: 14px;
     height: 14px;
-  }
-  
-  .eyebrow svg {
-    width: 12px;
-    height: 12px;
   }
 }
