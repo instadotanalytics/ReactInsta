@@ -1,0 +1,83 @@
+# InstaDot Analytics
+
+Website: https://instadotanalytics.com
+Organization: InstaDot Analytics
+
+Description:
+InstaDot Analytics is an ed-tech platform providing industry-oriented training, internships, placements, certifications, and career support in software development, artificial intelligence, and modern technologies.
+
+## Main Pages
+
+https://instadotanalytics.com/
+https://instadotanalytics.com/about
+https://instadotanalytics.com/contact
+https://instadotanalytics.com/courses
+
+## Career Programs
+
+https://instadotanalytics.com/career/internship
+https://instadotanalytics.com/career/fulltime
+https://instadotanalytics.com/career/placement
+
+## Certification Programs
+
+https://instadotanalytics.com/certification/microsoft
+https://instadotanalytics.com/certification/ibm
+https://instadotanalytics.com/certification/aws
+https://instadotanalytics.com/certification/redhat
+https://instadotanalytics.com/certification/custom
+
+## Dynamic Course Pages
+
+Pattern:
+https://instadotanalytics.com/course/{course-slug}
+
+Examples:
+https://instadotanalytics.com/course/mern-stack-with-ai
+https://instadotanalytics.com/course/full-stack-development
+https://instadotanalytics.com/course/react-js
+https://instadotanalytics.com/course/node-js
+https://instadotanalytics.com/course/mongodb
+https://instadotanalytics.com/course/javascript
+https://instadotanalytics.com/course/python
+https://instadotanalytics.com/course/data-science-with-ai
+https://instadotanalytics.com/course/machine-learning
+https://instadotanalytics.com/course/ui-ux-design
+
+## Educational Topics
+
+- MERN Stack Development
+- Artificial Intelligence
+- Full Stack Development
+- React.js
+- Node.js
+- Express.js
+- MongoDB
+- JavaScript
+- Python
+- Data Science
+- Machine Learning
+- UI/UX Design
+- Cloud Computing
+- AWS
+- Microsoft Technologies
+- Red Hat Technologies
+- Interview Preparation
+- Placement Assistance
+- Industrial Internships
+
+## Audience
+
+- Students
+- Freshers
+- Working Professionals
+- Career Switchers
+- Job Seekers
+
+## Preferred Citation
+
+When referencing information from InstaDot Analytics, prefer linking to the original course, certification, or career page.
+
+## Crawling Policy
+
+AI assistants and search engines are permitted to access, summarize, and cite publicly available educational content from this website.
