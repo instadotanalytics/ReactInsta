@@ -56,7 +56,9 @@ const Contact = () => {
         setError(data.message || "Something went wrong. Please try again.");
       }
     } catch (err) {
-      setError("Unable to connect to server. Please check your internet connection.");
+      setError(
+        "Unable to connect to server. Please check your internet connection.",
+      );
     } finally {
       setLoading(false);
     }
@@ -107,12 +109,8 @@ const Contact = () => {
         {/* ── Hero ── */}
         <div className={styles.heroHeader}>
           <div className={styles.heroInner}>
-
             {/* Badge */}
-            <div className={styles.badge}>
-              <span className={styles.badgeDot} />
-              Now Enrolling — Batch Starting Soon
-            </div>
+          
 
             {/* Title */}
             <h1 className={styles.title}>
@@ -124,17 +122,16 @@ const Contact = () => {
             {/* Subtitle */}
             <p className={styles.subtitle}>
               Master Java Full Stack, React, Spring Boot, Node.js and more —
-              through hands-on training crafted by industry experts to get
-              you hired faster.
+              through hands-on training crafted by industry experts to get you
+              hired faster.
             </p>
 
             {/* Description */}
             <p className={styles.heroDesc}>
-              Join thousands of students who transformed their careers with
-              our structured programs, real-world capstone projects, and
-              dedicated placement support. Our curriculum is built around
-              what top companies actually look for — so you're job-ready
-              from day one.
+              Join thousands of students who transformed their careers with our
+              structured programs, real-world capstone projects, and dedicated
+              placement support. Our curriculum is built around what top
+              companies actually look for — so you're job-ready from day one.
             </p>
 
             {/* Buttons */}
@@ -154,7 +151,6 @@ const Contact = () => {
                 </div>
               ))}
             </div>
-
           </div>
 
           {/* Scroll hint */}
@@ -166,10 +162,8 @@ const Contact = () => {
 
         {/* ── Below Hero ── */}
         <div className={styles.container}>
-
           {/* Main Grid */}
           <div className={styles.mainGrid}>
-
             {/* Left — Info */}
             <div className={styles.infoCol}>
               <div className={styles.infoInner}>
@@ -178,8 +172,8 @@ const Contact = () => {
 
                 <h2 className={styles.infoHeading}>Contact Information</h2>
                 <p className={styles.infoDesc}>
-                  Fill up the form and our team will get back to you within
-                  24 hours.
+                  Fill up the form and our team will get back to you within 24
+                  hours.
                 </p>
 
                 <div className={styles.infoList}>
@@ -205,7 +199,6 @@ const Contact = () => {
             {/* Right — Form */}
             <div className={styles.formCol}>
               <form className={styles.form} onSubmit={handleSubmit}>
-
                 {submitted && (
                   <p className={styles.successMsg}>
                     <FiCheckCircle size={16} /> Message sent successfully!
@@ -274,15 +267,12 @@ const Contact = () => {
                 >
                   <span>{loading ? "Sending..." : "Send Message "}</span>
                 </button>
-
               </form>
             </div>
-
           </div>
 
           {/* Map */}
           <div className={styles.mapWrapper}>
-         
             <div className={styles.mapFrame}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d229.9578356683155!2d75.89718498963744!3d22.75330334092318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396302ab01f137ed%3A0xd9ae82fbc59ab08a!2sP-9%2C%20Vijay%20Nagar%2C%20Scheme%20No%2054%2C%20Indore%2C%20Madhya%20Pradesh%20452010!5e0!3m2!1sen!2sin!4v1773321741083!5m2!1sen!2sin"
@@ -296,7 +286,6 @@ const Contact = () => {
               />
             </div>
           </div>
-
         </div>
       </div>
 
