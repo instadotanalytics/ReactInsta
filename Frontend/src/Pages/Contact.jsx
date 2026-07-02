@@ -154,10 +154,10 @@ const Contact = () => {
           </div>
 
           {/* Scroll hint */}
-          <div className={styles.scrollHint}>
+          {/* <div className={styles.scrollHint}>
             <span>Scroll down</span>
             <FiChevronDown className={styles.scrollArrow} size={18} />
-          </div>
+          </div> */}
         </div>
 
         {/* ── Below Hero ── */}

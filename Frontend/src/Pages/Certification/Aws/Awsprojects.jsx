@@ -97,7 +97,7 @@ export default function AWSProjects() {
       <div className={styles.inner}>
         {/* Header */}
         <header className={styles.header}>
-          <span className={styles.eyebrow} aria-label="Section category">Hands-On Learning</span>
+          {/* <span className={styles.eyebrow} aria-label="Section category">Hands-On Learning</span> */}
           <h2 id="aws-projects-title" className={styles.title}>
             Hands-On <span className={styles.titleAccent}>AWS Projects</span>
           </h2>

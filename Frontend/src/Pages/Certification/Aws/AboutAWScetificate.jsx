@@ -196,10 +196,10 @@ const AboutAWSCertificate = () => {
           <div className={styles.heroGrid}>
             {/* LEFT */}
             <div className={styles.content}>
-              <div className={styles.badge}>
+              {/* <div className={styles.badge}>
                 <FaAws />
                 <span>AWS CERTIFICATION</span>
-              </div>
+              </div> */}
 
               <h2 className={styles.title}>
                 Validate Your Cloud Expertise with

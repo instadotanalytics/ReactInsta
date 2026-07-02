@@ -160,19 +160,17 @@ export default function HomeLanding() {
 
       <div className={styles.content}>
         <h1 className={styles.title}>
-          Built for <span className={styles.accent}>Scale</span>
-          <span className={styles.mobileBreak}> &amp;</span>
+          Your <span className={styles.accent}>Gateway</span>
+          <span className={styles.mobileBreak}> to a</span>
           <br className={styles.desktopBreak} />
           <span className={styles.noWrap}>
-            <span className={styles.accent}>Intelligence.</span> Powered by{" "}
-            <span className={styles.accent}>AI.</span>
+            <span className={styles.accent}>Successful</span>
+            <span className={styles.accent}>  Tech Career</span>
           </span>
         </h1>
 
         <p className={styles.desc}>
-          From London startups to Singapore enterprises — we build AI agents,
-          ship full-stack products, and scale cloud infrastructure. Fast.
-          Reliable. Built to last.
+         Empowering students with industry-ready skills through professional training, internships, live projects, and placement support.
         </p>
 
         <div className={styles.ctaRow}>

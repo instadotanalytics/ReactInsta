@@ -13,7 +13,7 @@ const sections = [
     subtitle: 'Empowering Careers Nationwide',
     desc: 'We provide industry-focused training programs that help learners gain real-world skills and grow their careers. Our comprehensive approach ensures every student achieves their professional goals.',
     image: '/images/download (1).jfif',
-    tag: '01',
+    // tag: '01',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const sections = [
     subtitle: 'Built with Industry Experts',
     desc: 'Courses designed with top industry experts. Stay ahead with industry-relevant skills, practical learning experiences, and up-to-date content tailored to employer expectations.',
     image: '/images/download (4).jfif',
-    tag: '02',
+    // tag: '02',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const sections = [
     subtitle: 'Real-World Experience',
     desc: 'Build a real-world portfolio with live projects. Apply your knowledge to practical challenges, gain industry experience, and develop job-ready skills through hands-on learning.',
     image: '/images/growth now.jfif',
-    tag: '03',
+    // tag: '03',
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const sections = [
     subtitle: 'Recognized Worldwide',
     desc: 'Internationally recognized certificates that showcase your expertise and boost your career prospects. Gain credentials valued by employers across industries and around the world.',
     image: '/images/download (2).jfif',
-    tag: '04',
+    // tag: '04',
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ const sections = [
     subtitle: 'Learn from the Best',
     desc: 'Learn from experienced industry professionals who provide valuable guidance, practical insights, and mentorship to help you build confidence and succeed in your career.',
     image: '/images/download (3).jfif',
-    tag: '05',
+    // tag: '05',
   },
 ];
 
@@ -325,7 +325,7 @@ const OurImpact = () => {
                       className={styles.panelContent}
                       ref={(el) => (textWrapRefs.current[i] = el)}
                     >
-                      <span className={styles.tag}>{s.tag}</span>
+                      {/* <span className={styles.tag}>{s.tag}</span> */}
                       <span className={styles.eyebrow}>{s.subtitle}</span>
                       <h2 className={styles.title}>{s.title}</h2>
                       <p className={styles.description}>{s.desc}</p>
@@ -385,7 +385,7 @@ const OurImpact = () => {
                   className={styles.mobileImage}
                   loading="lazy"
                 />
-                <span className={styles.mobileTag}>{s.tag}</span>
+                {/* <span className={styles.mobileTag}>{s.tag}</span> */}
               </div>
               <div className={styles.mobileContent}>
                 <span className={styles.mobileEyebrow}>{s.subtitle}</span>
