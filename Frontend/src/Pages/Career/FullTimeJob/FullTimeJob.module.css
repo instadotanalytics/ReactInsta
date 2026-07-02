@@ -451,22 +451,39 @@
     font-size: 34px;
   }
 
+  .searchWrapper {
+    width: 100%;
+  }
+
   .searchBar {
-    flex-direction: column;
-    padding: 12px;
-    gap: 10px;
-    border-radius: 16px;
+    display: flex;
+    flex-direction: row;     /* Keep horizontal */
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
+    border-radius: 14px;
+  }
+
+  .searchIcon {
+    margin: 0 8px;
+    font-size: 18px;
+    flex-shrink: 0;
   }
 
   .searchInput {
-    width: 100%;
-    padding: 10px 0;
+    flex: 1;
+    min-width: 0;
+    padding: 12px 0;
+    font-size: 14px;
   }
 
   .searchBtn {
-    width: 100%;
-    justify-content: center;
-    padding: 14px;
+    width: auto;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .statsGrid {

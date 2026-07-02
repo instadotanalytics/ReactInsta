@@ -7,7 +7,7 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding: 96px 24px 112px;
+  padding: 100px 20px;
   background: linear-gradient(160deg, #ffffff 0%, #f8fbff 45%, #eef6ff 100%);
   font-family: -apple-system, "Inter", "Segoe UI", sans-serif;
   opacity: 0;
@@ -346,7 +346,7 @@
 
 @media (max-width: 768px) {
   .section {
-    padding: 60px 18px 70px;
+    padding: 60px 18px 10px;
   }
 
   .inner {
