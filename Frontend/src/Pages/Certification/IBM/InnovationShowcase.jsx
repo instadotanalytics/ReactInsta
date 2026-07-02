@@ -112,8 +112,6 @@ const InnovationShowcase = () => {
                 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <span className={styles.badgeDot} />
-                <span>Building Tomorrow's Solutions</span>
               </motion.div>
 
               <motion.h1
