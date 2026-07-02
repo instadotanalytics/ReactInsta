@@ -26,48 +26,48 @@ import { TbCertificate } from "react-icons/tb";
 
 const IBM = () => {
   const certifications = [
-    { icon: <MdOutlineCloud size={22} />, title: "Cloud Computing", description: "AWS, Azure, hybrid cloud architecture" },
-    { icon: <MdOutlinePsychology size={22} />, title: "Artificial Intelligence", description: "Watson, NLP, machine learning" },
-    { icon: <MdOutlineBarChart size={22} />, title: "Data Science", description: "Analysis, visualization, Python" },
-    { icon: <MdOutlineShield size={22} />, title: "Cybersecurity", description: "Threat management, compliance" },
+    { icon: <MdOutlineCloud size={18} />, title: "Cloud Computing", description: "AWS, Azure, hybrid cloud" },
+    { icon: <MdOutlinePsychology size={18} />, title: "Artificial Intelligence", description: "Watson, NLP, ML" },
+    { icon: <MdOutlineBarChart size={18} />, title: "Data Science", description: "Analysis, Python, stats" },
+    { icon: <MdOutlineShield size={18} />, title: "Cybersecurity", description: "Threat management" },
   ];
 
   const features = [
-    { icon: <RiTrophyLine size={28} />, title: "Industry Trust", desc: "Recognized by 90% of Fortune 500 companies" },
-    { icon: <RiRefreshLine size={28} />, title: "Always Updated", desc: "Curriculum aligned with latest tech trends" },
-    { icon: <RiBriefcaseLine size={28} />, title: "Career Boost", desc: "Average 35% salary increase after certification" },
-    { icon: <RiGlobalLine size={28} />, title: "Global Community", desc: "Connect with IBM professionals worldwide" },
+    { icon: <RiTrophyLine size={24} />, title: "Industry Trust", desc: "Recognized by 90% of Fortune 500" },
+    { icon: <RiRefreshLine size={24} />, title: "Always Updated", desc: "Latest tech trends" },
+    { icon: <RiBriefcaseLine size={24} />, title: "Career Boost", desc: "35% salary increase" },
+    { icon: <RiGlobalLine size={24} />, title: "Global Community", desc: "Connect worldwide" },
   ];
 
   const certTracks = [
     {
-      icon: <MdOutlineCloud size={30} />,
+      icon: <MdOutlineCloud size={24} />,
       title: "Cloud Computing",
-      desc: "Master AWS, Azure & hybrid cloud architecture for modern enterprises.",
+      desc: "AWS, Azure & hybrid cloud architecture",
       modules: "12 Modules",
       bg: "#EFF6FF",
       color: "#2563EB",
     },
     {
-      icon: <MdOutlinePsychology size={30} />,
+      icon: <MdOutlinePsychology size={24} />,
       title: "Artificial Intelligence",
-      desc: "Watson AI, NLP systems, and machine learning model deployment.",
+      desc: "Watson AI, NLP, machine learning",
       modules: "16 Modules",
       bg: "#F5F3FF",
       color: "#7C3AED",
     },
     {
-      icon: <MdOutlineBarChart size={30} />,
+      icon: <MdOutlineBarChart size={24} />,
       title: "Data Science",
-      desc: "Data analysis, visualization, Python, and statistical modeling.",
+      desc: "Analysis, visualization, Python",
       modules: "14 Modules",
       bg: "#ECFDF5",
       color: "#059669",
     },
     {
-      icon: <MdOutlineShield size={30} />,
+      icon: <MdOutlineShield size={24} />,
       title: "Cybersecurity",
-      desc: "Threat management, compliance frameworks, and risk assessment.",
+      desc: "Threat & compliance frameworks",
       modules: "10 Modules",
       bg: "#FFF7ED",
       color: "#EA580C",
@@ -88,26 +88,20 @@ const IBM = () => {
         <div className={styles.heroInner}>
           {/* LEFT */}
           <div className={styles.leftContent}>
-            <div className={styles.eyebrow}>
-              <TbCertificate size={14} />
-              Globally Recognized Credentials
-            </div>
-
             <h1 className={styles.title}>
               Advance Your Career with{" "}
               <span className={styles.highlight}>IBM Certifications</span>
             </h1>
 
             <p className={styles.description}>
-              Gain industry-recognized credentials in Cloud Computing,
-              Artificial Intelligence, Data Science, and Cybersecurity with
-              professional IBM certification programs.
+              Earn globally recognized credentials and validate your expertise in
+              cutting-edge technologies with IBM's comprehensive certification programs.
             </p>
 
             <div className={styles.statsRow}>
               <div className={styles.statItem}>
                 <span className={styles.statNum}>500K+</span>
-                <span className={styles.statLabel}>Certified Pros</span>
+                <span className={styles.statLabel}>Certified</span>
               </div>
               <div className={styles.statDiv} />
               <div className={styles.statItem}>
