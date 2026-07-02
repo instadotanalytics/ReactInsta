@@ -3,7 +3,7 @@ import styles from "./IBM.module.css";
 import Header from "../../../components/Header/Header";
 import Footer from "../../../components/Footer/Footer";
 import CertificationApplyForm from "../../CertificationApplyForm";
-import InnovationShowcase from "../../InnovationShowcase";
+import InnovationShowcase from "./InnovationShowcase";
 import AboutIBM from "./AboutIBM";
 import IBMValueProposition from "./IBMValueProposition";
 
