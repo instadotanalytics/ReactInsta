@@ -163,20 +163,19 @@
   justify-content: flex-end;
   padding-right: 20px;
 }
-.sideImg_blue {
-  background: linear-gradient(135deg, #1e3a5f, #1d4ed8);
-}
+/* Same light-blue banner used on every card for a consistent look */
+.sideImg_blue,
 .sideImg_orange {
-  background: linear-gradient(135deg, #7c2d12, #ea580c);
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #3b82f6 100%);
 }
 
 .sideImgLogo {
   width: 40px;
   height: 40px;
   border-radius: 11px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,13 +199,10 @@
   border-radius: 999px;
   margin-bottom: 8px;
 }
-.cat_blue {
+.cat_blue,
+.cat_orange {
   background: #eff6ff;
   color: #2563eb;
-}
-.cat_orange {
-  background: #fff7ed;
-  color: #ea580c;
 }
 .sideTitle {
   font-size: 14.5px;
@@ -272,20 +268,21 @@
   }
 }
 
-/* ── Center card ────────────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════
+   Center card — now light blue / white instead of dark navy
+══════════════════════════════════════════════════════ */
 .centerCard {
-  background: #0f172a;
+  background: #fff;
+  border: 1.5px solid #eaf0ff;
   border-radius: 22px;
   overflow: hidden;
-  box-shadow:
-    0 14px 40px rgba(15, 23, 42, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.06);
   cursor: pointer;
   position: relative;
   transition: box-shadow 0.3s;
 }
 .centerCard:hover {
-  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.3);
+  box-shadow: 0 16px 40px rgba(59, 130, 246, 0.12);
 }
 
 .centerImgWrap {
@@ -297,16 +294,16 @@
 .centerImgInner {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e1b4b 100%);
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #3b82f6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .screenMock {
   width: 110px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -316,11 +313,11 @@
 .bar {
   height: 5px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(37, 99, 235, 0.22);
   width: 100%;
 }
 .barAccent {
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
   width: 60%;
 }
 .barSm {
@@ -329,12 +326,12 @@
 .barBlock {
   height: 20px;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(37, 99, 235, 0.14);
 }
 .centerOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, #0f172a 100%);
+  background: linear-gradient(180deg, transparent 30%, #ffffff 100%);
 }
 
 .centerBody {
@@ -346,7 +343,7 @@
   gap: 6px;
   font-size: 10.5px;
   font-weight: 600;
-  color: #60a5fa;
+  color: #2563eb;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -354,13 +351,13 @@
 .centerTitle {
   font-size: 17.5px;
   font-weight: 800;
-  color: #f8fafc;
+  color: #0f172a;
   line-height: 1.25;
   margin-bottom: 8px;
 }
 .centerDesc {
   font-size: 12.5px;
-  color: #94a3b8;
+  color: #475569;
   line-height: 1.55;
   margin-bottom: 12px;
 }
@@ -369,15 +366,17 @@
   font-weight: 500;
   padding: 3px 9px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #cbd5e1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
+  border: 1px solid rgba(37, 99, 235, 0.15);
 }
 .centerActions {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5edff;
 }
 .centerMeta {
   font-size: 11.5px;
@@ -430,22 +429,27 @@
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-bottom: 28px;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+@media (min-width: 480px) {
+  .statsGrid {
+    gap: 10px;
+  }
 }
 @media (min-width: 640px) {
   .statsGrid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 36px;
+    gap: 12px;
+    margin-bottom: 32px;
   }
 }
 
 .statCard {
   background: #fff;
   border: 1.5px solid #eaf0ff;
-  border-radius: 16px;
-  padding: 16px 12px;
+  border-radius: 14px;
+  padding: 12px 8px;
   text-align: center;
   transition:
     transform 0.3s,
@@ -472,79 +476,64 @@
 .statCard:hover::after {
   opacity: 0.14;
 }
-.statBlue::after {
-  background: #3b82f6;
-}
-.statPurple::after {
-  background: #8b5cf6;
-}
-.statGreen::after {
-  background: #10b981;
-}
+.statBlue::after,
+.statPurple::after,
+.statGreen::after,
 .statAmber::after {
-  background: #f59e0b;
+  background: #3b82f6;
 }
 
 .statIcon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 8px;
+  margin: 0 auto 6px;
   transition: transform 0.3s;
 }
 .statCard:hover .statIcon {
   transform: scale(1.08);
 }
-.statBlueIcon {
+.statBlueIcon,
+.statPurpleIcon,
+.statGreenIcon,
+.statAmberIcon {
   background: #eff6ff;
   color: #3b82f6;
 }
-.statPurpleIcon {
-  background: #f5f3ff;
-  color: #7c3aed;
-}
-.statGreenIcon {
-  background: #ecfdf5;
-  color: #10b981;
-}
-.statAmberIcon {
-  background: #fffbeb;
-  color: #f59e0b;
-}
 
 .statNum {
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 800;
   color: #111827;
   letter-spacing: -0.02em;
   line-height: 1;
 }
 .statLabel {
-  font-size: 11px;
+  font-size: 10px;
   color: #9ca3af;
   font-weight: 500;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 @media (min-width: 768px) {
   .statCard {
-    border-radius: 20px;
-    padding: 22px 18px;
+    border-radius: 18px;
+    padding: 20px 16px;
   }
   .statIcon {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .statNum {
-    font-size: 28px;
+    font-size: 26px;
   }
   .statLabel {
-    font-size: 12.5px;
+    font-size: 12px;
   }
 }
 

@@ -1,28 +1,50 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
 
     <!-- ===== FAVICON ===== -->
-    <link rel="icon" type="image/jpeg" href="./public/instadotlogoforweb.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/instadotlogoforweb.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- ===== BRAND COLOR (mobile browser bar) ===== -->
+    <!-- ===== THEME ===== -->
     <meta name="theme-color" content="#1a56db" />
 
     <!-- ===== PRIMARY SEO ===== -->
-    <title>Insta Dot Analytics | Best IT Training Institute in Indore</title>
+    <title>
+      Insta Dot Analytics | Best IT Training Institute in Indore | MERN, AI,
+      Data Science & Cyber Security
+    </title>
+
     <meta
       name="description"
-      content="Insta Dot Analytics — Best IT Training Institute in Indore. Learn Java, Python, MERN Stack, AI/ML, Data Science & Cyber Security with placement support and live projects."
+      content="Join Insta Dot Analytics, Indore's leading IT training institute. Learn MERN Stack, AI/ML, Data Science, Java, Python, Cyber Security, Cloud Computing, Power BI and more with live projects, internships, certifications, and placement support."
     />
+
+    <meta
+      name="keywords"
+      content="IT Training Institute Indore, MERN Stack Course, AI Course, Data Science Course, Java Training, Python Training, Cyber Security Training, Power BI, Full Stack Development, Internship, Placement"
+    />
+
     <meta name="author" content="Insta Dot Analytics" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="bingbot" content="index,follow" />
+
     <link rel="canonical" href="https://instadotanalytics.com/" />
 
-    <!-- ===== OPEN GRAPH (WhatsApp / Facebook) ===== -->
+    <!-- ===== GEO SEO ===== -->
+    <meta name="geo.region" content="IN-MP" />
+    <meta name="geo.placename" content="Indore" />
+    <meta name="geo.position" content="22.7196;75.8577" />
+    <meta name="ICBM" content="22.7196,75.8577" />
+
+    <!-- ===== OPEN GRAPH ===== -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://instadotanalytics.com/" />
     <meta
@@ -31,18 +53,16 @@
     />
     <meta
       property="og:description"
-      content="Learn Java, Python, MERN Stack, AI/ML, Data Science & Cyber Security with placement support and live projects at Insta Dot Analytics, Indore."
+      content="Learn MERN Stack, AI/ML, Data Science, Java, Python and Cyber Security with live projects and placement support."
     />
     <meta
       property="og:image"
       content="https://instadotanalytics.com/instalogo.jpeg"
     />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:site_name" content="Insta Dot Analytics" />
 
-    <!-- ===== TWITTER / X CARD ===== -->
+    <!-- ===== TWITTER ===== -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -50,55 +70,79 @@
     />
     <meta
       name="twitter:description"
-      content="Learn Java, Python, MERN Stack, AI/ML, Data Science & Cyber Security with placement support and live projects."
+      content="Learn MERN Stack, AI, Data Science, Cyber Security and more with placement support."
     />
     <meta
       name="twitter:image"
       content="https://instadotanalytics.com/instalogo.jpeg"
     />
-    <!-- Replace with your Twitter handle if available -->
-    <!-- <meta name="twitter:site" content="@InstaDotAnalytics" /> -->
 
-    <!-- ===== JSON-LD STRUCTURED DATA (Google Rich Results) ===== -->
+    <!-- ===== EDUCATIONAL ORGANIZATION ===== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": ["EducationalOrganization", "LocalBusiness"],
+        "@type": "EducationalOrganization",
         "name": "Insta Dot Analytics",
         "url": "https://instadotanalytics.com",
         "logo": "https://instadotanalytics.com/instalogo.jpeg",
+        "description": "Leading IT training institute in Indore offering industry-oriented programs with placement assistance.",
+        "sameAs": [
+          "https://www.instagram.com/instadotanalytics/",
+          "https://in.linkedin.com/company/instadotanalytics",
+          "https://www.facebook.com/instadotanalytics"
+        ]
+      }
+    </script>
+
+    <!-- ===== WEBSITE SCHEMA ===== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Insta Dot Analytics",
+        "url": "https://instadotanalytics.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://instadotanalytics.com/courses?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- ===== LOCAL BUSINESS ===== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Insta Dot Analytics",
         "image": "https://instadotanalytics.com/instalogo.jpeg",
-        "description": "Best IT Training Institute in Indore offering Java, Python, MERN Stack, AI/ML, Data Science and Cyber Security courses with placement support.",
+        "url": "https://instadotanalytics.com",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Indore",
           "addressRegion": "Madhya Pradesh",
           "addressCountry": "IN"
         },
-        "areaServed": "Indore",
-        "sameAs": [
-          "https://www.instagram.com/instadotanalytics/",
-          "https://in.linkedin.com/company/instadotanalytics",
-          "https://www.facebook.com/instadotanalytics"
-        ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "IT Training Courses",
-          "itemListElement": [
-            { "@type": "Course", "name": "Java Programming" },
-            { "@type": "Course", "name": "Python Programming" },
-            { "@type": "Course", "name": "MERN Stack Development" },
-            {
-              "@type": "Course",
-              "name": "Artificial Intelligence & Machine Learning"
-            },
-            { "@type": "Course", "name": "Data Science & Analytics" },
-            { "@type": "Course", "name": "Cyber Security & Ethical Hacking" },
-            { "@type": "Course", "name": "C & C++ Programming" },
-            { "@type": "Course", "name": "C# Programming" },
-            { "@type": "Course", "name": "Power BI & Tableau" }
-          ]
-        }
+        "areaServed": "Indore"
+      }
+    </script>
+
+    <!-- ===== COURSE CATALOG ===== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        "name": "Professional IT Courses",
+        "itemListElement": [
+          { "@type": "Course", "name": "MERN Stack Development" },
+          { "@type": "Course", "name": "Artificial Intelligence & Machine Learning" },
+          { "@type": "Course", "name": "Data Science & Analytics" },
+          { "@type": "Course", "name": "Cyber Security & Ethical Hacking" },
+          { "@type": "Course", "name": "Java Programming" },
+          { "@type": "Course", "name": "Python Programming" },
+          { "@type": "Course", "name": "Power BI & Tableau" },
+          { "@type": "Course", "name": "Cloud Computing" }
+        ]
       }
     </script>
   </head>
