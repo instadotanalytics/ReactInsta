@@ -212,13 +212,13 @@
   transition: opacity 0.25s;
 }
 
-.btnPrimary:hover::before {
+/* .btnPrimary:hover::before {
   opacity: 1;
 }
 .btnPrimary:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(59, 130, 246, 0.3);
-}
+} */
 .btnPrimary > * {
   position: relative;
   z-index: 1;
