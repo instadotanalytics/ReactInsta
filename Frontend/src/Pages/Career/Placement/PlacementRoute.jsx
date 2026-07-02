@@ -66,14 +66,22 @@ const PlacementSection = () => {
 
             {/* POPULAR COURSES */}
             <div className={styles.popularCourses}>
-              <h3>Popular Courses</h3>
+  <h3>Popular Courses</h3>
 
-              <div className={styles.courseTags}>
-                <span className={styles.courseTag}>Full Stack</span>
-                <span className={styles.courseTag}>Data Science</span>
-                <span className={styles.courseTag}>Digital Marketing</span>
-              </div>
-            </div>
+  <div className={styles.courseTags}>
+    <span className={styles.courseTag}>Full Stack</span>
+    <span className={styles.courseTag}>Data Science</span>
+    <span className={styles.courseTag}>Digital Marketing</span>
+    <span className={styles.courseTag}>Java Development</span>
+
+    {/* duplicate for infinite scroll */}
+
+    <span className={styles.courseTag}>Full Stack</span>
+    <span className={styles.courseTag}>Data Science</span>
+    <span className={styles.courseTag}>Digital Marketing</span>
+    <span className={styles.courseTag}>Java Development</span>
+  </div>
+</div>
           </div>
         </div>
       </section>
