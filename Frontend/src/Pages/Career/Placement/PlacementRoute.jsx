@@ -7,8 +7,9 @@ import ReviewSection from "../../ReviewSection";
 import WhyJoinUS from "../../WhyJoinUS";
 import OurImpact from "../../OurImpact";
 import FAQSection from "../../FAQSection";
-import PlacementList from "../../PlacementList";
+// import PlacementList from "../../PlacementList";
 import PlacementMetrics from "./PlacementMetrics";
+import PlacementProcess from "./PlacementProcess";
 
 const PlacementSection = () => {
   return (
@@ -76,9 +77,10 @@ const PlacementSection = () => {
           </div>
         </div>
       </section>
-      <PlacementMetrics/>
       {/* <Companypartners /> */}
-      <PlacementList />
+      <PlacementMetrics/>
+      {/* <PlacementList /> */}
+      <PlacementProcess/>
       <ReviewSection />
       <WhyJoinUS />
       <OurImpact />
