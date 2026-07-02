@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 /* ── PAGE SHELL ─────────────────────────────────────────────── */
@@ -12,113 +13,6 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-}
-
-/* ── BACKGROUND AMBIENCE ────────────────────────────────────── */
-.bgOrb1 {
-  position: absolute;
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(67, 97, 238, 0.16) 0%,
-    transparent 70%
-  );
-  top: -120px;
-  right: -80px;
-  animation: orbDrift 14s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-.bgOrb2 {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(56, 189, 248, 0.14) 0%,
-    transparent 70%
-  );
-  bottom: -100px;
-  left: -60px;
-  animation: orbDrift 18s ease-in-out infinite alternate-reverse;
-  pointer-events: none;
-}
-
-.bgOrb3 {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(37, 99, 235, 0.12) 0%,
-    transparent 70%
-  );
-  top: 40%;
-  left: 38%;
-  animation: orbDrift 10s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-@keyframes orbDrift {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(30px, -20px) scale(1.08);
-  }
-  100% {
-    transform: translate(-20px, 35px) scale(0.94);
-  }
-}
-
-/* Subtle dot-grid overlay */
-.bgGrid {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    rgba(37, 99, 235, 0.08) 1px,
-    transparent 1px
-  );
-  background-size: 32px 32px;
-  pointer-events: none;
-}
-
-/* Moving horizontal scan line */
-.scanLine {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(37, 99, 235, 0.3),
-    rgba(56, 189, 248, 0.3),
-    transparent
-  );
-  animation: scanMove 8s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes scanMove {
-  0% {
-    top: -2%;
-    opacity: 0;
-  }
-  5% {
-    opacity: 1;
-  }
-  95% {
-    opacity: 1;
-  }
-  100% {
-    top: 102%;
-    opacity: 0;
-  }
 }
 
 /* ── TWO-COLUMN LAYOUT ──────────────────────────────────────── */
@@ -207,19 +101,24 @@
   flex-shrink: 0;
 }
 
-/* Step progress cards */
+/* ══════════════════════════════════════════════
+   STEP PROGRESS CARDS
+   Locked to a 3-column grid at every breakpoint so
+   "01 Personal / 02 Academic / 03 Preferences"
+   always stays on one row, including mobile.
+══════════════════════════════════════════════ */
 .stepCards {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  flex-wrap: wrap;
+  width: 100%;
 }
 
 .stepCard {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
+  gap: 12px;
+  padding: 14px 16px;
   border-radius: 14px;
   border: 1px solid rgba(15, 26, 46, 0.08);
   background: rgba(255, 255, 255, 0.6);
@@ -227,6 +126,7 @@
   font-size: 14px;
   font-weight: 500;
   position: relative;
+  min-width: 0;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   cursor: default;
@@ -246,6 +146,7 @@
     rgba(56, 189, 248, 0.08)
   );
   color: #0f1a2e;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
 }
 
 .stepCardActive:hover {
@@ -293,6 +194,10 @@
 .stepLabel {
   font-weight: 600;
   letter-spacing: 0.3px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ── RIGHT PANEL ────────────────────────────────────────────── */
@@ -571,18 +476,24 @@
     margin-right: auto;
   }
 
+  /* Step cards go compact + stacked (icon on top, label below)
+     but stay in a single 3-column row */
   .stepCards {
-    flex-direction: row;
-    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
   }
 
   .stepCard {
-    flex: 1;
     flex-direction: column;
     text-align: center;
-    padding: 12px 10px;
+    padding: 14px 8px;
     gap: 8px;
-    min-width: 100px;
+    min-width: 0;
+  }
+
+  .stepLabel {
+    white-space: normal;
+    line-height: 1.25;
   }
 
   .rightPanel {
@@ -594,15 +505,6 @@
 
   .headline {
     font-size: 34px;
-  }
-}
-
-@media (max-width: 768px) {
-  .bgOrb1,
-  .bgOrb2,
-  .bgOrb3 {
-    filter: blur(2px);
-    opacity: 0.7;
   }
 }
 
@@ -637,8 +539,26 @@
     grid-column: 1;
   }
 
+  /* Keep the 3 step cards on one row, just tighten them up */
   .stepCards {
-    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stepCard {
+    padding: 10px 6px;
+    gap: 6px;
+    border-radius: 12px;
+  }
+
+  .stepBullet {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .stepLabel {
+    font-size: 11.5px;
+    letter-spacing: 0.1px;
   }
 
   /* Stats: stay in a single row, shrink to fit */
@@ -676,6 +596,28 @@
     justify-content: center;
   }
 
+  /* Extra tight screens — 3-in-a-row still, just very compact */
+  .stepCards {
+    gap: 6px;
+  }
+
+  .stepCard {
+    padding: 8px 4px;
+    gap: 5px;
+    border-radius: 10px;
+  }
+
+  .stepBullet {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  .stepLabel {
+    font-size: 9.5px;
+    letter-spacing: 0;
+  }
+
   /* Extra tight screens — keep single row, compact further */
   .statsRow {
     gap: 6px;
@@ -692,14 +634,5 @@
 
   .statDivider {
     height: 24px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bgOrb1,
-  .bgOrb2,
-  .bgOrb3,
-  .scanLine {
-    animation: none;
   }
 }

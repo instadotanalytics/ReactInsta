@@ -18,7 +18,7 @@ import {
   FiDollarSign,
   FiArrowRight,
   FiArrowLeft,
-  FiSend
+  FiSend,
 } from "react-icons/fi";
 
 const InternshipForm = () => {
@@ -37,7 +37,7 @@ const InternshipForm = () => {
     duration: "",
     mode: "",
     internshipType: "",
-    expectedStipend: ""
+    expectedStipend: "",
   });
 
   const handleChange = (e) => {
@@ -55,12 +55,27 @@ const InternshipForm = () => {
   const validateStep = () => {
     switch (currentStep) {
       case 1:
-        return formData.fullName && formData.email && formData.mobile && formData.city;
+        return (
+          formData.fullName &&
+          formData.email &&
+          formData.mobile &&
+          formData.city
+        );
       case 2:
-        return formData.college && formData.course && formData.branch && formData.currentYear && formData.skills;
+        return (
+          formData.college &&
+          formData.course &&
+          formData.branch &&
+          formData.currentYear &&
+          formData.skills
+        );
       case 3:
-        return formData.duration && formData.mode && formData.internshipType &&
-          (formData.internshipType === "unpaid" || formData.expectedStipend);
+        return (
+          formData.duration &&
+          formData.mode &&
+          formData.internshipType &&
+          (formData.internshipType === "unpaid" || formData.expectedStipend)
+        );
       default:
         return true;
     }
@@ -69,12 +84,27 @@ const InternshipForm = () => {
   const isStepComplete = (step) => {
     switch (step) {
       case 1:
-        return formData.fullName && formData.email && formData.mobile && formData.city;
+        return (
+          formData.fullName &&
+          formData.email &&
+          formData.mobile &&
+          formData.city
+        );
       case 2:
-        return formData.college && formData.course && formData.branch && formData.currentYear && formData.skills;
+        return (
+          formData.college &&
+          formData.course &&
+          formData.branch &&
+          formData.currentYear &&
+          formData.skills
+        );
       case 3:
-        return formData.duration && formData.mode && formData.internshipType &&
-          (formData.internshipType === "unpaid" || formData.expectedStipend);
+        return (
+          formData.duration &&
+          formData.mode &&
+          formData.internshipType &&
+          (formData.internshipType === "unpaid" || formData.expectedStipend)
+        );
       default:
         return false;
     }
@@ -86,14 +116,24 @@ const InternshipForm = () => {
       const res = await fetch(`${API_BASE_URL}/internships`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
       const data = await res.json();
       alert(data.message);
       setFormData({
-        fullName: "", email: "", mobile: "", city: "",
-        college: "", course: "", branch: "", currentYear: "", skills: "",
-        duration: "", mode: "", internshipType: "", expectedStipend: ""
+        fullName: "",
+        email: "",
+        mobile: "",
+        city: "",
+        college: "",
+        course: "",
+        branch: "",
+        currentYear: "",
+        skills: "",
+        duration: "",
+        mode: "",
+        internshipType: "",
+        expectedStipend: "",
       });
       setTouched({});
       setCurrentStep(1);
@@ -119,7 +159,9 @@ const InternshipForm = () => {
         className={styles.floatingInput}
         autoComplete="off"
       />
-      <label htmlFor={name} className={styles.floatingLabel}>{label}</label>
+      <label htmlFor={name} className={styles.floatingLabel}>
+        {label}
+      </label>
     </div>
   );
 
@@ -138,37 +180,37 @@ const InternshipForm = () => {
       >
         {children}
       </select>
-      <label htmlFor={name} className={`${styles.floatingLabel} ${formData[name] ? styles.labelUp : ""}`}>{label}</label>
+      <label
+        htmlFor={name}
+        className={`${styles.floatingLabel} ${formData[name] ? styles.labelUp : ""}`}
+      >
+        {label}
+      </label>
     </div>
   );
 
   const steps = [
     { num: "01", label: "Personal" },
     { num: "02", label: "Academic" },
-    { num: "03", label: "Preferences" }
+    { num: "03", label: "Preferences" },
   ];
 
   return (
     <div className={styles.pageContainer}>
-      {/* Background animated elements */}
-      <div className={styles.bgOrb1} aria-hidden="true" />
-      <div className={styles.bgOrb2} aria-hidden="true" />
-      <div className={styles.bgOrb3} aria-hidden="true" />
-      <div className={styles.bgGrid} aria-hidden="true" />
-      <div className={styles.scanLine} aria-hidden="true" />
-
       <div className={styles.layout}>
         {/* LEFT PANEL */}
         <div className={styles.leftPanel}>
-
           <h1 className={styles.headline}>
-            Kickstart Your Career<br />
+            Kickstart Your Career
+            <br />
             with the{" "}
             <span className={styles.gradientText}>Perfect Internship.</span>
           </h1>
 
           <p className={styles.subtext}>
-            Join thousands of students who've found their dream internships through our platform. Get real-world experience and launch your career.
+            Join thousands of students who've found their dream internships
+            through our platform. Get real-world experience and launch your
+            career.
           </p>
 
           <div className={styles.statsRow}>
@@ -200,18 +242,31 @@ const InternshipForm = () => {
                   key={step.num}
                   className={`${styles.stepCard}
                     ${isActive ? styles.stepCardActive : ""}
-                    ${(isCompleted || isPast) ? styles.stepCardDone : ""}
+                    ${isCompleted || isPast ? styles.stepCardDone : ""}
                   `}
                 >
                   <div className={styles.stepBullet}>
                     {isCompleted || isPast ? (
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                        <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M2 6L5 9L10 3"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
-                    ) : step.num}
+                    ) : (
+                      step.num
+                    )}
                   </div>
                   <span className={styles.stepLabel}>{step.label}</span>
-                  
                 </div>
               );
             })}
@@ -236,33 +291,82 @@ const InternshipForm = () => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className={styles.formBody} noValidate>
+            <form
+              onSubmit={handleSubmit}
+              className={styles.formBody}
+              noValidate
+            >
               {currentStep === 1 && (
-                <div className={`${styles.fieldsGrid} ${styles.singleColumn}`} key="step1">
-                  <FloatingField name="fullName" label="Full Name" icon={FiUser} />
-                  <FloatingField name="email" type="email" label="Email Address" icon={FiMail} />
-                  <FloatingField name="mobile" type="tel" label="Mobile Number" icon={FiPhone} />
-                  <FloatingField name="city" label="Current City" icon={FiMapPin} />
+                <div
+                  className={`${styles.fieldsGrid} ${styles.singleColumn}`}
+                  key="step1"
+                >
+                  <FloatingField
+                    name="fullName"
+                    label="Full Name"
+                    icon={FiUser}
+                  />
+                  <FloatingField
+                    name="email"
+                    type="email"
+                    label="Email Address"
+                    icon={FiMail}
+                  />
+                  <FloatingField
+                    name="mobile"
+                    type="tel"
+                    label="Mobile Number"
+                    icon={FiPhone}
+                  />
+                  <FloatingField
+                    name="city"
+                    label="Current City"
+                    icon={FiMapPin}
+                  />
                 </div>
               )}
 
               {currentStep === 2 && (
                 <div className={styles.fieldsGrid} key="step2">
                   <div className={styles.spanFull}>
-                    <FloatingField name="college" label="College / University" icon={FiBook} />
+                    <FloatingField
+                      name="college"
+                      label="College / University"
+                      icon={FiBook}
+                    />
                   </div>
-                  <FloatingField name="course" label="Course (e.g. B.Tech, BCA)" icon={FiAward} />
-                  <FloatingField name="branch" label="Specialization Branch" icon={FiLayers} />
-                  <FloatingField name="currentYear" label="Current Academic Year" icon={FiCalendar} />
+                  <FloatingField
+                    name="course"
+                    label="Course (e.g. B.Tech, BCA)"
+                    icon={FiAward}
+                  />
+                  <FloatingField
+                    name="branch"
+                    label="Specialization Branch"
+                    icon={FiLayers}
+                  />
+                  <FloatingField
+                    name="currentYear"
+                    label="Current Academic Year"
+                    icon={FiCalendar}
+                  />
                   <div className={styles.spanFull}>
-                    <FloatingField name="skills" label="Skills / Technical Proficiencies" icon={FiCode} />
+                    <FloatingField
+                      name="skills"
+                      label="Skills / Technical Proficiencies"
+                      icon={FiCode}
+                    />
                   </div>
                 </div>
               )}
 
               {currentStep === 3 && (
                 <div className={styles.fieldsGrid} key="step3">
-                  <SelectField name="duration" label="Target Duration" icon={FiClock}>
+                  <SelectField
+                    name="duration"
+                    label="Target Duration"
+                    icon={FiClock}
+                  >
                     <option value=""></option>
                     <option value="1 Month">1 Month</option>
                     <option value="3 Months">3 Months</option>
@@ -277,7 +381,11 @@ const InternshipForm = () => {
                   </SelectField>
 
                   <div className={styles.spanFull}>
-                    <SelectField name="internshipType" label="Internship Type" icon={FiBriefcase}>
+                    <SelectField
+                      name="internshipType"
+                      label="Internship Type"
+                      icon={FiBriefcase}
+                    >
                       <option value=""></option>
                       <option value="paid">Paid</option>
                       <option value="unpaid">Unpaid</option>
@@ -285,17 +393,27 @@ const InternshipForm = () => {
                     </SelectField>
                   </div>
 
-                  {formData.internshipType && formData.internshipType !== "unpaid" && (
-                    <div className={`${styles.spanFull} ${styles.slideDown}`}>
-                      <FloatingField name="expectedStipend" type="number" label="Expected Monthly Stipend (₹)" icon={FiDollarSign} />
-                    </div>
-                  )}
+                  {formData.internshipType &&
+                    formData.internshipType !== "unpaid" && (
+                      <div className={`${styles.spanFull} ${styles.slideDown}`}>
+                        <FloatingField
+                          name="expectedStipend"
+                          type="number"
+                          label="Expected Monthly Stipend (₹)"
+                          icon={FiDollarSign}
+                        />
+                      </div>
+                    )}
                 </div>
               )}
 
               <div className={styles.formFooter}>
                 {currentStep > 1 && (
-                  <button type="button" onClick={handleBack} className={styles.btnBack}>
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    className={styles.btnBack}
+                  >
                     <FiArrowLeft size={16} />
                     Back
                   </button>
