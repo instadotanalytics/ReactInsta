@@ -3,15 +3,25 @@
   padding: 80px 20px;
   position: relative;
   overflow: hidden;
-  background: 
-    radial-gradient(ellipse at 10% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 60%),
-    radial-gradient(ellipse at 90% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 60%),
+  background:
+    radial-gradient(
+      ellipse at 10% 20%,
+      rgba(37, 99, 235, 0.05) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 90% 80%,
+      rgba(59, 130, 246, 0.05) 0%,
+      transparent 60%
+    ),
     linear-gradient(180deg, #e6f1ff 0%, #eaf0ff 50%, #e3e9ff 100%);
   will-change: transform; /* Performance hint */
 }
 
 /* Optimized Animated Orbs - Using transform3d for GPU acceleration */
-.orb1, .orb2, .orb3 {
+.orb1,
+.orb2,
+.orb3 {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px); /* Reduced blur for performance */
@@ -25,7 +35,11 @@
 .orb1 {
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.10), rgba(37, 99, 235, 0.02));
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.1),
+    rgba(37, 99, 235, 0.02)
+  );
   top: -120px;
   right: -120px;
   animation-delay: 0s;
@@ -34,7 +48,11 @@
 .orb2 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.02));
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.08),
+    rgba(59, 130, 246, 0.02)
+  );
   bottom: -100px;
   left: -100px;
   animation-delay: -7s;
@@ -51,8 +69,12 @@
 }
 
 @keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(30px, 20px) scale(1.05); } /* Reduced movement */
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(30px, 20px) scale(1.05);
+  } /* Reduced movement */
 }
 
 .container {
@@ -110,14 +132,24 @@
 .imagePlaceholder {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(59, 130, 246, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.05),
+    rgba(59, 130, 246, 0.05)
+  );
   animation: shimmer 1.5s ease-in-out infinite;
 }
 
 @keyframes shimmer {
-  0% { opacity: 0.5; }
-  50% { opacity: 0.8; }
-  100% { opacity: 0.5; }
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 .aboutImage {
@@ -125,7 +157,9 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
   will-change: transform, opacity;
 }
 
@@ -141,7 +175,11 @@
   position: absolute;
   inset: -2px;
   border-radius: 26px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(59, 130, 246, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.08),
+    rgba(59, 130, 246, 0.08)
+  );
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 0;
@@ -156,7 +194,11 @@
   position: absolute;
   inset: 1.2rem;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(59, 130, 246, 0.02));
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.02),
+    rgba(59, 130, 246, 0.02)
+  );
   pointer-events: none;
   z-index: 2;
 }
@@ -177,10 +219,30 @@
   border-color: rgba(37, 99, 235, 0.15);
 }
 
-.cornerTL { top: 0.6rem; left: 0.6rem; border-right: 0; border-bottom: 0; }
-.cornerTR { top: 0.6rem; right: 0.6rem; border-left: 0; border-bottom: 0; }
-.cornerBL { bottom: 0.6rem; left: 0.6rem; border-right: 0; border-top: 0; }
-.cornerBR { bottom: 0.6rem; right: 0.6rem; border-left: 0; border-top: 0; }
+.cornerTL {
+  top: 0.6rem;
+  left: 0.6rem;
+  border-right: 0;
+  border-bottom: 0;
+}
+.cornerTR {
+  top: 0.6rem;
+  right: 0.6rem;
+  border-left: 0;
+  border-bottom: 0;
+}
+.cornerBL {
+  bottom: 0.6rem;
+  left: 0.6rem;
+  border-right: 0;
+  border-top: 0;
+}
+.cornerBR {
+  bottom: 0.6rem;
+  right: 0.6rem;
+  border-left: 0;
+  border-top: 0;
+}
 
 /* Experience Badge */
 /* .experienceBadge {
@@ -237,35 +299,6 @@
   transform: translateX(0);
 }
 
-.subtitle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #2563eb;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: rgba(37, 99, 235, 0.06);
-  padding: 0.3rem 0.8rem;
-  border-radius: 50px;
-  border: 1px solid rgba(37, 99, 235, 0.06);
-  margin-bottom: 0.8rem;
-}
-
-.subtitleDot {
-  width: 5px;
-  height: 5px;
-  background: #2563eb;
-  border-radius: 50%;
-  animation: pulseDot 2s ease-in-out infinite;
-}
-
-@keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.5; }
-}
-
 .title {
   font-size: 2.4rem;
   font-weight: 800;
@@ -275,6 +308,7 @@
 }
 
 .highlight {
+  position: relative;
   background: linear-gradient(135deg, #2563eb, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -324,8 +358,14 @@
 }
 
 @keyframes slideUp {
-  0% { opacity: 0; transform: translateY(15px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .featureItem:hover {
@@ -334,6 +374,7 @@
   box-shadow: 0 4px 20px rgba(37, 99, 235, 0.06);
 }
 
+/* Icon container now wraps a react-icons svg instead of an emoji */
 .featureIcon {
   width: 36px;
   height: 36px;
@@ -341,9 +382,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
   flex-shrink: 0;
   transition: transform 0.3s ease;
+}
+
+.featureIcon svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .featureItem:hover .featureIcon {
@@ -408,9 +454,6 @@
   .title {
     font-size: 2.2rem;
   }
-  .features {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 768px) {
@@ -424,17 +467,6 @@
   .imageWrapper {
     order: -1;
   }
-  .experienceBadge {
-    bottom: 0.6rem;
-    left: -0.6rem;
-    padding: 0.6rem 1rem;
-  }
-  .years {
-    font-size: 1.6rem;
-  }
-  .badgeText {
-    font-size: 0.55rem;
-  }
   .title {
     font-size: 1.8rem;
   }
@@ -442,9 +474,15 @@
     font-size: 0.9rem;
     max-width: 100%;
   }
+  /* 2 feature cards per row on mobile instead of stacking all 4 */
   .features {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+  }
+  .featureItem {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem;
   }
   .stats {
     flex-wrap: wrap;
@@ -457,10 +495,22 @@
     width: 20px;
     height: 20px;
   }
-  .cornerTL { top: 0.4rem; left: 0.4rem; }
-  .cornerTR { top: 0.4rem; right: 0.4rem; }
-  .cornerBL { bottom: 0.4rem; left: 0.4rem; }
-  .cornerBR { bottom: 0.4rem; right: 0.4rem; }
+  .cornerTL {
+    top: 0.4rem;
+    left: 0.4rem;
+  }
+  .cornerTR {
+    top: 0.4rem;
+    right: 0.4rem;
+  }
+  .cornerBL {
+    bottom: 0.4rem;
+    left: 0.4rem;
+  }
+  .cornerBR {
+    bottom: 0.4rem;
+    right: 0.4rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -473,24 +523,12 @@
   .title {
     font-size: 1.4rem;
   }
-  .subtitle {
-    font-size: 0.6rem;
-    padding: 0.2rem 0.6rem;
-  }
   .imgOuter {
     padding: 0.6rem;
   }
-  .experienceBadge {
-    bottom: 0.4rem;
-    left: -0.4rem;
-    padding: 0.5rem 0.8rem;
-    border-radius: 12px;
-  }
-  .years {
-    font-size: 1.2rem;
-  }
-  .badgeText {
-    font-size: 0.45rem;
+  /* keep the 2-per-row layout, just tighten it up for small phones */
+  .features {
+    gap: 0.6rem;
   }
   .featureItem {
     padding: 0.6rem;
@@ -498,7 +536,16 @@
   .featureIcon {
     width: 30px;
     height: 30px;
-    font-size: 0.85rem;
+  }
+  .featureIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+  .featureContent h3 {
+    font-size: 0.8rem;
+  }
+  .featureContent p {
+    font-size: 0.68rem;
   }
   .statNumber h4 {
     font-size: 1.1rem;
@@ -511,8 +558,20 @@
     height: 16px;
     border-width: 1.5px;
   }
-  .cornerTL { top: 0.3rem; left: 0.3rem; }
-  .cornerTR { top: 0.3rem; right: 0.3rem; }
-  .cornerBL { bottom: 0.3rem; left: 0.3rem; }
-  .cornerBR { bottom: 0.3rem; right: 0.3rem; }
+  .cornerTL {
+    top: 0.3rem;
+    left: 0.3rem;
+  }
+  .cornerTR {
+    top: 0.3rem;
+    right: 0.3rem;
+  }
+  .cornerBL {
+    bottom: 0.3rem;
+    left: 0.3rem;
+  }
+  .cornerBR {
+    bottom: 0.3rem;
+    right: 0.3rem;
+  }
 }

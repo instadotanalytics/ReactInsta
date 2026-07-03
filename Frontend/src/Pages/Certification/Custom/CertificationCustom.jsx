@@ -13,51 +13,12 @@ import {
   FiTrendingUp,
   FiStar,
   FiCheckCircle,
-  FiUsers,
-  FiGlobe,
-  FiClock,
-  FiCalendar,
-  FiMapPin,
-  FiMessageCircle,
   FiUser,
-  FiMail,
+  FiMapPin,
+  FiInfo,
 } from "react-icons/fi";
 
-import {
-  FaGraduationCap,
-  FaRocket,
-  FaChartLine,
-  FaMedal,
-  FaCertificate,
-  FaStar as FaStarIcon,
-  FaCheckCircle as FaCheckCircleIcon,
-  FaUsers as FaUsersIcon,
-  FaGlobeAmericas,
-  FaClock as FaClockIcon,
-  FaCalendarAlt,
-  FaMapMarkerAlt,
-  FaComment,
-  FaUserCircle,
-  FaEnvelope,
-} from "react-icons/fa";
-
-import {
-  MdSchool,
-  MdRocketLaunch,
-  MdTrendingUp as MdTrendingUpIcon,
-  MdEmojiEvents,
-  MdVerified,
-  MdStar as MdStarIcon,
-  MdCheckCircle,
-  MdPeople,
-  MdPublic,
-  MdAccessTime,
-  MdDateRange,
-  MdLocationOn,
-  MdChat,
-  MdPerson,
-  MdEmail,
-} from "react-icons/md";
+import { FaGraduationCap, FaRocket, FaChartLine } from "react-icons/fa";
 
 const CertificationCustom = () => {
   const [activeTab, setActiveTab] = useState("benefits");
@@ -110,6 +71,14 @@ const CertificationCustom = () => {
 
     requestAnimationFrame(animate);
   };
+
+  // Companies grouped 4-per-screen. The list is padded so the last group
+  // still has 4 items and loops back seamlessly into the first group.
+  const companyGroups = [
+    ["Microsoft", "Amazon", "Apple", "Meta"],
+    ["IBM", "Intel", "Cisco", "Oracle"],
+    ["Salesforce", "Adobe", "NVIDIA", "Microsoft"],
+  ];
 
   return (
     <div className={styles.container}>
@@ -230,44 +199,22 @@ const CertificationCustom = () => {
         </div>
       </section>
 
-      {/* Trusted Companies */}
+      {/* Trusted Companies - shows 4 logos on screen at a time, on both mobile & desktop */}
       <section className={styles.trusted}>
         <h3>Trusted by Dreamers, Doers and Leaders</h3>
-        <div className={styles.companyMarquee}>
-          <div className={styles.marqueeTrack}>
-            {[
-              "Microsoft",
-              "Amazon",
-              "Apple",
-              "Meta",
-              "IBM",
-              "Intel",
-              "Cisco",
-              "Oracle",
-              "Salesforce",
-              "Adobe",
-              "NVIDIA",
-            ].map((company) => (
-              <span key={company} className={styles.companyLogo}>
-                {company}
-              </span>
-            ))}
-            {[
-              "Microsoft",
-              "Amazon",
-              "Apple",
-              "Meta",
-              "IBM",
-              "Intel",
-              "Cisco",
-              "Oracle",
-              "Salesforce",
-              "Adobe",
-              "NVIDIA",
-            ].map((company) => (
-              <span key={company + "-dup"} className={styles.companyLogo}>
-                {company}
-              </span>
+        <div className={styles.companySliderWrapper}>
+          <div className={styles.companySliderTrack}>
+            {companyGroups.map((group, groupIndex) => (
+              <div key={groupIndex} className={styles.companyGroup}>
+                {group.map((company, i) => (
+                  <span
+                    key={`${company}-${groupIndex}-${i}`}
+                    className={styles.companyLogo}
+                  >
+                    {company}
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -311,11 +258,16 @@ const CertificationCustom = () => {
           <div className={styles.tabContent}>
             {activeTab === "benefits" && (
               <div className={styles.factBox}>
-                <h4>Did You Know?</h4>
-                <p>
-                  Certified professionals earn 25–40% higher salaries and are 2×
-                  more likely to be promoted within 12 months.
-                </p>
+                <span className={styles.factBoxIcon}>
+                  <FiInfo size={22} />
+                </span>
+                <div>
+                  <h4>Did You Know?</h4>
+                  <p>
+                    Certified professionals earn 25–40% higher salaries and are
+                    2× more likely to be promoted within 12 months.
+                  </p>
+                </div>
               </div>
             )}
             {activeTab === "curriculum" && (

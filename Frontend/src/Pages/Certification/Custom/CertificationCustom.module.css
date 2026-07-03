@@ -72,8 +72,8 @@
 
 .heroGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10rem;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 3.5rem;
   align-items: center;
 }
 
@@ -192,7 +192,7 @@
 .imgFrame {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 480px;
   aspect-ratio: 4/3;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(20px);
@@ -277,11 +277,10 @@
   max-width: 1200px;
   margin: 2.5rem auto;
   padding: 3rem 1.5rem;
-   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
 
   backdrop-filter: blur(10px);
   border-radius: 28px;
-  
 }
 
 .aboutHeader {
@@ -351,7 +350,7 @@
   line-height: 1.5;
 }
 
-/* Trusted Companies */
+/* Trusted Companies - unified slider, shows 4 logos at a time on ANY screen size */
 .trusted {
   position: relative;
   z-index: 1;
@@ -367,56 +366,72 @@
   margin-bottom: 1.5rem;
 }
 
-.companyMarquee {
+.companySliderWrapper {
+  --group-h: 110px;
   overflow: hidden;
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 20%,
-    black 80%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 20%,
-    black 80%,
-    transparent
-  );
+  width: 100%;
+  height: var(--group-h);
+  border-radius: 16px;
 }
 
-.marqueeTrack {
+.companySliderTrack {
   display: flex;
-  gap: 2.5rem;
-  animation: marquee 30s linear infinite;
-  width: max-content;
+  flex-direction: row;
+  width: 300%;
+  height: 100%;
+  animation: companySlide 9s ease-in-out infinite;
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.companyGroup {
+  flex: 0 0 33.3333%;
+  width: 33.3333%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0.25rem;
 }
 
 .companyLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
   font-size: 1rem;
   font-weight: 600;
   color: #64748b;
   white-space: nowrap;
-  padding: 0.4rem 1rem;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
   transition: all 0.3s ease;
 }
 
 .companyLogo:hover {
   background: white;
   color: #3b82f6;
-  transform: scale(1.05);
+  transform: scale(1.04);
+}
+
+@keyframes companySlide {
+  0%,
+  25% {
+    transform: translateX(0);
+  }
+  33%,
+  58% {
+    transform: translateX(-33.3333%);
+  }
+  66%,
+  91% {
+    transform: translateX(-66.6666%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /* Journey Section */
@@ -424,11 +439,10 @@
   position: relative;
   z-index: 1;
   max-width: 1200px;
-  margin: 2.5rem auto;
+  margin: 2.5rem auto 1rem;
   padding: 2.5rem 1.5rem;
-   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
   border-radius: 28px;
-  border: 1px;
   text-align: center;
 }
 
@@ -458,7 +472,7 @@
 }
 
 .tabContainer {
-   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
 
   border-radius: 18px;
   padding: 1.25rem;
@@ -494,7 +508,7 @@
 }
 
 .tab:hover {
-   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
 
   color: #1e293b;
 }
@@ -507,26 +521,49 @@
 
 .tabContent {
   min-height: 100px;
+  display: flex;
+  justify-content: center;
 }
 
 .factBox {
- background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #dbeafe 100%);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  box-shadow: 0 10px 35px rgba(59, 130, 246, 0.08);
+  text-align: left;
+}
 
-  border-radius: 14px;
-  padding: 1.5rem;
+.factBoxIcon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  color: #3b82f6;
 }
 
 .factBox h4 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .factBox p {
   color: #475569;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.6;
+  margin: 0;
 }
 
 .curriculumList {
@@ -616,8 +653,8 @@
   position: relative;
   z-index: 1;
   max-width: 1100px;
-  margin: 2.5rem auto;
-  padding: 3rem 1rem;
+  margin: 1rem auto 2.5rem;
+  padding: 1.5rem 1rem 3rem;
   text-align: center;
 }
 
@@ -714,7 +751,7 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .heroGrid {
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
   .hero {
@@ -729,7 +766,7 @@
 
   .heroGrid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   /* Center hero heading, description and badges on mobile */
@@ -803,6 +840,24 @@
   .tab {
     text-align: center;
     justify-content: center;
+  }
+
+  /* Company slider: keep it a single row of 4 logos on mobile too,
+     just shrink height/font so they fit the narrower screen */
+  .companySliderWrapper {
+    --group-h: 76px;
+  }
+
+  .companyGroup {
+    gap: 0.5rem;
+    padding: 0 0.15rem;
+  }
+
+  .companyLogo {
+    height: 52px;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.35rem;
+    border-radius: 8px;
   }
 
   /* Responsive Icon Sizes */
@@ -899,6 +954,22 @@
   .cornerBR {
     bottom: 0.4rem;
     right: 0.4rem;
+  }
+
+  .companySliderWrapper {
+    --group-h: 64px;
+  }
+
+  .companyLogo {
+    height: 46px;
+    font-size: 0.62rem;
+    padding: 0.25rem 0.2rem;
+  }
+
+  .factBox {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
   }
 
   /* Small Screen Icon Sizes */
