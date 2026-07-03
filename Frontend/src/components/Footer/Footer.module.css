@@ -16,7 +16,7 @@
 .footer {
   position: relative;
   overflow: hidden;
-  padding-top: 56px;
+  padding-top: 20px;
 
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
 
@@ -37,7 +37,7 @@
 }
 
 /* ===== WAVE TOP EDGE ===== */
-.waveTop {
+/* .waveTop {
   position: absolute;
   top: 0;
   left: 0;
@@ -46,15 +46,15 @@
   line-height: 0;
   color: #f8fbff;
   transform: translateY(-1px); /* avoid sub-pixel seam with the section above */
-  z-index: 2;
+  /* z-index: 2;
   pointer-events: none;
-}
+} */
 
-.waveSvg {
+/* .waveSvg {
   width: 100%;
   height: 100%;
   display: block;
-}
+} */
 
 /* ===== CURSOR-TRACKING CANVAS ===== */
 .canvas {
