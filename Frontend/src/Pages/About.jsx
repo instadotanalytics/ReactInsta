@@ -287,9 +287,7 @@ const About = () => {
                 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <span className={styles.sectionBadge}>
-                  Our Journey
-                </span>
+                
                 <h2 className={styles.sectionTitle}>
                   Our Journey for <span className={styles.highlight}>Students Career Growth</span>
                 </h2>
