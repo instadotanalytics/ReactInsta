@@ -508,6 +508,7 @@
   .journeySection {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    margin: 2rem 0.4rem;
   }
   
   .featuresGrid {
@@ -543,7 +544,7 @@
     padding: 25px 0 0;
   }
   
- 
+  
   
   .heroTitle {
     font-size: 1.8rem;
@@ -618,7 +619,7 @@
   }
   
   .companyBadge {
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 0;
     flex-wrap: wrap;
   }
   

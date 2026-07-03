@@ -345,9 +345,6 @@ const About = () => {
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <div className={styles.successHeader}>
-              <span className={styles.sectionBadge}>
-                <FaStarIcon size={14} /> Success Stories
-              </span>
               <h2>750+ Success Stories <span className={styles.highlight}>and Counting!</span></h2>
               <p>Join our alumni network working at India's top companies</p>
             </div>
