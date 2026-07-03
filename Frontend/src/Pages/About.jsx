@@ -138,15 +138,7 @@ const About = () => {
               }}
               transition={{ duration: 0.8 }}
             >
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: -20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <span className={styles.badge}>About Us</span>
-              </motion.div>
+              
 
               <motion.h1
                 className={styles.heroTitle}
@@ -162,7 +154,6 @@ const About = () => {
                 </span>
               </motion.h1>
 
-              <motion.div className={styles.titleUnderline} />
 
               <motion.p
                 className={styles.heroDescription}
