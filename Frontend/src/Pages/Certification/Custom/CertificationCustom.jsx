@@ -329,51 +329,81 @@ const CertificationCustom = () => {
           Real feedback from real learners who transformed their careers with
           our training programs.
         </p>
-
-        <div className={styles.testimonialGrid}>
-          {[
-            {
-              name: "Priya Sharma",
-              location: "Mumbai, Maharashtra",
-              text: "Amazing experience! Everything was delivered exactly as promised. The team guided me throughout the process.",
-            },
-            {
-              name: "Aarav Mehta",
-              location: "Ahmedabad, Gujarat",
-              text: "Excellent quality and service. The pricing is slightly higher, but it's absolutely worth it. Highly recommended!",
-            },
-            {
-              name: "Ananya Desai",
-              location: "Pune, Maharashtra",
-              text: "I enrolled online and everything went smoothly. The course content was practical and well-structured.",
-            },
-            {
-              name: "Vikram Singh",
-              location: "Jaipur, Rajasthan",
-              text: "Outstanding training experience. The mentors were very supportive and knowledgeable.",
-            },
-            {
-              name: "Neha Gupta",
-              location: "Delhi, NCR",
-              text: "First time joining such a program and I'm impressed. Customer support responded quickly and professionally.",
-            },
-          ].map((testimonial, index) => (
-            <div key={index} className={styles.testimonialCard}>
-              <div className={styles.stars}>
-                <FiStar size={18} /> <FiStar size={18} /> <FiStar size={18} />{" "}
-                <FiStar size={18} /> <FiStar size={18} />
-              </div>
-              <p>"{testimonial.text}"</p>
-              <div className={styles.testimonialAuthor}>
-                <strong>
-                  <FiUser size={14} /> {testimonial.name}
-                </strong>
-                <span>
-                  <FiMapPin size={12} /> {testimonial.location}
-                </span>
-              </div>
-            </div>
-          ))}
+        <div className={styles.testimonialMarquee}>
+          <div className={styles.testimonialTrack}>
+            {[
+              {
+                name: "Priya Sharma",
+                location: "Mumbai, Maharashtra",
+                text: "Amazing experience! Everything was delivered exactly as promised. The team guided me throughout the process.",
+              },
+              {
+                name: "Aarav Mehta",
+                location: "Ahmedabad, Gujarat",
+                text: "Excellent quality and service. The pricing is slightly higher, but it's absolutely worth it. Highly recommended!",
+              },
+              {
+                name: "Ananya Desai",
+                location: "Pune, Maharashtra",
+                text: "I enrolled online and everything went smoothly. The course content was practical and well-structured.",
+              },
+              {
+                name: "Vikram Singh",
+                location: "Jaipur, Rajasthan",
+                text: "Outstanding training experience. The mentors were very supportive and knowledgeable.",
+              },
+              {
+                name: "Neha Gupta",
+                location: "Delhi, NCR",
+                text: "First time joining such a program and I'm impressed. Customer support responded quickly and professionally.",
+              },
+            ]
+              .concat([
+                {
+                  name: "Priya Sharma",
+                  location: "Mumbai, Maharashtra",
+                  text: "Amazing experience! Everything was delivered exactly as promised. The team guided me throughout the process.",
+                },
+                {
+                  name: "Aarav Mehta",
+                  location: "Ahmedabad, Gujarat",
+                  text: "Excellent quality and service. The pricing is slightly higher, but it's absolutely worth it. Highly recommended!",
+                },
+                {
+                  name: "Ananya Desai",
+                  location: "Pune, Maharashtra",
+                  text: "I enrolled online and everything went smoothly. The course content was practical and well-structured.",
+                },
+                {
+                  name: "Vikram Singh",
+                  location: "Jaipur, Rajasthan",
+                  text: "Outstanding training experience. The mentors were very supportive and knowledgeable.",
+                },
+                {
+                  name: "Neha Gupta",
+                  location: "Delhi, NCR",
+                  text: "First time joining such a program and I'm impressed. Customer support responded quickly and professionally.",
+                },
+              ])
+              .map((testimonial, index) => (
+                <div key={index} className={styles.testimonialCard}>
+                  <div className={styles.stars}>
+                    <FiStar size={18} /> <FiStar size={18} />{" "}
+                    <FiStar size={18} /> <FiStar size={18} />{" "}
+                    <FiStar size={18} />
+                  </div>
+                  <p>"{testimonial.text}"</p>
+                  <div className={styles.testimonialAuthor}>
+                    <strong>
+                      <FiUser size={14} /> {testimonial.name}
+                    </strong>
+                    <span>
+                      <FiMapPin size={12} /> {testimonial.location}
+                    </span>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </section>
     </div>

@@ -672,11 +672,87 @@
   margin: 0 auto 2.5rem;
 }
 
-.testimonialGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+.testimonialMarquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
 }
+
+.testimonialTrack {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: testimonialScroll 35s linear infinite;
+  -webkit-animation: testimonialScroll 35s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.testimonialMarquee:hover .testimonialTrack {
+  animation-play-state: paused;
+}
+
+@keyframes testimonialScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.testimonialCard {
+  flex: 0 0 300px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1.5rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+/* Desktop-only: blur is expensive, keep it only where GPUs can handle it */
+@media (min-width: 641px) {
+  .testimonialCard {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+.testimonialCard:hover {
+  transform: translateY(-4px);
+  background: white;
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.06);
+}
+
+@media (max-width: 640px) {
+  .testimonialCard {
+    flex: 0 0 240px;
+    background: rgba(255, 255, 255, 0.85); /* compensate for removed blur */
+  }
+  .testimonialTrack {
+    animation-duration: 25s;
+    -webkit-animation-duration: 25s;
+  }
+}
+
 
 .testimonialCard {
   background: rgba(255, 255, 255, 0.5);
