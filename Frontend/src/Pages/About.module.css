@@ -1,6 +1,6 @@
 /* About.module.css - Light Blue + Very Light Purple Theme */
 .aboutSection {
-  padding: 50px 0px 20px;
+  padding: 25px 0px 20px;
   position: relative;
   overflow: hidden;
   width: 100vw;
@@ -115,7 +115,7 @@
 }
 
 .highlight {
-  background: linear-gradient(135deg, #167ba0, #3a73ed, #282ef1);
+  background: linear-gradient(135deg, #00aae8, #3d94f2, #00bfff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -147,19 +147,9 @@
   margin: 0;
 }
 
-.titleUnderline {
-  width: 50px;
-  height: 3px;
-  background: linear-gradient(90deg, #2563eb, #7c3aed);
-  border-radius: 4px;
-  margin: 0.1rem 0 0.3rem;
-  animation: shimmerLine 2s ease-in-out infinite;
-}
 
-@keyframes shimmerLine {
-  0%, 100% { width: 50px; opacity: 0.6; }
-  50% { width: 80px; opacity: 1; }
-}
+
+
 
 .heroDescription {
   font-size: 1rem;
@@ -231,10 +221,10 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.4);
+  /* background: rgba(255, 255, 255, 0.4); */
   padding: 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+  /* border: 1px solid rgba(255, 255, 255, 0.4); */
+  /* box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03); */
   transition: all 0.4s ease;
 }
 
@@ -501,7 +491,7 @@
   
   .heroSection {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2.5rem;
     min-height: auto;
     padding: 1rem 0;
   }
@@ -549,7 +539,7 @@
 
 @media (max-width: 480px) {
   .aboutSection {
-    padding: 30px 0 20px;
+    padding: 25px 0 0;
   }
   
   .container {
@@ -557,7 +547,7 @@
   }
   
   .heroTitle {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
   
   .statsGrid {

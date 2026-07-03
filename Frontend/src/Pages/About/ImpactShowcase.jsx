@@ -2,69 +2,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ImpactShowcase.module.css";
 
-// React Icons imports - Feather Icons (Fi)
-import { 
-  FiUsers, 
-  FiUserCheck, 
-  FiBookOpen, 
-  FiBriefcase, 
-  FiAward,
-  FiTrendingUp,
-  FiCalendar,
-  FiGlobe,
-  FiClock,
-  FiStar,
-  FiTarget,
-  FiCompass,
-  FiZap,
-  FiLayers,
-  FiArrowRight,
-  FiHome,
-  FiMapPin
-} from "react-icons/fi";
-
-// React Icons imports - Font Awesome (Fa)
-import {
-  FaGraduationCap,
-  FaChalkboardTeacher,
-  FaBook,
-  FaSuitcase,
-  FaBuilding,
-  FaRocket,
-  FaTrophy,
-  FaChartLine,
-  FaCalendarAlt,
-  FaGlobeAmericas,
-  FaClock,
-  FaStar,
-  FaBullseye,
-  FaCompass,
-  FaBolt,
-  FaLayerGroup,
-  FaArrowRight
-} from "react-icons/fa";
-
-// React Icons imports - Material Design (Md)
-import {
-  MdPeople,
-  MdSchool,
-  MdMenuBook,
-  MdWork,
-  MdBusinessCenter,
-  MdEmojiEvents,
-  MdTrendingUp as MdTrendingUpIcon,
-  MdDateRange,
-  MdPublic,
-  MdAccessTime,
-  MdStar,
-  MdTrackChanges,
-  MdExplore,
-  MdFlashOn,
-  MdViewModule,
-  MdArrowForward,
-  MdLocationOn,
-  MdHome
-} from "react-icons/md";
+// React Icons imports
+import { FiUsers, FiUserCheck, FiBookOpen, FiBriefcase, FiAward, FiTrendingUp, FiCalendar, FiGlobe, FiClock, FiStar, FiTarget, FiCompass, FiZap, FiLayers, FiArrowRight } from "react-icons/fi";
+import { FaGraduationCap, FaChalkboardTeacher, FaBook, FaSuitcase, FaBuilding, FaRocket, FaTrophy, FaChartLine, FaCalendarAlt, FaGlobeAmericas } from "react-icons/fa";
+import { MdPeople, MdSchool, MdMenuBook, MdWork, MdBusinessCenter, MdEmojiEvents, MdTrendingUp as MdTrendingUpIcon, MdDateRange, MdPublic, MdAccessTime, MdStar, MdTrackChanges, MdExplore, MdFlashOn, MdViewModule, MdArrowForward, MdLocationOn, MdHome } from "react-icons/md";
 
 const ImpactShowcase = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -72,7 +13,7 @@ const ImpactShowcase = () => {
     const sectionRef = useRef(null);
     const canvasRef = useRef(null);
 
-    // Impact metrics - compact with React Icons
+    // Impact metrics - optimized for 2-column mobile layout
     const metrics = [
         {
             id: 'students',
@@ -80,7 +21,8 @@ const ImpactShowcase = () => {
             label: 'Students',
             value: 750,
             suffix: '+',
-            color: '#6C63FF'
+            color: '#4A90E2',
+            bgColor: 'rgba(74, 144, 226, 0.08)'
         },
         {
             id: 'trainers',
@@ -88,7 +30,8 @@ const ImpactShowcase = () => {
             label: 'Trainers',
             value: 12,
             suffix: '+',
-            color: '#A855F7'
+            color: '#2997ff',
+            bgColor: 'rgba(41, 151, 255, 0.08)'
         },
         {
             id: 'courses',
@@ -96,7 +39,8 @@ const ImpactShowcase = () => {
             label: 'Courses',
             value: 6,
             suffix: '+',
-            color: '#EC4899'
+            color: '#1c91ff',
+            bgColor: 'rgba(28, 145, 255, 0.08)'
         },
         {
             id: 'placement',
@@ -104,26 +48,19 @@ const ImpactShowcase = () => {
             label: 'Placement',
             value: 92,
             suffix: '%',
-            color: '#F59E0B'
-        },
-        {
-            id: 'companies',
-            icon: <FaBuilding />, // Changed from FiBuilding to FaBuilding
-            label: 'Companies',
-            value: 120,
-            suffix: '+',
-            color: '#10B981'
-        },
+            color: '#4A90E2',
+            bgColor: 'rgba(74, 144, 226, 0.08)'
+        }
     ];
 
-    // Journey milestones - compact
+    // Journey milestones
     const milestones = [
-        { year: '2018', title: 'Founded', description: 'Started our journey in Indore' },
-        { year: '2019', title: 'First Batch', description: '50 students enrolled' },
-        { year: '2020', title: 'Digital Growth', description: 'Expanded online' },
-        { year: '2021', title: 'Partnerships', description: '50+ company tie-ups' },
-        { year: '2022', title: 'Recognition', description: 'ISO certified' },
-        { year: '2023', title: '750+ Success', description: 'Placed in top companies' },
+        { year: '2018', title: 'Founded', description: 'Started our journey in Indore', icon: <FiCompass /> },
+        { year: '2019', title: 'First Batch', description: '50 students enrolled', icon: <FiUsers /> },
+        { year: '2020', title: 'Digital Growth', description: 'Expanded online', icon: <FiGlobe /> },
+        { year: '2021', title: 'Partnerships', description: '50+ company tie-ups', icon: <FiTarget /> },
+        { year: '2022', title: 'Recognition', description: 'ISO certified', icon: <FiAward /> },
+        { year: '2023', title: '750+ Success', description: 'Placed in top companies', icon: <FiTrendingUp /> },
     ];
 
     useEffect(() => {
@@ -158,7 +95,7 @@ const ImpactShowcase = () => {
         }
     }, [isVisible]);
 
-    // Canvas Animation for Professional Background
+    // Canvas Animation
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -176,7 +113,6 @@ const ImpactShowcase = () => {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Create geometric shapes
         class Shape {
             constructor(x, y) {
                 this.x = x;
@@ -185,12 +121,12 @@ const ImpactShowcase = () => {
                 this.rotation = Math.random() * Math.PI * 2;
                 this.speed = 0.003 + Math.random() * 0.005;
                 this.type = Math.floor(Math.random() * 3);
-                this.opacity = 0.03 + Math.random() * 0.06;
-                this.hue = 240 + Math.random() * 40;
+                this.opacity = 0.03 + Math.random() * 0.04;
+                this.hue = 200 + Math.random() * 40;
                 this.pulseSpeed = 0.02 + Math.random() * 0.03;
                 this.pulseOffset = Math.random() * Math.PI * 2;
-                this.xSpeed = (Math.random() - 0.5) * 0.3;
-                this.ySpeed = (Math.random() - 0.5) * 0.3;
+                this.xSpeed = (Math.random() - 0.5) * 0.2;
+                this.ySpeed = (Math.random() - 0.5) * 0.2;
             }
 
             update() {
@@ -213,7 +149,7 @@ const ImpactShowcase = () => {
                 ctx.rotate(this.rotation);
                 ctx.globalAlpha = this.opacity;
                 ctx.strokeStyle = `hsl(${this.hue}, 70%, 65%)`;
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 1.5;
 
                 if (this.type === 0) {
                     ctx.beginPath();
@@ -254,7 +190,7 @@ const ImpactShowcase = () => {
         }
 
         const shapes = [];
-        const numShapes = 25;
+        const numShapes = 20;
         for (let i = 0; i < numShapes; i++) {
             shapes.push(new Shape(
                 Math.random() * canvas.width,
@@ -269,12 +205,12 @@ const ImpactShowcase = () => {
                     const dy = shapes[i].y - shapes[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 200) {
-                        const opacity = (1 - distance / 200) * 0.06;
+                    if (distance < 180) {
+                        const opacity = (1 - distance / 180) * 0.05;
                         ctx.beginPath();
                         ctx.moveTo(shapes[i].x, shapes[i].y);
                         ctx.lineTo(shapes[j].x, shapes[j].y);
-                        ctx.strokeStyle = `rgba(108, 99, 255, ${opacity})`;
+                        ctx.strokeStyle = `rgba(74, 144, 226, ${opacity})`;
                         ctx.lineWidth = 1;
                         ctx.stroke();
                     }
@@ -292,9 +228,9 @@ const ImpactShowcase = () => {
                 canvas.width * 0.8
             );
 
-            gradient.addColorStop(0, `rgba(108, 99, 255, ${0.04 + Math.sin(time * 0.0005) * 0.01})`);
-            gradient.addColorStop(0.3, `rgba(168, 85, 247, ${0.03 + Math.cos(time * 0.0006) * 0.01})`);
-            gradient.addColorStop(0.7, `rgba(236, 72, 153, ${0.02 + Math.sin(time * 0.0004) * 0.01})`);
+            gradient.addColorStop(0, `rgba(74, 144, 226, ${0.04 + Math.sin(time * 0.0005) * 0.01})`);
+            gradient.addColorStop(0.3, `rgba(41, 151, 255, ${0.03 + Math.cos(time * 0.0006) * 0.01})`);
+            gradient.addColorStop(0.7, `rgba(28, 145, 255, ${0.02 + Math.sin(time * 0.0004) * 0.01})`);
             gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
 
             ctx.fillStyle = gradient;
@@ -323,141 +259,95 @@ const ImpactShowcase = () => {
 
     return (
         <section ref={sectionRef} className={styles.impactShowcase}>
-            {/* Canvas Background */}
             <canvas ref={canvasRef} className={styles.canvasBackground} />
-
-            {/* Geometric Pattern Overlay */}
             <div className={styles.patternOverlay} />
 
             <div className={styles.container}>
-                {/* Section Header */}
+                {/* Section Header - Centered */}
                 <div className={`${styles.header} ${isVisible ? styles.animateIn : ''}`}>
                     <h2 className={styles.title}>
                         <span className={styles.titleLine1}>Transforming Careers</span>
                         <span className={styles.titleLine2}>Through Excellence</span>
                     </h2>
+                    <p className={styles.subtitle}>
+                        Empowering professionals with industry-leading training and placement support
+                    </p>
                 </div>
 
-                {/* Metrics Grid */}
+                {/* Metrics Grid - 2 columns on mobile, centered */}
                 <div className={styles.metricsGrid}>
                     {metrics.map((metric, index) => (
                         <div
                             key={metric.id}
                             className={`${styles.metricCard} ${isVisible ? styles.animateMetric : ''}`}
                             style={{
-                                animationDelay: `${index * 0.08}s`,
-                                borderColor: `${metric.color}33`
+                                animationDelay: `${index * 0.1}s`,
+                                background: metric.bgColor,
+                                borderColor: `${metric.color}25`
                             }}
                         >
                             <div className={styles.metricIconWrapper}>
-                                <div className={styles.metricIcon} style={{ color: metric.color }}>
+                                <div className={styles.metricIcon} style={{ color: metric.color, background: `${metric.color}15` }}>
                                     {metric.icon}
                                 </div>
-                                <div
-                                    className={styles.metricRing}
-                                    style={{
-                                        borderColor: metric.color,
-                                        animationDelay: `${index * 0.1}s`
-                                    }}
-                                />
                             </div>
-                            <div className={styles.metricValue} style={{ color: metric.color }}>
-                                {animatedValues[metric.id] || 0}{metric.suffix}
-                            </div>
-                            <div className={styles.metricLabel}>{metric.label}</div>
-                            <div
-                                className={styles.metricBar}
-                                style={{ background: `${metric.color}20` }}
-                            >
-                                <div
-                                    className={styles.metricProgress}
-                                    style={{
-                                        width: isVisible ? `${Math.min((metric.value / 1000) * 100, 100)}%` : '0%',
-                                        background: metric.color,
-                                        animationDelay: `${index * 0.15}s`
-                                    }}
-                                />
+                            <div className={styles.metricContent}>
+                                <div className={styles.metricValue} style={{ color: metric.color }}>
+                                    {animatedValues[metric.id] || 0}{metric.suffix}
+                                </div>
+                                <div className={styles.metricLabel}>{metric.label}</div>
+                                <div className={styles.metricBarWrapper}>
+                                    <div className={styles.metricBar} style={{ background: `${metric.color}20` }}>
+                                        <div
+                                            className={styles.metricProgress}
+                                            style={{
+                                                width: isVisible ? `${Math.min((metric.value / 1000) * 100, 100)}%` : '0%',
+                                                background: metric.color,
+                                                animationDelay: `${index * 0.15}s`
+                                            }}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Journey Timeline */}
+                {/* Journey Timeline - Centered with no vertical lines */}
                 <div className={styles.timelineSection}>
-                    <h3 className={styles.sectionSubtitle}>
-                        <span className={styles.subtitleLine}>Our Journey</span>
-                        <span className={styles.subtitleDecor}>
-                            <FiStar size={20} />
-                        </span>
-                    </h3>
-                    
-                    {/* Column Headers */}
                     <div className={styles.timelineHeader}>
-                        <div className={styles.columnHeaderLeft}>
-                            <FiCalendar size={16} /> 2018 - 2020
-                        </div>
-                        <div className={styles.columnHeaderRight}>
-                            <FiCalendar size={16} /> 2021 - 2023
-                        </div>
+                        <h3 className={styles.sectionSubtitle}>
+                            <span className={styles.subtitleLine}>Our Journey</span>
+                            <span className={styles.subtitleDecor}>
+                                <FiCalendar size={20} />
+                            </span>
+                        </h3>
                     </div>
 
-                    {/* Timeline Grid */}
                     <div className={styles.timeline}>
-                        {/* Left Column - 2018, 2019, 2020 */}
-                        <div className={styles.timelineLeft}>
-                            {milestones.slice(0, 3).map((milestone, index) => (
-                                <div
-                                    key={index}
-                                    className={`${styles.timelineItem} ${isVisible ? styles.animateTimeline : ''}`}
-                                >
-                                    <div
-                                        className={styles.timelineDot}
-                                        style={{
-                                            background: `hsl(${index * 60 + 200}, 80%, 60%)`
-                                        }}
-                                    />
-                                    <div className={styles.timelineContent}>
-                                        <div className={styles.timelineYear}>
-                                            <FiClock size={12} /> {milestone.year}
-                                        </div>
-                                        <h4 className={styles.timelineTitle}>
-                                             {milestone.title}
-                                        </h4>
-                                        <p className={styles.timelineDescription}>
-                                            <FiCompass size={14} /> {milestone.description}
-                                        </p>
+                        {milestones.map((milestone, index) => (
+                            <div
+                                key={index}
+                                className={`${styles.timelineItem} ${isVisible ? styles.animateTimeline : ''}`}
+                                style={{ animationDelay: `${index * 0.08}s` }}
+                            >
+                                <div className={styles.timelineConnector}>
+                                    <div className={styles.timelineDot} style={{
+                                        background: `linear-gradient(135deg, #4A90E2, #2997ff)`,
+                                        boxShadow: `0 0 20px rgba(74, 144, 226, 0.2)`
+                                    }}>
+                                        {milestone.icon}
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-
-                        {/* Right Column - 2021, 2022, 2023 */}
-                        <div className={styles.timelineRight}>
-                            {milestones.slice(3, 6).map((milestone, index) => (
-                                <div
-                                    key={index + 3}
-                                    className={`${styles.timelineItem} ${isVisible ? styles.animateTimeline : ''}`}
-                                >
-                                    <div
-                                        className={styles.timelineDot}
-                                        style={{
-                                            background: `hsl(${index * 60 + 20}, 80%, 60%)`
-                                        }}
-                                    />
-                                    <div className={styles.timelineContent}>
-                                        <div className={styles.timelineYear}>
-                                            <FiClock size={12} /> {milestone.year}
-                                        </div>
-                                        <h4 className={styles.timelineTitle}>
-                                            {milestone.title}
-                                        </h4>
-                                        <p className={styles.timelineDescription}>
-                                            <FiCompass size={14} /> {milestone.description}
-                                        </p>
+                                <div className={styles.timelineContent}>
+                                    <div className={styles.timelineYear}>
+                                        <FiClock size={12} /> {milestone.year}
                                     </div>
+                                    <h4 className={styles.timelineTitle}>{milestone.title}</h4>
+                                    <p className={styles.timelineDescription}>{milestone.description}</p>
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
