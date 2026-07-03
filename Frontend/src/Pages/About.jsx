@@ -100,7 +100,6 @@ const About = () => {
   ];
 
   const features = [
-    { icon: <FaRocket />, text: "Scratch to Advanced Courses", color: "#3b82f6" },
     { icon: <FaFlask />, text: "Hands-on Experimentation", color: "#7c3aed" },
     { icon: <FaMicrochip />, text: "Latest Technology Updates", color: "#06b6d4" },
     { icon: <FaMoneyBillWave />, text: "Affordable Learning", color: "#10b981" },

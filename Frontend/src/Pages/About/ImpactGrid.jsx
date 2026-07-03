@@ -168,9 +168,7 @@ const ImpactGrid = () => {
       <div className={styles.container}>
         {/* Header */}
         <div className={`${styles.header} ${isVisible ? styles.animateIn : ''}`}>
-          <span className={styles.badge}>
-            <FiAward size={14} /> Impact
-          </span>
+          
           <h2 className={styles.title}>
             <span className={styles.lightText}>Creating</span>
             <span className={styles.highlight}> Measurable</span>
