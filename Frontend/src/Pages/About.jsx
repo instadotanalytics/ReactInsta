@@ -100,7 +100,6 @@ const About = () => {
   ];
 
   const features = [
-    { icon: <FaRocket />, text: "Scratch to Advanced Courses", color: "#3b82f6" },
     { icon: <FaFlask />, text: "Hands-on Experimentation", color: "#7c3aed" },
     { icon: <FaMicrochip />, text: "Latest Technology Updates", color: "#06b6d4" },
     { icon: <FaMoneyBillWave />, text: "Affordable Learning", color: "#10b981" },
@@ -138,15 +137,7 @@ const About = () => {
               }}
               transition={{ duration: 0.8 }}
             >
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: -20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <span className={styles.badge}>About Us</span>
-              </motion.div>
+              
 
               <motion.h1
                 className={styles.heroTitle}
@@ -162,7 +153,6 @@ const About = () => {
                 </span>
               </motion.h1>
 
-              <motion.div className={styles.titleUnderline} />
 
               <motion.p
                 className={styles.heroDescription}
@@ -297,9 +287,7 @@ const About = () => {
                 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <span className={styles.sectionBadge}>
-                  Our Journey
-                </span>
+                
                 <h2 className={styles.sectionTitle}>
                   Our Journey for <span className={styles.highlight}>Students Career Growth</span>
                 </h2>
@@ -357,9 +345,6 @@ const About = () => {
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <div className={styles.successHeader}>
-              <span className={styles.sectionBadge}>
-                <FaStarIcon size={14} /> Success Stories
-              </span>
               <h2>750+ Success Stories <span className={styles.highlight}>and Counting!</span></h2>
               <p>Join our alumni network working at India's top companies</p>
             </div>

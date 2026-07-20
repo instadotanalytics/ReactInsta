@@ -527,6 +527,9 @@
 
 /* ══════════════════════════════════════════════════════
    RIGHT CARD — Hybrid Cloud
+   4 chips: On-Premise / Multi-Cloud / Edge / Private Cloud
+   Desktop: single column list.
+   Mobile: locked 2×2 grid (2 chips per row).
 ══════════════════════════════════════════════════════ */
 .cloudChips {
   display: flex;
@@ -546,6 +549,7 @@
   background: var(--rb-ice);
   border: 1px solid var(--rb-border);
   border-radius: 10px;
+  min-width: 0;
 }
 
 .chipDot {
@@ -607,6 +611,9 @@
 
 /* ══════════════════════════════════════════════════════
    BOTTOM CARD — Cost Optimization
+   Stays side-by-side (row) with the divider visible at
+   every breakpoint, just scaled down for small screens —
+   matches the laptop layout on mobile.
 ══════════════════════════════════════════════════════ */
 .cardBottom .floatCard {
   width: 380px;
@@ -615,6 +622,7 @@
 .costRow {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   margin-bottom: 12px;
 }
@@ -625,6 +633,7 @@
   align-items: center;
   gap: 2px;
   flex: 1;
+  min-width: 0;
 }
 
 .costNum {
@@ -633,12 +642,14 @@
   letter-spacing: -0.02em;
   color: var(--rb-ink);
   line-height: 1;
+  white-space: nowrap;
 }
 
 .costSub {
   font-size: 11.5px;
   color: var(--rb-ink-soft);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .costDivider {
@@ -762,26 +773,38 @@
     font-size: 26px;
   }
 
-  .costNum {
-    font-size: 24px;
-  }
-
   .ringsvg {
     width: 64px;
     height: 64px;
   }
 
+  .heroGlow {
+    display: none;
+  }
+
+  /* Hybrid Cloud chips → 2 per row */
+  .cloudChips {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .cloudChip {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  /* Cost Optimization → stays side-by-side, just tighter */
   .costRow {
-    flex-direction: column;
     gap: 14px;
   }
 
-  .costDivider {
-    display: none;
+  .costNum {
+    font-size: 24px;
   }
 
-  .heroGlow {
-    display: none;
+  .costDivider {
+    height: 34px;
   }
 }
 
@@ -869,22 +892,43 @@
     font-size: 26px;
   }
 
-  .costNum {
-    font-size: 24px;
-  }
-
   .ringsvg {
     width: 64px;
     height: 64px;
   }
 
+  /* Hybrid Cloud chips → keep 2 per row, slightly tighter */
+  .cloudChips {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+  }
+
+  .cloudChip {
+    font-size: 11.5px;
+    padding: 7px 9px;
+    gap: 6px;
+  }
+
+  /* Cost Optimization → same side-by-side layout as desktop,
+     scaled to fit small screens */
   .costRow {
-    flex-direction: column;
-    gap: 14px;
+    gap: 12px;
+  }
+
+  .costNum {
+    font-size: 22px;
+  }
+
+  .costSub {
+    font-size: 10.5px;
   }
 
   .costDivider {
-    display: none;
+    height: 30px;
+  }
+
+  .costCaption {
+    font-size: 11.5px;
   }
 }
 

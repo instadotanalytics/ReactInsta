@@ -102,4 +102,4 @@ const Custom = () => {
   )
 }
 
-export default Custom
+export default Custom;

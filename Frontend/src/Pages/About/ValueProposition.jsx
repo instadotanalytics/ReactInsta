@@ -355,9 +355,7 @@ const ValueProposition = () => {
         {/* Header */}
         <div className={`${styles.header} ${isVisible ? styles.animateHeader : ''}`}>
           <div className={styles.badgeWrapper}>
-            <span className={styles.badge}>
-              <FiAward size={14} /> Why Choose Us
-            </span>
+           
           </div>
           <h2 className={styles.title}>
             Transform Your Career With
@@ -385,7 +383,7 @@ const ValueProposition = () => {
             >
               <div className={styles.cardInner}>
                 {/* Colored top border */}
-                <div className={styles.cardBorder} style={{ background: value.color }} />
+                {/* <div className={styles.cardBorder} style={{ background: value.color }} /> */}
                 
                 {/* Icon with pulse ring */}
                 <div className={styles.iconWrapper}>

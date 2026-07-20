@@ -209,8 +209,8 @@ const Footer = () => {
   return (
     <footer className={styles.footer} ref={wrapRef}>
       {/* Wave top edge */}
-      <div className={styles.waveTop} aria-hidden="true">
-        <svg
+      {/* <div className={styles.waveTop} aria-hidden="true"> */}
+        {/* <svg
           viewBox="0 0 1440 80"
           preserveAspectRatio="none"
           className={styles.waveSvg}
@@ -219,8 +219,8 @@ const Footer = () => {
             d="M0,32 C240,80 480,0 720,24 C960,48 1200,8 1440,40 L1440,80 L0,80 Z"
             fill="currentColor"
           />
-        </svg>
-      </div>
+        </svg> */}
+      {/* </div> */}
 
       {/* Cursor-tracking particle canvas */}
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />

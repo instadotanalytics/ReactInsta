@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;600;700;800;900&display=swap");
 
 :root {
-  --cs-bg: #f8fafc;
+  --cs-bg: #f0f6ff;
   --cs-card-bg: #ffffff;
   --cs-ink: #0f172a;
   --cs-ink-muted: #64748b;
@@ -19,7 +19,7 @@
 
 .careerSection {
   padding: 100px 0;
-  /* background: var(--cs-bg); */
+  background: linear-gradient(180deg, #ffffff 0%, #eef4ff 50%, #e6efff 100%);
   font-family: var(--font-body);
   overflow: hidden;
 }
@@ -42,7 +42,7 @@
 
   font-size: clamp(32px, 5vw, 64px);
   font-weight: 600;
-  /* color: var(--cs-ink); */
+  color: var(--cs-ink);
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin: 0 auto 20px;
@@ -357,24 +357,5 @@
 
   .dotsRow {
     margin-top: 24px;
-  }
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --cs-bg: #0f172a;
-    --cs-card-bg: #1e293b;
-    --cs-ink: #f1f5f9;
-    --cs-ink-muted: #94a3b8;
-    --cs-border: #334155;
-    --cs-blue-bg: #1e3a5f;
-    --cs-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
-    --cs-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
-    --cs-shadow-lg: 0 10px 40px rgba(37, 99, 235, 0.2);
-  }
-
-  .cardImageWrap {
-    background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
   }
 }

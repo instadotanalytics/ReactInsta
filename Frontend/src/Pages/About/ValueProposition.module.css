@@ -2,8 +2,8 @@
 
 .whyChooseUs {
   width: 100%;
-  min-height: 100vh;
-  height: 100vh;
+  min-height: 85vh;
+  height: 10vh;
   max-height: 900px;
   position: relative;
   overflow: hidden;
@@ -29,7 +29,7 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(rgba(108, 99, 255, 0.015) 1px, transparent 1px),
     linear-gradient(90deg, rgba(108, 99, 255, 0.015) 1px, transparent 1px);
   background-size: 60px 60px;
@@ -39,8 +39,13 @@
 }
 
 @keyframes patternMove {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(60px, 60px); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(60px, 60px);
+  }
 }
 
 /* ===== CONTAINER ===== */
@@ -121,6 +126,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+  padding: 115;
 }
 
 .valueCard {
@@ -142,7 +148,7 @@
 
 .cardInner {
   position: relative;
-  padding: 2rem 1.5rem;
+  padding: 1rem;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
@@ -198,8 +204,17 @@
 }
 
 @keyframes iconPulse {
-  0%, 100% { transform: scale(1); opacity: 0.06; }
-  50% { transform: scale(1.2); opacity: 0.12; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.06;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.12;
+  }
 }
 
 .cardIcon {
@@ -220,8 +235,15 @@
 }
 
 @keyframes iconFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* Content */
@@ -237,7 +259,7 @@
   color: #6a6a8a;
   line-height: 1.6;
   flex: 1;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 /* Stat */
@@ -351,8 +373,10 @@
   }
 
   .valueGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    /* margin: 5px -50px; */
+    padding: 0 1rem;
   }
 
   .title {
