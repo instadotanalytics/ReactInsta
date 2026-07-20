@@ -27,6 +27,8 @@ import HrCounslerLogin from "./Hr&Counsler/HrCounslerLogin";
 import HrCounslerSignup from "./Hr&Counsler/HrCounslerSignup";
 import HrDashboard from "./Hr&Counsler/hr-dashboard/HrDashboard";
 import CounselorDashboard from "./Hr&Counsler/counselor-dashboard/CounselorDashboard";
+import BlogList from "./Pages/Blogs/BlogList";
+import BlogDetail from "./Pages/Blogs/BlogDetail";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -64,6 +66,8 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/counselor-dashboard" element={<CounselorDashboard />} />
         <Route path="/hr-dashboard" element={<HrDashboard />} />
+        <Route path="/blogs" element={<BlogList/>} />
+        <Route path="/blog/:slug" element={<BlogDetail/>} />
 
         <Route
           path="/admin-dashboard"

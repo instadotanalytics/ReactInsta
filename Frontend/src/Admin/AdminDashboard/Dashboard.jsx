@@ -13,7 +13,7 @@ import {
   FiUsers, FiBookOpen, FiClock, FiBarChart2,
   FiHome, FiSettings, FiCalendar, FiUserCheck,
   FiAward, FiTrendingUp, FiTarget, FiChevronDown,
-  FiGrid, FiLayers, FiBriefcase
+  FiGrid, FiLayers, FiBriefcase, FiEdit
 } from "react-icons/fi";
 import {
   MdOutlineWorkspacePremium,
@@ -32,7 +32,7 @@ import InternshipDetails from './InternshipDetails';
 import FullTimeJobList from './FullTimeJobList';
 import ContactFormDetails from './ContactFormDetails';
 import AdminCertificationFormData from './AdminCertificationFormData';
-
+import AdminBlogs from './AdminBlogs'; // Import AdminBlogs
 
 // Dashboard Home Component
 const DashboardHome = ({ username }) => {
@@ -408,6 +408,13 @@ const Dashboard = ({ username, onLogout }) => {
       component: <AdminCertificationFormData />
     },
     {
+      id: 'blogs',
+      name: 'Blogs',
+      icon: <FiEdit />,
+      badge: 'Manage',
+      component: <AdminBlogs />
+    },
+    {
       id: 'analytics',
       name: 'Analytics',
       icon: <FiBarChart2 />,
@@ -460,7 +467,6 @@ const Dashboard = ({ username, onLogout }) => {
       <div className={`${styles.sidebar} ${isMobileMenuOpen ? styles.open : ''}`}>
         <div className={styles.logoArea}>
           <div className={styles.logo}>
-            {/* Logo Image - Using a placeholder div if image doesn't exist */}
             <div className={styles.logoPlaceholder}>TA</div>
           </div>
           <div className={styles.logoText}>

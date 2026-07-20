@@ -1,4 +1,3 @@
-
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -19,7 +18,7 @@ import fullTimeJobRoutes from "./routes/fullTimeJobRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import applicationRoutes from "./routes/applicationRoutes.js";
 import hrCounslerRoutes from "./routes/hrCounslerRoutes.js";
-
+import blogRoutes from "./routes/blogRoutes.js";
 
 dotenv.config();
 console.log("CLOUD NAME:", process.env.CLOUDINARY_CLOUD_NAME);
@@ -45,11 +44,49 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// ✅ MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✓ MongoDB Connected"))
-  .catch((err) => console.log("✗ MongoDB Error:", err));
+// ✅ MongoDB Connection - New Version
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      // New MongoDB driver options
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      family: 4, // Use IPv4, skip trying IPv6
+    });
+    console.log(`✅ MongoDB Connected Successfully!`);
+    console.log(`📊 Database: ${conn.connection.name}`);
+    console.log(`🔗 Host: ${conn.connection.host}`);
+    console.log(`📁 Collection Count: ${conn.connection.collections ? Object.keys(conn.connection.collections).length : 0}`);
+  } catch (error) {
+    console.error("❌ MongoDB Connection Error:", error.message);
+    console.error("💡 Please check your MONGO_URI in .env file");
+    // Don't exit process, let it retry
+    process.exit(1);
+  }
+};
+
+// Connect to MongoDB
+connectDB();
+
+// ✅ MongoDB Connection Events - For better debugging
+mongoose.connection.on('connected', () => {
+  console.log('🟢 Mongoose connected to MongoDB');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.log('🔴 Mongoose connection error:', err.message);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.log('🟡 Mongoose disconnected from MongoDB');
+});
+
+// Handle application termination
+process.on('SIGINT', async () => {
+  await mongoose.connection.close();
+  console.log('🟡 MongoDB connection closed due to app termination');
+  process.exit(0);
+});
 
 // ✅ middleware
 app.use(
@@ -72,6 +109,25 @@ const loginLimiter = rateLimit({
 });
 app.use("/api/admin/login", loginLimiter);
 
+// ✅ Health check route for Render
+app.get("/health", (req, res) => {
+  const dbState = mongoose.connection.readyState;
+  const dbStatus = {
+    0: 'disconnected',
+    1: 'connected',
+    2: 'connecting',
+    3: 'disconnecting'
+  };
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    database: {
+      state: dbStatus[dbState] || 'unknown',
+      readyState: dbState
+    }
+  });
+});
+
 // ✅ routes
 app.use("/api/admin", adminRoutes);
 app.use("/api/courses", courseRoutes);
@@ -82,10 +138,19 @@ app.use("/api/fulltimejob", fullTimeJobRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/hr", hrCounslerRoutes);
+app.use("/api/blogs", blogRoutes);
 
 // ✅ test
 app.get("/api/test", (req, res) => {
-  res.json({ success: true });
+  const dbState = mongoose.connection.readyState;
+  res.json({ 
+    success: true, 
+    message: "API is working",
+    database: {
+      connected: dbState === 1,
+      state: dbState
+    }
+  });
 });
 
 app.use(express.static(path.join(__dirname, "../Frontend/dist")));
@@ -99,5 +164,7 @@ app.use(errorHandler);
 
 // ✅ start
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🌐 API URL: http://localhost:${PORT}/api/test`);
+  console.log(`📊 Health check: http://localhost:${PORT}/health`);
 });

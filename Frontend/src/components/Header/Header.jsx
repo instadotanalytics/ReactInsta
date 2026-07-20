@@ -8,6 +8,7 @@ import {
   FaHome, FaBars, FaTimes, FaWhatsapp, FaPhoneAlt,
   FaUserPlus, FaBriefcase, FaLaptopCode, FaUserTie,
   FaGraduationCap, FaRocket, FaBuilding, FaMicrosoft, FaAws,
+  FaBlog, // Added Blog icon
 } from "react-icons/fa";
 import { FaRedhat } from "react-icons/fa";
 import { SiBmcsoftware, SiCoursera } from "react-icons/si";
@@ -407,6 +408,15 @@ const Header = () => {
                 </Link>
               </li>
 
+              {/* NEW: Blogs Nav Item - Added before Contact */}
+              <li className={styles.navItem}>
+                <Link to="/blogs" onClick={handleLinkClick}>
+                  <span className={styles.linkContent}>
+                    <FaBlog className={styles.navIcon} /> Blogs
+                  </span>
+                </Link>
+              </li>
+
               <li className={styles.navItem}>
                 <Link to="/contact" onClick={handleLinkClick}>
                   <span className={styles.linkContent}>
@@ -503,6 +513,12 @@ const Header = () => {
               <li className={styles.mobileNavItem}>
                 <Link to="/about" onClick={handleLinkClick} className={styles.mobileLink}>
                   <BsInfoCircle /> About Us
+                </Link>
+              </li>
+              {/* NEW: Blogs Mobile Nav Item - Added before Contact */}
+              <li className={styles.mobileNavItem}>
+                <Link to="/blogs" onClick={handleLinkClick} className={styles.mobileLink}>
+                  <FaBlog /> Blogs
                 </Link>
               </li>
               <li className={styles.mobileNavItem}>
