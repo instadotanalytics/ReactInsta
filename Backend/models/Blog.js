@@ -40,6 +40,7 @@ const blogSchema = new mongoose.Schema(
       enum: [
         "Technology",
         "Data Science",
+        "Data Analytics",
         "Web Development",
         "Career",
         "Certification",
@@ -47,6 +48,29 @@ const blogSchema = new mongoose.Schema(
         "Internship",
         "Success Stories",
         "Tips & Tricks",
+        "Training Programs",
+        "Business Intelligence",
+        "Machine Learning",
+        "Artificial Intelligence",
+        "Python",
+        "SQL",
+        "Power BI",
+        "Tableau",
+        "Cloud Computing",
+        "Big Data",
+        "DevOps",
+        "Cyber Security",
+        "Digital Marketing",
+        "UI/UX Design",
+        "React JS",
+        "Node JS",
+        "MongoDB",
+        "Java",
+        "C++",
+        "JavaScript",
+        "Full Stack Development",
+        "MERN Stack",
+        "MEAN Stack",
       ],
       default: "Technology",
     },
@@ -93,8 +117,8 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
-// Create slug from title
-blogSchema.pre("save", function (next) {
+// ✅ Fixed: Use function keyword instead of arrow function
+blogSchema.pre("save", function(next) {
   if (this.isModified("title")) {
     this.slug = this.title
       .toLowerCase()
@@ -105,12 +129,16 @@ blogSchema.pre("save", function (next) {
 });
 
 // Virtual for formatted date
-blogSchema.virtual("formattedDate").get(function () {
+blogSchema.virtual("formattedDate").get(function() {
   return new Date(this.publishedAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 });
+
+// ✅ Add this for toJSON and toObject to include virtuals
+blogSchema.set("toJSON", { virtuals: true });
+blogSchema.set("toObject", { virtuals: true });
 
 export default mongoose.model("Blog", blogSchema);
