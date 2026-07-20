@@ -117,18 +117,7 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
-// ✅ Fixed: Use function keyword instead of arrow function
-blogSchema.pre("save", function(next) {
-  if (this.isModified("title")) {
-    this.slug = this.title
-      .toLowerCase()
-      .replace(/[^a-zA-Z0-9 ]/g, "")
-      .replace(/\s+/g, "-");
-  }
-  next();
-});
-
-// Virtual for formatted date
+// ✅ Virtual for formatted date
 blogSchema.virtual("formattedDate").get(function() {
   return new Date(this.publishedAt).toLocaleDateString("en-US", {
     year: "numeric",
@@ -137,7 +126,7 @@ blogSchema.virtual("formattedDate").get(function() {
   });
 });
 
-// ✅ Add this for toJSON and toObject to include virtuals
+// ✅ Include virtuals in JSON
 blogSchema.set("toJSON", { virtuals: true });
 blogSchema.set("toObject", { virtuals: true });
 

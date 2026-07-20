@@ -1,6 +1,20 @@
 import Blog from "../models/Blog.js";
+import { v2 as cloudinary } from "cloudinary";
 
-// Create Blog
+// ============================================
+// HELPER FUNCTION - Generate Slug
+// ============================================
+const generateSlug = (title) => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9 ]/g, "")  // Remove special characters
+    .replace(/\s+/g, "-")           // Replace spaces with hyphens
+    .trim();
+};
+
+// ============================================
+// CREATE BLOG
+// ============================================
 export const createBlog = async (req, res) => {
   try {
     const {
@@ -17,13 +31,32 @@ export const createBlog = async (req, res) => {
       isFeatured,
     } = req.body;
 
-    // Create slug from title
-    const slug = title
-      .toLowerCase()
-      .replace(/[^a-zA-Z0-9 ]/g, "")
-      .replace(/\s+/g, "-");
+    // ✅ Validate required fields
+    if (!title) {
+      return res.status(400).json({
+        success: false,
+        message: "Title is required",
+      });
+    }
 
-    // Check if blog with same title exists
+    if (!excerpt) {
+      return res.status(400).json({
+        success: false,
+        message: "Excerpt is required",
+      });
+    }
+
+    if (!content) {
+      return res.status(400).json({
+        success: false,
+        message: "Content is required",
+      });
+    }
+
+    // ✅ Generate slug
+    const slug = generateSlug(title);
+
+    // ✅ Check if blog with same slug exists
     const existingBlog = await Blog.findOne({ slug });
     if (existingBlog) {
       return res.status(400).json({
@@ -32,7 +65,7 @@ export const createBlog = async (req, res) => {
       });
     }
 
-    // Get featured image URL from Cloudinary
+    // ✅ Get featured image from Cloudinary
     let featuredImage = "";
     if (req.files && req.files.featuredImage) {
       featuredImage = req.files.featuredImage[0].path;
@@ -43,33 +76,35 @@ export const createBlog = async (req, res) => {
       });
     }
 
-    // Calculate reading time
+    // ✅ Calculate reading time
     const wordsPerMinute = 200;
     const wordCount = content.split(/\s+/).length;
     const readingTime = Math.ceil(wordCount / wordsPerMinute);
 
-    // Parse tags
-    const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()) : [];
+    // ✅ Parse tags
+    const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()).filter(tag => tag) : [];
 
+    // ✅ Create blog
     const blog = new Blog({
-      title,
+      title: title.trim(),
       slug,
-      excerpt,
-      content,
+      excerpt: excerpt.trim(),
+      content: content.trim(),
       featuredImage,
-      author: author || "InstaDot Analytics",
+      author: author?.trim() || "InstaDot Analytics",
       category: category || "Technology",
       tags: tagsArray,
       readingTime: readingTime || 5,
-      metaTitle: metaTitle || title,
-      metaDescription: metaDescription || excerpt.substring(0, 160),
+      metaTitle: metaTitle?.trim() || title.trim(),
+      metaDescription: metaDescription?.trim() || excerpt.substring(0, 160),
       metaKeywords: metaKeywords
-        ? metaKeywords.split(",").map((k) => k.trim())
+        ? metaKeywords.split(",").map((k) => k.trim()).filter(k => k)
         : tagsArray,
       isPublished: isPublished === "true" || isPublished === true,
       isFeatured: isFeatured === "true" || isFeatured === true,
     });
 
+    // ✅ Save blog
     await blog.save();
 
     res.status(201).json({
@@ -78,7 +113,17 @@ export const createBlog = async (req, res) => {
       data: blog,
     });
   } catch (error) {
-    console.error("Create blog error:", error);
+    console.error("❌ Create blog error:", error);
+    
+    // ✅ Handle validation errors
+    if (error.name === "ValidationError") {
+      const errors = Object.values(error.errors).map((e) => e.message);
+      return res.status(400).json({
+        success: false,
+        message: errors.join(", "),
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: error.message || "Failed to create blog",
@@ -86,16 +131,20 @@ export const createBlog = async (req, res) => {
   }
 };
 
-// Get All Blogs (Admin)
+// ============================================
+// GET ALL BLOGS (Admin)
+// ============================================
 export const getAllBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find().sort({ createdAt: -1 });
+    
     res.json({
       success: true,
       data: blogs,
+      count: blogs.length,
     });
   } catch (error) {
-    console.error("Get all blogs error:", error);
+    console.error("❌ Get all blogs error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to fetch blogs",
@@ -103,7 +152,9 @@ export const getAllBlogs = async (req, res) => {
   }
 };
 
-// Get Published Blogs (Frontend)
+// ============================================
+// GET PUBLISHED BLOGS (Frontend)
+// ============================================
 export const getPublishedBlogs = async (req, res) => {
   try {
     const { page = 1, limit = 9, category } = req.query;
@@ -136,7 +187,7 @@ export const getPublishedBlogs = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Get published blogs error:", error);
+    console.error("❌ Get published blogs error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to fetch blogs",
@@ -144,7 +195,9 @@ export const getPublishedBlogs = async (req, res) => {
   }
 };
 
-// Get Blog by Slug
+// ============================================
+// GET BLOG BY SLUG
+// ============================================
 export const getBlogBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
@@ -158,18 +211,18 @@ export const getBlogBySlug = async (req, res) => {
       });
     }
 
-    // Increment views
+    // ✅ Increment views
     blog.views += 1;
     await blog.save();
 
-    // Get related blogs
+    // ✅ Get related blogs
     const relatedBlogs = await Blog.find({
       _id: { $ne: blog._id },
       category: blog.category,
       isPublished: true,
     })
       .limit(3)
-      .select("title slug featuredImage excerpt publishedAt")
+      .select("title slug featuredImage excerpt publishedAt views")
       .lean();
 
     res.json({
@@ -178,7 +231,7 @@ export const getBlogBySlug = async (req, res) => {
       related: relatedBlogs,
     });
   } catch (error) {
-    console.error("Get blog by slug error:", error);
+    console.error("❌ Get blog by slug error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to fetch blog",
@@ -186,7 +239,9 @@ export const getBlogBySlug = async (req, res) => {
   }
 };
 
-// Update Blog
+// ============================================
+// UPDATE BLOG
+// ============================================
 export const updateBlog = async (req, res) => {
   try {
     const { id } = req.params;
@@ -204,6 +259,7 @@ export const updateBlog = async (req, res) => {
       isFeatured,
     } = req.body;
 
+    // ✅ Find existing blog
     const blog = await Blog.findById(id);
     if (!blog) {
       return res.status(404).json({
@@ -212,22 +268,30 @@ export const updateBlog = async (req, res) => {
       });
     }
 
-    // Update featured image if new one uploaded
+    // ✅ Update featured image if new one uploaded
     let featuredImage = blog.featuredImage;
     if (req.files && req.files.featuredImage) {
+      // Delete old image from Cloudinary
+      if (blog.featuredImage) {
+        try {
+          const publicId = blog.featuredImage.split("/").pop().split(".")[0];
+          await cloudinary.uploader.destroy(`blogs/${publicId}`);
+        } catch (err) {
+          console.error("Error deleting old image:", err);
+        }
+      }
       featuredImage = req.files.featuredImage[0].path;
     }
 
-    const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()) : [];
+    // ✅ Parse tags
+    const tagsArray = tags ? tags.split(",").map((tag) => tag.trim()).filter(tag => tag) : [];
 
-    // Update slug if title changed
+    // ✅ Update slug if title changed
     let slug = blog.slug;
-    if (title && title !== blog.title) {
-      slug = title
-        .toLowerCase()
-        .replace(/[^a-zA-Z0-9 ]/g, "")
-        .replace(/\s+/g, "-");
+    if (title && title.trim() !== blog.title) {
+      slug = generateSlug(title);
 
+      // Check if new slug already exists
       const existingBlog = await Blog.findOne({ slug, _id: { $ne: id } });
       if (existingBlog) {
         return res.status(400).json({
@@ -237,26 +301,33 @@ export const updateBlog = async (req, res) => {
       }
     }
 
+    // ✅ Calculate reading time
+    const wordsPerMinute = 200;
+    const wordCount = (content || blog.content).split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+    // ✅ Update blog
     const updatedBlog = await Blog.findByIdAndUpdate(
       id,
       {
-        title: title || blog.title,
+        title: title?.trim() || blog.title,
         slug,
-        excerpt: excerpt || blog.excerpt,
-        content: content || blog.content,
+        excerpt: excerpt?.trim() || blog.excerpt,
+        content: content?.trim() || blog.content,
         featuredImage,
-        author: author || blog.author,
+        author: author?.trim() || blog.author,
         category: category || blog.category,
         tags: tagsArray.length > 0 ? tagsArray : blog.tags,
-        metaTitle: metaTitle || blog.metaTitle,
-        metaDescription: metaDescription || blog.metaDescription,
+        readingTime: readingTime || 5,
+        metaTitle: metaTitle?.trim() || blog.metaTitle,
+        metaDescription: metaDescription?.trim() || blog.metaDescription,
         metaKeywords: metaKeywords
-          ? metaKeywords.split(",").map((k) => k.trim())
+          ? metaKeywords.split(",").map((k) => k.trim()).filter(k => k)
           : blog.metaKeywords,
         isPublished: isPublished !== undefined ? isPublished : blog.isPublished,
         isFeatured: isFeatured !== undefined ? isFeatured : blog.isFeatured,
       },
-      { new: true }
+      { new: true, runValidators: true }
     );
 
     res.json({
@@ -265,7 +336,16 @@ export const updateBlog = async (req, res) => {
       data: updatedBlog,
     });
   } catch (error) {
-    console.error("Update blog error:", error);
+    console.error("❌ Update blog error:", error);
+    
+    if (error.name === "ValidationError") {
+      const errors = Object.values(error.errors).map((e) => e.message);
+      return res.status(400).json({
+        success: false,
+        message: errors.join(", "),
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: error.message || "Failed to update blog",
@@ -273,7 +353,9 @@ export const updateBlog = async (req, res) => {
   }
 };
 
-// Delete Blog
+// ============================================
+// DELETE BLOG
+// ============================================
 export const deleteBlog = async (req, res) => {
   try {
     const { id } = req.params;
@@ -286,6 +368,17 @@ export const deleteBlog = async (req, res) => {
       });
     }
 
+    // ✅ Delete featured image from Cloudinary
+    if (blog.featuredImage) {
+      try {
+        const publicId = blog.featuredImage.split("/").pop().split(".")[0];
+        await cloudinary.uploader.destroy(`blogs/${publicId}`);
+      } catch (err) {
+        console.error("Error deleting image from Cloudinary:", err);
+      }
+    }
+
+    // ✅ Delete blog
     await blog.deleteOne();
 
     res.json({
@@ -293,7 +386,7 @@ export const deleteBlog = async (req, res) => {
       message: "Blog deleted successfully",
     });
   } catch (error) {
-    console.error("Delete blog error:", error);
+    console.error("❌ Delete blog error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to delete blog",
@@ -301,7 +394,9 @@ export const deleteBlog = async (req, res) => {
   }
 };
 
-// Get Blogs by Category
+// ============================================
+// GET BLOGS BY CATEGORY
+// ============================================
 export const getBlogsByCategory = async (req, res) => {
   try {
     const { category } = req.params;
@@ -319,9 +414,10 @@ export const getBlogsByCategory = async (req, res) => {
     res.json({
       success: true,
       data: blogs,
+      count: blogs.length,
     });
   } catch (error) {
-    console.error("Get blogs by category error:", error);
+    console.error("❌ Get blogs by category error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to fetch blogs",
@@ -329,7 +425,9 @@ export const getBlogsByCategory = async (req, res) => {
   }
 };
 
-// Get Featured Blogs
+// ============================================
+// GET FEATURED BLOGS
+// ============================================
 export const getFeaturedBlogs = async (req, res) => {
   try {
     const { limit = 3 } = req.query;
@@ -346,9 +444,10 @@ export const getFeaturedBlogs = async (req, res) => {
     res.json({
       success: true,
       data: blogs,
+      count: blogs.length,
     });
   } catch (error) {
-    console.error("Get featured blogs error:", error);
+    console.error("❌ Get featured blogs error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to fetch featured blogs",
@@ -356,7 +455,9 @@ export const getFeaturedBlogs = async (req, res) => {
   }
 };
 
-// Increment Blog Views
+// ============================================
+// INCREMENT BLOG VIEWS
+// ============================================
 export const incrementBlogViews = async (req, res) => {
   try {
     const { id } = req.params;
@@ -379,7 +480,7 @@ export const incrementBlogViews = async (req, res) => {
       views: blog.views,
     });
   } catch (error) {
-    console.error("Increment views error:", error);
+    console.error("❌ Increment views error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to increment views",
@@ -387,7 +488,9 @@ export const incrementBlogViews = async (req, res) => {
   }
 };
 
-// Search Blogs
+// ============================================
+// SEARCH BLOGS
+// ============================================
 export const searchBlogs = async (req, res) => {
   try {
     const { q, limit = 10 } = req.query;
@@ -399,14 +502,16 @@ export const searchBlogs = async (req, res) => {
       });
     }
 
+    const searchRegex = new RegExp(q.trim(), "i");
+
     const blogs = await Blog.find({
       $or: [
-        { title: { $regex: q, $options: "i" } },
-        { excerpt: { $regex: q, $options: "i" } },
-        { content: { $regex: q, $options: "i" } },
-        { author: { $regex: q, $options: "i" } },
-        { tags: { $in: [q] } },
-        { category: { $regex: q, $options: "i" } },
+        { title: { $regex: searchRegex } },
+        { excerpt: { $regex: searchRegex } },
+        { content: { $regex: searchRegex } },
+        { author: { $regex: searchRegex } },
+        { tags: { $in: [q.trim()] } },
+        { category: { $regex: searchRegex } },
       ],
       isPublished: true,
     })
@@ -421,7 +526,7 @@ export const searchBlogs = async (req, res) => {
       count: blogs.length,
     });
   } catch (error) {
-    console.error("Search blogs error:", error);
+    console.error("❌ Search blogs error:", error);
     res.status(500).json({
       success: false,
       message: error.message || "Failed to search blogs",
