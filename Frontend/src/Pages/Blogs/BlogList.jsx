@@ -1,50 +1,211 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import styles from "./BlogDetail.module.css";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Link } from "react-router-dom";
+import styles from "./BlogList.module.css";
 import { blogService } from "../../services/blogService";
 import {
   FaCalendar,
   FaUser,
   FaClock,
-  FaTag,
-  FaShare,
-  FaFacebook,
-  FaTwitter,
-  FaLinkedin,
-  FaWhatsapp,
-  FaCopy,
+  FaSearch,
+  FaTimes,
+  FaArrowRight,
+  FaFire,
+  FaStar,
+  FaRocket,
+  FaSpinner,
+  FaTags,
+  FaEye,
+  FaBookOpen,
+  FaNewspaper,
+  FaArrowLeft,
+  FaRegFileAlt,
+  FaChartLine,
 } from "react-icons/fa";
-import { Helmet } from "react-helmet-async";
+import { MdAutoAwesome, MdOutlineStars } from "react-icons/md";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
-const BlogDetail = () => {
-  const { slug } = useParams();
-  const [blog, setBlog] = useState(null);
-  const [relatedBlogs, setRelatedBlogs] = useState([]);
+// ============================================
+// THROTTLE UTILITY
+// ============================================
+const throttle = (fn, delay) => {
+  let lastCall = 0;
+  let timeoutId = null;
+  
+  return function (...args) {
+    const now = Date.now();
+    
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      fn.apply(this, args);
+    } else {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        lastCall = now;
+        fn.apply(this, args);
+      }, delay - (now - lastCall));
+    }
+  };
+};
+
+// ============================================
+// MAIN COMPONENT
+// ============================================
+const BlogList = () => {
+  const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [shareCopied, setShareCopied] = useState(false);
+  const [pagination, setPagination] = useState({
+    total: 0,
+    page: 1,
+    limit: 9,
+    pages: 0,
+  });
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeSearch, setActiveSearch] = useState("");
+  const [featuredBlogs, setFeaturedBlogs] = useState([]);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchBlog();
-  }, [slug]);
+  const categories = [
+    "All",
+    "Technology",
+    "Data Science",
+    "Data Analytics",
+    "Web Development",
+    "Career",
+    "Certification",
+    "Placement",
+    "Internship",
+    "Success Stories",
+    "Tips & Tricks",
+  ];
 
-  const fetchBlog = async () => {
+  // ============================================
+  // FETCH BLOGS WITH THROTTLE
+  // ============================================
+  const fetchBlogs = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await blogService.getBlogBySlug(slug);
+      const response = await blogService.getPublishedBlogs(
+        pagination.page,
+        pagination.limit,
+        selectedCategory
+      );
       if (response.success) {
-        setBlog(response.data);
-        setRelatedBlogs(response.related || []);
+        setBlogs(response.data);
+        setPagination(response.pagination);
+        setIsFirstLoad(false);
       }
     } catch (error) {
-      console.error("Error fetching blog:", error);
+      console.error("Error fetching blogs:", error);
     } finally {
       setLoading(false);
     }
+  }, [pagination.page, pagination.limit, selectedCategory]);
+
+  // Throttled version of fetchBlogs
+  const throttledFetchBlogs = useCallback(
+    throttle(fetchBlogs, 300),
+    [fetchBlogs]
+  );
+
+  // ============================================
+  // FETCH FEATURED BLOGS
+  // ============================================
+  const fetchFeaturedBlogs = useCallback(async () => {
+    try {
+      const response = await blogService.getFeaturedBlogs();
+      if (response.success) {
+        setFeaturedBlogs(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching featured blogs:", error);
+    }
+  }, []);
+
+  // ============================================
+  // EFFECTS
+  // ============================================
+  useEffect(() => {
+    throttledFetchBlogs();
+  }, [pagination.page, selectedCategory, throttledFetchBlogs]);
+
+  useEffect(() => {
+    fetchFeaturedBlogs();
+  }, [fetchFeaturedBlogs]);
+
+  // ============================================
+  // SEARCH WITH DEBOUNCE
+  // ============================================
+  const handleSearch = useCallback(async (e) => {
+    e?.preventDefault?.();
+    
+    if (searchQuery.trim().length < 2) {
+      if (activeSearch) {
+        clearSearch();
+      }
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await blogService.searchBlogs(searchQuery);
+      if (response.success) {
+        setBlogs(response.data);
+        setActiveSearch(searchQuery.trim());
+      }
+    } catch (error) {
+      console.error("Search error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [searchQuery, activeSearch]);
+
+  // Throttled search handler
+  const throttledSearch = useCallback(
+    throttle(handleSearch, 500),
+    [handleSearch]
+  );
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      throttledSearch(e);
+    }
   };
 
+  // ============================================
+  // CLEAR SEARCH
+  // ============================================
+  const clearSearch = () => {
+    setSearchQuery("");
+    setActiveSearch("");
+    setPagination({ ...pagination, page: 1 });
+    fetchBlogs();
+  };
+
+  // ============================================
+  // CATEGORY CHANGE
+  // ============================================
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category === "All" ? "" : category);
+    setPagination({ ...pagination, page: 1 });
+  };
+
+  // ============================================
+  // PAGE CHANGE
+  // ============================================
+  const handlePageChange = (page) => {
+    if (page !== pagination.page) {
+      setPagination({ ...pagination, page });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // ============================================
+  // FORMAT DATE
+  // ============================================
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
@@ -53,258 +214,303 @@ const BlogDetail = () => {
     });
   };
 
-  const shareUrl = window.location.href;
-  const shareTitle = blog?.title || "";
-
-  const shareLinks = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      shareUrl
-    )}`,
-    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-      shareUrl
-    )}&text=${encodeURIComponent(shareTitle)}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-      shareUrl
-    )}`,
-    whatsapp: `https://wa.me/?text=${encodeURIComponent(
-      `${shareTitle} - ${shareUrl}`
-    )}`,
-  };
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      setShareCopied(true);
-      setTimeout(() => setShareCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.loader}>Loading...</div>
-      </div>
-    );
-  }
-
-  if (!blog) {
-    return (
-      <div className={styles.notFound}>
-        <h2>Blog not found</h2>
-        <Link to="/blogs" className={styles.backBtn}>
-          ← Back to Blogs
-        </Link>
-      </div>
-    );
-  }
-
+  // ============================================
+  // RENDER
+  // ============================================
   return (
     <>
-    <Header/>
-      <Helmet>
-        <title>{blog.metaTitle || blog.title}</title>
-        <meta name="description" content={blog.metaDescription || blog.excerpt} />
-        <meta name="keywords" content={blog.metaKeywords?.join(", ") || ""} />
-        <meta property="og:title" content={blog.metaTitle || blog.title} />
-        <meta property="og:description" content={blog.metaDescription || blog.excerpt} />
-        <meta property="og:image" content={blog.featuredImage} />
-        <meta property="og:url" content={window.location.href} />
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blog.metaTitle || blog.title} />
-        <meta name="twitter:description" content={blog.metaDescription || blog.excerpt} />
-        <meta name="twitter:image" content={blog.featuredImage} />
-        <link rel="canonical" href={window.location.href} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: blog.title,
-            image: blog.featuredImage,
-            datePublished: blog.publishedAt,
-            dateModified: blog.updatedAt,
-            author: {
-              "@type": "Person",
-              name: blog.author || "InstaDot Analytics",
-            },
-            publisher: {
-              "@type": "Organization",
-              name: "InstaDot Analytics",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://instadotanalytics.com/logo.png",
-              },
-            },
-            description: blog.excerpt,
-            mainEntityOfPage: {
-              "@type": "WebPage",
-              "@id": window.location.href,
-            },
-          })}
-        </script>
-      </Helmet>
+      <Header />
 
-      <article className={styles.blogDetail}>
-        {/* Hero — image shown in full inside its own framed block */}
-        <div className={styles.heroSection}>
-          <div className={styles.heroImageWrapper}>
-            <img
-              src={blog.featuredImage}
-              alt={blog.title}
-              className={styles.heroImage}
-            />
-            <div className={styles.heroOverlay}></div>
+      <div className={styles.blogPage}>
+        {/* Hero Section */}
+        <section className={styles.hero}>
+          <div className={styles.heroParticles}>
+            {[...Array(20)].map((_, i) => (
+              <span
+                key={i}
+                className={styles.particle}
+                style={{
+                  '--delay': `${Math.random() * 3}s`,
+                  '--size': `${Math.random() * 6 + 2}px`,
+                  '--x': `${Math.random() * 100}%`,
+                  '--y': `${Math.random() * 100}%`,
+                }}
+              />
+            ))}
           </div>
           <div className={styles.heroContent}>
-            <div className={styles.heroMeta}>
-              <span className={styles.heroCategory}>{blog.category}</span>
-              <span className={styles.heroDate}>
-                <FaCalendar /> {formatDate(blog.publishedAt)}
-              </span>
-              <span className={styles.heroReadTime}>
-                <FaClock /> {blog.readingTime || 5} min read
-              </span>
-            </div>
-            <h1 className={styles.heroTitle}>{blog.title}</h1>
-            <div className={styles.heroAuthor}>
-              <div className={styles.authorInfo}>
-                <span className={styles.authorAvatar}>
-                  <FaUser />
-                </span>
-                <div>
-                  <span className={styles.authorName}>
-                    {blog.author || "InstaDot Analytics"}
-                  </span>
-                  <span className={styles.authorViews}>
-                    👁️ {blog.views || 0} views
-                  </span>
-                </div>
-              </div>
+            <span className={`${styles.eyebrow} ${styles.dotTrail}`}>
+              <FaNewspaper className={styles.eyebrowIcon} /> The Insta Dot Journal
+            </span>
+            <h1 className={styles.heroTitle}>
+              <span className={styles.gradientText}>InstaDot</span> Analytics Blog
+            </h1>
+            <p className={styles.heroDesc}>
+              Stay updated with the latest in technology, career guidance, and success stories
+            </p>
+            <div className={styles.heroStats}>
+              <span><FaFire className={styles.fireIcon} /> Trending Topics</span>
+              <span><FaChartLine /> 500+ Articles</span>
+              <span><FaStar className={styles.starIcon} /> Expert Insights</span>
             </div>
           </div>
+        </section>
+
+        {/* Search Bar - Fixed */}
+        <div className={styles.searchContainer}>
+          <form onSubmit={throttledSearch} className={`${styles.searchForm} ${isSearchFocused ? styles.focused : ''}`}>
+            <div className={styles.searchIconWrapper}>
+              <FaSearch className={styles.searchIcon} />
+            </div>
+            <input
+              type="text"
+              placeholder="Search articles, topics, courses..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              onFocus={() => setIsSearchFocused(true)}
+              onBlur={() => setIsSearchFocused(false)}
+              className={styles.searchInput}
+              aria-label="Search blog articles"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className={styles.clearInputBtn}
+                aria-label="Clear search"
+              >
+                <FaTimes />
+              </button>
+            )}
+            <button type="submit" className={styles.searchBtn} aria-label="Search">
+              <FaSearch className={styles.searchBtnIcon} />
+              <span className={styles.searchBtnText}>Search</span>
+            </button>
+          </form>
+
+          {activeSearch && (
+            <div className={styles.searchActive}>
+              <span>
+                <FaRocket className={styles.sparkleIcon} />
+                Showing results for <strong>&ldquo;{activeSearch}&rdquo;</strong>
+              </span>
+              <button onClick={clearSearch} className={styles.clearSearchBtn}>
+                <FaTimes /> Clear
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Content */}
-        <div className={styles.contentWrapper}>
-          <div className={styles.contentMain}>
-            <div
-              className={styles.blogContent}
-              dangerouslySetInnerHTML={{ __html: blog.content }}
-            />
-
-            {/* Tags */}
-            {blog.tags && blog.tags.length > 0 && (
-              <div className={styles.tagsSection}>
-                <h4>
-                  <FaTag /> Tags
-                </h4>
-                <div className={styles.tagsList}>
-                  {blog.tags.map((tag, index) => (
-                    <Link
-                      key={index}
-                      to={`/blogs?tag=${encodeURIComponent(tag)}`}
-                      className={styles.tag}
-                    >
-                      #{tag}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Share */}
-            <div className={styles.shareSection}>
-              <span className={styles.shareLabel}>
-                <FaShare /> Share this article
+        {/* Featured Blogs */}
+        {!activeSearch && !isFirstLoad && featuredBlogs.length > 0 && (
+          <section className={styles.featuredSection}>
+            <div className={styles.sectionHeader}>
+              <span className={`${styles.eyebrow} ${styles.dotTrail}`}>
+                <FaStar className={styles.eyebrowIcon} /> Handpicked
               </span>
-              <div className={styles.shareButtons}>
-                <a
-                  href={shareLinks.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${styles.shareBtn} ${styles.facebook}`}
-                  aria-label="Share on Facebook"
-                >
-                  <FaFacebook />
-                </a>
-                <a
-                  href={shareLinks.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${styles.shareBtn} ${styles.twitter}`}
-                  aria-label="Share on Twitter"
-                >
-                  <FaTwitter />
-                </a>
-                <a
-                  href={shareLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${styles.shareBtn} ${styles.linkedin}`}
-                  aria-label="Share on LinkedIn"
-                >
-                  <FaLinkedin />
-                </a>
-                <a
-                  href={shareLinks.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${styles.shareBtn} ${styles.whatsapp}`}
-                  aria-label="Share on WhatsApp"
-                >
-                  <FaWhatsapp />
-                </a>
-                <button
-                  className={`${styles.shareBtn} ${styles.copyBtn}`}
-                  onClick={copyToClipboard}
-                  aria-label="Copy link"
-                >
-                  {shareCopied ? "Copied!" : <FaCopy />}
-                </button>
-              </div>
+              <h2 className={styles.sectionTitle}>
+                Featured Articles
+                <span className={styles.sectionLine} />
+              </h2>
             </div>
+            <div className={styles.featuredGrid}>
+              {featuredBlogs.map((blog, index) => (
+                <Link
+                  to={`/blog/${blog.slug}`}
+                  key={blog._id}
+                  className={`${styles.featuredCard} ${styles.staggerCard}`}
+                  style={{ '--delay': `${index * 0.1}s` }}
+                >
+                  <div className={styles.featuredImageWrapper}>
+                    <img
+                      src={blog.featuredImage}
+                      alt={blog.title}
+                      className={styles.featuredImage}
+                      loading="lazy"
+                    />
+                    <div className={styles.featuredBadge}>
+                      <FaStar /> Featured
+                    </div>
+                    <div className={styles.imageOverlay} />
+                  </div>
+                  <div className={styles.featuredContent}>
+                    <span className={styles.featuredCategory}>
+                      <FaTags className={styles.categoryIcon} /> {blog.category}
+                    </span>
+                    <h3>{blog.title}</h3>
+                    <p>{blog.excerpt}</p>
+                    <div className={styles.featuredMeta}>
+                      <span>
+                        <FaCalendar /> {formatDate(blog.publishedAt)}
+                      </span>
+                      <span>
+                        <FaUser /> {blog.author || "Admin"}
+                      </span>
+                      <span className={styles.readMore}>
+                        Read <FaArrowRight />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
-            {/* Related Blogs */}
-            {relatedBlogs.length > 0 && (
-              <section className={styles.relatedSection}>
-                <h3 className={styles.relatedTitle}>Related Articles</h3>
-                <div className={styles.relatedGrid}>
-                  {relatedBlogs.map((related) => (
-                    <Link
-                      to={`/blog/${related.slug}`}
-                      key={related._id}
-                      className={styles.relatedCard}
-                    >
-                      <img
-                        src={related.featuredImage}
-                        alt={related.title}
-                        className={styles.relatedImage}
-                      />
-                      <div className={styles.relatedContent}>
-                        <h4>{related.title}</h4>
-                        <p>{related.excerpt}</p>
-                        <span className={styles.relatedDate}>
-                          <FaCalendar /> {formatDate(related.publishedAt)}
+        {/* Category Filter */}
+        {!activeSearch && (
+          <div className={styles.categoryFilter}>
+            <div className={styles.categoryScroll}>
+              {categories.map((category) => {
+                const isActive =
+                  (selectedCategory === "" && category === "All") ||
+                  selectedCategory === category;
+                return (
+                  <button
+                    key={category}
+                    className={`${styles.categoryBtn} ${isActive ? styles.active : ""}`}
+                    onClick={() => handleCategoryChange(category)}
+                    aria-pressed={isActive}
+                  >
+                    {category}
+                    {isActive && <span className={styles.activeDot} />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Blog Grid */}
+        <section className={styles.blogGridSection}>
+          {!activeSearch && (
+            <div className={styles.gridHeader}>
+              <span className={`${styles.eyebrow} ${styles.dotTrail}`}>
+                {selectedCategory || "All Topics"}
+              </span>
+              <span className={styles.gridCount}>
+                <FaBookOpen className={styles.countIcon} /> {pagination.total} {pagination.total === 1 ? 'article' : 'articles'}
+              </span>
+            </div>
+          )}
+
+          {loading ? (
+            <div className={styles.blogGrid} aria-busy="true" aria-label="Loading articles">
+              {Array.from({ length: pagination.limit }).map((_, i) => (
+                <div key={i} className={styles.skeletonCard}>
+                  <div className={styles.skeletonImage} />
+                  <div className={styles.skeletonBody}>
+                    <div className={`${styles.skeletonLine} ${styles.w80}`} />
+                    <div className={`${styles.skeletonLine} ${styles.w60}`} />
+                    <div className={`${styles.skeletonLine} ${styles.w40}`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : blogs.length === 0 ? (
+            <div className={styles.noBlogs}>
+              <div className={styles.noBlogsIcon}>
+                <FaRegFileAlt />
+              </div>
+              <h3>No articles found</h3>
+              <p>
+                {activeSearch
+                  ? `Nothing matched "${activeSearch}". Try a different search term.`
+                  : "Try a different category, or check back soon for new posts."}
+              </p>
+              {activeSearch && (
+                <button onClick={clearSearch} className={styles.pageBtn}>
+                  <FaTimes /> Clear search
+                </button>
+              )}
+            </div>
+          ) : (
+            <>
+              <div className={styles.blogGrid}>
+                {blogs.map((blog, index) => (
+                  <article
+                    key={blog._id}
+                    className={`${styles.blogCard} ${styles.staggerCard}`}
+                    style={{ '--delay': `${(index % 9) * 0.06}s` }}
+                  >
+                    <Link to={`/blog/${blog.slug}`} className={styles.cardLink}>
+                      <div className={styles.cardImage}>
+                        <img src={blog.featuredImage} alt={blog.title} loading="lazy" />
+                        <span className={styles.cardCategory}>
+                          <FaTags className={styles.categoryIcon} /> {blog.category}
                         </span>
+                        <div className={styles.cardOverlay} />
+                      </div>
+                      <div className={styles.cardContent}>
+                        <h3 className={styles.cardTitle}>{blog.title}</h3>
+                        <p className={styles.cardExcerpt}>{blog.excerpt}</p>
+                        <div className={styles.cardMeta}>
+                          <span className={styles.cardDate}>
+                            <FaCalendar /> {formatDate(blog.publishedAt)}
+                          </span>
+                          <span className={styles.cardViews}>
+                            <FaEye /> {blog.views || 0} views
+                          </span>
+                        </div>
+                        <div className={styles.cardFooter}>
+                          <span className={styles.cardAuthor}>
+                            <FaUser /> {blog.author || "Admin"}
+                          </span>
+                          <span className={styles.cardReadTime}>
+                            <FaClock /> {blog.readingTime || 5} min read
+                          </span>
+                        </div>
                       </div>
                     </Link>
-                  ))}
-                </div>
-              </section>
-            )}
+                  </article>
+                ))}
+              </div>
 
-            {/* Back Button */}
-            <Link to="/blogs" className={styles.backBtn}>
-              ← Back to all blogs
-            </Link>
-          </div>
-        </div>
-      </article>
-      <Footer/>
+              {/* Pagination */}
+              {pagination.pages > 1 && (
+                <div className={styles.pagination}>
+                  <button
+                    className={styles.pageBtn}
+                    onClick={() => handlePageChange(pagination.page - 1)}
+                    disabled={pagination.page === 1}
+                  >
+                    <FaArrowLeft /> Previous
+                  </button>
+                  <div className={styles.pageNumbers}>
+                    {Array.from({ length: Math.min(pagination.pages, 5) }, (_, i) => {
+                      let pageNum = i + 1;
+                      if (pagination.pages > 5 && pagination.page > 3) {
+                        pageNum = pagination.page - 2 + i;
+                        if (pageNum > pagination.pages) return null;
+                      }
+                      return (
+                        <button
+                          key={pageNum}
+                          className={`${styles.pageNumBtn} ${pagination.page === pageNum ? styles.activePage : ''}`}
+                          onClick={() => handlePageChange(pageNum)}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    }).filter(Boolean)}
+                  </div>
+                  <button
+                    className={styles.pageBtn}
+                    onClick={() => handlePageChange(pagination.page + 1)}
+                    disabled={pagination.page === pagination.pages}
+                  >
+                    Next <FaArrowRight />
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </section>
+      </div>
+      <Footer />
     </>
   );
 };
 
-export default BlogDetail;
+export default BlogList;
