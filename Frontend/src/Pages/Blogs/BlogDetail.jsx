@@ -81,13 +81,84 @@ const BlogDetail = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.loader}>Loading...</div>
+ // In BlogDetail.js - Update the loading section
+
+if (loading) {
+  return (
+    <div className={styles.loadingContainer}>
+      {/* Skeleton Hero */}
+      <div className={styles.skeletonHero}>
+        <div className={styles.skeletonImageWrapper}>
+          <div className={styles.skeletonImage} />
+        </div>
+        <div className={styles.skeletonMeta}>
+          <div className={styles.skeletonBadge} />
+          <div className={styles.skeletonText} />
+          <div className={styles.skeletonText} />
+        </div>
+        <div className={styles.skeletonTitle} />
+        <div className={styles.skeletonAuthor}>
+          <div className={styles.skeletonAvatar} />
+          <div className={styles.skeletonAuthorText}>
+            <div className={styles.skeletonText} />
+            <div className={styles.skeletonText} />
+          </div>
+        </div>
       </div>
-    );
-  }
+
+      {/* Skeleton Content */}
+      <div className={styles.skeletonContent}>
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonHeading} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonText} />
+        <div className={styles.skeletonDivider} />
+        
+        {/* Skeleton Tags */}
+        <div className={styles.skeletonTags}>
+          <div className={styles.skeletonTag} />
+          <div className={styles.skeletonTag} />
+          <div className={styles.skeletonTag} />
+          <div className={styles.skeletonTag} />
+        </div>
+        
+        {/* Skeleton Share */}
+        <div className={styles.skeletonShare}>
+          <div className={styles.skeletonText} style={{ width: '120px' }} />
+          <div className={styles.skeletonShareBtn} />
+          <div className={styles.skeletonShareBtn} />
+          <div className={styles.skeletonShareBtn} />
+          <div className={styles.skeletonShareBtn} />
+          <div className={styles.skeletonShareBtn} />
+        </div>
+      </div>
+
+      {/* Skeleton Related */}
+      <div className={styles.skeletonRelated}>
+        <div className={styles.skeletonRelatedTitle} />
+        <div className={styles.skeletonRelatedGrid}>
+          {[1, 2, 3].map((_, i) => (
+            <div key={i} className={styles.skeletonRelatedCard}>
+              <div className={styles.skeletonRelatedImage} />
+              <div className={styles.skeletonRelatedContent}>
+                <div className={styles.skeletonText} />
+                <div className={styles.skeletonText} style={{ width: '80%' }} />
+                <div className={styles.skeletonText} style={{ width: '60%' }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
   if (!blog) {
     return (
