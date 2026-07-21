@@ -15,6 +15,8 @@ import {
   FaCopy,
 } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -100,6 +102,7 @@ const BlogDetail = () => {
 
   return (
     <>
+    <Header/>
       <Helmet>
         <title>{blog.metaTitle || blog.title}</title>
         <meta name="description" content={blog.metaDescription || blog.excerpt} />
@@ -297,6 +300,7 @@ const BlogDetail = () => {
           </div>
         </div>
       </article>
+      <Footer/>
     </>
   );
 };
