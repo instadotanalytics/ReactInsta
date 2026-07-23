@@ -26,6 +26,21 @@
       gtag("config", "AW-18336913768");
     </script>
 
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof url != "undefined") {
+            window.location = url;
+          }
+        };
+        gtag("event", "conversion", {
+          send_to: "AW-18336913768/crpJCOT-mtUcEOiy3KdE",
+          event_callback: callback,
+        });
+        return false;
+      }
+    </script>
+
     <!-- ============================================
          FAVICON / TOUCH ICONS / MANIFEST
     ============================================ -->

@@ -79,30 +79,70 @@ const RegistrationPopUp = ({ onClose, onSuccess, onError }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-    try {
-      setSubmitting(true);
-      const res = await fetch(`${API_BASE_URL}/registrations`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Registration failed");
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-      setMessage({ type: "success", text: "You're registered! We'll reach out soon." });
-      setFormData({ fullName: "", email: "", phone: "", course: "", source: "website" });
-      if (onSuccess) onSuccess(data);
-      setTimeout(() => onClose(), 2500);
-    } catch (error) {
-      setMessage({ type: "error", text: error.message || "Something went wrong" });
-      if (onError) onError(error);
-    } finally {
-      setSubmitting(false);
+  if (!validateForm()) return;
+
+  try {
+    setSubmitting(true);
+
+    const res = await fetch(`${API_BASE_URL}/registrations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Registration failed");
     }
-  };
+
+    // ✅ Google Ads Conversion Tracking
+    if (
+      typeof window !== "undefined" &&
+      typeof window.gtag === "function" &&
+      typeof window.gtag_report_conversion === "function"
+    ) {
+      window.gtag_report_conversion();
+    }
+
+    setMessage({
+      type: "success",
+      text: "You're registered! We'll reach out soon.",
+    });
+
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      course: "",
+      source: "website",
+    });
+
+    if (onSuccess) {
+      onSuccess(data);
+    }
+
+    setTimeout(() => {
+      onClose();
+    }, 2500);
+  } catch (error) {
+    setMessage({
+      type: "error",
+      text: error.message || "Something went wrong",
+    });
+
+    if (onError) {
+      onError(error);
+    }
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   const fields = [
     {
