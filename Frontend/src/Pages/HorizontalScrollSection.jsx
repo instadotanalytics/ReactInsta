@@ -1,9 +1,19 @@
+// src/Components/HorizontalScrollSection/HorizontalScrollSection.jsx
+
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./HorizontalScrollSection.module.css";
 
+// Import your images
+import img1 from "../../public/images/img1.jpg";
+import img2 from "../../public/images/img3.jpeg"; // Add your other images
+import img3 from "../../public/images/img2.jpeg"
+import img4 from "../../public/images/img4.jpeg";
+import img5 from "../../public/images/img51.jpeg";
+// import img5 from "../../public/images/img7.jpeg";
+
 const cardData = [
   {
-    image: "https://i.pinimg.com/1200x/af/ed/63/afed63bef7e17aa7ec6c5fe02002c280.jpg",
+    image: img1,
     title: "Team Building Workshop",
     subtitle: "Strengthening Bonds",
     description:
@@ -11,7 +21,7 @@ const cardData = [
     tag: "Team Moment",
   },
   {
-    image: "https://i.pinimg.com/736x/4f/f4/21/4ff421f80ce73b7b2474cb424ceecd74.jpg",
+    image: img2,
     title: "Project Phoenix Launch",
     subtitle: "Our Biggest Achievement",
     description:
@@ -19,7 +29,7 @@ const cardData = [
     tag: "Success Story",
   },
   {
-    image: "https://i.pinimg.com/1200x/54/ba/ca/54baca30dbb6f384229f99432ad5c1bb.jpg",
+    image: img3,
     title: "Annual Tech Conference",
     subtitle: "Learning & Growing",
     description:
@@ -27,7 +37,7 @@ const cardData = [
     tag: "Innovation",
   },
   {
-    image: "https://i.pinimg.com/736x/1b/3a/17/1b3a17808e3f370dc6be6780af4fcb95.jpg",
+    image: img4,
     title: "Community Hackathon",
     subtitle: "Giving Back Together",
     description:
@@ -35,7 +45,7 @@ const cardData = [
     tag: "Social Impact",
   },
   {
-    image: "https://i.pinimg.com/1200x/92/b1/33/92b1332b9bff0ab1f659b4c9f9bc8e05.jpg",
+    image: img5,
     title: "Year-End Celebration",
     subtitle: "Celebrating Our People",
     description:
@@ -62,7 +72,7 @@ const HorizontalScrollSection = () => {
     };
 
     container.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial calculation
+    handleScroll();
 
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
