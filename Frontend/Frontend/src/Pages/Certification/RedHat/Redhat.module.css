@@ -1,0 +1,553 @@
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
+:root {
+  --white:        #FFFFFF;
+  --ice:          #F0F7FF;
+  --frost:        #E1EFFF;
+  --sky-pale:     #C8E2FF;
+  --sky:          #93C5FD;
+  --azure:        #60A5FA;
+  --azure-mid:    #3B82F6;
+  --indigo-soft:  #A5B4FC;
+  --text-dark:    #0F172A;
+  --text-mid:     #334155;
+  --text-soft:    #64748B;
+  --radius-sm:    8px;
+  --radius-md:    14px;
+  --radius-lg:    20px;
+  --radius-xl:    28px;
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #EEF6FF 0%, #F5F9FF 40%, #EBF3FF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────
+   BACKGROUND SYSTEM — pure CSS layers
+───────────────────────────────────────── */
+.bgWrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Large ambient glows (radial gradient blobs) --- */
+
+/* Primary central glow — cool azure–frost */
+.bgGlow1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(96, 165, 250, 0.38) 0%,
+    rgba(147, 197, 253, 0.24) 35%,
+    rgba(191, 219, 254, 0.12) 65%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  animation: breathe 10s ease-in-out infinite;
+}
+
+/* Secondary glow — offset top-right, indigo accent */
+.bgGlow2 {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(165, 180, 252, 0.28) 0%,
+    rgba(196, 213, 255, 0.16) 45%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  animation: drift 14s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+/* Tertiary glow — bottom-left, sky blue */
+.bgGlow3 {
+  position: absolute;
+  bottom: -8%;
+  left: -8%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(59, 130, 246, 0.22) 0%,
+    rgba(96, 165, 250, 0.13) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  animation: drift 16s ease-in-out infinite reverse;
+  animation-delay: -7s;
+}
+
+/* --- Concentric rings (the "layered circles" from the reference) --- */
+
+/* Ring 1 — innermost, most opaque */
+.bgRing1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 38% 38%,
+    rgba(219, 234, 254, 0.95) 0%,
+    rgba(191, 219, 254, 0.75) 50%,
+    rgba(147, 197, 253, 0.38) 80%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 0 2px rgba(96, 165, 250, 0.55),
+    0 0 0 4px rgba(147, 197, 253, 0.2),
+    inset 0 0 50px rgba(255, 255, 255, 0.7),
+    0 0 60px rgba(59, 130, 246, 0.18),
+    0 12px 48px rgba(96, 165, 250, 0.2);
+  animation: breathe 9s ease-in-out infinite;
+  animation-delay: -1s;
+}
+
+/* Ring 2 */
+.bgRing2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 520px;
+  height: 520px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 40% 36%,
+    rgba(219, 234, 254, 0.55) 0%,
+    rgba(191, 219, 254, 0.35) 45%,
+    rgba(147, 197, 253, 0.16) 75%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 0 1.5px rgba(96, 165, 250, 0.42),
+    0 0 0 3px rgba(147, 197, 253, 0.15),
+    inset 0 2px 40px rgba(255, 255, 255, 0.5),
+    0 0 50px rgba(59, 130, 246, 0.1);
+  animation: breathe 11s ease-in-out infinite;
+  animation-delay: -2.5s;
+}
+
+/* Ring 3 */
+.bgRing3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 720px;
+  height: 720px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 42% 38%,
+    rgba(219, 234, 254, 0.28) 0%,
+    rgba(191, 219, 254, 0.18) 45%,
+    rgba(147, 197, 253, 0.08) 72%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 0 1.5px rgba(96, 165, 250, 0.3),
+    0 0 0 3px rgba(147, 197, 253, 0.1),
+    inset 0 0 70px rgba(255, 255, 255, 0.28),
+    0 0 70px rgba(59, 130, 246, 0.07);
+  animation: breatheOuter 13s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+/* Ring 4 — outermost */
+.bgRing4 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 960px;
+  height: 960px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(96, 165, 250, 0.2);
+  background: radial-gradient(
+    ellipse at center,
+    transparent 58%,
+    rgba(147, 197, 253, 0.1) 75%,
+    rgba(191, 219, 254, 0.05) 90%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(147, 197, 253, 0.08),
+    0 0 80px rgba(59, 130, 246, 0.05);
+  animation: breatheOuter 17s ease-in-out infinite reverse;
+  animation-delay: -9s;
+}
+
+/* --- Floating blurred light blobs --- */
+
+.bgBlob1 {
+  position: absolute;
+  top: 22%;
+  right: 18%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(96, 165, 250, 0.42) 0%,
+    rgba(147, 197, 253, 0.22) 55%,
+    transparent 100%
+  );
+  filter: blur(32px);
+  animation: floatBlob 12s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.bgBlob2 {
+  position: absolute;
+  bottom: 28%;
+  left: 16%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(59, 130, 246, 0.35) 0%,
+    rgba(96, 165, 250, 0.18) 55%,
+    transparent 100%
+  );
+  filter: blur(26px);
+  animation: floatBlob 15s ease-in-out infinite reverse;
+  animation-delay: -7s;
+}
+
+/* --- Shimmer / highlight sweep --- */
+.bgShimmer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 700px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 12%,
+    transparent 25%,
+    transparent 50%,
+    rgba(147, 197, 253, 0.08) 62%,
+    transparent 75%
+  );
+  animation: shimmerRotate 28s linear infinite;
+}
+
+/* ─────────────────────────────────────────
+   KEYFRAMES
+───────────────────────────────────────── */
+
+/* Gentle inner ring breathe */
+@keyframes breathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.045);
+    opacity: 0.82;
+  }
+}
+
+/* Slower outer ring breathe */
+@keyframes breatheOuter {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 1;
+  }
+}
+
+/* Slow floating for ambient glows */
+@keyframes drift {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.85;
+  }
+  33% {
+    transform: translateY(-18px) scale(1.02);
+    opacity: 1;
+  }
+  66% {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0.7;
+  }
+}
+
+/* Blob float with slight horizontal drift */
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
+  }
+  35% {
+    transform: translate(-14px, -22px) scale(1.08);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(10px, 12px) scale(0.93);
+    opacity: 0.55;
+  }
+}
+
+/* Slow conic shimmer rotation */
+@keyframes shimmerRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────
+   INNER LAYOUT
+───────────────────────────────────────── */
+.heroInner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 3vh, 2.5rem);
+  padding: 7rem 0 5rem;
+}
+
+/* ── Content ── */
+.topBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.1rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  background: rgba(240, 247, 255, 0.9);
+  border: 1px solid rgba(147, 197, 253, 0.4);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--azure-mid);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 8px rgba(96, 165, 250, 0.1);
+}
+
+.heroTitle {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.heroAccent {
+  background: linear-gradient(130deg, #3B82F6 0%, #6366F1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSub {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--text-soft);
+  max-width: 520px;
+  margin: 0;
+}
+
+/* ── Certification cards ── */
+.cardsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(147, 197, 253, 0.45);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.25rem 1.15rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 2px 16px rgba(59, 130, 246, 0.08),
+    0 1px 4px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  cursor: default;
+  overflow: hidden;
+  animation: floatCard 4.5s ease-in-out infinite;
+  transition: transform 0.22s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.22s ease,
+              border-color 0.22s ease;
+}
+
+.card:nth-child(1) { animation-delay: 0s;    }
+.card:nth-child(2) { animation-delay: 0.35s; }
+.card:nth-child(3) { animation-delay: 0.7s;  }
+.card:nth-child(4) { animation-delay: 1.05s; }
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-6px); }
+}
+
+.card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow:
+    0 12px 36px rgba(59, 130, 246, 0.16),
+    0 4px 12px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(96, 165, 250, 0.7);
+  animation-play-state: paused;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.55rem;
+}
+
+.cardCode {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.cardLevel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.18rem 0.55rem;
+  background: rgba(239, 246, 255, 0.9);
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  color: var(--text-soft);
+  border-radius: 999px;
+}
+
+.cardName {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+
+.cardAccentLine {
+  height: 2px;
+  border-radius: 999px;
+  width: 36px;
+  opacity: 0.75;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .heroInner {
+    padding: 7rem 0 4rem;
+  }
+
+  .cardsRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bgRing3,
+  .bgRing4 {
+    width: 500px;
+    height: 500px;
+  }
+
+  .bgGlow1 {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 0 1.25rem;
+  }
+
+  .heroInner {
+    padding: 6rem 0 3.5rem;
+  }
+
+  .cardsRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .bgRing2,
+  .bgRing3,
+  .bgRing4 {
+    display: none;
+  }
+
+  .bgRing1 {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgGlow1,
+  .bgGlow2,
+  .bgGlow3,
+  .bgRing1,
+  .bgRing2,
+  .bgRing3,
+  .bgRing4,
+  .bgBlob1,
+  .bgBlob2,
+  .bgShimmer {
+    animation: none;
+  }
+  .card { animation: none; }
+  .card:hover { transform: none !important; }
+}

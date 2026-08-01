@@ -1,0 +1,456 @@
+/* OurPremiumServices.module.css - Updated with reduced white shadows */
+:root {
+  --ps-bg: #f0f5ff;
+  --ps-card-bg: #ffffff;
+  --ps-ink: #0a1628;
+  --ps-ink-soft: #1e293b;
+  --ps-ink-muted: #64748b;
+  --ps-blue: #2563eb;
+  --ps-blue-dark: #1e40af;
+  --ps-blue-light: #3b82f6;
+  --ps-blue-bg: #eff6ff;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --font-sans:
+    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.premiumSection {
+  padding: 80px 24px 100px;
+  background: var(--ps-bg);
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* ── Gradient Background ── */
+.gradientBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(37, 99, 235, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 50%,
+      rgba(37, 99, 235, 0.10) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(37, 99, 235, 0.06) 0%,
+      transparent 50%
+    );
+}
+
+.gradientOrb1,
+.gradientOrb2,
+.gradientOrb3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  animation: orbFloat 25s ease-in-out infinite;
+}
+
+.gradientOrb1 {
+  width: 500px;
+  height: 500px;
+  top: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.15), transparent 70%);
+  animation-delay: 0s;
+}
+
+.gradientOrb2 {
+  width: 400px;
+  height: 400px;
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.10), transparent 70%);
+  animation-delay: -8s;
+}
+
+.gradientOrb3 {
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08), transparent 70%);
+  animation-delay: -16s;
+}
+
+@keyframes orbFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(80px, -60px) scale(1.1);
+  }
+  66% {
+    transform: translate(-60px, 80px) scale(0.9);
+  }
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 20px;
+  background: var(--ps-blue-bg);
+  color: var(--ps-blue);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ps-ink);
+  margin: 0 0 12px;
+}
+
+.highlight {
+  background: linear-gradient(
+    135deg,
+    var(--ps-blue) 0%,
+    var(--ps-blue-dark) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--ps-ink-muted);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ── Grid ── */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--ps-card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(37, 99, 235, 0.06);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.10);
+  border-color: rgba(37, 99, 235, 0.12);
+}
+
+/* ── Image ── */
+.imageWrapper {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center right;
+  /* Removed white drop-shadow entirely */
+  filter: none;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  /* Reduced white overlay significantly */
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.30) 0%,  /* Reduced from 0.85 */
+      rgba(255,255,255,0.15) 35%, /* Reduced from 0.60 */
+      rgba(255,255,255,0.05) 70%, /* Reduced from 0.10 */
+      transparent 100%
+    );
+}
+
+/* ── Title on Image ── */
+.imageTitle {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  z-index: 5;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  /* Reduced shadow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 70%;
+}
+
+.imageTitleText {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.imageTagline {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #1e40af;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.description {
+  display: none;
+}
+
+/* ── Card Body ── */
+.cardBody {
+  padding: 16px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ── Features ── */
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ps-ink-muted);
+  padding: 3px 0;
+}
+
+.featureItem svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--ps-blue);
+}
+
+/* ── CTA Button ── */
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 18px;
+  border: 2px solid rgba(37, 99, 235, 0.10);
+  border-radius: 10px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ps-blue);
+  cursor: pointer;
+  transition: all 0.35s var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.ctaButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--ps-blue), var(--ps-blue-dark));
+  transform: translateY(100%);
+  transition: transform 0.35s var(--ease-smooth);
+  z-index: 0;
+}
+
+.ctaButton:hover::before {
+  transform: translateY(0);
+}
+
+.ctaButton:hover {
+  color: #ffffff;
+  border-color: var(--ps-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
+}
+
+.ctaButton span,
+.ctaButton svg {
+  position: relative;
+  z-index: 1;
+}
+
+.btnArrow {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .btnArrow {
+  transform: translateX(4px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .card {
+    width: 88%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .imageWrapper {
+    height: 160px;
+  }
+
+  .imageTitle {
+    max-width: 75%;
+    padding: 6px 12px;
+  }
+
+  .imageTitleText {
+    font-size: 1.1rem;
+  }
+
+  .imageTagline {
+    font-size: 0.5rem;
+  }
+
+  .description {
+    display: block;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin: 10px 0 14px;
+    color: #64748b;
+  }
+
+  .cardBody {
+    padding: 14px 16px;
+  }
+
+  .featureItem {
+    font-size: 0.74rem;
+  }
+
+  .ctaButton {
+    height: 42px;
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .premiumSection {
+    padding: 40px 10px;
+  }
+
+  .card {
+    width: 86%;
+    max-width: 300px;
+  }
+
+  .imageWrapper {
+    height: 145px;
+  }
+
+  .imageTitleText {
+    font-size: 1rem;
+  }
+
+  .imageTagline {
+    font-size: 0.45rem;
+  }
+
+  .featureItem {
+    font-size: 0.7rem;
+  }
+
+  .title {
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── WRAPPER ── */
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  height: 520px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(4,159,219,.10), transparent 35%),
+    radial-gradient(circle at 85% 25%, rgba(4,159,219,.08), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(4,159,219,.05), transparent 40%),
+    linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);
+  font-family: "DM Sans", sans-serif;
+  user-select: none;
+}
+
+/* ── DARK AMBIENT BACKGROUND GRADIENT ── */
+.sliderWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 35%, rgba(4,159,219,.08), transparent 45%),
+    radial-gradient(circle at 75% 65%, rgba(111,214,255,.06), transparent 45%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── SLIDE TRACK: all slides laid out side-by-side, center is active ── */
+.slideTrack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.slide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 52%;
+  max-width: 700px;
+  height: 76%;
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.75s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.75s cubic-bezier(0.77, 0, 0.175, 1),
+    filter 0.75s ease,
+    z-index 0s;
+  pointer-events: none;
+  will-change: transform, opacity;
+  /* box-shadow: 0 10px 45px rgba(0, 0, 0, 0.55); */
+}
+
+/* Active (center) card */
+.slide.active {
+  transform: translate(-50%, -50%) scale(1.13);
+  opacity: 1;
+  z-index: 5;
+  pointer-events: all;
+  /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7); */
+  filter: brightness(1);
+}
+
+/* Card to the left */
+.slide.prevSlide {
+  transform: translate(calc(-50% - 57%), -50%) scale(0.87);
+  opacity: 0.75;
+  z-index: 4;
+  filter: brightness(0.35) saturate(0.6);
+  pointer-events: all;
+}
+
+/* Card two positions left */
+.slide.prevSlide2 {
+  transform: translate(calc(-50% - 88%), -50%) scale(0.76);
+  opacity: 0.5;
+  z-index: 3;
+  filter: brightness(0.2) saturate(0.4);
+  pointer-events: all;
+}
+
+/* Card to the right */
+.slide.nextSlide {
+  transform: translate(calc(-50% + 57%), -50%) scale(0.87);
+  opacity: 0.75;
+  z-index: 4;
+  filter: brightness(0.35) saturate(0.6);
+  pointer-events: all;
+}
+
+/* Card two positions right */
+.slide.nextSlide2 {
+  transform: translate(calc(-50% + 88%), -50%) scale(0.76);
+  opacity: 0.5;
+  z-index: 3;
+  filter: brightness(0.2) saturate(0.4);
+  pointer-events: all;
+}
+
+/* Hidden cards */
+.slide.hiddenSlide {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%) scale(0.7);
+}
+
+/* ── IMAGE ── */
+.slideImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.06);
+  transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.slide.active .slideImage {
+  transform: scale(1);
+}
+
+/* ── OVERLAY: subtle dark gradient on active card bottom ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 10, 15, 0.62) 0%,
+    rgba(8, 10, 15, 0.18) 40%,
+    transparent 70%
+  );
+  z-index: 2;
+}
+
+/* ── NAV BUTTONS ── */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(65, 64, 64, 0.35);
+  background: rgb(245, 243, 243);
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  transition:
+    border-color 0.28s ease,
+    background 0.28s ease,
+    transform 0.28s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 50%;
+  outline: none;
+}
+.navBtn:hover {
+  background: rgba(232, 201, 126, 0.14);
+  border-color: rgba(241, 238, 230, 0.75);
+  transform: translateY(-50%) scale(1.06);
+}
+.navBtn:active {
+  transform: translateY(-50%) scale(0.97);
+}
+.prevBtn {
+  left: 22px;
+}
+.nextBtn {
+  right: 22px;
+}
+
+/* ── BOTTOM BAR ── */
+.bottomBar {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── DOTS ── */
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.28);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition:
+    background 0.35s ease,
+    transform 0.35s ease,
+    width 0.35s ease;
+  outline: none;
+}
+.dot.activeDot {
+  background: #e8c97e;
+  width: 22px;
+  border-radius: 3px;
+  transform: none;
+}
+
+/* ── SLIDE LABEL ── */
+.slideLabel {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.35);
+}
+
+/* ── PROGRESS BAR ── */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgba(232, 201, 126, 0.4), #e8c97e);
+  z-index: 10;
+  animation: progress 5s linear forwards;
+}
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ── RESPONSIVE ── */
+
+@media (max-width: 1024px) {
+  .sliderWrapper { height: 440px; }
+  .slide { width: 62%; }
+  .slide.prevSlide  { transform: translate(calc(-50% - 62%), -50%) scale(0.86); }
+  .slide.nextSlide  { transform: translate(calc(-50% + 62%), -50%) scale(0.86); }
+  .slide.prevSlide2 { transform: translate(calc(-50% - 90%), -50%) scale(0.74); }
+  .slide.nextSlide2 { transform: translate(calc(-50% + 90%), -50%) scale(0.74); }
+}
+ 
+@media (max-width: 768px) {
+  .sliderWrapper { height: 320px; }
+ 
+  /* active card: wider + less scale-up so it doesn't overflow */
+  .slide { width: 78%; height: 82%; }
+  .slide.active { transform: translate(-50%, -50%) scale(1.04); }
+ 
+  /* side cards: tighter offset, more hidden */
+  .slide.prevSlide  { transform: translate(calc(-50% - 72%), -50%) scale(0.78); opacity: 0.45; }
+  .slide.nextSlide  { transform: translate(calc(-50% + 72%), -50%) scale(0.78); opacity: 0.45; }
+  .slide.prevSlide2 { transform: translate(calc(-50% - 98%), -50%) scale(0.62); opacity: 0; pointer-events: none; }
+  .slide.nextSlide2 { transform: translate(calc(-50% + 98%), -50%) scale(0.62); opacity: 0; pointer-events: none; }
+ 
+  .counterCurrent { font-size: 26px; }
+  .counterTotal   { font-size: 11px; }
+  .counter        { top: 14px; right: 18px; left: auto; }
+  .counterLine    { display: none; }
+  .navBtn         { width: 34px; height: 34px; }
+  .prevBtn        { left: 8px; }
+  .nextBtn        { right: 8px; }
+  .bottomBar      { bottom: 10px; }
+}
+ 
+@media (max-width: 480px) {
+  .sliderWrapper { height: 200px; }
+ 
+  .slide { width: 85%; height: 88%; }
+  .slide.active { transform: translate(-50%, -50%) scale(1.02); }
+ 
+  .slide.prevSlide  { transform: translate(calc(-50% - 80%), -50%) scale(0.72); opacity: 0.3; filter: brightness(0.25); }
+  .slide.nextSlide  { transform: translate(calc(-50% + 80%), -50%) scale(0.72); opacity: 0.3; filter: brightness(0.25); }
+  .slide.prevSlide2,
+  .slide.nextSlide2 { opacity: 0; pointer-events: none; }
+ 
+  /* smaller nav buttons, hug the edges */
+  .navBtn { width: 28px; height: 28px; }
+  .navBtn svg { width: 12px; height: 12px; }
+  .prevBtn { left: 15px; }
+  .nextBtn { right: 15px; }
+ 
+  .dot { width: 4px; height: 4px; }
+  .dot.activeDot { width: 14px; }
+  .cardLabel { bottom: 12px; left: 12px; }
+  .bottomBar { bottom: 8px; gap: 12px; }
+  .slideLabel { display: none; }
+}
+ 
+@media (max-width: 360px) {
+  .sliderWrapper { height: 200px; }
+  .slide { width: 95%; height: 82%; }
+}

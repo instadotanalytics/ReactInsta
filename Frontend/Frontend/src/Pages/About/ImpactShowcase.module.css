@@ -1,0 +1,551 @@
+/* ImpactShowcase.module.css */
+.impactShowcase {
+    position: relative;
+    padding:  0;
+    min-height: 75vh;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 50%, #f5f9ff 100%);
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.canvasBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.patternOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(74, 144, 226, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(41, 151, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    z-index: 3;
+}
+
+/* Header Styles - Centered */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header.animateIn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.title {
+    margin: 0 0 8px 0;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.titleLine1 {
+    display: block;
+    color: #2c3e50;
+}
+
+.titleLine2 {
+    display: block;
+    background: linear-gradient(135deg, #4A90E2 0%, #2997ff 50%, #1c91ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: #5a6c7d;
+    font-size: 16px;
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Metrics Grid - 2 columns on mobile */
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 50px;
+}
+
+.metricCard {
+    padding: 16px 18px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(15px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.06);
+}
+
+.metricCard.animateMetric {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.metricCard:hover {
+    transform: translateY(-3px);
+    border-color: rgba(74, 144, 226, 0.2);
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.metricIconWrapper {
+    flex-shrink: 0;
+}
+
+.metricIcon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.metricCard:hover .metricIcon {
+    transform: scale(1.05);
+}
+
+.metricContent {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+}
+
+.metricValue {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    transition: all 0.3s ease;
+}
+
+.metricLabel {
+    color: #5a6c7d;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.metricBarWrapper {
+    width: 100%;
+    max-width: 120px;
+    margin: 0 auto;
+}
+
+.metricBar {
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.metricProgress {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Timeline Section - Centered, no vertical lines */
+.timelineSection {
+    margin-top: 30px;
+}
+
+.timelineHeader {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sectionSubtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #2c3e50;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.subtitleLine {
+    background: linear-gradient(135deg, #4A90E2 0%, #2997ff 50%, #1c91ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitleDecor {
+    color: #4A90E2;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    padding: 10px 0;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.timelineItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    justify-content: center;
+}
+
+.timelineItem.animateTimeline {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timelineItem:nth-child(even) {
+    transform: translateX(15px);
+}
+
+.timelineItem:nth-child(even).animateTimeline {
+    transform: translateX(0);
+}
+
+.timelineConnector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.timelineDot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.timelineItem:hover .timelineDot {
+    transform: scale(1.1);
+}
+
+.timelineContent {
+    flex: 1;
+    padding: 4px 0;
+    text-align: center;
+}
+
+.timelineYear {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #5a6c7d;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.timelineTitle {
+    color: #2c3e50;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 2px 0;
+}
+
+.timelineDescription {
+    color: #5a6c7d;
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .impactShowcase {
+        padding: 80px 0;
+    }
+
+    .metricsGrid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+
+    .metricCard {
+        padding: 24px 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .metricValue {
+        font-size: 28px;
+    }
+
+    .metricLabel {
+        font-size: 13px;
+    }
+
+    .metricIcon {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+    }
+
+    .title {
+        font-size: 44px;
+    }
+
+    .subtitle {
+        font-size: 17px;
+    }
+
+    .timeline {
+                display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 30px;
+        position: relative;
+        max-width: 505px;
+        margin-left: 21em;
+    }
+
+    .timelineItem {
+        padding: 10px 0;
+        gap: 14px;
+        justify-content: flex-start;
+    }
+
+    .timelineItem:nth-child(odd) {
+        padding-right: 10px;
+        justify-content: flex-end;
+    }
+
+    .timelineItem:nth-child(even) {
+        padding-left: 10px;
+        justify-content: flex-start;
+    }
+
+    .timelineContent {
+        text-align: left;
+    }
+
+    .timelineItem:nth-child(odd) .timelineContent {
+        text-align: left;
+    }
+
+    .timelineDot {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .sectionSubtitle {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .impactShowcase {
+        padding: 40px 0;
+    }
+
+    .container {
+        padding: 0 14px;
+    }
+
+    .header {
+        margin-bottom: 30px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .titleLine1 {
+        font-size: 22px;
+    }
+
+    .titleLine2 {
+        font-size: 26px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        padding: 0 8px;
+    }
+
+    .metricsGrid {
+        gap: 10px;
+        margin-bottom: 35px;
+    }
+
+    .metricCard {
+        padding: 14px 14px;
+        gap: 10px;
+    }
+
+    .metricValue {
+        font-size: 18px;
+    }
+
+    .metricLabel {
+        font-size: 11px;
+    }
+
+    .metricIcon {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .metricBarWrapper {
+        max-width: 80px;
+    }
+
+    .sectionSubtitle {
+        font-size: 22px;
+    }
+
+    .timeline {
+        padding: 5px 0;
+        gap: 4px;
+        max-width: 100%;
+    }
+
+    .timelineItem {
+        padding: 6px 0;
+        gap: 12px;
+    }
+
+    .timelineDot {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .timelineTitle {
+        font-size: 14px;
+    }
+
+    .timelineDescription {
+        font-size: 12px;
+    }
+
+    .timelineYear {
+        font-size: 11px;
+    }
+
+    .timelineContent {
+        text-align: start;
+    }
+}
+
+@media (max-width: 480px) {
+    .impactShowcase {
+        padding: 30px 0 0 ;
+        height: 0vh;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .titleLine1 {
+        font-size: 20px;
+    }
+
+    .titleLine2 {
+        font-size: 22px;
+    }
+
+    .metricValue {
+        font-size: 16px;
+    }
+
+    .metricCard {
+        padding: 12px 12px;
+        gap: 8px;
+    }
+
+    .metricIcon {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .timelineDot {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+    }
+
+    .timeline {
+        gap: 3px 20px;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .timelineItem {
+        padding: 5px 0;
+    }
+}
+
+/* Hover Effects for Desktop */
+@media (min-width: 768px) {
+    .metricCard:hover .metricValue {
+        transform: scale(1.03);
+    }
+
+    .metricCard:hover .metricIcon {
+        box-shadow: 0 4px 16px rgba(74, 144, 226, 0.15);
+    }
+}
+
+/* Animation Delays */
+.metricCard:nth-child(1) { animation-delay: 0.1s; }
+.metricCard:nth-child(2) { animation-delay: 0.2s; }
+.metricCard:nth-child(3) { animation-delay: 0.3s; }
+.metricCard:nth-child(4) { animation-delay: 0.4s; }

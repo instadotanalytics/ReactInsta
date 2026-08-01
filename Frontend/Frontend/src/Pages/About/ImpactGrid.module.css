@@ -1,0 +1,421 @@
+/* ImpactGrid.module.css */
+
+.impactGrid {
+  width: 100%;
+  padding: 3.5rem 2rem;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+.animateIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 1rem;
+  background: #f0f0f5;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #6C63FF;
+  margin-bottom: 1.5rem;
+}
+
+.badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+}
+
+.lightText {
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.highlight {
+  font-weight: 700;
+  background: linear-gradient(135deg, #31adff, #248aff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #4a4a6a;
+  font-weight: 300;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ===== METRICS GRID ===== */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin: 0 4rem 4rem 4rem;
+}
+
+.metricCard {
+  background: #f8f8fc;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-bottom: 3px solid;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(15px);
+  position: relative;
+  cursor: default;
+}
+
+.animateMetric {
+  animation: metricIn 0.6s ease forwards;
+}
+
+@keyframes metricIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.metricCard:hover {
+  background: #f0f0f8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.metricIcon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.metricCard:hover .metricIcon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.metricIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.metricValue {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  transition: all 0.3s ease;
+}
+
+.metricBody {
+  margin-bottom: 1rem;
+}
+
+.metricLabel {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #1a1a2e;
+  margin-bottom: 0.15rem;
+}
+
+.metricDescription {
+  font-size: 0.8rem;
+  color: #6a6a8a;
+  font-weight: 300;
+  margin: 0;
+}
+
+.metricBar {
+  width: 100%;
+  height: 2px;
+  background: #e8e8ee;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.metricProgress {
+  height: 100%;
+  border-radius: 1px;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ===== FOCUS GRID ===== */
+.focusGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin: 0 5rem 3rem 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8e8ee;
+}
+
+.focusCard {
+  padding: 1rem;
+  border-radius: 12px;
+  background: #fafafe;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  position: relative;
+  text-align: center;
+}
+
+.animateFocus {
+  animation: focusIn 0.6s ease forwards;
+}
+
+@keyframes focusIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.focusCard:hover {
+  background: #f0f0f8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.focusIcon {
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1rem;
+  background: rgba(108, 99, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  color: #6C63FF;
+}
+
+.focusCard:hover .focusIcon {
+  transform: scale(1.1) rotate(-5deg);
+  background: rgba(108, 99, 255, 0.15);
+}
+
+.focusIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.focusTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 0.25rem;
+}
+
+.focusDescription {
+  font-size: 0.85rem;
+  color: #6a6a8a;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.focusLine {
+  width: 30px;
+  height: 2px;
+  background: #6C63FF;
+  margin: 0.75rem auto 0;
+  transition: width 0.3s ease;
+  opacity: 0.3;
+  border-radius: 2px;
+}
+
+.focusCard:hover .focusLine {
+  width: 50px;
+  opacity: 1;
+}
+
+/* ===== FOOTER STAT ===== */
+.footerStat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e8e8ee;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.8s ease;
+  flex-wrap: wrap;
+}
+
+.animateFooter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footerIcon {
+  font-size: 1.2rem;
+  color: #6C63FF;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+}
+
+.footerIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.footerNumber {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.footerLabel {
+  font-size: 0.9rem;
+  color: #5d5d79;
+  font-weight: 500;
+}
+
+.footerDivider {
+  color: #d0d0d8;
+  margin: 0 0.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .focusGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .impactGrid {
+    padding: 2rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .footerStat {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footerDivider {
+    display: none;
+  }
+
+  .footerNumber {
+    font-size: 1rem;
+  }
+
+  .footerLabel {
+    font-size: 0.8rem;
+  }
+
+  .metricIcon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .metricIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .focusIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .focusIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .focusGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 30px 0 0 0px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .metricValue {
+    font-size: 1.6rem;
+  }
+
+  .metricCard {
+    padding: 1.2rem;
+  }
+
+  .footerIcon {
+    font-size: 1rem;
+  }
+
+  .footerIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -1,0 +1,638 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+/* ── PAGE SHELL ─────────────────────────────────────────────── */
+.pageContainer {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: linear-gradient(160deg, #f4f8ff 0%, #e6f0ff 45%, #d6e6ff 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── TWO-COLUMN LAYOUT ──────────────────────────────────────── */
+.layout {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  width: 100%;
+  max-width: 1160px;
+}
+
+/* ── LEFT PANEL ─────────────────────────────────────────────── */
+.leftPanel {
+  flex: 1;
+  min-width: 0;
+  padding: 20px 0;
+}
+
+.headline {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #0f1a2e;
+  letter-spacing: -1px;
+  margin: 0 0 20px;
+}
+
+.gradientText {
+  background: linear-gradient(130deg, #2563eb 0%, #4361ee 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtext {
+  font-size: 15px;
+  color: #526080;
+  line-height: 1.7;
+  max-width: 400px;
+  margin: 0 0 40px;
+}
+
+/* ── STATS ROW — forced single-row, shrinks proportionally ──── */
+.statsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.statNum {
+  font-size: 30px;
+  font-weight: 800;
+  color: #2563eb;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.statDivider {
+  width: 1px;
+  height: 36px;
+  background: rgba(15, 26, 46, 0.12);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   STEP PROGRESS CARDS
+   Locked to a 3-column grid at every breakpoint so
+   "01 Personal / 02 Academic / 03 Preferences"
+   always stays on one row, including mobile.
+══════════════════════════════════════════════ */
+.stepCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.stepCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 26, 46, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+  color: #7c8aab;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  min-width: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: default;
+}
+
+.stepCard:hover {
+  border-color: rgba(37, 99, 235, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  color: #3a4a6b;
+}
+
+.stepCardActive {
+  border-color: rgba(37, 99, 235, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.08),
+    rgba(56, 189, 248, 0.08)
+  );
+  color: #0f1a2e;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+}
+
+.stepCardActive:hover {
+  border-color: rgba(37, 99, 235, 0.6);
+  color: #0f1a2e;
+}
+
+.stepCardDone {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.06);
+  color: #059669;
+}
+
+.stepCardDone:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #059669;
+}
+
+.stepBullet {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  background: rgba(15, 26, 46, 0.06);
+  color: inherit;
+  transition: all 0.35s;
+}
+
+.stepCardActive .stepBullet {
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: white;
+}
+
+.stepCardDone .stepBullet {
+  background: rgba(16, 185, 129, 0.18);
+  color: #059669;
+}
+
+.stepLabel {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── RIGHT PANEL ────────────────────────────────────────────── */
+.rightPanel {
+  flex: 0 0 480px;
+}
+
+.glassCard {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow:
+    0 32px 80px rgba(37, 99, 235, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  min-height: 480px;
+}
+
+.singleColumn {
+  display: grid;
+  grid-template-columns: 1fr !important;
+}
+
+.cardTop {
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid rgba(15, 26, 46, 0.06);
+}
+
+.stepBadge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #4361ee;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f1a2e;
+  letter-spacing: -0.4px;
+  margin: 0 0 16px;
+}
+
+/* Progress bar */
+.progressBar {
+  height: 3px;
+  background: rgba(15, 26, 46, 0.07);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── FORM BODY ──────────────────────────────────────────────── */
+.formBody {
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 280px;
+}
+
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+  margin-bottom: 28px;
+}
+
+.spanFull {
+  grid-column: 1 / -1;
+}
+
+/* ── FLOATING LABEL INPUT ───────────────────────────────────── */
+.floatingGroup {
+  position: relative;
+  width: 100%;
+}
+
+.fieldIcon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3c4;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  transition: color 0.25s;
+  z-index: 2;
+}
+
+.floatingInput {
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(15, 26, 46, 0.14);
+  border-radius: 0;
+  padding: 20px 0 8px 24px;
+  color: #0f1a2e;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  outline: none;
+  transition: border-color 0.25s;
+  -webkit-appearance: none;
+}
+
+/* Hide browser number spinners */
+.floatingInput[type="number"]::-webkit-inner-spin-button,
+.floatingInput[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.floatingSelect {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3c4' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  background-size: 14px;
+  padding-right: 20px;
+}
+
+.floatingSelect option {
+  background: #ffffff;
+  color: #0f1a2e;
+}
+
+/* The floating label */
+.floatingLabel {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: #7c8aab;
+  pointer-events: none;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+/* Float up when input has content or is focused */
+.floatingInput:focus ~ .floatingLabel,
+.floatingInput:not(:placeholder-shown) ~ .floatingLabel,
+.floatingLabel.labelUp {
+  top: 6px;
+  transform: translateY(0);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #2563eb;
+}
+
+/* Icon tints on focus */
+.floatingInput:focus ~ .floatingLabel {
+  color: #2563eb;
+}
+
+.floatingGroup:focus-within .fieldIcon {
+  color: #2563eb;
+}
+
+/* Underline glow on focus */
+.floatingInput:focus {
+  border-bottom-color: #2563eb;
+}
+
+/* ── SLIDE-DOWN ANIMATION ───────────────────────────────────── */
+.slideDown {
+  animation: slideDown 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── FORM FOOTER ────────────────────────────────────────────── */
+.formFooter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btnBack,
+.btnNext,
+.btnSubmit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  border: none;
+}
+
+.btnBack {
+  background: rgba(15, 26, 46, 0.05);
+  color: #526080;
+  border: 1px solid rgba(15, 26, 46, 0.1);
+  flex-shrink: 0;
+}
+
+.btnBack:hover {
+  background: rgba(15, 26, 46, 0.09);
+  color: #0f1a2e;
+  border-color: rgba(15, 26, 46, 0.2);
+}
+
+.btnNext,
+.btnSubmit {
+  flex: 1;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
+  color: #ffffff;
+}
+
+.btnNext:hover,
+.btnSubmit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.28);
+  filter: brightness(1.05);
+}
+
+.btnNext:active,
+.btnSubmit:active {
+  transform: translateY(0);
+}
+
+.btnNext:disabled,
+.btnSubmit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1020px) {
+  .layout {
+    flex-direction: column;
+    gap: 40px;
+    align-items: stretch;
+  }
+
+  .leftPanel {
+    padding: 0;
+    text-align: center;
+  }
+
+  .subtext {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Step cards go compact + stacked (icon on top, label below)
+     but stay in a single 3-column row */
+  .stepCards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .stepCard {
+    flex-direction: column;
+    text-align: center;
+    padding: 14px 8px;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .stepLabel {
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .rightPanel {
+    flex: none;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .headline {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pageContainer {
+    padding: 24px 16px;
+  }
+
+  .headline {
+    font-size: 28px;
+  }
+
+  .rightPanel {
+    width: 100%;
+  }
+
+  .glassCard {
+    border-radius: 20px;
+  }
+
+  .cardTop,
+  .formBody {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .fieldsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .spanFull {
+    grid-column: 1;
+  }
+
+  /* Keep the 3 step cards on one row, just tighten them up */
+  .stepCards {
+    gap: 8px;
+  }
+
+  .stepCard {
+    padding: 10px 6px;
+    gap: 6px;
+    border-radius: 12px;
+  }
+
+  .stepBullet {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .stepLabel {
+    font-size: 11.5px;
+    letter-spacing: 0.1px;
+  }
+
+  /* Stats: stay in a single row, shrink to fit */
+  .statsRow {
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .statNum {
+    font-size: 20px;
+  }
+
+  .statLabel {
+    font-size: 10px;
+  }
+
+  .statDivider {
+    height: 28px;
+  }
+}
+
+@media (max-width: 380px) {
+  .headline {
+    font-size: 24px;
+  }
+
+  .formFooter {
+    flex-direction: column;
+  }
+
+  .btnBack,
+  .btnNext,
+  .btnSubmit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Extra tight screens — 3-in-a-row still, just very compact */
+  .stepCards {
+    gap: 6px;
+  }
+
+  .stepCard {
+    padding: 8px 4px;
+    gap: 5px;
+    border-radius: 10px;
+  }
+
+  .stepBullet {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  .stepLabel {
+    font-size: 9.5px;
+    letter-spacing: 0;
+  }
+
+  /* Extra tight screens — keep single row, compact further */
+  .statsRow {
+    gap: 6px;
+  }
+
+  .statNum {
+    font-size: 17px;
+  }
+
+  .statLabel {
+    font-size: 9px;
+    letter-spacing: -0.2px;
+  }
+
+  .statDivider {
+    height: 24px;
+  }
+}

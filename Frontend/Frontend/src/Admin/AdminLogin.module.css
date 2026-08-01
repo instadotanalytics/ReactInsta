@@ -1,0 +1,382 @@
+/* AdminLogin.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  padding: 20px;
+}
+
+.loginCard {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 45px 40px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.header h2 {
+  color: #1a1a1a;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #333 0%, #667eea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header p {
+  color: #666;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.adminBadge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  color: #444;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.3px;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: white;
+  color: #333;
+  outline: none;
+  font-family: inherit;
+}
+
+.inputGroup input:focus {
+  border-color: #667eea;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+  background: #fff;
+}
+
+.inputGroup input::placeholder {
+  color: #aaa;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.inputGroup input:disabled {
+  background: #f8f8f8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputWrapper input {
+  padding-right: 50px;
+}
+
+.inputWrapper button {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 20px;
+  padding: 5px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.inputWrapper button:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.inputWrapper button:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+button[type="submit"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #a0a0a0 0%, #808080 100%);
+  box-shadow: none;
+}
+
+.errorMessage {
+  background: #fff2f2;
+  color: #e44;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 5px solid #e44;
+  margin-bottom: 25px;
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(238, 68, 68, 0.1);
+}
+
+.successMessage {
+  background: #f0fff4;
+  color: #0a7;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 5px solid #0a7;
+  margin-bottom: 25px;
+  animation: slideIn 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 170, 119, 0.1);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .loginCard {
+    padding: 35px 25px;
+  }
+
+  .header h2 {
+    font-size: 28px;
+  }
+
+  .header p {
+    font-size: 14px;
+  }
+
+  .inputGroup input {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  button[type="submit"] {
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginCard {
+    padding: 30px 20px;
+  }
+
+  .header h2 {
+    font-size: 24px;
+  }
+
+  .adminBadge {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  .inputGroup label {
+    font-size: 13px;
+  }
+
+  .inputWrapper button {
+    font-size: 18px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .loginCard {
+    padding: 25px 15px;
+  }
+
+  .header h2 {
+    font-size: 22px;
+  }
+
+  .header p {
+    font-size: 13px;
+  }
+
+  .inputGroup input {
+    padding: 10px 14px;
+  }
+
+  button[type="submit"] {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  }
+
+  .loginCard {
+    background: rgba(30, 30, 40, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .header h2 {
+    background: linear-gradient(135deg, #fff 0%, #667eea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header p {
+    color: #b0b0b0;
+  }
+
+  .inputGroup label {
+    color: #ddd;
+  }
+
+  .inputGroup input {
+    background: #2a2a35;
+    border-color: #3a3a45;
+    color: #fff;
+  }
+
+  .inputGroup input:focus {
+    border-color: #667eea;
+    background: #2a2a35;
+  }
+
+  .inputGroup input::placeholder {
+    color: #888;
+  }
+
+  .inputWrapper button {
+    color: #bbb;
+  }
+
+  .inputWrapper button:hover {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.2);
+  }
+
+  .errorMessage {
+    background: #2a1a1a;
+    color: #ff6b6b;
+    border-left-color: #ff6b6b;
+  }
+
+  .successMessage {
+    background: #1a2a1a;
+    color: #5cb85c;
+    border-left-color: #5cb85c;
+  }
+}
