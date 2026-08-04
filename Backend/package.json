@@ -1,15 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "description": "Backend API",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node Backend/server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cloudinary": "^1.41.3",
