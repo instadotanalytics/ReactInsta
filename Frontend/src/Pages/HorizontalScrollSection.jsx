@@ -14,7 +14,7 @@ import img5 from "../../public/images/img51.jpeg";
 const cardData = [
   {
     image: img1,
-    title: "Team Building Workshop. . .",
+    title: "Team Building Workshop",
     subtitle: "Strengthening Bonds",
     description:
       "Our annual team building retreat brought together 200+ employees for three days of collaboration, innovation challenges, and unforgettable memories in the mountains.",
