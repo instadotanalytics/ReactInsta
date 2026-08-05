@@ -103,7 +103,7 @@ const AdminLogin = () => {
           <p>Enter your credentials to access admin panel</p>
         </div>
 
-        {error && <div className={styles.errorMessage}>⚠️ {error}</div>}
+        {error && <div className={styles.errorMessage}> {error}</div>}
         {successMessage && <div className={styles.successMessage}>✅ {successMessage}</div>}
 
         <form onSubmit={handleSubmit} className={styles.form}>
