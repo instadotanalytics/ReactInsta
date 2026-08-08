@@ -1,9 +1,11 @@
-import dotenv from 'dotenv';
-import bcrypt from 'bcrypt';
+import dotenv from "dotenv";
+import bcrypt from "bcryptjs";
+
 dotenv.config();
 
 const plainPassword = process.env.ADMIN_PASSWORD;
 const saltRounds = 10;
+
 const hashedPassword = bcrypt.hashSync(plainPassword, saltRounds);
 
 export const ADMIN = {
