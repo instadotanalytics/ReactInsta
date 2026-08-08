@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Backend API",
+  "description": "Insta Dot Analytics Backend API",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -13,12 +13,12 @@
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cloudinary": "^1.41.3",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.6.2",
-    "helmet": "^8.3.0",
-    "jsonwebtoken": "^9.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.2.2",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0",
