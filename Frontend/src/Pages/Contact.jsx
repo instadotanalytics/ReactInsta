@@ -110,7 +110,7 @@ const Contact = () => {
         <div className={styles.heroHeader}>
           <div className={styles.heroInner}>
             {/* Badge */}
-          
+
 
             {/* Title */}
             <h1 className={styles.title}>
@@ -275,14 +275,14 @@ const Contact = () => {
           <div className={styles.mapWrapper}>
             <div className={styles.mapFrame}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d229.9578356683155!2d75.89718498963744!3d22.75330334092318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396302ab01f137ed%3A0xd9ae82fbc59ab08a!2sP-9%2C%20Vijay%20Nagar%2C%20Scheme%20No%2054%2C%20Indore%2C%20Madhya%20Pradesh%20452010!5e0!3m2!1sen!2sin!4v1773321741083!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.4378906725246!2d75.89571197476222!3d22.749125126478376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396303e173f89509%3A0x718ea945f76a48d0!2sInsta%20Dot%20Analytics!5e0!3m2!1sen!2sin!4v1790763368733!5m2!1sen!2sin"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
-                allowFullScreen=""
+                allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Office Location"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Insta Dot Analytics Office Location"
               />
             </div>
           </div>
