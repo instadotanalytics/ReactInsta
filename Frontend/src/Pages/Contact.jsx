@@ -69,7 +69,7 @@ const Contact = () => {
       icon: <FiMapPin size={20} />,
       label: "Our Location",
       value:
-        "P13-14, Ground Floor, Metro Tower, Vijay Nagar, Scheme No 54, Indore, Madhya Pradesh",
+        "First Floor, Plot-91, Above Shriyahi Architect, Near Medanta hospital, Vijay Nagar, RatnaLok Colony, Indore, Madhya Pradesh 452010",
     },
     {
       icon: <FiPhone size={20} />,
